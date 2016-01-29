@@ -1,0 +1,29 @@
+.text-right{
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 10px;
+}
+
+#showEmployeeSelected{
+    margin-bottom: 10px;
+}
+
+.label-adv{
+    padding-top: 3px;
+}
+
+#createDateToBtn, #createDateFromBtn {
+    cursor: pointer;
+}
+
+.datepicker-switch, .prev, .next{
+    background-color: #006dcc;
+}
+
+.old{
+    background-color: #EAEAEA;
+}
+
+.dow{
+    background-color: #BBBBBB;
+}

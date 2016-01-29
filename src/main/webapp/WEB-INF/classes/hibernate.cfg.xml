@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- Database connection settings -->
+		<!-- <property name="connection.driver_class">org.hsqldb.jdbcDriver</property> 
+			<property name="connection.url">jdbc:hsqldb:hsql://localhost/xdb</property> 
+			<property name="connection.username">SA</property> <property name="connection.password"></property> -->
+
+		<!--<property name="connection.driver_class">oracle.jdbc.OracleDriver</property>-->
+		<!--<property name="connection.url">jdbc:oracle:thin:@172.16.0.32:1521:twcmt1</property>-->
+		<!--<property name="connection.username">scott</property>-->
+		<!--<property name="connection.password">tiger</property>-->
+
+		<!--<property name="connection.driver_class">oracle.jdbc.OracleDriver</property>-->
+		<!--<property name="connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>-->
+		<!--<property name="connection.username">tdcs</property>-->
+		<!--<property name="connection.password">tdcs</property>-->
+		<!--<property name="connection.driver_class">oracle.jdbc.OracleDriver</property>-->
+		<!--<property name="connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>-->
+
+
+		<property name="connection.driver_class">oracle.jdbc.OracleDriver</property>
+		<property name="connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+		<property name="connection.username">tdcs</property>
+		<property name="connection.password">tdcs</property>
+
+		<!--<property name="connection.username">root</property>-->
+		<!--<property name="connection.password">root</property>-->
+
+		<!-- <property name="connection.driver_class">oracle.jdbc.OracleDriver</property> -->
+		<!-- <property name="connection.url">jdbc:oracle:thin:@172.16.0.91:1521:ECONSAVE</property> -->
+		<!-- <property name="connection.username">rmssitmd</property> -->
+		<!-- <property name="connection.password">rmssitmd</property> -->
+
+
+
+		<!--<property name="connection.driver_class">oracle.jdbc.OracleDriver</property>-->
+		<!--<property name="connection.url">jdbc:oracle:thin:@localhost:1521/xe</property>-->
+		<!--<property name="connection.username">user1</property>-->
+		<!--<property name="connection.password">1234</property>-->
+
+		<!--<property name="connection.driver_class">oracle.jdbc.OracleDriver</property>-->
+		<!--<property name="connection.url">jdbc:oracle:thin:@localhost:1521/xe</property>-->
+		<!--<property name="connection.username">TDCS</property>-->
+		<!--<property name="connection.password">TDCS</property>-->
+
+
+		<!-- SQL dialect -->
+		<!--<property name="dialect">org.hibernate.dialect.HSQLDialect</property>-->
+
+        <!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
+
+		<!-- Echo all executed SQL to stdout -->
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+
+
+        <!--Mapping file-->
+		<mapping class="com.springapp.mvc.pojo.User" />
+		<mapping class="com.springapp.mvc.pojo.University" />
+        <mapping class="com.springapp.mvc.pojo.Faculty" />
+        <mapping class="com.springapp.mvc.pojo.Major" />
+        <mapping class="com.springapp.mvc.pojo.Apprentice" />
+        <mapping class="com.springapp.mvc.pojo.Position" />
+        <mapping class="com.springapp.mvc.pojo.Company" />
+        <mapping class="com.springapp.mvc.pojo.Section" />
+        <mapping class="com.springapp.mvc.pojo.SectionPosition" />
+        <mapping class="com.springapp.mvc.pojo.Team" />
+        <mapping class="com.springapp.mvc.pojo.UniversityFaculty" />
+        <mapping class="com.springapp.mvc.pojo.UniversityFacultyMajor" />
+        <mapping class="com.springapp.mvc.pojo.Topic" />
+        <mapping class="com.springapp.mvc.pojo.Subtopic" />
+        <mapping class="com.springapp.mvc.pojo.Description" />
+        <mapping class="com.springapp.mvc.pojo.Evaluate" />
+		<!--Mapping Exam-->
+		<mapping class="com.springapp.mvc.pojo.exam.Category" />
+		<mapping class="com.springapp.mvc.pojo.exam.Choice" />
+		<mapping class="com.springapp.mvc.pojo.exam.Difficulty" />
+		<mapping class="com.springapp.mvc.pojo.exam.ExamAnswerRecord" />
+		<mapping class="com.springapp.mvc.pojo.exam.ExamPaper" />
+		<mapping class="com.springapp.mvc.pojo.exam.Question" />
+		<mapping class="com.springapp.mvc.pojo.exam.QuestionType" />
+		<mapping class="com.springapp.mvc.pojo.exam.SubCategory" />
+		<mapping class="com.springapp.mvc.pojo.exam.ExamResult" />
+	  	<mapping class="com.springapp.mvc.pojo.exam.ExamMarkingRecord"/>
+		<mapping class="com.springapp.mvc.pojo.exam.Status"/>
+		<mapping class="com.springapp.mvc.pojo.exam.ExamRecord"/>
+		<mapping class="com.springapp.mvc.pojo.exam.PaperQuestion"/>
+
+		<mapping class="com.springapp.mvc.pojo.exam.PaperGenerateTemplate"/>
+
+	</session-factory>
+</hibernate-configuration>

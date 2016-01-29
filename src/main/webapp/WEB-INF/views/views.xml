@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+
+    <definition name="login" extends="tempEmpty">
+        <put-attribute name="title" value="เข้าสู่ระบบ" />
+        <put-attribute name="body" value="/WEB-INF/pages/login.jsp" />
+    </definition>
+
+    <definition name="homeUser" extends="tempForUser">
+        <put-attribute name="title" value="หน้าแรก" />
+        <put-attribute name="body" value="/WEB-INF/pages/homeUser.jsp" />
+    </definition>
+
+    <definition name="addStudent" extends="tempForUser">
+        <put-attribute name="title" value="เพิ่มข้อมูลนักศึกษา" />
+        <put-attribute name="body" value="/WEB-INF/pages/addStudent.jsp" />
+    </definition>
+
+    <definition name="signup" extends="tempRegis">
+        <put-attribute name="title" value="สมัครสมาชิก" />
+        <put-attribute name="body" value="/WEB-INF/pages/addStudent.jsp" />
+    </definition>
+
+    <definition name="addStaff" extends="tempForUser">
+        <put-attribute name="title" value="เพิ่มข้อมูลพนักงาน" />
+        <put-attribute name="body" value="/WEB-INF/pages/addStaff.jsp" />
+    </definition>
+
+    <definition name="searchStudent" extends="tempForUser">
+        <put-attribute name="title" value="ค้นหาข้อมูลนักศึกษา" />
+        <put-attribute name="body" value="/WEB-INF/pages/searchStudent.jsp" />
+    </definition>
+
+    <definition name="searchStaff" extends="tempForUser">
+        <put-attribute name="title" value="ค้นหาข้อมูลพนักงาน" />
+        <put-attribute name="body" value="/WEB-INF/pages/searchStaff.jsp" />
+    </definition>
+
+    <definition name="evaluation" extends="tempForUser">
+        <put-attribute name="title" value=" การประเมินผล" />
+        <put-attribute name="body" value="/WEB-INF/pages/evaluation.jsp" />
+    </definition>
+
+    <definition name="viewEvaluate" extends="tempForUser">
+        <put-attribute name="title" value=" การประเมินผล" />
+        <put-attribute name="body" value="/WEB-INF/pages/viewEvaluation.jsp" />
+    </definition>
+
+    <definition name="validate" extends="tempForUser">
+        <put-attribute name="title" value="อนุมัตินักศึกษา" />
+        <put-attribute name="body" value="/WEB-INF/pages/validate.jsp" />
+    </definition>
+
+    <definition name="detail" extends="tempEmpty">
+        <put-attribute name="title" value="รายละเอียดนักศึกษา" />
+        <put-attribute name="body" value="/WEB-INF/pages/detail.jsp" />
+    </definition>
+
+    <!--CREATE BY PEEM-->
+    <definition name="viewData" extends="tempForUser">
+        <put-attribute name="title" value="รายละเอียดนักศึกษา" />
+        <put-attribute name="body" value="/WEB-INF/pages/viewData.jsp" />
+    </definition>
+
+    <definition name="viewStaffData" extends="tempForUser">
+        <put-attribute name="title" value="รายละเอียดพนักงาน" />
+        <put-attribute name="body" value="/WEB-INF/pages/viewStaffData.jsp" />
+    </definition>
+
+    <definition name="mainPageEmp" extends="tempForUser">
+        <put-attribute name="title" value="ข้อสอบ" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam/mainPageEmp.jsp" />
+    </definition>
+
+    <!--CREATE BY JOKIZZ-->
+    <definition name="mainPageStudent" extends="tempForUser">
+        <put-attribute name="title" value="ทำข้อสอบ" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam/mainPageStudent.jsp" />
+    </definition>
+
+    <definition name="checkScore" extends="tempForUser">
+        <put-attribute name="title" value="ตรวจคะแนน" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam/checkScore.jsp" />
+    </definition>
+
+    <definition name="autoGeneratePaper" extends="tempForUser">
+        <put-attribute name="title" value="เลือกข้อสอบอัตโนมัติ"/>
+        <put-attribute name="body" value="/WEB-INF/pages/exam/autoGeneratePaper.jsp"/>
+    </definition>
+
+    <definition name="createPaper" extends="tempForUser">
+        <put-attribute name="title" value="สร้างชุดข้อสอบ" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam/createPaper.jsp" />
+    </definition>
+
+    <definition name="searchPaper" extends="tempForUser">
+        <put-attribute name="title" value="ค้นหาชุดข้อสอบ" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam/searchPaper.jsp" />
+
+    </definition>
+
+
+
+    <!--CREATE BY PEEM-->
+
+    <definition name="pacturePage" extends="tempEmpty">
+        <put-attribute name="title" value="รายละเอียดนักศึกษา" />
+        <put-attribute name="body" value="/WEB-INF/pages/picture.jsp" />
+    </definition>
+
+    <definition name="added" extends="tempForUser">
+        <put-attribute name="title" value="รายละเอียดนักศึกษา" />
+        <put-attribute name="body" value="/WEB-INF/pages/afterAddStudent.jsp" />
+    </definition>
+
+    <definition name="addedStaff" extends="tempForUser">
+        <put-attribute name="title" value="รายละเอียดพนักงาน" />
+        <put-attribute name="body" value="/WEB-INF/pages/afterAddStaff.jsp" />
+    </definition>
+
+
+    <definition name="loginComplete" extends="tempForUser">
+        <put-attribute name="title" value="รายละเอียดพนักงาน" />
+        <put-attribute name="body" value="/WEB-INF/pages/loginComplete.jsp" />
+    </definition>
+
+    <definition name="homeStaff" extends="tempForUser">
+        <put-attribute name="title" value="รายละเอียดพนักงาน" />
+        <put-attribute name="body" value="/WEB-INF/pages/homeStaff.jsp" />
+    </definition>
+
+
+    <!--CREATE BY NICK-->
+    <definition name="examRecordSearch" extends="tempForUser">
+        <put-attribute name="title" value="ตรวจข้อสอบ"/>
+        <put-attribute name="body" value="/WEB-INF/pages/exam/examRecordSearch.jsp"/>
+    </definition>
+
+    <definition name="paperPreview" extends="tempForUser">
+        <put-attribute name="title" value="ข้อมูลชุดข้อสอบ"/>
+        <put-attribute name="body" value="/WEB-INF/pages/exam/paperPreview.jsp"/>
+    </definition>
+
+    <!-- Create by Wanchana -->
+    <definition name = "manageCategory" extends="tempForUser">
+        <put-attribute name="title" value="จัดการหมวดหมู่" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam/manageCategory.jsp" />
+    </definition>
+    <definition name = "manageSubCategory" extends="tempForUser">
+        <put-attribute name="title" value="จัดการหัวข้อเรื่อง" />
+        <put-attribute name="body" value="/WEB-INF/pages/exam/manageSubCategory.jsp" />
+    </definition>
+
+    <definition name = "manageQuestion" extends = "tempForUser">
+        <put-attribute name="title" value = "จัดการข้อสอบ" />
+        <put-attribute name="body" value = "/WEB-INF/pages/exam/manageQuestion.jsp" />
+    </definition>
+    <definition name = "managePapers" extends = "tempForUser">
+        <put-attribute name="title" value = "จัดการชุดข้อสอบ" />
+        <put-attribute name="body" value = "/WEB-INF/pages/exam/managePaper.jsp" />
+    </definition>
+    <definition name = "editButtonOnPageManagePapers" extends = "tempForUser">
+        <put-attribute name="title" value = "แก้ไขชุดข้อสอบ" />
+        <put-attribute name="body" value = "/WEB-INF/pages/exam/editButtonOnPageManagePapers.jsp" />
+    </definition>
+    <definition name = "doExam" extends = "tempForUser">
+        <put-attribute name="title" value = "ทำข้อสอบ" />
+        <put-attribute name="body" value = "/WEB-INF/pages/exam/doExam.jsp" />
+    </definition>
+
+    <definition name="paperExamRecord" extends="tempForUser">
+        <put-attribute name="title" value="ค้นหาผลการทำข้อสอบ"/>
+        <put-attribute name="body" value="/WEB-INF/pages/exam/paperExamRecord.jsp"/>
+    </definition>
+
+    <definition name="marking" extends="tempForUser">
+        <put-attribute name="title" value="ตรวจข้อสอบ"/>
+        <put-attribute name="body" value="/WEB-INF/pages/exam/marking.jsp"/>
+    </definition>
+
+    <!--<definition name="editPaper" extends="tempForUser">-->
+        <!--<put-attribute name="title" value="แก้ไขชุดข้อสอบ"/>-->
+        <!--<put-attribute name="body" value="/WEB-INF/pages/exam/editPaper.jsp"/>-->
+    <!--</definition>-->
+    <!--create by job-->
+    <definition name="examReportResultForEmployee" extends="tempForUser">
+        <put-attribute name="title" value="รายงานแสดงผลการสอบ"/>
+        <put-attribute name="body" value="/WEB-INF/pages/exam/examReportResultForEmployee.jsp"/>
+    </definition>
+</tiles-definitions>
