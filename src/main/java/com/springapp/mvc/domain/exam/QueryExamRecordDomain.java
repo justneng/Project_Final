@@ -64,15 +64,6 @@ public class QueryExamRecordDomain extends HibernateUtil {
         }
     }
 
-//    public int getCount(User user, String paperId){
-//
-//        Criteria criteria = getSession().createCriteria(ExamRecord.class, "examRecord");
-//        criteria.add(Restrictions.eq("paper.id", paperId));
-//        criteria.add(Restrictions.eq("user", user));
-//        ExamRecord examRecord = (ExamRecord) criteria.uniqueResult();
-//        return examRecord.getCount();
-//    }
-
     public void mergeUpdateExamRecord(ExamRecord examRecord){
         getSession().merge(examRecord);
     }

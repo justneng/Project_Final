@@ -43,6 +43,7 @@ public class QueryAutoGeneratePaperDomain extends HibernateUtil{
     }
 
     public boolean isNotCreated(String cid){
+        getSession().flush();
         Criteria criteria = getSession().createCriteria(PaperGenerateTemplate.class);
         criteria.add(Restrictions.eq("category.id", cid));
 
@@ -57,6 +58,7 @@ public class QueryAutoGeneratePaperDomain extends HibernateUtil{
     }
 
     public int checkExamPaperTime(int currentTime){
+        getSession().flush();
         Criteria criteria = getSession().createCriteria(PaperGenerateTemplate.class);
         criteria.add(Restrictions.eq("no", currentTime + 1));
         if(criteria.uniqueResult() != null){
@@ -69,6 +71,7 @@ public class QueryAutoGeneratePaperDomain extends HibernateUtil{
     }
 
     public int getFirstExam(){
+        getSession().flush();
         Criteria criteria = HibernateUtil.getSession().createCriteria(PaperGenerateTemplate.class);
         criteria.add(Restrictions.eq("no", 1));
         PaperGenerateTemplate paperGenerateTemplate = (PaperGenerateTemplate) criteria.uniqueResult();
@@ -76,6 +79,7 @@ public class QueryAutoGeneratePaperDomain extends HibernateUtil{
     }
 
     public int currentNumber(String cid, User user){
+        getSession().flush();
         Criteria criteria = getSession().createCriteria(PaperGenerateTemplate.class);
         criteria.add(Restrictions.eq("category.id", cid));
         criteria.addOrder(Order.desc("examPaper.id"));
@@ -92,9 +96,15 @@ public class QueryAutoGeneratePaperDomain extends HibernateUtil{
             criteria1.addOrder(Order.desc("count"));
             criteria1.setMaxResults(1);
             ExamRecord examRecords = (ExamRecord) criteria1.uniqueResult();
-            int count = examRecords.getCount();
-            if(count > 0){
-                return count;
+            int count = 0;
+            if(examRecords != null){
+                count = examRecords.getCount();
+                if(count > 0){
+                    return count;
+                }
+                else{
+                    return 0;
+                }
             }
             else{
                 return 0;
@@ -106,6 +116,7 @@ public class QueryAutoGeneratePaperDomain extends HibernateUtil{
     }
 
     public int getCurrentExamPaperNo(String cid){
+        getSession().flush();
         Criteria criteria = getSession().createCriteria(PaperGenerateTemplate.class);
         criteria.add(Restrictions.eq("category.id", cid));
         criteria.addOrder(Order.desc("id"));
@@ -157,6 +168,7 @@ public class QueryAutoGeneratePaperDomain extends HibernateUtil{
         paperGenerateTemplate.setNo(time);
 
         try{
+            getSession().flush();
             HibernateUtil.beginTransaction();
             getSession().save(examPaper);
             getSession().save(paperGenerateTemplate);
@@ -170,6 +182,7 @@ public class QueryAutoGeneratePaperDomain extends HibernateUtil{
             }
 
             HibernateUtil.commitTransaction();
+            getSession().flush();
         } catch(Exception e){
             System.out.println("Error While Generate Paper");
             e.printStackTrace();
@@ -180,6 +193,7 @@ public class QueryAutoGeneratePaperDomain extends HibernateUtil{
     }
 
     public int getPaperGenerateTemplateNo(ExamPaper examPaper){
+        getSession().flush();
         Criteria criteria = getSession().createCriteria(PaperGenerateTemplate.class);
         criteria.add(Restrictions.eq("examPaper", examPaper));
         PaperGenerateTemplate paperGenerateTemplate = (PaperGenerateTemplate) criteria.uniqueResult();

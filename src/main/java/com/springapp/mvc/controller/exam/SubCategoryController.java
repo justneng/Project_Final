@@ -71,7 +71,8 @@ public class SubCategoryController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
-        String json = new Gson().toJson(subCategory);
+//        String json = new Gson().toJson(subCategory);
+        String json = new JSONSerializer().include("choices").exclude("*.class").serialize(subCategory);
         return new ResponseEntity<String>(json, headers, httpStatus);
     }
 
