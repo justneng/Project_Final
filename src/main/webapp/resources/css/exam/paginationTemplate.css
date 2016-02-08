@@ -16,3 +16,6 @@
     margin: 1px;
     cursor: pointer;
 }
+.panel-heading{
+    height: 35px;
+}

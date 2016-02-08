@@ -135,4 +135,23 @@ public class QueryExamResultDomain extends HibernateUtil {
 
         return check;
     }
+
+    public Boolean checkResultIsDone(ExamRecord examRecord){
+
+        Boolean check = false;
+        Criteria criteria = getSession().createCriteria(ExamResult.class);
+        criteria.add(Restrictions.eq("examRecord", examRecord));
+
+        if(criteria.list().size() != 0){
+            ExamResult result = (ExamResult) criteria.uniqueResult();
+            if(result.getStatus().getId() == 7){
+                check = true;
+            }
+            else{
+                check = false;
+            }
+        }
+
+        return check;
+    }
 }

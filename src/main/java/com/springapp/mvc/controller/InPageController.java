@@ -1,11 +1,24 @@
 package com.springapp.mvc.controller;
 
+import com.springapp.mvc.controller.exam.PrepareCategory;
 import com.springapp.mvc.domain.*;
 import com.springapp.mvc.domain.exam.QueryAutoGeneratePaperDomain;
 import com.springapp.mvc.domain.exam.QueryCategoryDomain;
 
+import com.springapp.mvc.domain.exam.QueryExamRecordDomain;
 import com.springapp.mvc.domain.exam.QuerySubCategoryDomain;
 import com.springapp.mvc.pojo.*;
+import com.springapp.mvc.pojo.exam.Category;
+import com.springapp.mvc.pojo.exam.ExamPaper;
+import com.springapp.mvc.pojo.exam.ExamRecord;
+import com.springapp.mvc.pojo.exam.PaperGenerateTemplate;
+import com.springapp.mvc.util.HibernateUtil;
+import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +26,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.print.Paper;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/TDCS")
@@ -51,6 +68,8 @@ public class InPageController {
     private QueryCategoryDomain queryCategoryDomain;
     @Autowired
     private QueryAutoGeneratePaperDomain queryAutoGeneratePaperDomain;
+    @Autowired
+    private QueryExamRecordDomain queryExamRecordDomain;
     //add jokizz
     @Autowired
     private QuerySubCategoryDomain querySubCategoryDomain;
@@ -274,10 +293,94 @@ public class InPageController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/exam/autoGeneratePaper")
-    public String autoGenerateQuestions(Model model){
-
-        model.addAttribute("listCategories", queryAutoGeneratePaperDomain.getCategoryToGenerate());
-
+    public String autoGenerateQuestions(Model model, HttpServletRequest request){
+//        User user = queryUserDomain.getCurrentUser(request);
+//        Criteria criteria = HibernateUtil.getSession().createCriteria(PaperGenerateTemplate.class);
+//        criteria.addOrder(Order.asc("id"));
+//        List<Map<String, Object>> histories = new ArrayList<Map<String, Object>>();
+//        if(criteria.list().size() > 0){
+//            List<PaperGenerateTemplate> paperGenerateTemplates = criteria.list();
+//            for(int i = 0; i < paperGenerateTemplates.size(); i ++){
+//                Criteria cri = HibernateUtil.getSession().createCriteria(ExamRecord.class);
+//                cri.add(Restrictions.eq("user", user));
+//                cri.add(Restrictions.eq("paper.id", paperGenerateTemplates.get(i).getExamPaper().getId()));
+//                ExamRecord examRecord = (ExamRecord) cri.uniqueResult();
+//                if(examRecord != null){
+//                    Map<String, Object> map = new HashMap<String, Object>();
+//                    map.put("categoryId", paperGenerateTemplates.get(i).getCategory().getId());
+//                    map.put("paperId", paperGenerateTemplates.get(i).getExamPaper().getId());
+//                    map.put("value", examRecord);
+//                    histories.add(map);
+//                }
+//            }
+//        }
+//        int i = 0;
+//        int idx = 0;
+//        int paperNumber = 0;
+//        User user = queryUserDomain.getCurrentUser(request);
+//        List<Category> categoriesList = queryCategoryDomain.getAllCategory();
+//        List<Map<String, Object>> available = new ArrayList();
+//
+//        for(i = 0; i < categoriesList.size(); i ++){
+//            List<PaperGenerateTemplate> paper = new ArrayList<PaperGenerateTemplate>();
+//            Category category = categoriesList.get(i);
+//
+//            Criteria criteria = HibernateUtil.getSession().createCriteria(PaperGenerateTemplate.class);
+//            criteria.add(Restrictions.eq("category", categoriesList.get(i)));
+//            criteria.setProjection(Projections.property("examPaper.id"));
+//            List<Integer> paperIdTemplate = criteria.list();
+//            if(paperIdTemplate.size() > 0){
+//                paperNumber = paperIdTemplate.size() + 1;
+//
+//                Criteria criteria1 = HibernateUtil.getSession().createCriteria(ExamRecord.class);
+//                criteria1.setProjection(Projections.projectionList().add(Projections.property("paper.id"), "paper.id"));
+//                criteria1.add(Restrictions.in("paper.id", paperIdTemplate));
+//                criteria1.add(Restrictions.eq("user", user));
+//
+//                List<ExamRecord> examRecords = criteria1.list();
+//
+//                if(examRecords.size() > 0){
+//                    for(idx = 0; idx < examRecords.size(); idx ++){
+//                        paperIdTemplate.remove(examRecords.get(idx));
+//                    }
+//                    if(paperIdTemplate.size() > 0){
+//                        Criteria criteria2 = HibernateUtil.getSession().createCriteria(PaperGenerateTemplate.class);
+//                        criteria2.add(Restrictions.in("examPaper.id", paperIdTemplate));
+//                        paper = criteria2.list();
+//                        Map<String, Object> map = new HashMap<String, Object>();
+//                        map.put("category", category);
+//                        map.put("paper", paper);
+//                        map.put("paperNumber", paperNumber);
+//                        available.add(map);
+//                    }
+//                    else{
+//                        Map<String, Object> map = new HashMap<String, Object>();
+//                        map.put("category", category);
+//                        map.put("paper", null);
+//                        map.put("paperNumber", paperNumber);
+//                        available.add(map);
+//                    }
+//                }
+//                else{
+//                    Map<String, Object> map = new HashMap<String, Object>();
+//                    map.put("category", category);
+//                    map.put("paper", null);
+//                    map.put("paperNumber", paperNumber);
+//                    available.add(map);
+//                }
+//            }
+//            else{
+//                Map<String, Object> map = new HashMap<String, Object>();
+//                map.put("category", category);
+//                map.put("paper", null);
+//                map.put("paperNumber", paperNumber);
+//                available.add(map);
+//            }
+//        }
+//
+//        model.addAttribute("listCategories", queryAutoGeneratePaperDomain.getCategoryToGenerate());
+//        model.addAttribute("listPapers",histories);
+//        model.addAttribute("listAvailable",available);
         return "autoGeneratePaper";
     }
 
