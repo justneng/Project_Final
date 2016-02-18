@@ -2,6 +2,23 @@ var paperCodes = new Array();
 var orderPaperByColumn;
 var orderPaperType;
 
+$('.glyphicon-triangle-top, .glyphicon-triangle-bottom').on('click', function(){
+    getPaperIds();
+    orderPaperByColumn = $(this).parent().siblings('label').attr('value');
+    orderPaperType = $(this).attr('value');
+    if(paperCodes.length > 0){
+        var temp = new Array();
+
+        for(var i = 0; i < paperCodes.length; i ++){
+            var item = {
+                "paperCodes" : paperCodes[i]
+            };
+            temp.push(item);
+        }
+        orderPaper(temp, orderPaperByColumn, orderPaperType);
+    }
+});
+
 $("#orderPaperByColumn").on('change', function(){
     getPaperIds();
     orderPaperByColumn = $("#orderPaperByColumn").val();
@@ -109,9 +126,9 @@ function orderPaper(paperCodes, orderPaperByColumn, orderPaperType){
                         '<td><label id="lpaperScore'+value.examPaper.maxScore+'" class="label-control">'+value.examPaper.maxScore+'</label></td>'+
                         '<td><label id="lpaperForPosition'+posiId+'" class="label-control">'+posiName+'</label></td>'+
                         '<td class="pSelect">'+
-                        '<select id="dropdownId'+value.examPaper.id+'" name="paperStatus" '+str2+' class="btn btn-success btn-sm" style="text-align: left;">'+
+                        '<select id="dropdownId'+value.examPaper.id+'" name="paperStatus"'+str2+' class="dropdown" style="color: white; width: 80px; text-align: center;">'+
                             //'<option value="3">ยังไม่เผยแพร่</option>'+
-                        '<option value="1">เปิดใช้งาน</option>'+
+                        '<option value="1"><strong>เปิดใช้งาน</strong></option>'+
                         '<option value="2">ปิดใช้งาน</option>'+
                         '</select>'+
                         '</td>'+

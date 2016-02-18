@@ -15,6 +15,11 @@
             text-align:left;
         }
     }
+
+    label[for='addEmpCreateByBtn']{
+        font-weight: normal;
+    }
+
 </style>
 
 <script>
@@ -23,7 +28,7 @@
 
 <div class="row">
     <div class="col-sm-2 text-right">
-        <label for="addEmpCreateByBtn" class="label-control">สร้างโดย</label>
+        <label for="addEmpCreateByBtn">สร้างโดย</label>
     </div>
     <div class="col-sm-10">
         <button id="addEmpCreateByBtn" data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span></button>

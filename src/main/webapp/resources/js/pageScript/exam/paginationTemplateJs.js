@@ -1,4 +1,7 @@
 var records = null;
+var first = 0;
+var last = 0;
+var allRecord = 0;
 
 $(document).ready(function(){
     $('.pagination').on('click', 'li > a', function(){
@@ -15,7 +18,7 @@ function currentPage(currentElem){
         setStyle(first);
     }
     else if(elem.attr('id') == 'last-page'){
-        var last = elem.siblings().find('a:contains("'+ Math.ceil(records.length / 5) +'")');
+        var last = elem.siblings().find('a:contains("'+ Math.ceil(records.length / 10) +'")');
         printRecords(getRecordsPerPage(Number(last.text()), records));
         setStyle(last);
     }
@@ -62,8 +65,11 @@ function setStyle(elem){
 
 var getRecordsPerPage = function (page, data){
     var array = [];
-    var firstRecord = (page - 1) * 5;
-    var lastRecord = firstRecord + 5;
+    var firstRecord = (page - 1) * 10;
+    var lastRecord = firstRecord + 10;
+    first = firstRecord;
+    last= lastRecord;
+
     if(lastRecord > data.length? lastRecord = data.length: lastRecord = lastRecord);
 
     for(var i = firstRecord; i < lastRecord; i ++){
@@ -132,7 +138,7 @@ var printRecords = function (records){
 
 var totalPage = function(lenght){
 
-    var allPages = Math.ceil(lenght / 5);
+    var allPages = Math.ceil(lenght / 10);
     var str = '';
 
     for(var i = 1; i <= allPages; i ++){

@@ -10,31 +10,52 @@
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 <script>
     var context = '${context}';
+    $('#flash').hide();
 </script>
 
 <style>
-    #tbManagePaper{
+    #tbManagePaper {
         margin-top: 3px;
-    }
-    #tbodyManagePaper td{
-        font-size: 13px;
-    }
-    #paperNotFound {
-        background-color: #b2e0ff;
-        height: 100px;
         display: none;
-        top: 40px;
-        vertical-align: middle;
-        border-radius: 5px;
-        margin-top: -15px;
     }
 
-    #paperNotFoundDesc {
-        text-align: center;
-        vertical-align: middle;
-        line-height: 100px;
-        color: #00647f;
+    #tbodyManagePaper td {
+        font-size: 13px;
     }
+
+    .alert-info, .alert-danger{
+        margin-top: 3px;
+
+    }
+
+    #tbodyManagePaper label{
+        font-weight: normal !important;
+    }
+
+    th {
+        text-align: center;
+    }
+
+    .add-paper {
+        padding-left: 0;
+    }
+
+    span .glyphicon-triangle-bottom, .glyphicon-triangle-top{
+        font-size: 1px;
+        cursor: pointer;
+        color: #777777;
+    }
+
+    .sorting-column{
+        display: inline-block;
+        width: 15px;
+        vertical-align: middle;"
+    }
+
+    #paper-not-found-message ,#deletePapers{
+        display: none;
+    }
+
 </style>
 
 <div class="container-fluid">
@@ -49,59 +70,81 @@
     <div class="row">
         <div class="col-sm-6 add-paper">
             <a href="${context}/TDCS/exam/createPaper" style="bottom: 0;">
-                <button class="btn btn-success btn-sm" align="center">
+                <button class="btn btn-primary btn-sm" align="center">
                     <span class="glyphicon glyphicon-plus"><label>&nbsp;<strong>สร้างชุดข้อสอบ</strong></label></span>
                 </button>
             </a>
-            <button id="deletePapers" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-minus"><label>&nbsp;<strong>ลบออก</strong></label></span></button>
-        </div>
-        <div class="col-sm-5 col-sm-offset-1">
-            <div class="form-inline">
-                <div class="form-group">
-                    <label for="orderPaperByColumn" class="control-label">จัดเรียงตาม :</label>
-                    <select id="orderPaperByColumn" class="form-control input-sm" width="100%">
-                        <option value="code">รหัสชุดข้อสอบ</option>
-                        <option value="name">ชื่อชุดข้อสอบ</option>
-                        <option value="createBy">สร้างโดย</option>
-                        <option value="maxScore">คะแนน</option>
-                        <option value="position">ประเภทผู้สอบ</option>
-                        <option value="paperStatus">สถานะ</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="orderPaperType" lass="control-label">รูปแบบ :</label>
-                    <select id="orderPaperType" class="form-control input-sm" width="100%">
-                        <option value="desc">จากมากไปน้อย</option>
-                        <option value="asc">จากน้อยไปมาก</option>
-                    </select>
-                </div>
-            </div>
+            <button id="deletePapers" class="btn btn-gray btn-sm"><span class="glyphicon glyphicon-minus"><label>
+                &nbsp;<strong>ลบออก</strong></label></span></button>
         </div>
     </div>
-    <div class="row">
-        <table id="tbManagePaper" class="table table-responsive table-hover table-bordered table-striped">
+    <div class="row table-responsive">
+        <table id="tbManagePaper" class="table table-bordered table-hovered" width="100%">
             <thead class="table-header small">
-                <tr>
-                    <th style="text-align: center"><input id="checkPaperAll" type="checkbox"/></th>
-                    <th style="text-align: center">รหัสชุดข้อสอบ</th>
-                    <th style="text-align: center">ชื่อชุดข้อสอบ</th>
-                    <th style="text-align: center">สร้างโดย</th>
-                    <th style="text-align: center">คะแนน</th>
-                    <th style="text-align: center">ประเภทผู้สอบ</th>
-                    <th style="text-align: center">สถานะ</th>
-                    <th style="text-align: center">แก้ไข</th>
-                </tr>
+            <tr>
+                <th width="3%" style="vertical-align: middle;"><input id="checkPaperAll" type="checkbox"/></th>
+                <th width="12%">
+                    <label value="code">รหัสชุดข้อสอบ</label>
+                    <span class="sorting-column">
+                        <span class="glyphicon glyphicon-triangle-top" value="desc"></span><br/>
+                        <span class="glyphicon glyphicon-triangle-bottom" value="asc"></span>
+                    </span>
+                </th>
+                <th width="30%">
+                    <label value="name">ชื่อชุดข้อสอบ</label>
+                    <span class="sorting-column">
+                        <span class="glyphicon glyphicon-triangle-top" value="desc"></span><br/>
+                        <span class="glyphicon glyphicon-triangle-bottom" value="asc"></span>
+                    </span>
+                </th>
+                <th width="15%">
+                    <label value="createBy">สร้างโดย</label>
+                    <span class="sorting-column">
+                        <span class="glyphicon glyphicon-triangle-top" value="desc"></span><br/>
+                        <span class="glyphicon glyphicon-triangle-bottom" value="asc"></span>
+                    </span>
+                </th>
+                <th width="8%">
+                    <label value="maxScore">คะแนน</label>
+                    <span class="sorting-column">
+                        <span class="glyphicon glyphicon-triangle-top" value="desc"></span><br/>
+                        <span class="glyphicon glyphicon-triangle-bottom" value="asc"></span>
+                    </span>
+                </th>
+                <th width="21%">
+                    <label value="position">ประเภทผู้สอบ</label>
+                    <span class="sorting-column">
+                        <span class="glyphicon glyphicon-triangle-top" value="desc"></span><br/>
+                        <span class="glyphicon glyphicon-triangle-bottom" value="asc"></span>
+                    </span>
+                </th>
+                <th width="8%">
+                    <label value="paperStatus">สถานะ</label>
+                    <span class="sorting-column">
+                        <span class="glyphicon glyphicon-triangle-top" value="desc"></span><br/>
+                        <span class="glyphicon glyphicon-triangle-bottom" value="asc"></span>
+                    </span>
+                </th>
+                <th width="5%"style="vertical-align: middle;">
+                    แก้ไข
+                </th>
+            </tr>
             </thead>
             <tbody id="tbodyManagePaper" align="center">
 
             </tbody>
         </table>
-        <%--<div id="paperNotFound" width="100%">--%>
-            <%--<h3 id="paperNotFoundDesc">ไม่พบชุดข้อสอบ</h3>--%>
-        <%--</div>--%>
     </div>
 
-    <%@include file="template/paginationTemplate.jsp"%>
+    <div id="init-message-show" class="row alert alert-info text-center">
+        <strong>กรุณาค้นหาชุดข้อสอบที่ต้องการ</strong>
+    </div>
+
+    <div id="paper-not-found-message" class="row alert alert-danger text-center">
+        <strong>ไม่พบข้อมูล</strong>
+    </div>
+
+    <%@include file="template/paginationTemplate.jsp" %>
 
 </div>
 
@@ -110,29 +153,4 @@
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/categoryDropdown.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/orderPaper.js" />"></script>
 
-<style>
-    th {
-        border:solid 1px white;
-    }
-    /*.btn-success{*/
-        /*background-color: #5ecc2d;*/
-        /*border-radius: 0;*/
-        /*border: 1px solid #40731f;*/
-    /*}*/
-    /*.btn-danger{*/
-        /*background-color: #f62200;*/
-        /*border-radius: 0;*/
-        /*border: 1px solid #9c1800;*/
-    /*}*/
-    .add-paper{
-        padding-left: 0;
-    }
-    .table-header{
-        background-color: #595d69;
-    }
-    tr th{
-        color: white;
-    }
-
-</style>
 

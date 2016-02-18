@@ -8,6 +8,10 @@ var clearCreateByInput = function(){
 
 // Add by Mr.Wanchana
 $("#addEmpCreateByBtn").on('click', function(){
+    $("#tbEmployee").parent().parent().hide();
+    $('.alert-info[id=init-message]').show();
+    $('#emp-not-found-message').hide();
+    $('#addEmpBtn').hide();
     searchEmpName();
 });
 

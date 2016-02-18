@@ -1029,6 +1029,7 @@ function dataNotFound(){
 function dataFound(){
     $("#addQuestionBtn").show();
     //$("#removeRowQuestionSelect").show();
+    $('#init-message-show').hide();
     $("#questionsAreEmpty").hide();
     $("#removeRowSelected").removeAttr('disabled');
     $("#addQuestionBtn").removeAttr('disabled');

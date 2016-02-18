@@ -24,10 +24,13 @@
         color: #00647f;
     }
 
-    #modalSearchByEmployeeName{
-
+    td label{
+        font: 13px normal;
     }
 
+    #showEmployeeSelected button:hover{
+        background-color: #d43f3a;
+    }
 </style>
 
 <div id="modalSearchByEmployeeName" class="modal fade" role="dialog">
@@ -40,10 +43,13 @@
             <div class="modal-body" align="center">
                 <div class="row">
                     <div class="form-inline">
-                        <div class="form-group">
-                            <label>ชื่อ :</label>
-                            <input id="searchEmployeeNameText" class="form-control input-sm" type="text" placeholder="ค้นหาพนักงาน"/>
-                            <button id="searchBtnFromModalSearchEmployee" class="btn btn-primary btn-sm" type="submit">ค้นหา</button>
+                        <div class="form-group col-sm-12">
+                            ชื่อ&nbsp;
+                            <input id="searchEmployeeNameText" class="form-control input-sm" type="text" size="35" placeholder="ค้นหาพนักงาน ชื่อ-นามสกุล"/>
+                            <button id="searchBtnFromModalSearchEmployee" class="btn btn-primary btn-sm" type="submit">
+                                ค้นหา&nbsp;
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -67,20 +73,22 @@
                         </table>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div id="dataNotFound" width="100%">
-                            <h3 id="dataNotFoundDesc">ไม่พบข้อมูล</h3>
-                        </div>
-                    </div>
+
+                <div id="init-message" class="row alert alert-info text-center">
+                    <strong>กรุณาค้นหาพนักงานที่ต้องการ</strong>
                 </div>
-                <div class="row">
+
+                <div id="emp-not-found-message" class="row alert alert-danger text-center">
+                    <strong>ไม่พบข้อมูล</strong>
+                </div>
+                
+                <div id="addEmpBtn" class="row">
                     <div class="col-md-12" align="right">
                         <div class="form-group">
                             <button id="addEmployeeBtn"
-                                    class="btn btn-success modalSearchByEmployeeNameSubmitBtn btn-sm">เพิ่ม
+                                    class="btn btn-primary modalSearchByEmployeeNameSubmitBtn btn-sm">เพิ่ม
                             </button>
-                            <button class="btn btn-danger modalSearchByEmployeeNameCloseBtn btn-sm">ยกเลิก</button>
+                            <button class="btn btn-gray modalSearchByEmployeeNameCloseBtn btn-sm">ยกเลิก</button>
                         </div>
                     </div>
                 </div>
