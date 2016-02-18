@@ -8,8 +8,9 @@
     margin-bottom: 10px;
 }
 
-.label-adv{
+.label-adv, .label-normal{
     padding-top: 3px;
+    font-weight: normal;
 }
 
 #createDateToBtn, #createDateFromBtn {
@@ -26,4 +27,19 @@
 
 .dow{
     background-color: #BBBBBB;
+}
+
+#advanceBtn{
+    background-color: #f5f5f5;
+    border: hidden;
+}
+
+.glyphicon-triangle-bottom, .glyphicon-triangle-top{
+    font-size: 1px;
+    cursor: pointer;
+    color: #777777;
+}
+
+label[for="paperCodeSearch"], label[for="paperName"]{
+
 }

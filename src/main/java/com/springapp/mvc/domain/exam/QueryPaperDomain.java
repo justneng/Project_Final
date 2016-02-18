@@ -44,6 +44,7 @@ public class QueryPaperDomain extends HibernateUtil {
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
         criteria.add(Restrictions.eq("code", code));
         criteria.add(Restrictions.ne("paperStatus.id", 4));
+        criteria.add(Restrictions.ne("createBy", null));
 
         if(criteria.list().size() > 0){
             return (ExamPaper) criteria.list().get(0);
@@ -117,6 +118,7 @@ public class QueryPaperDomain extends HibernateUtil {
     public List<ExamPaper> getAllPapers() {
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
         criteria.add(Restrictions.ne("paperStatus.id", 4));
+        criteria.add(Restrictions.ne("code", "SYSTM"));
         List<ExamPaper> papers = criteria.list();
 
         return papers;
@@ -169,6 +171,7 @@ public class QueryPaperDomain extends HibernateUtil {
         }
         criteria.addOrder(Order.asc("id"));
         criteria.add(Restrictions.ne("paperStatus.id", 4));
+        criteria.add(Restrictions.ne("code", "SYSTM"));
 
         List<ExamPaper> papers = criteria.list();
 
@@ -230,6 +233,7 @@ public class QueryPaperDomain extends HibernateUtil {
         }
         criteria.addOrder(Order.asc("id"));
         criteria.add(Restrictions.ne("paperStatus.id", 4));
+        criteria.add(Restrictions.ne("code", "SYSTM"));
 
         List<ExamPaper> papers = criteria.list();
 
@@ -427,6 +431,7 @@ public class QueryPaperDomain extends HibernateUtil {
         }
         criteria.addOrder(Order.asc("id"));
         criteria.add(Restrictions.ne("paperStatus.id", 4));
+        criteria.add(Restrictions.ne("code", "SYSTM"));
         criteria.setFirstResult((page - 1) * 3);
         criteria.setMaxResults(3);
 

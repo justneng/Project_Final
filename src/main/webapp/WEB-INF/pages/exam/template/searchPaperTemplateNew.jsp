@@ -18,19 +18,18 @@
 <script src="${context}/resources/js/pageScript/exam/searchPaperTemplateNew.js"></script>
 
 <div class="panel panel-default">
-    <div class="panel-heading">ค้นหา</div>
+    <div class="panel-heading">
+        <label>ค้นหา</label>
+        <button id="advanceBtn" class="btn btn-default btn-sm" data-toggle="collapse"
+                data-target="#paper-advance-search-panel" type="button"><span
+                class="glyphicon glyphicon-triangle-bottom"></span></button>
+    </div>
+
     <div class="panel-body">
         <div class="row">
             <div class="form-group">
                 <div class="col-sm-2 text-right">
-                    <div class="col-sm-4">
-                        <div class="row">
-                            <button id="advanceBtn" class="btn btn-default btn-sm" data-toggle="collapse"
-                                    data-target="#paper-advance-search-panel" type="button"><span
-                                    class="glyphicon glyphicon-triangle-bottom"></span></button>
-                        </div>
-                    </div>
-                    <label for="paperCodeSearch">รหัสชุดข้อสอบ</label>
+                    <label class="control-label label-normal" for="paperCodeSearch">รหัสชุดข้อสอบ</label>
                 </div>
 
                 <div class="col-sm-3">
@@ -39,7 +38,7 @@
                 </div>
 
                 <div class="col-sm-2 text-right">
-                    <label for="paperName" class="control-label">ชื่อชุดข้อสอบ</label>
+                    <label for="paperName" class="label-control label-normal">ชื่อชุดข้อสอบ</label>
                 </div>
 
                 <div class="col-sm-3">
@@ -67,7 +66,7 @@
                         <div id="pStartTime" class="input-group date">
                             <input id="searchCreateDateFromInput" type="text" class="form-control input-sm datepicker"
                                    maxlength="10" data-date-format="dd/mm/yyyy"
-                                   placeholder="  สร้างชุดข้อสอบตั้งแต่วันที่"/>
+                                   placeholder="สร้างชุดข้อสอบตั้งแต่วันที่"/>
                         <span id="createDateFromBtn" class="input-group-addon"><span
                                 class="glyphicon glyphicon-calendar" href="#"></span></span>
                         </div>
@@ -80,7 +79,7 @@
                     <div class="col-sm-3">
                         <div id="pToTime" class="input-group date">
                             <input id="searchCreateDateToInput" type="text" class="form-control input-sm datepicker"
-                                   maxlength="10" data-date-format="dd/mm/yyyy" placeholder="  ถึง"/>
+                                   maxlength="10" data-date-format="dd/mm/yyyy" placeholder="ถึง"/>
                         <span id="createDateToBtn" class="input-group-addon"><span class="glyphicon glyphicon-calendar"
                                                                                    href="#"></span></span>
                         </div>

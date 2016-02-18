@@ -16,7 +16,7 @@ $(document).ready(function(){
 });
 
 function searchEmpName(){
-    employeeNotFound();
+    //employeeNotFound();
     $('.modalSearchByEmployeeNameSubmitBtn').unbind('click').click(function(){
         $("#modalSearchByEmployeeName").modal("hide");
     });
@@ -213,12 +213,18 @@ function getEmployee(){
 function employeeNotFound(){
     $("#tbEmployee").parent().parent().hide();
     $("#dataNotFound").show();
+    $('.alert-info[id=init-message]').hide();
+    $('#emp-not-found-message').show();
+    $('#addEmpBtn').hide();
 }
 
 function employeeFound(){
     $("#tbEmployee").parent().parent().show();
     $("#tbodySelectEmployeeName").empty();
+    $('.alert-info[id=init-message]').hide();
+    $('#emp-not-found-message').hide();
     $("#dataNotFound").hide();
+    $('#addEmpBtn').show();
 }
 
 function counterStrike(){
