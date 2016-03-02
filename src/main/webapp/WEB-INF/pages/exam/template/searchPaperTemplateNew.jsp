@@ -13,9 +13,6 @@
 </script>
 
 <link rel="stylesheet" href="<c:url value="/resources/css/exam/searchTemplate.css"/>"/>
-<script src="${context}/resources/js/pageScript/exam/selectEmployee.js"></script>
-<script src="${context}/resources/js/pageScript/exam/addCreateBy.js"></script>
-<script src="${context}/resources/js/pageScript/exam/searchPaperTemplateNew.js"></script>
 
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -137,3 +134,6 @@
     </div>
 </div>
 
+<script src="${context}/resources/js/pageScript/exam/selectEmployee.js"></script>
+<script src="${context}/resources/js/pageScript/exam/addCreateBy.js"></script>
+<script src="${context}/resources/js/pageScript/exam/searchPaperTemplateNew.js"></script>

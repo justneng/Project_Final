@@ -591,4 +591,62 @@ public class QueryQuestionDomain extends HibernateUtil {
             return 0;
         }
     }
+
+    public List<Question> orderQuestions(List questionIds, String orderBy, String orderType){
+
+        Criteria criteria = getSession().createCriteria(Question.class, "question");
+        criteria.add(Restrictions.in("id", questionIds));
+        criteria.createAlias("question.difficultyLevel", "difficultyLevel");
+        criteria.createAlias("question.status", "status");
+        criteria.createAlias("question.subCategory", "subCategory");
+        criteria.createAlias("subCategory.category", "category");
+        criteria.createAlias("question.questionType", "questionType");
+        criteria.add(Restrictions.ne("status.id", 4));
+
+        if(orderType.equals("asc")){
+            if(orderBy.equals("category")){
+                criteria.addOrder(Order.asc("category.name"));
+            }
+            if(orderBy.equals("subcategory")){
+                criteria.addOrder(Order.asc("subCategory.name"));
+            }
+            if(orderBy.equals("description")){
+                criteria.addOrder(Order.asc("description"));
+            }
+            if(orderBy.equals("type")){
+                criteria.addOrder(Order.asc("questionType.description"));
+            }
+            if(orderBy.equals("level")){
+                criteria.addOrder(Order.asc("difficultyLevel.description"));
+            }
+            if(orderBy.equals("score")){
+                criteria.addOrder(Order.asc("score"));
+            }
+        }
+
+        if(orderType.equals("desc")){
+            if(orderBy.equals("category")){
+                criteria.addOrder(Order.desc("category.name"));
+            }
+            if(orderBy.equals("subcategory")){
+                criteria.addOrder(Order.desc("subCategory.name"));
+            }
+            if(orderBy.equals("description")){
+                criteria.addOrder(Order.desc("description"));
+            }
+            if(orderBy.equals("type")){
+                criteria.addOrder(Order.desc("questionType.description"));
+            }
+            if(orderBy.equals("level")){
+                criteria.addOrder(Order.desc("difficultyLevel.description"));
+            }
+            if(orderBy.equals("score")){
+                criteria.addOrder(Order.desc("score"));
+            }
+        }
+
+        List<Question> quetions = criteria.list();
+
+        return quetions;
+    }
 }

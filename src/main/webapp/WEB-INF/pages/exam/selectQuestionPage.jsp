@@ -13,23 +13,6 @@
         font-size: 13.85px;
     }
 
-    #questionsAreEmpty {
-        background-color: #b2e0ff;
-        height: 100px;
-        display: none;
-        top: 40px;
-        vertical-align: middle;
-        border-radius: 5px;
-        margin-top: -15px;
-    }
-
-    #questionsAreEmptyDesc {
-        text-align: center;
-        vertical-align: middle;
-        line-height: 100px;
-        color: #00647f;
-    }
-
     #tbSelectQuestion {
         margin-top: 5px;
     }
@@ -37,55 +20,94 @@
     #tbodySelectQuestion td {
         font-size: 13px;
     }
+
+    .sorting-questions{
+        display: inline-block;
+        width: 15px;
+        vertical-align: middle;"
+    }
+
+    #addQuestionBtn{
+        display: none;
+    }
 </style>
-<div class="modal fade" id="selectQuest" data-backdrop="false">
-    <div class="modal-dialog modal-lg" style="width: 80%">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" aria-label="Close" data-dismiss="modal"><span
-                        aria-hidden="true">&times;</span></button>
-                <div class="container row">
-                    <h4>เลือกข้อสอบ</h4>
-                    <hr>
-                </div>
 
-                <div class="container">
-                <%@include file="../template/searchQuestionTemplateNew.jsp"%>
-                </div>
+<div class="row">
 
-                <%--<button id="removeRowSelected" class="btn btn-danger btn-sm" type="button" style="height: 30px;"><span class="glyphicon glyphicon-trash"></span></button>--%>
-                <button id="addQuestionBtn" class="btn btn-gray btn-sm" type="button">เพิ่มลงในชุดข้อสอบ</button>
-                <table id="tbSelectQuestion" class="table table-responsive table-hover table-bordered">
-                    <thead class="bg-primary small">
-                    <tr>
-                        <th style="text-align: center ;"><input id="checkQuestionAll" type="checkbox"></th>
-                        <th style="text-align: center ;">หมวดหมู่</th>
-                        <th style="text-align: center ;">หัวข้อเรื่อง</th>
-                        <th style="text-align: center ;">คำถาม</th>
-                        <th style="text-align: center ;">ข้อสอบ</th>
-                        <th style="text-align: center ;">ระดับ</th>
-                        <th style="text-align: center ;">คะแนน</th>
-                        <th style="text-align: center ;">ผู้สร้าง</th>
-                    </tr>
-                    </thead>
-                    <tbody id="tbodySelectQuestion">
+    <%@include file="template/searchQuestionTemplateNew.jsp"%>
 
-                    </tbody>
-                    <div id="questionsAreEmpty" width="100%">
-                        <h3 id="questionsAreEmptyDesc">ไม่พบข้อสอบ</h3>
-                    </div>
-                </table>
-            </div>
-        </div>
-        <!-- /.modal-content -->
+    <button id="addQuestionBtn" class="btn btn-default btn-sm" type="button">
+        <span class="glyphicon glyphicon-transfer">&nbsp;<strong>เพิ่มลงในชุดข้อสอบ</strong></span>
+    </button>
+
+    <div id="tbSelectQuestions" class="table-responsive">
+        <table id="tbSelectQuestion" class="table table-responsive table-hover table-bordered" hidden>
+            <thead class="bg-default small">
+            <tr>
+                <th style="text-align: center ; vertical-align: middle;" width="3%">
+                    <input id="checkQuestionAll" type="checkbox">
+                </th>
+                <th style="text-align: center ;" width="20%">
+                    <label value="category"><strong>หมวดหมู่</strong></label>
+                    <span class="sorting-questions">
+                        <span class="glyphicon glyphicon-triangle-top" value="desc"></span><br/>
+                        <span class="glyphicon glyphicon-triangle-bottom" value="asc"></span>
+                    </span>
+                </th>
+                <th style="text-align: center ;" width="20%">
+                    <label value="subcategory"><strong>หัวข้อเรื่อง</strong></label>
+                    <span class="sorting-questions">
+                        <span class="glyphicon glyphicon-triangle-top" value="desc"></span><br/>
+                        <span class="glyphicon glyphicon-triangle-bottom" value="asc"></span>
+                    </span>
+                </th>
+                <th style="text-align: center ;" width="35%">
+                    <label value="description"><strong>คำถาม</strong></label>
+                    <span class="sorting-questions">
+                        <span class="glyphicon glyphicon-triangle-top" value="desc"></span><br/>
+                        <span class="glyphicon glyphicon-triangle-bottom" value="asc"></span>
+                    </span>
+                </th>
+                <th style="text-align: center ;">
+                    <label value="type"><strong>ประเภท</strong></label>
+                    <span class="sorting-questions">
+                        <span class="glyphicon glyphicon-triangle-top" value="desc"></span><br/>
+                        <span class="glyphicon glyphicon-triangle-bottom" value="asc"></span>
+                    </span>
+                </th>
+                <th style="text-align: center ;">
+                    <label value="level"><strong>ระดับ</strong></label>
+                    <span class="sorting-questions">
+                        <span class="glyphicon glyphicon-triangle-top" value="desc"></span><br/>
+                        <span class="glyphicon glyphicon-triangle-bottom" value="asc"></span>
+                    </span>
+                </th>
+                <th style="text-align: center ;">
+                    <label value="score"><strong>คะแนน</strong></label>
+                    <span class="sorting-questions">
+                        <span class="glyphicon glyphicon-triangle-top" value="desc"></span><br/>
+                        <span class="glyphicon glyphicon-triangle-bottom" value="asc"></span>
+                    </span>
+                </th>
+            </tr>
+            </thead>
+            <tbody id="tbodySelectQuestion">
+
+            </tbody>
+        </table>
     </div>
-    <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
-<!-- End Modal Select Question -->
-<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>
-<%--Add By Mr.Wanchana--%>
-<!-- Modal show Quertion Information -->
+
+<div id="init-message-question" class="row alert alert-info text-center">
+    <strong>กรุณาเลือกข้อสอบ</strong>
+</div>
+
+<div id="questionsAreEmpty" class="row alert alert-danger text-center" hidden>
+    <strong>ไม่พบข้อมูล</strong>
+</div>
+
+<%@include file="template/paginationTemplate.jsp" %>
+
 <div id="showQuestionInfoModal" class="modal fade" role="dialog" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -179,11 +201,11 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/orderQuestions.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>
 <script>
-//    $("#addQuestionBtn").on('click', function () {
-//        $("#selectQuest").modal('hide');
-//    });
     $(".btn-default").on('click', function () {
         $("#questionPaperDetail").modal('hide');
     });
