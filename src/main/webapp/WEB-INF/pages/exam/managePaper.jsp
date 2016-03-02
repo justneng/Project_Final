@@ -8,11 +8,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
-<script>
-    var context = '${context}';
-    $('#flash').hide();
-</script>
-
 <style>
     #tbManagePaper {
         margin-top: 3px;
@@ -58,11 +53,17 @@
 
 </style>
 
+<script>
+    var context = '${context}';
+    $('#flash').hide();
+</script>
+
 <div class="container-fluid">
     <div class="row">
         <h3 class="h3">จัดการชุดข้อสอบ</h3>
         <hr/>
     </div>
+
     <div class="row">
         <%@include file="template/searchPaperTemplateNew.jsp" %>
     </div>
@@ -152,5 +153,6 @@
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/categoryDropdown.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/orderPaper.js" />"></script>
+
 
 

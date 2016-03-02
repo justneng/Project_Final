@@ -44,7 +44,7 @@ public class QueryPaperDomain extends HibernateUtil {
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
         criteria.add(Restrictions.eq("code", code));
         criteria.add(Restrictions.ne("paperStatus.id", 4));
-        criteria.add(Restrictions.ne("createBy", null));
+//        criteria.add(Restrictions.ne("createBy", null));
 
         if(criteria.list().size() > 0){
             return (ExamPaper) criteria.list().get(0);

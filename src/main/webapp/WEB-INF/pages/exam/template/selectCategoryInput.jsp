@@ -13,11 +13,19 @@
 <script>
     var context = '${context}';
 </script>
+<script src="${context}/resources/js/pageScript/exam/selectCategoryInput.js" charset="utf-8"></script>
 
-<div class="row">
+<style>
+    li:not[tab=yes]{
+        font-size: 13px;
+    }
+</style>
+
+<div class="form-group">
     <div class="col-sm-2 text-right">
-        <label for="selectCategoryToSelection" class="control-label"><h5 style="margin-top: 5px;">หมวดหมู่ :</h5></label>
+        <label for="selectCategoryToSelection" class="control-label"><h5 style="margin-top: 5px;">หมวดหมู่</h5></label>
     </div>
+
     <div class="col-sm-3" style="padding: 0;">
         <div class="input-group">
             <input type="text" class="form-control input-sm" name="cat" id="selectCategoryToSelection" placeholder="ค้นหาหมวดหมู่"
@@ -28,12 +36,12 @@
         </span>
         </div>
     </div>
+
     <div class="col-sm-2 text-right">
-        <label for="selectCategoryToSelection" class="control-label"><h5 style="margin-top: 5px;">หัวข้อเรื่อง :</h5></label>
+        <label for="selectCategoryToSelection" class="control-label"><h5 style="margin-top: 5px;">หัวข้อเรื่อง</h5></label>
     </div>
+
     <div class="col-sm-3" style="padding: 0;">
         <select id="selectSubCategoryToSelection" class="form-control input-sm" data-width="100%"></select>
     </div>
 </div>
-
-<script src="${context}/resources/js/pageScript/exam/selectCategoryInput.js" charset="utf-8"></script>

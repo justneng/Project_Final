@@ -163,10 +163,8 @@ $(document).ready(function(){
         }
     });
 
-    //$("#selectionQuestionBtnInpagePaper").on('click' ,function(){
     $("#selectionQuestionBtnInpagePaper").unbind('click').click(function(){
         $("#selectQuest").modal('show');
-        //viewQuestions();
         dataNotFound();
         if($("#tbSelectQuestion #tbodySelectQuestion tr").length == 0){
             $("#questionsAreEmpty").show();
@@ -182,11 +180,13 @@ $(document).ready(function(){
         if(this.checked){
             $(".selectQ").each(function(){
                 this.checked = true;
+                $(this).attr("check", "true");
             });
         }
         else{
             $(".selectQ").each(function(){
                 this.checked = false;
+                $(this).attr("check", "false");
             });
         }
     });
@@ -225,10 +225,11 @@ $(document).ready(function(){
             });
         }
     });
+
     $("#removeRowSelected").on('click', function(){
         $("#tbSelectQuestion tr").has('input[class="selectQ"]:checked').remove();
-        viewQuestions();
     });
+
     $("#removeRowQuestionSelect").on('click', function(){
         $("#tbSelectedQuestionToPaper tr").has('input[class="selectedQuestion"]:checked').remove();
         scoreOnChange();
@@ -243,6 +244,7 @@ $(document).ready(function(){
             checkAll2 = checkAll2 + 1;
         });
         if($("#tbodySelectedQuestionToPaper tr").length == 0){
+            $('#questionNotFoundDesc').hide();
             $("#removeRowQuestionSelect").hide();
             $("#tbSelectedQuestionToPaper").hide();
             $("#questionNotFound").show();
@@ -348,54 +350,93 @@ $(document).ready(function(){
     });
 
     $("#date").datepicker();
-    function select(){
-        $('#obj').click(function(){
-            $('#objective').show();
-            $('#objective2').show();
-            $('#subjective').hide();
-            $('#subjective2').hide();
-        });
 
-        $('#sub').click(function(){
-            $('#subjective').show();
-            $('#subjective2').show();
-            $('#objective').hide();
-            $('#objective2').hide();
-        })
-    }
-});
-
-$("#addQuestionBtn").unbind('click').click(function(){
-
-    if($("#tbodySelectQuestion tr input[type=checkbox]:checked").length > 0){
-        $("#tbodySelectQuestion tr input[type=checkbox]:checked").each(function(){
-            var qId = $(this).parent().siblings().map(function(){
-                return $(this).text();
-            }).get(0);
-            addQuestionToPaper(qId);
-            scoreOnChange();
-
-            checkAll2 = checkAll2 + 1;
-        });
-        if(checkAll2 > 0){
-            $("#removeRowQuestionSelect").show();
+    $('#selecttabs').on('click', function(){
+        if($('#tbodySelectedQuestionToPaper tr').length > 0){
+            viewQuestions();
         }
-        $("#selectQuest").modal('hide');
-    }
-    else{
-        if(!confirm('คุณยังไม่ได้เลือกข้อสอบ คุณต้องการออกจากหน้าต่างนี้หรือไม่?')){
-            return false;
+    });
+
+    $('#randomtabs').on('click', function(){
+        countQuestionReady();
+    });
+
+    $("#addQuestionBtn").unbind('click').click(function(){
+
+        if($("#tbodySelectQuestion tr input[type=checkbox]:checked").length > 0){
+            $("#tbodySelectQuestion tr input[type=checkbox]:checked").each(function(){
+                var qId = $(this).parent().siblings().map(function(){
+                    return $(this).text();
+                }).get(0);
+                addQuestionToPaper(qId);
+                scoreOnChange();
+                checkAll2 = checkAll2 + 1;
+            });
+
+            if(checkAll2 > 0){
+                $("#removeRowQuestionSelect").show();
+            }
+
+            $('<span class="label label-default" style="font-size: 13px;">เพิ่มข้อสอบลงชุดข้อสอบเรียบร้อบแล้ว</span>')
+                .insertAfter('#addQuestionBtn')
+                .delay(1500)
+                .fadeOut(function() {
+                    $(this).remove();
+                });
+            viewQuestions();
+            $('#checkQuestionAll').attr('checked', false);
         }
         else{
-            $("#selectQuest").modal('hide');
+            $('#checkQuestionAll').checked = false;
+            $('<span class="label label-danger" style="font-size: 13px;">คุณยังไม่ได้เลือกข้อสอบ</span>')
+                .insertAfter('#addQuestionBtn')
+                .delay(1000)
+                .fadeOut(function() {
+                    $(this).remove();
+                });
         }
-    }
+    });
+
+    $('#newPaperId').bind('keyup change', function(){
+        $('#paper-code').text($('#newPaperId').val());
+    });
+    $('#newPaperName').bind('keyup change', function(){
+        $('#paper-name').text($('#newPaperName').val());
+    });
+
+    $('#check-only-easy').unbind('click').click(function(){
+        if($('#check-only-easy').is(':checked')){
+            $('#randEasy').val('');
+            $('#randEasy').attr('disabled', 'disabled');
+        }
+        else{
+            $('#randEasy').removeAttr('disabled');
+        }
+    });
+
+    $('#check-only-normal').unbind('click').click(function(){
+        if($('#check-only-easy').is(':checked')){
+            $('#randNormal').val('');
+            $('#randNormal').attr('disabled', 'disabled');
+        }
+        else{
+            $('#randNormal').removeAttr('disabled');
+        }
+    });
+
+    $('#check-only-hard').unbind('click').click(function(){
+        if($('#check-only-hard').is(':checked')){
+            $('#randHard').val('');
+            $('#randHard').attr('disabled', 'disabled');
+        }
+        else{
+            $('#randHard').removeAttr('disabled');
+        }
+    });
 });
 
 function viewQuestions(){
-    if($("#tbSelectedQuestionToPaper").is(":hidden") || $("#selectQuest").is(":visible") || $("#questionsAreEmpty").is(':visible')){
-        //if($("#tbodySelectedQuestionToPaper tr").length == 0){
-        //    alert('1' + $("#tbodySelectQuestion tr").length);
+    if(questionsInPaper.length == 0){
         $("#checkQuestionAll").attr('checked', false);
         var dataResponse = $.ajax({
             type: "POST",
@@ -404,61 +445,29 @@ function viewQuestions(){
             async: false,
             success: function(dataResponse){
                 dataFound();
-                $("#tbodySelectQuestion").empty();
-                dataResponse.forEach(function(value){
-
-                    var str = "";
-                    if(value.choices != null){
-                        var i = 1;
-                        (value.choices).forEach(function(value2){
-                            if(Number(value.status.id) == 3){
-                                str = str +'<td style="display: none;"><label id="labelChoice'+i+value.id+'">'+value2.description+'</td>'+
-                                    '<td style="display: none;"><label id="labelChoiceCorrection'+i+value.id+'">'+value2.correction.value+'</td>';
-                            }
-                            i = i+1;
-                        });
-                    }
-                    //
-
-                    $("#tbodySelectQuestion").append(
-                        '<tr>'+
-                        '<td style="display: none;"><label id="labelQuestionId'+value.id+'">'+value.id+'</td>'+
-
-                        '<td style="display: none;"><label id="labelQuestionTypeId'+value.id+'">'+value.questionType.id+'</td>'+
-                        str+
-
-                        '<td class="xyz" style="text-align: center;"><input class="selectQ" name="selectQ" type="checkbox"/></td>'+
-                        '<td style="text-align: left;"><label id="labelCategoryName'+value.id+'">'+value.subCategory.category.name+'<label></td>'+
-                        '<td style="text-align: left;"><label id="labelSubCategoryName'+value.id+'">'+value.subCategory.name+'</label></td>'+
-                        '<td style="text-align: left;"><label id="labelQuestionDesc'+value.id+'">'+value.description+'</label></td>'+
-                        '<td><label id="labelQuestionTypeDesc'+value.id+'">'+value.questionType.description+'</td>'+
-                        '<td style="text-align: center;"><label id="labelDiffDesc'+value.id+'">'+value.difficultyLevel.description+'</td>'+
-                        '<td style="text-align: center;"><label id="labelScore'+value.id+'">'+value.score+'</td>'+
-
-                        '<td style="text-align: center;"><label id="labelQuestionCreateBy'+value.id+'">'+value.createBy.thFname+" "+value.createBy.thLname+'</td>'+
-                        '<td style="display: none;"><label id="labelQuestionCreateDate'+value.id+'">'+value.createDate+'</td>'+
-
-                        '</tr>'
-                    );
-                });
+                records = dataResponse;
+                if(records.length <= 10){
+                    checkAll = result.length;
+                    notShowPagingSelectQuestions();
+                }
+                else{
+                    showPagingSelectQuestions(records);
+                }
             },
             error: function(){
                 alert("เกิดข้อผิดพลาดขณะร้องขอข้อมูล...");
             }
         });
     }
-    if($("#tbodySelectQuestion tr").length != 0 && $("#tbodySelectedQuestionToPaper tr").length != 0){
+    else{
         $("#tbSelectQuestion").show();
         $("#questionsAreEmpty").hide();
         $("#addQuestionBtn").removeAttr('disabled');
         allQuestionIdOnTableCreatePaper = [];
-        $("#tbodySelectedQuestionToPaper tr input:checkbox").each(function(){
-            var temp = $(this).parent().siblings().map(function(){
-                return $(this).text();
-            }).get(0);
-            allQuestionIdOnTableCreatePaper.push(temp);
+        $("#tbodySelectedQuestionToPaper tr td:first-child").each(function(){
+            allQuestionIdOnTableCreatePaper.push($(this).attr("qid"));
         });
-        // converse array to json.
+
         var toJsonObject = {};
         var tempz = new Array();
         for(var i = 0; i < allQuestionIdOnTableCreatePaper.length; i++){
@@ -477,49 +486,18 @@ function viewQuestions(){
             async: false,
             success: function(data){
                 if(data.length == 0){
-                    //alert('2');
                     dataNotFound();
                 }
                 else{
                     dataFound();
-                    //alert('3');
-                    $("#checkQuestionAll").attr('checked', false);
-                    $("#tbSelectQuestion").show();
-                    $("#tbodySelectQuestion").empty();
-                    data.forEach(function(value){
-
-                       var str = "";
-                        if(value.choices != null){
-                            var i = 1;
-                            (value.choices).forEach(function(value2){
-                                if(Number(value.status.id) == 3){
-                                    str = str +'<td style="display: none;"><label id="labelChoice'+i+value.id+'">'+value2.description+'</td>'+
-                                        '<td style="display: none;"><label id="labelChoiceCorrection'+i+value.id+'">'+value2.correction.value+'</td>';
-                                }
-                                i = i+1;
-                            });
-                        }
-
-                        $("#tbodySelectQuestion").append(
-                            '<tr>'+
-                            '<td style="display: none;"><label id="labelQuestionId'+value.id+'">'+value.id+'</td>'+
-                            '<td style="display: none;"><label id="labelQuestionTypeId'+value.id+'">'+value.questionType.id+'</td>'+
-                            str+
-
-                            '<td class="xyz" style="text-align: center;"><input class="selectQ" name="selectQ" type="checkbox"/></td>'+
-                            '<td style="text-align: left;"><label id="labelCategoryName'+value.id+'">'+value.subCategory.category.name+'<label></td>'+
-                            '<td style="text-align: left;"><label id="labelSubCategoryName'+value.id+'">'+value.subCategory.name+'</label></td>'+
-                            '<td style="text-align: left;"><label id="labelQuestionDesc'+value.id+'">'+value.description+'</label></td>'+
-                            '<td><label id="labelQuestionTypeDesc'+value.id+'">'+value.questionType.description+'</td>'+
-                            '<td style="text-align: center;"><label id="labelDiffDesc'+value.id+'">'+value.difficultyLevel.description+'</td>'+
-                            '<td style="text-align: center;"><label id="labelScore'+value.id+'">'+value.score+'</td>'+
-
-                            '<td style="text-align: center;"><label id="labelQuestionCreateBy'+value.id+'">'+value.createBy.thFname+" "+value.createBy.thLname+'</td>'+
-                            '<td style="display: none;"><label id="labelQuestionCreateDate'+value.id+'">'+value.createDate+'</td>'+
-
-                            '</tr>'
-                        );
-                    });
+                    records = data;
+                    if(records.length <= 10){
+                        checkAll = data.length;
+                        notShowPagingSelectQuestions(records);
+                    }
+                    else{
+                        showPagingSelectQuestions(records);
+                    }
                 }
             },
             error: function(){
@@ -537,15 +515,13 @@ function addQuestionToPaper(qId){
     $("#tbSelectedQuestionToPaper").show();
     $("#tbodySelectedQuestionToPaper").append(
         '<tr>'+
-        '<td style="display: none;">'+$("#labelQuestionId"+qId).text()+'</td>'+
-        '<td style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
-        '<td style="text-align: center;">'+$("#labelQuestionTypeDesc"+qId).text()+'</td>'+
+        '<td qid="'+qId+'" style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
         '<td>'+$("#labelCategoryName"+qId).text()+'</td>'+
         '<td>'+$("#labelSubCategoryName"+qId).text()+'</td>'+
-        '<td>'+$("#labelQuestionDesc"+qId).text()+'</td>'+
+        '<td>'+checkString($("#labelQuestionDesc"+qId).text())+'</td>'+
+        '<td style="text-align: center;">'+$("#labelQuestionTypeDesc"+qId).text()+'</td>'+
         '<td style="text-align: center;">'+$("#labelDiffDesc"+qId).text()+'</td>'+
         '<td><input id="newScore'+qId+'" onchange="scoreOnChange()" name="newScore" type="number" class="form-control input-sm"  min="1" max="50" value="'+newScore+'"/></td>'+
-        '<td style="text-align: center;">'+$("#labelQuestionCreateBy"+qId).text()+'</td>'+
         '</tr>'
     );
     $("#questionNotFound").hide();
@@ -821,8 +797,6 @@ function generalSearchQuestion(btnSearchStatus) {
     searchQHard = $("#rHard").val();
     if(searchQHard == ""? searchQHard = 0: searchQHard = $("#rHard").val());
 
-    //alert(searchQEasy + " " + searchQNormal + " " + searchQHard);
-
     if(itemLenght > 0){
 
         for (var i = 0; i < itemLenght; i++) {
@@ -948,7 +922,6 @@ function generalSearchQuestion(btnSearchStatus) {
         }
     }
     jsonObj = JSON.stringify(tempArray);
-    //alert(jsonObj);
     var dataResponse = $.ajax({
         type: "POST",
         url: context+"/TDCS/exam/generalQuestionSearch",
@@ -957,47 +930,17 @@ function generalSearchQuestion(btnSearchStatus) {
         mimeType: 'application/json',
         data: jsonObj,
         success: function (result) {
-            checkAll = result.length;
             $("#checkQuestionAll").prop('checked', false);
 
             if(result.length > 0){
-                dataFound();
-                $("#tbodySelectQuestion").empty();
-                result.forEach(function(value){
-
-                    var str = "";
-                    if(value.choices != null){
-                        var j = 1;
-                        (value.choices).forEach(function(value2){
-                            if(Number(value.status.id) == 3){
-                                str = str +'<td style="display: none;"><label id="labelChoice'+j+value.id+'">'+value2.description+'</td>'+
-                                    '<td style="display: none;"><label id="labelChoiceCorrection'+j+value.id+'">'+value2.correction+'</td>';
-                            }
-                            j = j+1;
-                        });
-                    }
-                    //
-                    $("#tbodySelectQuestion").append(
-                        '<tr>'+
-                        '<td style="display: none;"><label id="labelQuestionId'+value.id+'">'+value.id+'</td>'+
-
-                        '<td style="display: none;"><label id="labelQuestionTypeId'+value.id+'">'+value.questionType.id+'</td>'+
-                        str+
-
-                        '<td class="xyz" style="text-align: center;"><input class="selectQ" name="selectQ" type="checkbox"/></td>'+
-                        '<td style="text-align: left;"><label id="labelCategoryName'+value.id+'">'+value.subCategory.category.name+'<label></td>'+
-                        '<td style="text-align: left;"><label id="labelSubCategoryName'+value.id+'">'+value.subCategory.name+'</label></td>'+
-                        '<td style="text-align: left;"><label id="labelQuestionDesc'+value.id+'">'+value.description+'</label></td>'+
-                        '<td style="text-align: center;"><label id="labelQuestionTypeDesc'+value.id+'">'+value.questionType.description+'</td>'+
-                        '<td style="text-align: center;"><label id="labelDiffDesc'+value.id+'">'+value.difficultyLevel.description+'</td>'+
-                        '<td style="text-align: center;"><label id="labelScore'+value.id+'">'+value.score+'</td>'+
-
-                        '<td style="text-align: center;"><label id="labelQuestionCreateBy'+value.id+'">'+value.createBy.thFname+" "+value.createBy.thLname+'</td>'+
-                        '<td style="display: none;"><label id="labelQuestionCreateDate'+value.id+'">'+value.createDate+'</td>'+
-
-                        '</tr>'
-                    );
-                });
+                records = result;
+                if(records.length <= 10){
+                    checkAll = result.length;
+                    notShowPagingSelectQuestions();
+                }
+                else{
+                    showPagingSelectQuestions(records);
+                }
             }
             else{
                 dataNotFound();
@@ -1018,7 +961,20 @@ function generalSearchQuestion(btnSearchStatus) {
     //allQuestionIdOnTableCreatePaper = [];
 }
 
+function checkString(txt){
+    txt = txt.replace("<", "&lt;");
+    txt = txt.replace(">", "&gt;");
+    txt = txt.replace("/", "&#8725;");
+
+    return txt;
+}
+
 function dataNotFound(){
+    $('#questionNotFoundDesc').show();
+    $('.paging').hide();
+    $('#addQuestionBtn').hide();
+    $('#init-message-question').hide();
+    $('#questionsAreEmpty').show();
     $("#addQuestionBtn").hide();
     $("#questionsAreEmpty").show();
     $("#removeRowSelected").attr('disabled', 'disabled');
@@ -1027,8 +983,12 @@ function dataNotFound(){
 }
 
 function dataFound(){
+    $('#questionNotFoundDesc').hide();
+    $('.paging').show();
+    $('#addQuestionBtn').show();
+    $('#init-message-question').hide();
+    $('#questionsAreEmpty').hide();
     $("#addQuestionBtn").show();
-    //$("#removeRowQuestionSelect").show();
     $('#init-message-show').hide();
     $("#questionsAreEmpty").hide();
     $("#removeRowSelected").removeAttr('disabled');
@@ -1060,47 +1020,6 @@ function showUpdatePaper(paperId){
         async: false,
         success: function(value){
             $("#tbodySelectedQuestionToPaper").empty();
-            //$("#removeRowQuestionSelect").show();
-            //data.forEach(function(value){
-            //    $("#newPaperId").val(value.examPaper.code);
-            //    if($("#newPaperName").val(value.examPaper.name) == null? $("#newPaperName").val(''): $("#newPaperName").val(value.examPaper.name));
-            //    $("#newPaperScore").val(value.examPaper.maxScore);
-            //    $("#maxScore").val(value.examPaper.maxScore);
-            //
-            //    var posiId;
-            //    var posiName;
-            //
-            //    if(value.examPaper.position != null){
-            //        posiId = value.examPaper.position.posiId;
-            //    }
-            //    else{
-            //        posiId = 0;
-            //    }
-            //    $("#newPaperForPosition").val(Number(posiId));
-            //
-            //    var paperTime = value.examPaper.timeLimit;
-            //    var hours = Math.floor(paperTime / 60);
-            //    var minutes = paperTime % 60;
-            //    $("#hours").val(hours);
-            //    $("#minutes").val(minutes);
-            //
-            //    $("#tbodySelectedQuestionToPaper").append(
-            //        '<tr>'+
-            //        '<td style="display: none;">'+ value.question.id+'</td>'+
-            //
-            //        '<td style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
-            //        '<td style="text-align: center;">'+ value.question.questionType.description+'</td>'+
-            //        '<td>'+ value.question.subCategory.category.name+'</td>'+
-            //        '<td>'+ value.question.subCategory.name+'</td>'+
-            //        '<td style="text-align: left;">'+ value.question.description+'</td>'+
-            //        '<td style="text-align: center;">'+ value.question.difficultyLevel.description+'</td>'+
-            //        '<td><input id="newScore'+value.question.id+'" onchange="scoreOnChange()" name="newScore" type="number" class="form-control input-sm"  min="1" max="50" value="'+value.score+'"/></td>'+
-            //        '<td style="text-align: center;">'+ value.question.createBy.thFname+' '+value.question.createBy.thLname+'</td>'+
-            //        '</tr>'
-            //    );
-            //    sumScore(value.score);
-            //    $("#score").val(sumPaperScore);
-            //});
             for(var i = 0; i < value.length; i ++){
                 $("#newPaperId").val(value[0].examPaper.code);
                 if($("#newPaperName").val(value[0].examPaper.name) == null? $("#newPaperName").val(''): $("#newPaperName").val(value[0].examPaper.name));
@@ -1292,6 +1211,33 @@ function countQuestionReady(){
             $("#randNormal").attr('data-original-title', 'จำนวนข้อที่สามารถสุ่มได้ ' + sp[2] + ' ข้อ');
             $("#randHard").attr('data-original-title', 'จำนวนข้อที่สามารถสุ่มได้ ' + sp[3] + ' ข้อ');
 
+            if(sp[1] == 0){
+                $('#easy-remaining').removeClass('label-success').addClass('label-danger').text('จำนวนข้อที่สามารถสุ่มได้ ' + sp[1] + ' ข้อ');
+                $('#randEasy').attr('disabled', 'disabled');
+            }
+            else{
+                $('#easy-remaining').addClass('label-success').text('จำนวนข้อที่สามารถสุ่มได้ ' + sp[1] + ' ข้อ');
+                $('#randEasy').attr('max', sp[1]);
+            }
+
+            if(sp[2] == 0){
+                $('#normal-remaining').removeClass('label-success').addClass('label-danger').text('จำนวนข้อที่สามารถสุ่มได้ ' + sp[2] + ' ข้อ');
+                $('#randNormal').attr('disabled', 'disabled');
+            }
+            else{
+                $('#normal-remaining').addClass('label-success').text('จำนวนข้อที่สามารถสุ่มได้ ' + sp[2] + ' ข้อ');
+                $('#randNormal').attr('max', sp[2]);
+            }
+
+            if(sp[3] == 0){
+                $('#hard-remaining').removeClass('label-success').addClass('label-danger').text('จำนวนข้อที่สามารถสุ่มได้ ' + sp[3] + ' ข้อ');
+                $('#randHard').attr('disabled', 'disabled');
+            }
+            else{
+                $('#hard-remaining').addClass('label-success').text('จำนวนข้อที่สามารถสุ่มได้ ' + sp[3] + ' ข้อ');
+                $('#randHard').attr('max', sp[3]);
+            }
+
             $('[data-toggle="tooltip"]').tooltip();
             sp="";
         },
@@ -1378,6 +1324,10 @@ function updatePaper(){
 
 function randomQuestion(){
 
+    var checkEasy = "";
+    var checkNormal = "";
+    var checkHard = "";
+
     if(categoryId.indexOf(':')!=-1){
         categoryId = categoryId.substring(0, categoryId.indexOf(':') - 1);
     }
@@ -1393,6 +1343,11 @@ function randomQuestion(){
         }).get(0);
         questionsInPaper.push(temp);
     });
+
+    if($('#check-only-easy').is(':checked')? checkEasy = 1: checkEasy = 0);
+    if($('#check-only-normal').is(':checked')? checkNormal = 1: checkNormal = 0);
+    if($('#check-only-hard').is(':checked')? checkHard = 1: checkHard = 0);
+
 
     var randEasy = $("#randEasy").val();
     var randNormal = $("#randNormal").val();
@@ -1416,7 +1371,10 @@ function randomQuestion(){
             "randHard": randHard,
             "qid" : id,
             "categoryId": categoryId,
-            "subCategoryId": subcategoryId
+            "subCategoryId": subcategoryId,
+            "checkEasy": checkEasy,
+            "checkNormal": checkNormal,
+            "checkHard": checkHard
         };
         tempz.push(item);
     }
@@ -1428,176 +1386,25 @@ function randomQuestion(){
         contentType: "application/json",
         data: obj,
         success: function(data){
-            var questionCount = (Number(randEasy) + Number(randNormal) + Number(randHard));
-            var checkTrLength = $("#tbodySelectedQuestionToPaper tr").length ;
-            var dataLength = 0;
-            data.forEach(function(i){
-                if(jQuery.type(i) === "object"){
-                    dataLength ++;
-                }
-                else{
-                    return;
-                }
+            $("#checkAllQuestionFromCreatePaperPage").checked = false;
+            $("#tbSelectedQuestionToPaper").show();
+            $("#removeRowQuestionSelect").show();
+            $("#questionNotFoundDesc").hide();
+            data.forEach(function (value) {
+
+                $("#tbodySelectedQuestionToPaper").append(
+                    '<tr>'+
+                    '<td style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
+                    '<td style="display: none;">'+ value.id+'</td>'+
+                    '<td>'+ value.subCategory.category.name+'</td>'+
+                    '<td>'+ value.subCategory.name+'</td>'+
+                    '<td style="text-align: left;">'+ checkString(value.description)+'</td>'+
+                    '<td style="text-align: left;">'+ value.questionType.description+'</td>'+
+                    '<td style="text-align: center;">'+ value.difficultyLevel.description+'</td>'+
+                    '<td><input id="newScore'+id+'" onkeypress="return isNumber(event)" onchange="scoreOnChange()" name="newScore" type="number" class="form-control input-sm"  min="1" max="50" value="'+value.score+'"/></td>'+
+                    '</tr>'
+                );
             });
-
-            if((dataLength == 0 || data == null) && (checkTrLength == 0)){
-                alert('ไม่พบข้อสอบ');
-                dataNotFound();
-            }
-            if((dataLength == 0 || data == null) && (checkTrLength > 0)){
-                alert('ไม่พบข้อสอบ');
-                dataFound();
-                $("#questionNotFound").hide();
-                $("#checkQuestionAll").attr('checked', false);
-                $("#tbSelectedQuestionToPaper").show();
-
-            }
-            if((dataLength != 0) && (data != null)){
-                if(dataLength > 0) {
-                    dataFound();
-                    $("#questionNotFound").hide();
-                    $("#checkQuestionAll").attr('checked', false);
-
-                    if ((dataLength < questionCount)) {
-                        var tmpArr = new Array(data[0], data[1], data[2]);
-                        var message1 = "", message2 = "", message3 = "";
-                        var str = "\t\t\tข้อสอบไม่เพียงพอ";
-                        tmpArr.forEach(function(i){
-                            if(jQuery.type(i) === "string"){
-                                var str = i.split('#');
-                                if(str[0] == "easy") {
-                                    message1 = ":จำนวนข้อสอบระดับง่ายที่สามารถสุ่มได้มากที่สุด " + str[1] + " ข้อ";
-                                }
-                                if(str[0] == "normal") {
-                                    message2 = ":จำนวนข้อสอบระดับปานกลางที่สามารถสุ่มได้มากที่สุด " + str[1] + " ข้อ";
-                                }
-                                if(str[0] == "hard") {
-                                    message3 = ":จำนวนข้อสอบระดับยากที่สามารถสุ่มได้มากที่สุด " + str[1] + " ข้อ";
-                                }
-                            }
-                            else{
-                                return;
-                            }
-                        });
-
-                        if(message1 != ""){
-                            str = str + "\n" + message1;
-                        }if(message2 != ""){
-                            str = str + "\n" + message2;
-                        }if(message3 != ""){
-                            str = str + "\n" + message3;
-                        }
-                        str = str + "\n" +'\t\t  ต้องการดำเนินการต่อหรือไม่?';
-
-                        if((message1 != "") && (message2 != "") && (message3 != "")){
-                            str = 'ไม่พบข้อสอบ';
-                        }
-
-                        if (!confirm(str)) {
-                            if($("#tbodySelectedQuestionToPaper tr").length > 0){
-                                return false;
-                            }
-                            else{
-                                $("#tbSelectedQuestionToPaper").hide();
-                                $("#questionNotFound").show();
-                                dataNotFound();
-                                return false;
-                            }
-                        }
-                        else {
-                            $("#checkAllQuestionFromCreatePaperPage").checked = false;
-                            data.forEach(function (value) {
-                                if(jQuery.type(value) === "string"){
-                                    return;
-                                }
-                                else{
-                                    $("#tbSelectedQuestionToPaper").show();
-                                    $("#removeRowQuestionSelect").show();
-                                    $("#tbodySelectedQuestionToPaper").append(
-                                        '<tr>' +
-                                        '<td style="display: none;"><label id="labelQuestionId' + value.id + '">' + value.id + '</td>' +
-                                        '<td style="display: none;"><label id="labelCreateDateId' + value.id + '">' + value.createDate + '</td>' +
-                                        '<td style="text-align: center;"><input class="selectedQuestion" name="selectQ" type="checkbox"/></td>' +
-                                        '<td style="text-align: center;"><label id="labelQuestionTypeDesc' + value.id + '">' + value.questionType.description + '</td>' +
-                                        '<td style="text-align: left;"><label id="labelCategoryName' + value.id + '">' + value.subCategory.category.name + '<label></td>' +
-                                        '<td style="text-align: left;"><label id="labelSubCategoryName' + value.id + '">' + value.subCategory.name + '</label></td>' +
-                                        '<td style="text-align: left;"><label id="labelQuestionDesc' + value.id + '">' + value.description + '</label></td>' +
-                                        '<td style="text-align: center;"><label id="labelDiffDesc' + value.id + '">' + value.difficultyLevel.description + '</td>' +
-                                        '<td><input id="newScore' + value.id + '" onchange="scoreOnChange()" name="newScore" type="number" class="form-control input-sm"  min="1" max="50" value="' + value.score + '"/></td>' +
-
-                                        '<td style="text-align: center;"><label id="labelQuestionCreateBy' + value.id + '">' + value.createBy.thFname + " " + value.createBy.thLname + '</td>' +
-                                        '<td style="display: none;"><label id="labelQuestionCreateDate' + value.id + '">' + value.createDate + '</td>' +
-
-                                        '</tr>'
-                                    );
-                                }
-                            });
-                        }
-                    }
-
-                    else if (dataLength == questionCount) {
-                        $("#checkAllQuestionFromCreatePaperPage").checked = false;
-                        $("#tbSelectedQuestionToPaper").show();
-                        $("#removeRowQuestionSelect").show();
-                        data.forEach(function (value) {
-                            $("#tbodySelectedQuestionToPaper").append(
-                                '<tr>' +
-                                '<td style="display: none;"><label id="labelQuestionId' + value.id + '">' + value.id + '</td>' +
-                                '<td style="display: none;"><label id="labelCreateDateId' + value.id + '">' + value.createDate + '</td>' +
-                                '<td style="text-align: center;"><input class="selectedQuestion" name="selectQ" type="checkbox"/></td>' +
-                                '<td style="text-align: center;"><label id="labelQuestionTypeDesc' + value.id + '">' + value.questionType.description + '</td>' +
-                                '<td style="text-align: left;"><label id="labelCategoryName' + value.id + '">' + value.subCategory.category.name + '<label></td>' +
-                                '<td style="text-align: left;"><label id="labelSubCategoryName' + value.id + '">' + value.subCategory.name + '</label></td>' +
-                                '<td style="text-align: left;"><label id="labelQuestionDesc' + value.id + '">' + value.description + '</label></td>' +
-                                '<td style="text-align: center;"><label id="labelDiffDesc' + value.id + '">' + value.difficultyLevel.description + '</td>' +
-                                '<td><input id="newScore' + value.id + '" onchange="scoreOnChange()" name="newScore" type="number" class="form-control input-sm"  min="1" max="50" value="' + value.score + '"/></td>' +
-
-                                '<td style="text-align: center;"><label id="labelQuestionCreateBy' + value.id + '">' + value.createBy.thFname + " " + value.createBy.thLname + '</td>' +
-                                '<td style="display: none;"><label id="labelQuestionCreateDate' + value.id + '">' + value.createDate + '</td>' +
-
-                                '</tr>'
-                            );
-                        });
-                    }
-                    else{
-                        $("#checkAllQuestionFromCreatePaperPage").checked = false;
-                        $("#tbSelectedQuestionToPaper").show();
-                        $("#removeRowQuestionSelect").show();
-                        data.forEach(function (value) {
-
-                            var str = "";
-                            if (value.choices != null) {
-                                var i = 1;
-                                (value.choices).forEach(function (value2) {
-                                    if (Number(value.status.id) == 3) {
-                                        str = str + '<td style="display: none;"><label id="labelChoice' + i + value.id + '">' + value2.description + '</td>' +
-                                            '<td style="display: none;"><label id="labelChoiceCorrection1' + value.id + '">' + value2.correction.value + '</td>';
-                                    }
-                                    i = i + 1;
-                                });
-                            }
-
-                            $("#tbodySelectedQuestionToPaper").append(
-                                '<tr>' +
-                                '<td style="display: none;"><label id="labelQuestionId' + value.id + '">' + value.id + '</td>' +
-                                '<td style="display: none;"><label id="labelCreateDateId' + value.id + '">' + value.createDate + '</td>' +
-                                '<td style="text-align: center;"><input class="selectedQuestion" name="selectQ" type="checkbox"/></td>' +
-                                '<td style="text-align: center;"><label id="labelQuestionTypeDesc' + value.id + '">' + value.questionType.description + '</td>' +
-                                '<td style="text-align: left;"><label id="labelCategoryName' + value.id + '">' + value.subCategory.category.name + '<label></td>' +
-                                '<td style="text-align: left;"><label id="labelSubCategoryName' + value.id + '">' + value.subCategory.name + '</label></td>' +
-                                '<td style="text-align: left;"><label id="labelQuestionDesc' + value.id + '">' + value.description + '</label></td>' +
-                                '<td style="text-align: center;"><label id="labelDiffDesc' + value.id + '">' + value.difficultyLevel.description + '</td>' +
-                                '<td><input id="newScore' + value.id + '" onchange="scoreOnChange()" name="newScore" type="number" class="form-control input-sm"  min="1" max="50" value="' + value.score + '"/></td>' +
-
-                                '<td style="text-align: center;"><label id="labelQuestionCreateBy' + value.id + '">' + value.createBy.thFname + " " + value.createBy.thLname + '</td>' +
-                                '<td style="display: none;"><label id="labelQuestionCreateDate' + value.id + '">' + value.createDate + '</td>' +
-
-                                '</tr>'
-                            );
-                        });
-                    }
-                }
-            }
 
             scoreOnChange();
             categoryId = "";

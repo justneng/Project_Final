@@ -433,6 +433,9 @@ public class QuestionController {
         int randEasy = 0;
         int randNormal = 0;
         int randHard = 0;
+        int checkEasy = 0;
+        int checkNormal = 0;
+        int checkHard = 0;
         int i = 0;
         int subCategoryId = 0;
         String json = "";
@@ -448,6 +451,9 @@ public class QuestionController {
                 randHard = jsonObject.getInt("randHard");
                 categoryId = jsonObject.getString("categoryId");
                 subCategoryName = jsonObject.getString("subCategoryId");
+                checkEasy = jsonObject.getInt("checkEasy");
+                checkNormal = jsonObject.getInt("checkNormal");
+                checkHard = jsonObject.getInt("checkHard");
             }
             qIds.add(new Integer(jsonObject.getInt("qid")));
         }
@@ -567,6 +573,28 @@ public class QuestionController {
         }
 
         return str;
+    }
+
+    @RequestMapping(value = "/exam/orderQuestions", method= RequestMethod.POST)
+    public ResponseEntity<String> orderPaper(@RequestParam(value = "questionIds") String jsonString,
+                                             @RequestParam(value = "orderByColumn") String orderByColumn,
+                                             @RequestParam(value = "orderType") String orderType){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        List questionIdsList = new ArrayList();
+        JSONArray jsonArray = new JSONArray(jsonString);
+        for(int i = 0; i < jsonArray.length(); i ++){
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            questionIdsList.add(jsonObject.getInt("questionIds"));
+        }
+
+        List<Question> questions = queryQuestionDomain.orderQuestions(questionIdsList, orderByColumn, orderType);
+
+        String json = new JSONSerializer().include("choices").exclude("*.class").serialize(questions);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 
     // ---------------------------------------------------------------------------------------------------------

@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/exam/paginationTemplate.css"/>"/>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/paginationTemplateJs.js" />"></script>
 
-<div class="row paging">
+<div id="paging" class="row paging">
     <form class="form-inline text-center">
         <ul id="page-component" class="pagination pagination-sm">
 

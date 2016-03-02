@@ -31,6 +31,10 @@
     #showEmployeeSelected button:hover{
         background-color: #d43f3a;
     }
+
+    .alert{
+        margin-top: 3px;
+    }
 </style>
 
 <div id="modalSearchByEmployeeName" class="modal fade" role="dialog">
@@ -43,7 +47,7 @@
             <div class="modal-body" align="center">
                 <div class="row">
                     <div class="form-inline">
-                        <div class="form-group col-sm-12">
+                        <div class="form-group">
                             ชื่อ&nbsp;
                             <input id="searchEmployeeNameText" class="form-control input-sm" type="text" size="35" placeholder="ค้นหาพนักงาน ชื่อ-นามสกุล"/>
                             <button id="searchBtnFromModalSearchEmployee" class="btn btn-primary btn-sm" type="submit">

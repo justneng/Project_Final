@@ -28,42 +28,19 @@ $(document).ready(function(){
                     $("#tbSelectedQuestionToPaper").show();
                     $("#tbodySelectedQuestionToPaper").empty();
                     for(var i = 0; i < value.length; i ++){
-                        //$("#newPaperId").val(value[0].examPaper.code);
-                        //if($("#newPaperName").val(value[0].examPaper.name) == null? $("#newPaperName").val(''): $("#newPaperName").val(value[0].examPaper.name));
-                        //$("#newPaperScore").val(value[0].examPaper.maxScore);
-                        //$("#maxScore").val(value[0].examPaper.maxScore);
-                        //
-                        //var posiId;
-                        //var posiName;
-                        //
-                        //if(value[0].examPaper.position != null){
-                        //    posiId = value[0].examPaper.position.posiId;
-                        //}
-                        //else{
-                        //    posiId = 0;
-                        //}
-                        //$("#newPaperForPosition").val(Number(posiId));
-                        //
-                        //var paperTime = value[0].examPaper.timeLimit;
-                        //var hours = Math.floor(paperTime / 60);
-                        //var minutes = paperTime % 60;
-                        //$("#hours").val(hours);
-                        //$("#minutes").val(minutes);
-
                         $("#tbodySelectedQuestionToPaper").append(
                             '<tr>'+
-                            '<td style="display: none;">'+ value[i].question.id+'</td>'+
-
                             '<td style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
-                            '<td style="text-align: center;">'+ value[i].question.questionType.description+'</td>'+
+                            '<td style="display: none;">'+ value[i].question.id+'</td>'+
                             '<td>'+ value[i].question.subCategory.category.name+'</td>'+
                             '<td>'+ value[i].question.subCategory.name+'</td>'+
-                            '<td style="text-align: left;">'+ value[i].question.description+'</td>'+
+                            '<td style="text-align: left;">'+ checkString(value[i].question.description)+'</td>'+
+                            '<td style="text-align: left;">'+ value[i].question.questionType.description+'</td>'+
                             '<td style="text-align: center;">'+ value[i].question.difficultyLevel.description+'</td>'+
                             '<td><input id="newScore'+value[i].question.id+'" onkeypress="return isNumber(event)" onchange="scoreOnChange()" name="newScore" type="number" class="form-control input-sm"  min="1" max="50" value="'+value[i].score+'"/></td>'+
-                            '<td style="text-align: center;">'+ value[i].question.createBy.thFname+' '+value[i].question.createBy.thLname+'</td>'+
                             '</tr>'
                         );
+
                         questionsInPaper.push(value[i].question.id);
                         newQuestionScore.push(value[i].score);
                         sumScore(value[i].score);
@@ -72,6 +49,7 @@ $(document).ready(function(){
                     sumPaperScore = 0;
                 }
                 else{
+                    alert('this');
                     $("#tbodySelectedQuestionToPaper").empty();
                     $("#score").val(0);
                     $("#tbSelectedQuestionToPaper").hide();

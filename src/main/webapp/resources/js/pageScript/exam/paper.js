@@ -232,7 +232,6 @@ function getAllPapers(){
     });
 }
 
-
 function updatePaperStatus(paperId) {
     var paperStatus = $("#dropdownId" + paperId).val();
     $.ajax({
@@ -409,6 +408,7 @@ function generalSearchPaper(btnSearchStatus) {
                 }
                 else{
                     //For pagination
+                    paperFound();
                     records = data;
                     if(records.length <= 10){
                         notShowPaging();
