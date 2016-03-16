@@ -130,7 +130,6 @@ function listcatSelectInput() {
 };
 
 
-/////To Dropdown
 $("#selectCategoryToSelection").on('change', function () {
         listSubCategory();
     }

@@ -48,10 +48,7 @@ $(document).ready(function(){
     var paperStatus = value.substring(value.indexOf("#") + 1, value.length);
     if($.isNumeric(Number(id)) && paperStatus == "edit"){
         paperId = Number(id);
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-=======
         $('#createPaperBtn').attr('button-status', 'update');
->>>>>>> update project
         onLoadPageEditPaper();
         showUpdatePaper(paperId);
     }
@@ -60,10 +57,7 @@ $(document).ready(function(){
         showPaperInfo(paperId);
     }
     else{
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-=======
         $('#createPaperBtn').attr('button-status', 'create');
->>>>>>> update project
         onLoadPageCreatePaper();
     }
 
@@ -124,22 +118,15 @@ $(document).ready(function(){
         //if(subcategoryId == ""? subcategoryId = "": subcategoryId = $("#selectSubCategoryToSelection").val());
     });
 
-    $("#selectCategoryToSelectionForRandom").change(function(){
-        subcategoryId = $("#selectSubCategoryToSelectionForRandom").val();
-        categoryId = $("#selectCategoryToSelectionForRandom").val();
-    });
-
-    $("#selectSubCategoryToSelectionForRandom").change(function(){
-
-        //subCategoryIds = [];
-        //var str = $("#selectCategoryToSelectionForRandom").val();
-        //catId = str.substring(0, str.indexOf(":") - 1);
-        //subCategoryIds.push($("#selectSubCategoryToSelectionForRandom").val());
-        //countQuestionReady();
-
-        subcategoryId = $("#selectSubCategoryToSelectionForRandom").val();
-        categoryId = $("#selectCategoryToSelectionForRandom").val();
-    });
+    //$("#selectCategoryToSelectionForRandom").change(function(){
+    //    subcategoryId = $("#selectSubCategoryToSelectionForRandom").val();
+    //    categoryId = $("#selectCategoryToSelectionForRandom").val();
+    //});
+    //
+    //$("#selectSubCategoryToSelectionForRandom").change(function(){
+    //    subcategoryId = $("#selectSubCategoryToSelectionForRandom").val();
+    //    categoryId = $("#selectCategoryToSelectionForRandom").val();
+    //});
 
     if($("#newPaperScore").val() == ""){
         $("#maxScore").val(0);
@@ -252,36 +239,16 @@ $(document).ready(function(){
             checkAll2 = checkAll2 + 1;
         });
         if($("#tbodySelectedQuestionToPaper tr").length == 0){
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-            $('#questionNotFoundDesc').hide();
-            $("#removeRowQuestionSelect").hide();
-            $("#tbSelectedQuestionToPaper").hide();
-            $("#questionNotFound").show();
-            $("#score").val(0);
-=======
             questionsInPaper = [];
             $("#removeRowQuestionSelect").hide();
             $("#tbSelectedQuestionToPaper").hide();
             $('#sum-score').hide();
             $("#score").val(0);
             $('#questionNotFoundDesc').show();
->>>>>>> update project
         }
     });
 
     $("#createPaperBtn").unbind('click').click(function(){
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-        newQuestionScore = [];
-        $("#tbodySelectedQuestionToPaper tr input[type='number']").each(function(){
-            newQuestionScore.push($(this).val());
-        });
-        minutes =  $("#minutes").val();
-        if(minutes == ""? minutes = 0: minutes =  $("#minutes").val());
-        hours = $("#hours").val();
-        if(hours == ""? hours = 0: hours = $("#hours").val());
-
-        createPaper();
-=======
         if($('#createPaperBtn').attr('button-status') == "create"){
             newQuestionScore = [];
             $("#tbodySelectedQuestionToPaper tr input[type='number']").each(function(){
@@ -309,7 +276,6 @@ $(document).ready(function(){
             if(hours == ""? hours = 0: hours =  $("#hours").val());
             updatePaper();
         }
->>>>>>> update project
     });
 
     //$("#copyPaperBtn").unbind('click').click(function(){
@@ -320,28 +286,6 @@ $(document).ready(function(){
         window.location.reload(true);
     });
 
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-    $("#updatePaperBtn").unbind('click').click(function(){
-        questionsInPaper = [];
-        $("#tbodySelectedQuestionToPaper tr input:checkbox").each(function(){
-            var qId = $(this).parent().siblings().map(function(){
-                return $(this).text();
-            }).get(0);
-            questionsInPaper.push(qId);
-        });
-        newQuestionScore = [];
-        $("#tbodySelectedQuestionToPaper tr input[type='number']").each(function(){
-            newQuestionScore.push($(this).val());
-        });
-        minutes =  $("#minutes").val();
-        hours = $("#hours").val();
-        if(minutes == ""? minutes = 0: minutes =  $("#minutes").val());
-        if(hours == ""? hours = 0: hours =  $("#hours").val());
-        updatePaper();
-    });
-
-=======
->>>>>>> update project
     $("#saveCopyPaperBtn").unbind('click').click(function(){
         var paperCode = $("#newPaperId").val();
         var paperName = $("#newPaperName").val();
@@ -401,15 +345,6 @@ $(document).ready(function(){
 
     $("#date").datepicker();
 
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-    $('#selecttabs').on('click', function(){
-        if($('#tbodySelectedQuestionToPaper tr').length > 0){
-            viewQuestions();
-        }
-    });
-
-    $('#randomtabs').on('click', function(){
-=======
     $('#maintabs').unbind('click').click(function(){
         if($('#tbodySelectedQuestionToPaper tr').length > 0){
             $('#questionNotFoundDesc').hide();
@@ -425,7 +360,6 @@ $(document).ready(function(){
 
     $('#randomtabs').unbind('click').click(function(){
         resetRandomQuestion();
->>>>>>> update project
         countQuestionReady();
     });
 
@@ -483,11 +417,7 @@ $(document).ready(function(){
     });
 
     $('#check-only-normal').unbind('click').click(function(){
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-        if($('#check-only-easy').is(':checked')){
-=======
         if($('#check-only-normal').is(':checked')){
->>>>>>> update project
             $('#randNormal').val('');
             $('#randNormal').attr('disabled', 'disabled');
         }
@@ -508,16 +438,12 @@ $(document).ready(function(){
 });
 
 function viewQuestions(){
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-    if(questionsInPaper.length == 0){
-=======
     allQuestionIdOnTableCreatePaper = [];
     $(".selectedQuestion").each(function(){
         allQuestionIdOnTableCreatePaper.push($(this).parent().attr("qid"));
     });
 
     if(allQuestionIdOnTableCreatePaper == [] || allQuestionIdOnTableCreatePaper.length == 0){
->>>>>>> update project
         $("#checkQuestionAll").attr('checked', false);
         var dataResponse = $.ajax({
             type: "POST",
@@ -544,13 +470,6 @@ function viewQuestions(){
         $("#tbSelectQuestion").show();
         $("#questionsAreEmpty").hide();
         $("#addQuestionBtn").removeAttr('disabled');
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-        allQuestionIdOnTableCreatePaper = [];
-        $("#tbodySelectedQuestionToPaper tr td:first-child").each(function(){
-            allQuestionIdOnTableCreatePaper.push($(this).attr("qid"));
-        });
-=======
->>>>>>> update project
 
         var toJsonObject = {};
         var tempz = new Array();
@@ -597,10 +516,7 @@ function addQuestionToPaper(qId){
     var newScore = $('#labelScore'+qId).text();
 
     $("#tbSelectedQuestionToPaper").show();
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-=======
     $('#sum-score').show();
->>>>>>> update project
     $("#tbodySelectedQuestionToPaper").append(
         '<tr>'+
         '<td qid="'+qId+'" style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
@@ -784,10 +700,7 @@ function onLoadPageCreatePaper(){
     $("#removeRowQuestionSelect").hide();
     $("#questionNotFound").show();
     $("#tbSelectedQuestionToPaper").hide();
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-=======
     $('#sum-score').hide();
->>>>>>> update project
     $("#removeRowSelected").removeAttr('disabled');
     $("#addQuestionBtn").removeAttr('disabled');
     $("#score").val(0);
@@ -811,32 +724,17 @@ function onLoadPageCopyPaper(){
 }
 
 function onLoadPageEditPaper(){
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-    //$("#copyPaperBtn").show();
-    $("#copyPaperField").hide();
-    $("#questionNotFound").hide();
-    $("#removeRowSelected").removeAttr('disabled');
-    $("#addQuestionBtn").removeAttr('disabled');
-    $("#score").val(0);
-    $("#maxScore").val(0);
-    $("#hours").defaultValue = "0";
-    $("#tbSelectedQuestionToPaper").show();
-=======
     //$("#score").val(0);
     //$("#maxScore").val(0);
     //$("#hours").defaultValue = "0";
     //$("#tbSelectedQuestionToPaper").show();
     //$('#sum-score').show();
->>>>>>> update project
 }
 
 function onLoadPagePaperInfo(){
     $("#copyPaperField").hide();
     $("#tbSelectedQuestionToPaper").hide();
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-=======
     $('#sum-score').hide();
->>>>>>> update project
     $(".btn:not(#cancelCreatePaperBtn)").hide();
     $("#tbPaperInfo").show();
     $("h3").text('ข้อมูลชุดข้อสอบ');
@@ -865,16 +763,8 @@ function scoreOnChange(){
 function generalSearchQuestion(btnSearchStatus) {
 
     allQuestionIdOnTableCreatePaper = [];
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-    $("#tbodySelectedQuestionToPaper tr input:checkbox").each(function(){
-        var temp = $(this).parent().siblings().map(function(){
-            return $(this).text();
-        }).get(0);
-        allQuestionIdOnTableCreatePaper.push(temp);
-=======
     $(".selectedQuestion").each(function(){
         allQuestionIdOnTableCreatePaper.push($(this).parent().attr('qId'));
->>>>>>> update project
     });
 
     itemLenght = ($("#showEmployeeSelected").children("button")).length;
@@ -887,14 +777,11 @@ function generalSearchQuestion(btnSearchStatus) {
     if((subcategoryId == null) || (subcategoryId == "") || (subcategoryId == "ไม่มีหัวข้อเรื่องภายใต้หมวดหมู่นี้")? subcategoryId = "": subcategoryId = subcategoryId);
     questionDescriptionSearch = $("#searchQuestionDescInput").val();
     if(questionDescriptionSearch == ""? questionDescriptionSearch = "": questionDescriptionSearch = $("#searchQuestionDescInput").val());
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
     questionCreateDateFromSearch = $("#searchCreateDateFromInput").val();
     if(questionCreateDateFromSearch == ""? questionCreateDateFromSearch = "": questionCreateDateFromSearch = $("#searchCreateDateFromInput").val());
     questionCreateDateToSearch = $("#searchCreateDateToInput").val();
     if(questionCreateDateToSearch == ""? questionCreateDateToSearch = "": questionCreateDateToSearch = $("#searchCreateDateToInput").val());
     questionScoreFromSearch = $("#searchScoreFromInput").val();
-=======
->>>>>>> update project
     if(questionScoreFromSearch == ""? questionScoreFromSearch = "": questionScoreFromSearch = $("#searchScoreFromInput").val());
     questionScoreToSearch = $("#searchScoreToInput").val();
     if(questionScoreToSearch == ""? questionScoreToSearch = "": questionScoreToSearch = $("#searchScoreToInput").val());
@@ -1044,13 +931,10 @@ function generalSearchQuestion(btnSearchStatus) {
         success: function (result) {
             $("#checkQuestionAll").prop('checked', false);
 
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-=======
             if(result.length == 0){
                 dataNotFound();
             }
 
->>>>>>> update project
             if(result.length > 0){
                 records = result;
                 if(records.length <= 10){
@@ -1061,12 +945,6 @@ function generalSearchQuestion(btnSearchStatus) {
                     showPagingSelectQuestions(records);
                 }
             }
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-            else{
-                dataNotFound();
-            }
-=======
->>>>>>> update project
         },
         error: function () {
             alert('ไม่พบข้อสอบ');
@@ -1096,11 +974,6 @@ function dataNotFound(){
     $('.paging').hide();
     $('#addQuestionBtn').hide();
     $('#init-message-question').hide();
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-    $('#questionsAreEmpty').show();
-    $("#addQuestionBtn").hide();
-=======
->>>>>>> update project
     $("#questionsAreEmpty").show();
     $("#removeRowSelected").attr('disabled', 'disabled');
     $("#addQuestionBtn").attr('disabled', 'disabled');
@@ -1144,13 +1017,10 @@ function showUpdatePaper(paperId){
         },
         async: false,
         success: function(value){
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-=======
 
             $("#tbSelectedQuestionToPaper").show();
             $('#sum-score').show();
 
->>>>>>> update project
             $("#tbodySelectedQuestionToPaper").empty();
             for(var i = 0; i < value.length; i ++){
                 $("#newPaperId").val(value[0].examPaper.code);
@@ -1177,20 +1047,6 @@ function showUpdatePaper(paperId){
 
                 $("#tbodySelectedQuestionToPaper").append(
                     '<tr>'+
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-                    '<td style="display: none;">'+ value[i].question.id+'</td>'+
-
-                    '<td style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
-                    '<td style="text-align: center;">'+ value[i].question.questionType.description+'</td>'+
-                    '<td>'+ value[i].question.subCategory.category.name+'</td>'+
-                    '<td>'+ value[i].question.subCategory.name+'</td>'+
-                    '<td style="text-align: left;">'+ value[i].question.description+'</td>'+
-                    '<td style="text-align: center;">'+ value[i].question.difficultyLevel.description+'</td>'+
-                    '<td><input id="newScore'+value[i].question.id+'" onkeypress="return isNumber(event)" onchange="scoreOnChange()" name="newScore" type="number" class="form-control input-sm"  min="1" max="50" value="'+value[i].score+'"/></td>'+
-                    '<td style="text-align: center;">'+ value[i].question.createBy.thFname+' '+value[i].question.createBy.thLname+'</td>'+
-                    '</tr>'
-                );
-=======
                     '<td qid="'+value[i].question.id+'" style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
                     '<td>'+value[i].question.subCategory.category.name+'</td>'+
                     '<td>'+value[i].question.subCategory.name+'</td>'+
@@ -1201,7 +1057,6 @@ function showUpdatePaper(paperId){
                     '</tr>'
                 );
 
->>>>>>> update project
                 questionsInPaper.push(value[i].question.id);
                 newQuestionScore.push(value[i].score);
                 sumScore(value[i].score);
@@ -1281,14 +1136,8 @@ function showPaperInfo(pId){
 function onLoadPageUpdatePaper(){
     countTbSelectedQuestionToPaper();
     $("h3:not('#questionNotFoundDesc'):not('#questionsAreEmptyDesc')").text('แก้ไขชุดข้อสอบ');
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-    $("#createPaperBtn").hide();
-    $("#updatePaperBtn").show();
-    $("#removeRowQuestionSelect").show();
-=======
     $('#removeRowQuestionSelect').show();
     $('#questionNotFoundDesc').hide();
->>>>>>> update project
 }
 
 function resetRandomQuestion(){
@@ -1307,22 +1156,17 @@ function resetRandomQuestion(){
 
 function countQuestionReady(){
 
+    subcategoryId = $("#selectSubCategoryToSelectionForRandom").val();
+    categoryId = $("#selectCategoryToSelectionForRandom").val();
+
     var tmp = new Array();
     var idx;
     var qIds = {};
     var subCatIds = {};
 
     questionsInPaper = [];
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-    $("#tbodySelectedQuestionToPaper tr input:checkbox").each(function(){
-        var temp = $(this).parent().siblings().map(function(){
-            return $(this).text();
-        }).get(0);
-        questionsInPaper.push(temp);
-=======
     $(".selectedQuestion").each(function(){
         questionsInPaper.push($(this).parent().attr('qid'));
->>>>>>> update project
     });
 
     if(questionsInPaper.length > 0){
@@ -1492,16 +1336,8 @@ function randomQuestion(){
     if(subcategoryId == null? subcategoryId = "": subcategoryId = subcategoryId);
 
     questionsInPaper = [];
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-    $("#tbodySelectedQuestionToPaper tr input:checkbox").each(function(){
-        var temp = $(this).parent().siblings().map(function(){
-            return $(this).text();
-        }).get(0);
-        questionsInPaper.push(temp);
-=======
     $(".selectedQuestion").each(function(){
         questionsInPaper.push($(this).parent().attr('qid'));
->>>>>>> update project
     });
 
     if($('#check-only-easy').is(':checked')? checkEasy = 1: checkEasy = 0);
@@ -1550,20 +1386,6 @@ function randomQuestion(){
             $("#tbSelectedQuestionToPaper").show();
             $("#removeRowQuestionSelect").show();
             $("#questionNotFoundDesc").hide();
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-            data.forEach(function (value) {
-
-                $("#tbodySelectedQuestionToPaper").append(
-                    '<tr>'+
-                    '<td style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
-                    '<td style="display: none;">'+ value.id+'</td>'+
-                    '<td>'+ value.subCategory.category.name+'</td>'+
-                    '<td>'+ value.subCategory.name+'</td>'+
-                    '<td style="text-align: left;">'+ checkString(value.description)+'</td>'+
-                    '<td style="text-align: left;">'+ value.questionType.description+'</td>'+
-                    '<td style="text-align: center;">'+ value.difficultyLevel.description+'</td>'+
-                    '<td><input id="newScore'+id+'" onkeypress="return isNumber(event)" onchange="scoreOnChange()" name="newScore" type="number" class="form-control input-sm"  min="1" max="50" value="'+value.score+'"/></td>'+
-=======
             $('#sum-score').show();
 
             alert('เพิ่มข้อสอบเรียบร้อยแล้ว');
@@ -1578,7 +1400,6 @@ function randomQuestion(){
                     '<td style="text-align: center;">'+value.questionType.description+'</td>'+
                     '<td style="text-align: center;">'+value.difficultyLevel.description+'</td>'+
                     '<td><input id="newScore'+value.id+'" onchange="scoreOnChange()" name="newScore" type="number" class="form-control input-sm"  min="1" max="50" value="'+value.score+'"/></td>'+
->>>>>>> update project
                     '</tr>'
                 );
             });

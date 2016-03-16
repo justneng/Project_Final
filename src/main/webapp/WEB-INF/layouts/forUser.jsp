@@ -15,7 +15,7 @@
     <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
     <link class="cssdeck" href="<c:url value="/resources/css/bootstrap.css" />" rel="stylesheet" >
-    <%--<link class="cssdeck" href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet" >--%>
+    <link class="cssdeck" href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet" >
     <link class="cssdeck" href="<c:url value="/resources/css/bootstrap-select.css" />" rel="stylesheet" >
     <%--<link class="cssdeck" href="<c:url value="/resources/css/bootstrap-select.min.css" />" rel="stylesheet" >--%>
     <link class="cssdeck" href="<c:url value="/resources/css/bootstrap-select.css.map" />" rel="stylesheet" >
@@ -37,7 +37,7 @@
     <link class="cssdeck" href="<c:url value="/resources/css/bootstrapValidator.min.css" />" rel="stylesheet" >
 
     <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <%--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">--%>
 
 </head>
 
@@ -49,11 +49,7 @@
             <div class="form-group">
                 <div class="row"> </div>
             </div>
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-            <div class="jumbotron" style="background-color: #ffffff;border: solid #c3c3c3 1px;">
-=======
             <div class="jumbotron" style="background-color: #fbfbfb; border: solid #c3c3c3 1px;">
->>>>>>> update project
             <%--body--%>
             <tiles:insertAttribute name="body" />
             </div>

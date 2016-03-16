@@ -42,11 +42,7 @@ $(document).ready(function(){
         pId = $(this).parent().siblings().map(function(){
             return $(this).text();
         }).get(0);
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-        window.location.href = context+"/TDCS/exam/createPaper?pId="+paperId+"#info";
-=======
         window.location.href = context+"/TDCS/exam/editPaper?pId="+paperId+"#info";
->>>>>>> update project
     });
 
     $("#searchPaperStatus").on('change', function(){
@@ -227,11 +223,14 @@ function getAllPapers(){
         contentType: "application/json",
         async: false,
         success : function(data){
+            $("#checkPaperAll").prop('checked', false);
             records = data;
             if(records.length <= 10){
                 notShowPaging();
             }
-            showPaging(records);
+            else{
+                showPaging(records);
+            }
         }
     });
 }
@@ -247,12 +246,13 @@ function updatePaperStatus(paperId) {
         },
         success: function () {
             alert('อัพเดทสถานะเรียบร้อยแล้ว');
+            getAllPapers();
         },
         error: function () {
             alert('error');
         }
     });
-    setColorDropdown(paperId, paperStatus);
+    //setColorDropdown(paperId, paperStatus);
 }
 
 function presentStatus(paperId, presentStatus){

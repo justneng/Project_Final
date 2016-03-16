@@ -15,8 +15,6 @@ $("#addEmpCreateByBtn").on('click', function(){
     searchEmpName();
 });
 
-
-// Add by Mr.Wanchana
 var getUserIds = function (){
     var itemLenght = ($("#showEmployeeSelected").children("button")).length;
     var arrayEmpIdToQuery = new Array();

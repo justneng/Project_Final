@@ -179,18 +179,11 @@
         <put-attribute name="body" value="/WEB-INF/pages/exam/marking.jsp"/>
     </definition>
 
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-    <!--<definition name="editPaper" extends="tempForUser">-->
-        <!--<put-attribute name="title" value="แก้ไขชุดข้อสอบ"/>-->
-        <!--<put-attribute name="body" value="/WEB-INF/pages/exam/editPaper.jsp"/>-->
-    <!--</definition>-->
-=======
     <definition name="editPaper" extends="tempForUser">
         <put-attribute name="title" value="แก้ไขชุดข้อสอบ"/>
         <put-attribute name="body" value="/WEB-INF/pages/exam/editPapers.jsp"/>
     </definition>
 
->>>>>>> update project
     <!--create by job-->
     <definition name="examReportResultForEmployee" extends="tempForUser">
         <put-attribute name="title" value="รายงานแสดงผลการสอบ"/>

@@ -51,13 +51,8 @@
                             ชื่อ&nbsp;
                             <input id="searchEmployeeNameText" class="form-control input-sm" type="text" size="35" placeholder="ค้นหาพนักงาน ชื่อ-นามสกุล"/>
                             <button id="searchBtnFromModalSearchEmployee" class="btn btn-primary btn-sm" type="submit">
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-                                ค้นหา&nbsp;
-                                <span class="glyphicon glyphicon-search"></span>
-=======
                                 <span class="glyphicon glyphicon-search"></span>&nbsp;
                                 ค้นหา
->>>>>>> update project
                             </button>
                         </div>
                     </div>

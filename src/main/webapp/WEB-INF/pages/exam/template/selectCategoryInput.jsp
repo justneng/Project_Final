@@ -13,7 +13,6 @@
 <script>
     var context = '${context}';
 </script>
-<script src="${context}/resources/js/pageScript/exam/selectCategoryInput.js" charset="utf-8"></script>
 
 <style>
     li:not[tab=yes]{
@@ -30,10 +29,10 @@
         <div class="input-group">
             <input type="text" class="form-control input-sm" name="cat" id="selectCategoryToSelection" placeholder="ค้นหาหมวดหมู่"
                    data-width="100%" autocomplete="off"/>
-        <span class="input-group-addon input-group-sm input-sm" id="selectCat">
-            <i onclick="listcatSelectInput()" style="cursor: pointer; height: 20px;">
-                <span class="glyphicon glyphicon-search"></span></i>
-        </span>
+            <span class="input-group-addon input-group-sm input-sm" id="selectCat">
+                <i onclick="listcatSelectInput()" style="cursor: pointer; height: 20px;">
+                    <span class="glyphicon glyphicon-search"></span></i>
+            </span>
         </div>
     </div>
 
@@ -45,3 +44,5 @@
         <select id="selectSubCategoryToSelection" class="form-control input-sm" data-width="100%"></select>
     </div>
 </div>
+
+<script src="${context}/resources/js/pageScript/exam/selectCategoryInput.js" charset="utf-8"></script>

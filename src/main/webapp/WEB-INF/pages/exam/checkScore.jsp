@@ -9,9 +9,6 @@
     if('${status}' == ''||'${status}' == 'staff'){
         window.location.href = context+"/TDCS/index.html";
     }
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-</script>
-=======
 
     $(document).ready(function(){
         $('#print-report').on('click', function(){
@@ -30,17 +27,13 @@
     });
 </script>
 
->>>>>>> update project
 <div class="container row">
     <h3 class="h3">ผลคะแนนการสอบ</h3>
 </div>
 <hr/>
 
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-=======
 <button id="print-report" class="btn btn-success" type="button">Click me</button>
 
->>>>>>> update project
 <div class="container">
     <div class="row">
         <table class="table table-bordered table-hover">

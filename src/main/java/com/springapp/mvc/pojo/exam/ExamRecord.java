@@ -37,13 +37,8 @@ public class ExamRecord implements Serializable {
     @Column(name = "TIME_TAKEN_MINUTE")
     private Integer timeTaken;
 
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-    @Column(name = "COUNT")
-    private Integer count;
-=======
 //    @Column(name = "COUNT")
 //    private Integer count;
->>>>>>> update project
 
     @OneToMany(mappedBy = "examRecord",fetch = FetchType.EAGER)
     @Cascade(CascadeType.ALL)
@@ -129,15 +124,6 @@ public class ExamRecord implements Serializable {
         this.examDate = examDate;
     }
 
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-=======
 //    public Integer getCount() {
 //        return count;
 //    }
@@ -145,5 +131,4 @@ public class ExamRecord implements Serializable {
 //    public void setCount(Integer count) {
 //        this.count = count;
 //    }
->>>>>>> update project
 }

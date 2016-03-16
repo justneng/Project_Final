@@ -31,11 +31,7 @@
         <label for="addEmpCreateByBtn">สร้างโดย</label>
     </div>
     <div class="col-sm-10">
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-        <button id="addEmpCreateByBtn" data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span></button>
-=======
         <button id="addEmpCreateByBtn" data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-user"></span></button>
->>>>>>> update project
         <div id="showEmployeeSelected" class="">
 
         </div>

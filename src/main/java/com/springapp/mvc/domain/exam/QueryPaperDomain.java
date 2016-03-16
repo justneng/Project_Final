@@ -116,10 +116,15 @@ public class QueryPaperDomain extends HibernateUtil {
     }
 
     public List<ExamPaper> getAllPapers() {
+        HibernateUtil.getSession().flush();
+        HibernateUtil.beginTransaction();
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
         criteria.add(Restrictions.ne("paperStatus.id", 4));
         criteria.add(Restrictions.ne("code", "SYSTM"));
+        criteria.addOrder(Order.asc("id"));
         List<ExamPaper> papers = criteria.list();
+        HibernateUtil.commitTransaction();
+        HibernateUtil.closeSession();
 
         return papers;
     }
@@ -151,6 +156,7 @@ public class QueryPaperDomain extends HibernateUtil {
     }
 
     public void updatePaperStatus(ExamPaper examPaper){
+        HibernateUtil.getSession().flush();
         HibernateUtil.beginTransaction();
         getSession().merge(examPaper);
         HibernateUtil.commitTransaction();
@@ -160,15 +166,9 @@ public class QueryPaperDomain extends HibernateUtil {
     public List<ExamPaper> generalSearchPaper(List empIds, String code, String name) {
 
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
-<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
-        if (empIds != null) {
-            criteria.add(Restrictions.in("createBy.userId", empIds));
-        }
-=======
 //        if (empIds != null) {
 //            criteria.add(Restrictions.in("createBy.userId", empIds));
 //        }
->>>>>>> update project
         if (!code.equals("")) {
             criteria.add(Restrictions.like("code", "%" + code + "%").ignoreCase());
         }

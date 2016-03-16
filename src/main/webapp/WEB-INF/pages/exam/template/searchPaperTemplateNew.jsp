@@ -18,8 +18,9 @@
     <div class="panel-heading">
         <label>ค้นหา</label>
         <button id="advanceBtn" class="btn btn-default btn-sm" data-toggle="collapse"
-                data-target="#paper-advance-search-panel" type="button"><span
-                class="glyphicon glyphicon-triangle-bottom"></span></button>
+                data-target="#paper-advance-search-panel" type="button" status="down">
+            <span class="glyphicon glyphicon-triangle-bottom"></span>
+        </button>
     </div>
 
     <div class="panel-body">
