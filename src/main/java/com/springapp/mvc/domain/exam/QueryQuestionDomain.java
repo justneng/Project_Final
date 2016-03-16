@@ -369,9 +369,15 @@ public class QueryQuestionDomain extends HibernateUtil {
         criteria.createAlias("subCategory.category", "category");
         criteria.add(Restrictions.ne("status.id", 4));
 
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
         if (users != null) {
             criteria.add(Restrictions.in("createBy.id", users));
         }
+=======
+//        if (users != null) {
+//            criteria.add(Restrictions.in("createBy.id", users));
+//        }
+>>>>>>> update project
         if (catId != "") {
             Criterion criterion1 = Restrictions.like("category.id", "%" + catId + "%").ignoreCase();
             Criterion criterion2 = Restrictions.like("category.name", "%" + catId + "%").ignoreCase();

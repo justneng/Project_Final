@@ -49,7 +49,11 @@
             <div class="form-group">
                 <div class="row"> </div>
             </div>
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
             <div class="jumbotron" style="background-color: #ffffff;border: solid #c3c3c3 1px;">
+=======
+            <div class="jumbotron" style="background-color: #fbfbfb; border: solid #c3c3c3 1px;">
+>>>>>>> update project
             <%--body--%>
             <tiles:insertAttribute name="body" />
             </div>

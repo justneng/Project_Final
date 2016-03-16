@@ -160,9 +160,15 @@ public class QueryPaperDomain extends HibernateUtil {
     public List<ExamPaper> generalSearchPaper(List empIds, String code, String name) {
 
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
         if (empIds != null) {
             criteria.add(Restrictions.in("createBy.userId", empIds));
         }
+=======
+//        if (empIds != null) {
+//            criteria.add(Restrictions.in("createBy.userId", empIds));
+//        }
+>>>>>>> update project
         if (!code.equals("")) {
             criteria.add(Restrictions.like("code", "%" + code + "%").ignoreCase());
         }

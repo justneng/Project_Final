@@ -150,6 +150,10 @@
 </div>
 
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/paper.js" />"></script>
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
+=======
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/selectEmployee.js" />"></script>
+>>>>>>> update project
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/categoryDropdown.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/orderPaper.js" />"></script>

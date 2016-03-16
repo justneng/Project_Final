@@ -42,7 +42,11 @@ $(document).ready(function(){
         pId = $(this).parent().siblings().map(function(){
             return $(this).text();
         }).get(0);
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
         window.location.href = context+"/TDCS/exam/createPaper?pId="+paperId+"#info";
+=======
+        window.location.href = context+"/TDCS/exam/editPaper?pId="+paperId+"#info";
+>>>>>>> update project
     });
 
     $("#searchPaperStatus").on('change', function(){

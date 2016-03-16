@@ -142,7 +142,11 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2 col-xm-2 col-lg-2 text-right label-create-by" for="addEmpCreateByBtn">สร้างโดย</label>
                     <div class="col-sm-9 col-xm-9 col-lg-9 show-employee-selected">
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
                         <button id="addEmpCreateByBtn" data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></button>
+=======
+                        <button id="addEmpCreateByBtn" data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-user"></span></button>
+>>>>>>> update project
                         <div id="showEmployeeSelected" class="">
 
                         </div>
@@ -156,7 +160,11 @@
                         <label class="control-label" for="searchQuestionDescInput" >คำถาม</label>
                     </div>
 
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
                     <div class="col-sm-8 col-xm-2 col-lg-2 form-group" style="padding: 0;">
+=======
+                    <div class="col-sm-8 col-xm-8 col-lg-8 form-group" style="padding: 0;">
+>>>>>>> update project
                         <input id="searchQuestionDescInput" type="text" class="form-control input-sm" placeholder="ค้นหาคำถาม"/>
                     </div>
                 </div>

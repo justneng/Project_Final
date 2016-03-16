@@ -56,7 +56,11 @@
 </style>
 
 <ul id="create-paper-tabs" class="nav nav-tabs">
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
     <li id="maintabs" class="">
+=======
+    <li id="maintabs" class="active">
+>>>>>>> update project
         <a id="maintabs-link" href="#create-paper-form-content" data-toggle="tab">
             แบบฟอร์มสร้างชุดข้อสอบ
         </a>
@@ -68,7 +72,11 @@
         </a>
     </li>
 
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
     <li id="randomtabs" class="active">
+=======
+    <li id="randomtabs" class="">
+>>>>>>> update project
         <a href="#random-questions-content" data-toggle="tab">
             สุ่มข้อสอบ
         </a>
@@ -78,6 +86,7 @@
 
 <div id="create-paper-content" class="tab-content">
 
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
     <div class="container tab-pane fade" id="create-paper-form-content">
         <div class="row">
             <button id="updatePaperBtn" class="btn btn-success btn-sm" type="button" style="display: none;">บันทึก
@@ -91,6 +100,18 @@
         </div>
         <br/><br/>
 
+=======
+    <div class="container tab-pane fade in active" id="create-paper-form-content">
+        <%--<div class="row">--%>
+            <%--<button id="updatePaperBtn" class="btn btn-success btn-sm" type="button" style="display: none;">บันทึก--%>
+            <%--</button>--%>
+            <%--<button id="saveCopyPaperBtn" class="btn btn-success btn-sm" type="button" style="display: none;">บันทึก--%>
+            <%--</button>--%>
+        <%--</div>--%>
+        <%--<br/><br/>--%>
+
+        <br/>
+>>>>>>> update project
         <div class="row">
             <button id="createPaperBtn" class="btn btn-primary btn-sm" type="button">
                 <span class="glyphicon glyphicon-saved"></span>&nbsp;
@@ -252,6 +273,7 @@
         </div>
         <br/>
 
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
         <div class="row">
             <div class="col-sm-4 col-sm-offset-8">
                 <label class="col-sm-2" style="bottom: 3px;"><h5>คะแนน</h5></label>
@@ -266,6 +288,19 @@
                     <input class="form-control input-sm" readonly="true" name="score" id="maxScore"
                            style="text-align: center">
                 </div>
+=======
+        <div id="sum-score" class="form-inline text-right" hidden>
+            <div class="form-group">
+                <label>คะแนน  </label>
+                <input class="form-control input-sm" readonly="true" size="4" name="score" id="score"
+                       style="text-align: center">
+            </div>&nbsp;
+
+            <div class="form-group">
+                <label>เต็ม  </label>
+                <input class="form-control input-sm" readonly="true" size="4" name="score" id="maxScore"
+                       style="text-align: center">
+>>>>>>> update project
             </div>
         </div>
     </div>
@@ -275,7 +310,11 @@
         <%@include file="selectQuestionPage.jsp" %>
     </div>
 
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
     <div class="container-fluid tab-pane fade in active" id="random-questions-content">
+=======
+    <div class="container-fluid tab-pane fade" id="random-questions-content">
+>>>>>>> update project
         <br/><br/>
         <%@include file="randomQuestions.jsp" %>
     </div>

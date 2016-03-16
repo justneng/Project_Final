@@ -132,10 +132,7 @@ function listcatSelectInput() {
 
 /////To Dropdown
 $("#selectCategoryToSelection").on('change', function () {
-
-        //if ($("#selectCategoryToSelection").val() != "") {
         listSubCategory();
-        //}
     }
 )
 

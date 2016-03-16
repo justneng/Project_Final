@@ -56,6 +56,7 @@ public class AutoGeneratePaperController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
         HttpStatus httpStatus = HttpStatus.OK;
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
         int i = 0;
         int idx = 0;
         User user = queryUserDomain.getCurrentUser(request);
@@ -131,6 +132,84 @@ public class AutoGeneratePaperController {
         }
 
         String json = new JSONSerializer().exclude("*.class").serialize(returnValues);
+=======
+//        int i = 0;
+//        int idx = 0;
+//        User user = queryUserDomain.getCurrentUser(request);
+//        List<PrepareCategory> prepare = queryAutoGeneratePaperDomain.getCategoryToGenerate();
+//        List returnValues = new ArrayList();
+//
+//        for(i = 0; i < prepare.size(); i ++) {
+//            List<ExamRecord> paper = new ArrayList<ExamRecord>();
+//            Category category = prepare.get(i).getCategory();
+//
+//            Criteria criteria = HibernateUtil.getSession().createCriteria(PaperGenerateTemplate.class);
+//            criteria.add(Restrictions.eq("category", category));
+//            criteria.addOrder(Order.asc("no"));
+//            List<PaperGenerateTemplate> paperGenerateTemplateList = criteria.list();
+//
+//            List<Integer> paperIdTemplate = new ArrayList<Integer>();
+//            for (PaperGenerateTemplate pap : paperGenerateTemplateList) {
+//                paperIdTemplate.add(pap.getExamPaper().getId());
+//            }
+//            if(paperIdTemplate.size() > 0){
+//                for(int j = 0; j < paperIdTemplate.size(); j ++){
+//                    ExamRecord examRecord = new ExamRecord();
+//                    Criteria cri = HibernateUtil.getSession().createCriteria(ExamRecord.class);
+//                    cri.add(Restrictions.eq("paper.id", paperIdTemplate.get(j)));
+//                    cri.add(Restrictions.eq("user", user));
+//                    examRecord = (ExamRecord) cri.uniqueResult();
+//                    paper.add(examRecord);
+//                }
+//
+//                List list = new ArrayList();
+//                List tmp = new ArrayList();
+//                for(idx = 0; idx < paper.size(); idx ++){
+//                    if(paper.get(idx) != null){
+//                        paperIdTemplate.remove(paper.get(idx).getPaper().getId());
+//                        PaperAvailable paperAvailable = new PaperAvailable();
+//                        paperAvailable.setId(paper.get(idx).getId());
+//                        paperAvailable.setAlreadyMarking(true);
+//                        paperAvailable.setCount(paper.get(idx).getCount());
+//                        paperAvailable.setExamAnswerRecords(paper.get(idx).getExamAnswerRecords());
+//                        paperAvailable.setExamDate(paper.get(idx).getExamDate());
+//                        paperAvailable.setPaper(paper.get(idx).getPaper());
+//                        paperAvailable.setExamResult(paper.get(idx).getExamResult());
+//                        paperAvailable.setTimeTaken(paper.get(idx).getTimeTaken());
+//                        paperAvailable.setUser(paper.get(idx).getUser());
+//                        tmp.add(paperAvailable);
+//                    }
+//                    if(idx == paper.size() - 1){
+//                        if(paperIdTemplate.size() > 0){
+//                            Criteria c = HibernateUtil.getSession().createCriteria(PaperGenerateTemplate.class);
+//                            c.add(Restrictions.in("examPaper.id", paperIdTemplate));
+//                            List<PaperGenerateTemplate> templates = c.list();
+//
+//                            for(int j = 0 ; j < templates.size(); j ++){
+//                                PaperAvailable paperAvailable = new PaperAvailable();
+//                                paperAvailable.setCount(templates.get(j).getNo());
+//                                paperAvailable.setAlreadyMarking(false);
+//                                paperAvailable.setPaper(templates.get(j).getExamPaper());
+//                                tmp.add(paperAvailable);
+//                            }
+//                        }
+//                        list.add(tmp);
+//                        list.add(prepare.get(i));
+//                    }
+//                }
+//                returnValues.add(list);
+//            }
+//            else{
+//                List list = new ArrayList();
+//                list.add(null);
+//                list.add(prepare.get(i));
+//                returnValues.add(list);
+//            }
+//        }
+//
+//        String json = new JSONSerializer().exclude("*.class").serialize(returnValues);
+        String json = "";
+>>>>>>> update project
         return new ResponseEntity<String>(json, headers, httpStatus.OK);
     }
 
@@ -169,6 +248,7 @@ public class AutoGeneratePaperController {
     @RequestMapping(method = RequestMethod.GET, value = "/exam/doExamGenerate")
     public String doExamGenerate(ModelMap modelMap, HttpServletRequest request, @RequestParam(value = "paperId") Integer paperId){
 
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
         ExamPaper examPaper = queryPaperDomain.getPaperById(paperId);
         User user = queryUserDomain.getCurrentUser(request);
         modelMap.addAttribute("paper", examPaper);
@@ -189,6 +269,28 @@ public class AutoGeneratePaperController {
         }
 
         modelMap.addAttribute("examRecord",examRecord);
+=======
+//        ExamPaper examPaper = queryPaperDomain.getPaperById(paperId);
+//        User user = queryUserDomain.getCurrentUser(request);
+//        modelMap.addAttribute("paper", examPaper);
+//        modelMap.addAttribute("user", user);
+//
+//        ExamRecord examRecord = queryExamRecordDomain.getExamRecordByPaperAndUser(examPaper,user);
+//        if(examRecord == null && examPaper != null){
+//            examRecord = new ExamRecord();
+//            examRecord.setUser(user);
+//            examRecord.setPaper(queryPaperDomain.getPaperById(paperId));
+//            examRecord.setExamDate(DateUtil.getCurrentDateWithRemovedTime());
+//            examRecord.setCount(queryAutoGeneratePaperDomain.getPaperGenerateTemplateNo(examPaper));
+//            HibernateUtil.beginTransaction();
+//            queryExamRecordDomain.saveExamRecord(examRecord);
+//            HibernateUtil.commitTransaction();
+//        }else{
+//            examRecord = null;
+//        }
+//
+//        modelMap.addAttribute("examRecord",examRecord);
+>>>>>>> update project
 
         return "doExam";
     }

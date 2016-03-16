@@ -65,12 +65,22 @@
         </div>
     </div>
 
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
     <div class="row">
         <div class="col-sm-12 text-center">
             <hr/>
             <button id="randBtn" class="btn btn-primary btn-sm" type="button" data-dismiss = "modal">สุ่มผลลัพธ์</button>
             <button id="randResetBtn" class="btn btn-gray btn-sm searchInputClearBtn" type="button">ล้างข้อมูล</button>
         </div>
+=======
+    <div id="random-question-alert" class="row alert alert-info text-center" hidden>
+        <strong>เพิ่มข้อสอบเรียบร้อยแล้ว</strong>
+    </div>
+
+    <div class="row text-center">
+        <button id="randBtn" class="btn btn-primary btn-sm" type="button" data-dismiss = "modal">สุ่มผลลัพธ์</button>
+        <button id="randResetBtn" class="btn btn-gray btn-sm searchInputClearBtn" type="button">ล้างข้อมูล</button>
+>>>>>>> update project
     </div>
 </div>
 

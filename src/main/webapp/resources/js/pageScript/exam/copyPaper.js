@@ -26,12 +26,20 @@ $(document).ready(function(){
                     $("#questionNotFound").hide();
                     $("#removeRowQuestionSelect").show();
                     $("#tbSelectedQuestionToPaper").show();
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
+=======
+                    $('#sum-score').show();
+>>>>>>> update project
                     $("#tbodySelectedQuestionToPaper").empty();
                     for(var i = 0; i < value.length; i ++){
                         $("#tbodySelectedQuestionToPaper").append(
                             '<tr>'+
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
                             '<td style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
                             '<td style="display: none;">'+ value[i].question.id+'</td>'+
+=======
+                            '<td qid="'+value[i].question.id+'"style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
+>>>>>>> update project
                             '<td>'+ value[i].question.subCategory.category.name+'</td>'+
                             '<td>'+ value[i].question.subCategory.name+'</td>'+
                             '<td style="text-align: left;">'+ checkString(value[i].question.description)+'</td>'+
@@ -49,10 +57,17 @@ $(document).ready(function(){
                     sumPaperScore = 0;
                 }
                 else{
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
                     alert('this');
                     $("#tbodySelectedQuestionToPaper").empty();
                     $("#score").val(0);
                     $("#tbSelectedQuestionToPaper").hide();
+=======
+                    $("#tbodySelectedQuestionToPaper").empty();
+                    $("#score").val(0);
+                    $("#tbSelectedQuestionToPaper").hide();
+                    $('#sum-score').hide();
+>>>>>>> update project
                     $("#removeRowQuestionSelect").hide();
                     $("#questionNotFound").show();
                 }

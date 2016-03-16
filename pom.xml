@@ -51,6 +51,17 @@
     </pluginRepositories>
 
     <dependencies>
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
+=======
+
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0.4</version>
+        </dependency>
+
+
+>>>>>>> update project
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -127,12 +138,15 @@
         </dependency>
 
         <dependency>
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
             <version>11.2.0.4</version>
         </dependency>
 
         <dependency>
+=======
+>>>>>>> update project
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
             <version>5.5.0</version>
@@ -314,11 +328,14 @@
             <version>10.11.1.1</version>
         </dependency>
         <!-- report -->
+<<<<<<< 94164463eb48811be54f2ae8ff886469cc3b93d5
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
             <version>11.2.0.4</version>
         </dependency>
+=======
+>>>>>>> update project
 
         <dependency>
             <groupId>com.google.code.gson</groupId>
