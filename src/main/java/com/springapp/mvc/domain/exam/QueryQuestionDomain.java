@@ -536,13 +536,20 @@ public class QueryQuestionDomain extends HibernateUtil {
             criteria.add(Restrictions.not(Restrictions.in("id", qIds)));
         }
 
-        if(catId != null){
-            criteria.add(Restrictions.eq("category.id", catId));
-        }
+        if(!catId.equals("")){
 
-        if(subNames != null){
-            criteria.add(Restrictions.in("subCategory.name", subNames));
-            criteria.add(Restrictions.eq("category.id", catId));
+            if((subNames != null) && (catId != null)){
+                criteria.add(Restrictions.in("subCategory.name", subNames));
+                criteria.add(Restrictions.eq("category.id", catId));
+            }
+
+            if((subNames != null) && (catId == null)){
+                criteria.add(Restrictions.in("subCategory.id", subNames));
+            }
+
+            if(catId != null){
+                criteria.add(Restrictions.eq("category.id", catId));
+            }
         }
 
         List<Question> questions = criteria.list();

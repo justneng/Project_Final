@@ -29,7 +29,7 @@ var updateCategoryList = function () {
         url: context+"/TDCS/exam/getAllCategory",
         success: function (catList) {
             catList.forEach(function (category) {
-                $('#selectCategoryToSelectionForRandom').append('<option class="category" categoryId="' + category.id + '"' +
+                $('#selectCategoryToSelectionForRandom').append('<option class="category input-sm" categoryId="' + category.id + '"' +
                 ' categoryName="' + category.name + ' value=' + category.id + '">' + category.id + ' : ' + category.name + '')
             })
         },

@@ -1,5 +1,8 @@
 $(document).ready(function(){
-    onLoadPage();
+    $('#generate-paper-tab').on('click', function(){
+        onLoadPage();
+    });
+
     $('.do-exam').on('click', function(){
         var $cid = $(this).attr('cid');
         generatePaper($cid);
@@ -45,7 +48,7 @@ function onLoadPage(){
                     str = '<td><button class="btn btn-primary btn-sm disabled" type="button">ข้อสอบไม่เพียงพอ</button></td>';
                 }
 
-                $('tbody').append(
+                $('#tbody-generate-papers').append(
                     '<tr>'+
                     '<td>'+category.category.name+'&nbsp;<span class="badge">'+category.numberOfQuestions+'</span></td>'+
                     str+
@@ -75,7 +78,7 @@ function onLoadPage(){
                         }
                     });
 
-                    $('tbody').append(
+                    $('#tbody-generate-papers').append(
                             str2+
                             '<tr class="collapse info select-paper'+category.category.id+'">'+
                                 '<td>'+

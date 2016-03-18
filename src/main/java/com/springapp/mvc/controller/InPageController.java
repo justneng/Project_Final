@@ -292,8 +292,8 @@ public class InPageController {
         return "manageSubCategory";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/exam/autoGeneratePaper")
-    public String autoGenerateQuestions(Model model, HttpServletRequest request){
+//    @RequestMapping(method = RequestMethod.GET, value = "/exam/autoGeneratePaper")
+//    public String autoGenerateQuestions(Model model, HttpServletRequest request){
 //        User user = queryUserDomain.getCurrentUser(request);
 //        Criteria criteria = HibernateUtil.getSession().createCriteria(PaperGenerateTemplate.class);
 //        criteria.addOrder(Order.asc("id"));
@@ -381,8 +381,8 @@ public class InPageController {
 //        model.addAttribute("listCategories", queryAutoGeneratePaperDomain.getCategoryToGenerate());
 //        model.addAttribute("listPapers",histories);
 //        model.addAttribute("listAvailable",available);
-        return "autoGeneratePaper";
-    }
+//        return "autoGeneratePaper";
+//    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/exam/manageQuestion")
     public String editQuestions(HttpServletRequest request){

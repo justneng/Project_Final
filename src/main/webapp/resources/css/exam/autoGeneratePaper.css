@@ -7,16 +7,13 @@
     line-height: 1.428571429;
     border-radius: 15px;
 }
-.table{
-    border-bottom: 5px solid #006dcc;
-}
-thead{
-    background-color: #404666;
-    color: #eaebff;
-}
-.active{
-    width: 100%;
-}
+/*thead{*/
+    /*background-color: #404666;*/
+    /*color: #eaebff;*/
+/*}*/
+/*.active{*/
+    /*width: 100%;*/
+/*}*/
 .paper-history{
     text-align: center;
 }

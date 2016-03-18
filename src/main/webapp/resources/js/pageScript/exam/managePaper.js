@@ -1148,6 +1148,9 @@ function resetRandomQuestion(){
     $("#selectSubCategoryToSelectionForRandom").empty();
     $("#selectCategoryToSelectionForRandom").val('');
     $("#selectSubCategoryToSelectionForRandom").val('');
+    $('#check-only-easy').checked = false;
+    $('#check-only-normal').checked = false;
+    $('#check-only-hard').checked = false;
 
     clearCategoryList();
     updateCategoryList();
@@ -1213,28 +1216,38 @@ function countQuestionReady(){
             if(sp[1] == 0){
                 $('#easy-remaining').removeClass('label-success').addClass('label-danger').text('จำนวนข้อที่สามารถสุ่มได้ ' + sp[1] + ' ข้อ');
                 $('#randEasy').attr('disabled', 'disabled');
+                $('#check-only-easy').attr('disabled', 'disabled');
             }
             else{
-                $('#easy-remaining').addClass('label-success').text('จำนวนข้อที่สามารถสุ่มได้ ' + sp[1] + ' ข้อ');
+                $('#easy-remaining').removeClass('label-danger').addClass('label-success').text('จำนวนข้อที่สามารถสุ่มได้ ' + sp[1] + ' ข้อ');
                 $('#randEasy').attr('max', sp[1]);
+                $('#randEasy').removeAttr('disabled', 'disabled');
+                $('#check-only-easy').removeAttr('disabled', 'disabled');
             }
 
             if(sp[2] == 0){
                 $('#normal-remaining').removeClass('label-success').addClass('label-danger').text('จำนวนข้อที่สามารถสุ่มได้ ' + sp[2] + ' ข้อ');
                 $('#randNormal').attr('disabled', 'disabled');
+                $('#check-only-normal').attr('disabled', 'disabled');
+
             }
             else{
-                $('#normal-remaining').addClass('label-success').text('จำนวนข้อที่สามารถสุ่มได้ ' + sp[2] + ' ข้อ');
+                $('#normal-remaining').removeClass('label-danger').addClass('label-success').text('จำนวนข้อที่สามารถสุ่มได้ ' + sp[2] + ' ข้อ');
                 $('#randNormal').attr('max', sp[2]);
+                $('#randNormal').removeAttr('disabled', 'disabled');
+                $('#check-only-normal').removeAttr('disabled', 'disabled');
             }
 
             if(sp[3] == 0){
                 $('#hard-remaining').removeClass('label-success').addClass('label-danger').text('จำนวนข้อที่สามารถสุ่มได้ ' + sp[3] + ' ข้อ');
                 $('#randHard').attr('disabled', 'disabled');
+                $('#check-only-hard').attr('disabled', 'disabled');
             }
             else{
-                $('#hard-remaining').addClass('label-success').text('จำนวนข้อที่สามารถสุ่มได้ ' + sp[3] + ' ข้อ');
+                $('#hard-remaining').removeClass('label-danger').addClass('label-success').text('จำนวนข้อที่สามารถสุ่มได้ ' + sp[3] + ' ข้อ');
                 $('#randHard').attr('max', sp[3]);
+                $('#randHard').removeAttr('disabled', 'disabled');
+                $('#check-only-hard').removeAttr('disabled', 'disabled');
             }
 
             $('[data-toggle="tooltip"]').tooltip();
@@ -1388,8 +1401,6 @@ function randomQuestion(){
             $("#questionNotFoundDesc").hide();
             $('#sum-score').show();
 
-            alert('เพิ่มข้อสอบเรียบร้อยแล้ว');
-
             data.forEach(function (value) {
                 $("#tbodySelectedQuestionToPaper").append(
                     '<tr>'+
@@ -1418,6 +1429,10 @@ function randomQuestion(){
 
             checkAll2 = 0;
             checkAll2 = questionsInPaper.length;
+
+            alert('เพิ่มข้อสอบเรียบร้อยแล้ว');
+            resetRandomQuestion();
+            countQuestionReady();
         },
         error: function(){
             alert('เกิดข้อผิดพลาด');

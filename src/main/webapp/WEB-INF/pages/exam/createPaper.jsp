@@ -79,14 +79,6 @@
 <div id="create-paper-content" class="tab-content">
 
     <div class="container tab-pane fade in active" id="create-paper-form-content">
-        <%--<div class="row">--%>
-            <%--<button id="updatePaperBtn" class="btn btn-success btn-sm" type="button" style="display: none;">บันทึก--%>
-            <%--</button>--%>
-            <%--<button id="saveCopyPaperBtn" class="btn btn-success btn-sm" type="button" style="display: none;">บันทึก--%>
-            <%--</button>--%>
-        <%--</div>--%>
-        <%--<br/><br/>--%>
-
         <br/>
         <div class="row">
             <button id="createPaperBtn" class="btn btn-primary btn-sm" type="button">

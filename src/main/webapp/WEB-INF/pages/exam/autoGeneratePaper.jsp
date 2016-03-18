@@ -7,19 +7,11 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <link rel="stylesheet" href="<c:url value="/resources/css/exam/autoGeneratePaper.css"/>"/>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/autoGeneratePaper.js"/>"></script>
 
-<script>
-    var context = '${context}';
-    if ('${status}' == '' || '${status}' == 'staff') {
-        window.location.href = context + "/TDCS/index.html";
-    }
-</script>
-
-<div class="container">
+<div id="select-paper-by-system-generate" class="container tab-pane fade">
     <div class="row">
         <div class="table-responsive">
             <div class="table-responsive">
@@ -32,7 +24,7 @@
                         <th></th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody-generate-papers">
                     <c:forEach items="${listCategories}" var="category">
                         <tr>
                             <td>
@@ -74,27 +66,6 @@
                                 </c:choose>
                             </c:forEach>
                         </c:forEach>
-                        <%--<c:choose>--%>
-                            <%--<c:when test="${category.numberOfQuestions >= '10'}">--%>
-                                <%--<c:forEach items="${listAvailable}" var="paper">--%>
-                                    <%--<c:set var="paperName" value="${paper['paper']}"/>--%>
-                                    <%--<c:forEach items="${paper}" var="numb" varStatus="i">--%>
-                                        <%--<c:set var="paperNumber" value="${numb.value}"/>--%>
-                                    <%--</c:forEach>--%>
-                                <%--</c:forEach>--%>
-                                <%--<tr class="collapse choose">--%>
-                                    <%--<td>--%>
-                                        <%--<span class="glyphicon glyphicon-triangle-right"></span>&nbsp;--%>
-                                        <%--<span class="newTemplate glyphicon glyphicon-plus"><c:out value="${paperNumber}"/></span>--%>
-                                    <%--</td>--%>
-                                    <%--<td>--%>
-                                        <%--<button cid="${category.category.id}" class="btn btn-primary btn-sm active do-exam" type="button">--%>
-                                            <%--เริ่มทำข้อสอบ--%>
-                                        <%--</button>--%>
-                                    <%--</td>--%>
-                                <%--</tr>--%>
-                            <%--</c:when>--%>
-                        <%--</c:choose>--%>
                     </c:forEach>
                     </tbody>
                 </table>

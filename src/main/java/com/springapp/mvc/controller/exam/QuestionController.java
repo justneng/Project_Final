@@ -462,70 +462,94 @@ public class QuestionController {
             subCategoryId = querySubCategoryDomain.getSubCategoryIdByName(subCategoryName);
         }
 
-        if(randEasy != 0){
-            List index = new ArrayList();
-            List<Question> questionsEasy = queryQuestionDomain.getQuestionsByLevel(1, qIds, categoryId, subCategoryId);
-            if(questionsEasy.size() >= randEasy){
-                for(i = 0; i < questionsEasy.size(); i ++){
-                    index.add(i);
-                }
-                for(int j = 0; j < randEasy; j ++){
-                    Collections.shuffle(index);
-                    questions.add(questionsEasy.get((Integer) index.get(0)));
-                    index.remove(0);
+        if(checkEasy != 0 || checkNormal != 0 || checkHard != 0){
+            if(checkEasy != 0){
+                List<Question> questionsEasy = queryQuestionDomain.getQuestionsByLevel(1, qIds, categoryId, subCategoryId);
+                for(Question question : questionsEasy){
+                    questions.add(question);
                 }
             }
-            else{
-                String str = "easy#";
-                int count = questionsEasy.size();
-                str = str + count;
-                questions.add(str);
+
+            if(checkNormal != 0){
+                List<Question> questionsNormal = queryQuestionDomain.getQuestionsByLevel(2, qIds, categoryId, subCategoryId);
+                for(Question question : questionsNormal){
+                    questions.add(question);
+                }
+            }
+
+            if(checkHard != 0){
+                List<Question> questionsHard = queryQuestionDomain.getQuestionsByLevel(3, qIds, categoryId, subCategoryId);
+                for(Question question : questionsHard){
+                    questions.add(question);
+                }
             }
         }
-        if(randNormal != 0){
-            List index2 = new ArrayList();
-            List<Question> questionsNormal = queryQuestionDomain.getQuestionsByLevel(2, qIds, categoryId, subCategoryId);
-            if(questionsNormal.size() >= randNormal){
-                for(i = 0; i < questionsNormal.size(); i ++){
-                    index2.add(i);
+        else{
+            if(randEasy != 0){
+                List index = new ArrayList();
+                List<Question> questionsEasy = queryQuestionDomain.getQuestionsByLevel(1, qIds, categoryId, subCategoryId);
+                if(questionsEasy.size() >= randEasy){
+                    for(i = 0; i < questionsEasy.size(); i ++){
+                        index.add(i);
+                    }
+                    for(int j = 0; j < randEasy; j ++){
+                        Collections.shuffle(index);
+                        questions.add(questionsEasy.get((Integer) index.get(0)));
+                        index.remove(0);
+                    }
                 }
-                for(int j = 0; j < randNormal; j ++){
-                    Collections.shuffle(index2);
-                    questions.add(questionsNormal.get((Integer) index2.get(0)));
-                    index2.remove(0);
-                }
-            }
-            else{
-                String str = "normal#";
-                int count = questionsNormal.size();
-                str = str + count;
-                questions.add(str);
-            }
-        }
-        if(randHard != 0){
-            List index3 = new ArrayList();
-            List<Question> questionsHard = queryQuestionDomain.getQuestionsByLevel(3, qIds, categoryId, subCategoryId);
-            if(questionsHard.size() >= randHard){
-                for(i = 0; i < questionsHard.size(); i ++){
-                    index3.add(i);
-                }
-                for(int j = 0; j < randHard; j ++){
-                    Collections.shuffle(index3);
-                    questions.add(questionsHard.get((Integer) index3.get(0)));
-                    index3.remove(0);
+                else{
+                    String str = "easy#";
+                    int count = questionsEasy.size();
+                    str = str + count;
+                    questions.add(str);
                 }
             }
-            else{
-                String str = "hard#";
-                int count = questionsHard.size();
-                str = str + count;
-                questions.add(str);
+            if(randNormal != 0){
+                List index2 = new ArrayList();
+                List<Question> questionsNormal = queryQuestionDomain.getQuestionsByLevel(2, qIds, categoryId, subCategoryId);
+                if(questionsNormal.size() >= randNormal){
+                    for(i = 0; i < questionsNormal.size(); i ++){
+                        index2.add(i);
+                    }
+                    for(int j = 0; j < randNormal; j ++){
+                        Collections.shuffle(index2);
+                        questions.add(questionsNormal.get((Integer) index2.get(0)));
+                        index2.remove(0);
+                    }
+                }
+                else{
+                    String str = "normal#";
+                    int count = questionsNormal.size();
+                    str = str + count;
+                    questions.add(str);
+                }
             }
-        }
-        if((randEasy == 0) && (randHard == 0) && (randNormal == 0)){
-            List<Question> questionList = queryQuestionDomain.getQuestionsByLevel(0, qIds, categoryId, subCategoryId);
-            for(Object idx: questionList){
-                questions.add(idx);
+            if(randHard != 0){
+                List index3 = new ArrayList();
+                List<Question> questionsHard = queryQuestionDomain.getQuestionsByLevel(3, qIds, categoryId, subCategoryId);
+                if(questionsHard.size() >= randHard){
+                    for(i = 0; i < questionsHard.size(); i ++){
+                        index3.add(i);
+                    }
+                    for(int j = 0; j < randHard; j ++){
+                        Collections.shuffle(index3);
+                        questions.add(questionsHard.get((Integer) index3.get(0)));
+                        index3.remove(0);
+                    }
+                }
+                else{
+                    String str = "hard#";
+                    int count = questionsHard.size();
+                    str = str + count;
+                    questions.add(str);
+                }
+            }
+            if((randEasy == 0) && (randHard == 0) && (randNormal == 0)){
+                List<Question> questionList = queryQuestionDomain.getQuestionsByLevel(0, qIds, categoryId, subCategoryId);
+                for(Object idx: questionList){
+                    questions.add(idx);
+                }
             }
         }
 

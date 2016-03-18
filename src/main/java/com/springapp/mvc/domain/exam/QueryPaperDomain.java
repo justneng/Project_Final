@@ -252,6 +252,7 @@ public class QueryPaperDomain extends HibernateUtil {
 
     public List<ExamPaper> getOpenedPaperForUser(User user) {
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
+        criteria.add(Restrictions.ne("code", "SYSTM"));
 
         criteria.add(Restrictions.eq("paperStatus", queryStatusDomain.getOpenStatus()));
 
@@ -259,7 +260,6 @@ public class QueryPaperDomain extends HibernateUtil {
         Criterion c2 = Restrictions.eq("position", user.getPosition());
 
         criteria.add(Restrictions.or(c1, c2));
-
         Criteria criteria2 = getSession().createCriteria(ExamRecord.class);
         criteria2.add(Restrictions.eq("user", user));
         List<ExamRecord> ERList = criteria2.list();
