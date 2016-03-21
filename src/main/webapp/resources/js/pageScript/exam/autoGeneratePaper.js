@@ -1,13 +1,22 @@
 $(document).ready(function(){
+    $(document).ajaxStart(function(){
+        $("#waiting-icon").css("display", "block");
+    });
+    $(document).ajaxComplete(function(){
+        $("#waiting-icon").css("display", "none");
+
+    });
+
     $('#generate-paper-tab').on('click', function(){
         onLoadPage();
     });
 
-    $('.do-exam').on('click', function(){
+    $('#tbody-generate-papers').on('click', '.do-exam', function(){
         var $cid = $(this).attr('cid');
         generatePaper($cid);
     });
-    $('.do-exam-exist').on('click', function(){
+
+    $('#tbody-generate-papers').on('click', '.do-exam-exist', function(){
         var $paperId = $(this).attr('cid');
         location.href= context+"/TDCS/exam/doExamGenerate?paperId="+$paperId;
     });
@@ -41,16 +50,17 @@ function onLoadPage(){
                 var str = '';
 
                 if(Number(category.numberOfQuestions) >= 10){
-                    str = '<td><button cid="'+category.category.id+'" class="btn btn-link btn-sm" type="button" data-toggle="collapse" data-target=".select-paper'+category.category.id+'">'+
+                    str = '<td>'+category.category.name+'&nbsp;<span class="badge" style="background-color: #00b5e5;">'+category.numberOfQuestions+'</span></td>'+
+                          '<td><button cid="'+category.category.id+'" class="btn btn-link btn-sm" type="button" data-toggle="collapse" data-target=".select-paper'+category.category.id+'">'+
                             'เลือกชุดข้อสอบ&nbsp;<span class="caret"></span></button></td>';
                 }
                 else{
-                    str = '<td><button class="btn btn-primary btn-sm disabled" type="button">ข้อสอบไม่เพียงพอ</button></td>';
+                    str = '<td>'+category.category.name+'&nbsp;<span class="badge" style="background-color: darkgray;">'+category.numberOfQuestions+'</span></td>'+
+                          '<td><button class="btn btn-primary btn-sm disabled" type="button">ข้อสอบไม่เพียงพอ</button></td>';
                 }
 
                 $('#tbody-generate-papers').append(
                     '<tr>'+
-                    '<td>'+category.category.name+'&nbsp;<span class="badge">'+category.numberOfQuestions+'</span></td>'+
                     str+
                     '</tr>'
                 );
@@ -64,14 +74,14 @@ function onLoadPage(){
                         }
                         else{
                             if(val.alreadyMarking == true){
-                                str2 = str2 + '<tr class="collapse info select-paper'+category.category.id+'">'+
-                                    '<td><span class="glyphicon glyphicon-triangle-right"></span>'+val.paper.name+'&nbsp;</td>'+
+                                str2 = str2 + '<tr class="collapse select-paper'+category.category.id+'">'+
+                                    '<td><span class="glyphicon glyphicon-open-file"></span> '+val.paper.name+'&nbsp;</td>'+
                                     '<td><button class="btn btn-block btn-sm disabled" type="button">ทำชุดข้อสอบนี้แล้ว</button></td>'+
                                     '</tr>'
                             }
                             else{
-                                str2 = str2 + '<tr class="collapse info select-paper'+category.category.id+'">'+
-                                    '<td><span class="glyphicon glyphicon-triangle-right"></span>'+val.paper.name+'&nbsp;<span class="badge available">Available</span></td>'+
+                                str2 = str2 + '<tr class="collapse select-paper'+category.category.id+'">'+
+                                    '<td><span class="glyphicon glyphicon-open-file"></span> '+val.paper.name+'&nbsp;<span class="badge available">Available</span></td>'+
                                     '<td><button cid="'+val.paper.id+'" class="btn btn-primary btn-sm active do-exam-exist" type="button">เริ่มทำข้อสอบ</button></td>'+
                                     '</tr>'
                             }
@@ -80,10 +90,10 @@ function onLoadPage(){
 
                     $('#tbody-generate-papers').append(
                             str2+
-                            '<tr class="collapse info select-paper'+category.category.id+'">'+
+                            '<tr class="collapse select-paper'+category.category.id+'">'+
                                 '<td>'+
-                                    '<span class="glyphicon glyphicon-triangle-right"></span>&nbsp;'+
-                                    '<span class="newTemplate glyphicon glyphicon-plus">&nbsp;'+category.category.name+' ครั้งที่ '+no+'</span>'+
+                                    '<span class="glyphicon glyphicon-open-file"></span>'+
+                                    '<span class="newTemplate glyphicon glyphicon-plus"> '+category.category.name+'ครั้งที่'+no+'</span>'+
                                 '</td>'+
                                 '<td>'+
                                     '<button cid="'+category.category.id+'" class="btn btn-primary btn-sm active do-exam" type="button">'+
@@ -101,11 +111,11 @@ function onLoadPage(){
                     else{
                         papers.length + 1
                     }
-                    $('tbody').append(
+                    $('#tbody-generate-papers').append(
                         str2+
-                        '<tr class="collapse info select-paper'+category.category.id+'">'+
+                        '<tr class="collapse select-paper'+category.category.id+'">'+
                         '<td>'+
-                        '<span class="glyphicon glyphicon-triangle-right"></span>&nbsp;'+
+                        '<span class="glyphicon glyphicon-open-file"></span>&nbsp;'+
                         '<span class="newTemplate glyphicon glyphicon-plus">&nbsp;'+category.category.name+' ครั้งที่ '+no+'</span>'+
                         '</td>'+
                         '<td>'+

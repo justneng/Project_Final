@@ -1,6 +1,7 @@
 package com.springapp.mvc.domain.exam;
 
 import com.springapp.mvc.controller.exam.PrepareCategory;
+import com.springapp.mvc.pojo.Position;
 import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.*;
 import com.springapp.mvc.util.DateUtil;
@@ -125,7 +126,7 @@ public class QueryAutoGeneratePaperDomain extends HibernateUtil{
         return paperGenerateTemplate.getNo();
     }
 
-    public int generateNewPaper(String cid, int time){
+    public int generateNewPaper(String cid, int time, Position position){
         Status status = queryStatusDomain.getStatusById(1);
         List<Question> allQuestions = queryQuestionDomain.getQuestionsObjectBy(cid);
         List<Question> questionsKeeper = new ArrayList<Question>();
@@ -157,6 +158,7 @@ public class QueryAutoGeneratePaperDomain extends HibernateUtil{
         ExamPaper examPaper = new ExamPaper();
         examPaper.setName(paperName);
         examPaper.setCode("SYSTM");
+        examPaper.setPosition(position);
         examPaper.setMaxScore(maxScore);
         examPaper.setCreateDate(DateUtil.getCurrentDateWithRemovedTime());
         examPaper.setTimeLimit(30);

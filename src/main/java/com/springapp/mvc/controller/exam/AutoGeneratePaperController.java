@@ -68,7 +68,7 @@ public class AutoGeneratePaperController {
 
             Criteria criteria = HibernateUtil.getSession().createCriteria(PaperGenerateTemplate.class);
             criteria.add(Restrictions.eq("category", category));
-            criteria.addOrder(Order.asc("no"));
+            criteria.addOrder(Order.asc("id"));
             List<PaperGenerateTemplate> paperGenerateTemplateList = criteria.list();
 
             List<Integer> paperIdTemplate = new ArrayList<Integer>();
@@ -145,7 +145,7 @@ public class AutoGeneratePaperController {
         Integer paperId = 0;
 
         if(queryAutoGeneratePaperDomain.isNotCreated(cid)){
-            paperId = queryAutoGeneratePaperDomain.generateNewPaper(cid, 1);
+            paperId = queryAutoGeneratePaperDomain.generateNewPaper(cid, 1, user.getPosition());
             return new ResponseEntity<Integer>(paperId, headers, httpStatus.CREATED);
         }
         else{
@@ -155,13 +155,12 @@ public class AutoGeneratePaperController {
                     return new ResponseEntity<Integer>(paperId, headers, httpStatus.CREATED);
                 }
                 else{
-                    paperId = queryAutoGeneratePaperDomain.generateNewPaper(cid, queryAutoGeneratePaperDomain.getCurrentExamPaperNo(cid) + 1);
+                    paperId = queryAutoGeneratePaperDomain.generateNewPaper(cid, queryAutoGeneratePaperDomain.getCurrentExamPaperNo(cid) + 1, user.getPosition());
                     return new ResponseEntity<Integer>(paperId, headers, httpStatus.CREATED);
                 }
             }
             else{
-                paperId = queryAutoGeneratePaperDomain.getFirstExam();
-                paperId = queryAutoGeneratePaperDomain.generateNewPaper(cid, 1);
+                paperId = queryAutoGeneratePaperDomain.generateNewPaper(cid, 1, user.getPosition());
                 return new ResponseEntity<Integer>(paperId, headers, httpStatus.CREATED);
             }
         }

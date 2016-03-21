@@ -1,30 +1,28 @@
 package com.springapp.mvc.controller.exam;
 
 import com.springapp.mvc.controller.exam.reportutils.ReportUtils;
+import com.springapp.mvc.domain.QueryUserDomain;
+import com.springapp.mvc.domain.exam.QueryExamResultDomain;
 import com.springapp.mvc.domain.exam.QueryPaperDomain;
-import com.springapp.mvc.pojo.exam.ExamPaper;
-import com.springapp.mvc.pojo.exam.PaperPaper;
-import com.springapp.mvc.util.HibernateUtil;
+import com.springapp.mvc.domain.exam.QueryReportDomain;
+import com.springapp.mvc.pojo.User;
+import com.springapp.mvc.pojo.exam.ExamResult;
+import com.springapp.mvc.pojo.exam.StudentReport;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.engine.util.JRReportUtils;
-import net.sf.jasperreports.view.JasperViewer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.*;
+
+import static org.apache.tiles.servlet.context.ServletUtil.getServletContext;
 
 /**
  * Created by wanchana on 11/3/2559.
@@ -36,52 +34,46 @@ public class ReportController {
     @Autowired
     QueryPaperDomain queryPaperDomain;
 
+    @Autowired
+    QueryUserDomain queryUserDomain;
+
+    @Autowired
+    QueryReportDomain queryReportDomain;
+
+    @Autowired
+    QueryExamResultDomain queryExamResultDomain;
+
     @RequestMapping(value = "/exam/printReport", method = RequestMethod.POST)
-    public String printReport(HttpServletRequest request,
+    public void printReport(HttpServletRequest request,
                             HttpServletResponse response) throws ClassNotFoundException, SQLException {
 
         File report = null;
         InputStream inputStream = null;
+        List<StudentReport> studentReports = new ArrayList<StudentReport>();
+        User user = queryUserDomain.getCurrentUser(request);
+        List<ExamResult> examResults = queryExamResultDomain.getUserResult(user);
 
         try {
-            report = new File("G:\\TDCS-master\\src\\main\\webapp\\WEB-INF\\report\\viewScore.jasper");
+            String currentPath = System.getProperty("user.dir");
+            String filePath = currentPath + "\\src\\main\\webapp\\WEB-INF\\report\\hopez.jasper";
+            report = new File(filePath);
             inputStream = new FileInputStream(report);
-            List<PaperPaper> paperTest = new ArrayList<PaperPaper>();
-            List<ExamPaper> examPapers = queryPaperDomain.getAllPapers();
-            for(ExamPaper p : examPapers){
-                PaperPaper pt = new PaperPaper();
-                pt.setNAME(p.getName());
-                paperTest.add(pt);
+
+            for(ExamResult result: examResults){
+                StudentReport studentReport = new StudentReport(result.getExamRecord().getPaper().getCode()
+                                                                , result.getExamRecord().getPaper().getName()
+                                                                , (result.getObjectiveScore() + result.getSubjectiveScore()), 'E');
+
+                studentReports.add(studentReport);
             }
-//            PaperPaper pt = new PaperPaper();
-//            pt.setCode("CODEE");
-//            pt.setName("wanchana");
-//            paperTest.add(pt);
-//            PaperPaper pt2 = new PaperPaper();
-//            pt2.setCode("CODEE");
-//            pt2.setName("wanchana");
-//            paperTest.add(pt2);
 
-            List testList = new ArrayList();
-            testList.add(paperTest);
-
-            Map param = new HashMap();
-            param.put("code", "T0001");
-            param.put("name", "ทดลองสร้างชุดข้อสอ#1");
-//            JasperPrint ip = JasperFillManager.fillReport("G:\\TDCS-master\\src\\main\\webapp\\WEB-INF\\report\\viewScore.jasper", param, new JRBeanCollectionDataSource(paperTest));
-//            JasperViewer.viewReport(ip);
-//            JasperViewer viewer = new JasperViewer(ip);
-//            viewer.setVisible(true);
-//            viewer.setFitPageZoomRatio();
-
-            ReportUtils.viewReport(testList, inputStream, param, "test report viewer");
+            Map param = queryReportDomain.getParameterStudentReport(user);
+            ReportUtils.viewReport(studentReports, inputStream, param, "ผลการสอบ");
 
         } catch (JRException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        return "checkScore";
     }
 }

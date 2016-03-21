@@ -38,4 +38,12 @@ public class QueryFacutyDomain extends HibernateUtil{
         closeSession();
         return list;
     }
+
+//    Add by wanchana
+    public Faculty getFacultyByFacultyId(int id){
+        Criteria criteria = getSession().createCriteria(Faculty.class);
+        criteria.add(Restrictions.eq("facId", id));
+        Faculty faculty = (Faculty) criteria.uniqueResult();
+        return faculty;
+    }
 }
