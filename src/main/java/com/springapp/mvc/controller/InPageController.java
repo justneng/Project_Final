@@ -19,6 +19,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -264,13 +265,12 @@ public class InPageController {
     // Create by Wanchana K
     @RequestMapping(method = RequestMethod.GET, value = "/exam/manageCategory")
     public String editCategories(HttpServletRequest request , Model model){
-//        Criteria criteria = HibernateUtil.getSession().createCriteria(Category.class);
-//
-//        criteria.setProjection(Projections.projectionList().add(Projections.property("name") , "name"));
-//        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
-//        List<Map> categories = criteria.list();
-//
-//        model.addAttribute("LIST_OF_CATEOGRIES", queryCategoryDomain.getListCategories());
+        Criteria criteria = HibernateUtil.getSession().createCriteria(Category.class);
+        criteria.setProjection(Projections.projectionList().add(Projections.property("name") , "name"));
+        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List<Map> categories = criteria.list();
+
+        model.addAttribute("LIST_OF_CATEOGRIES", queryCategoryDomain.getListCategories());
 
         return "manageCategory";
     }

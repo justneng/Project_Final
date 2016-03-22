@@ -159,10 +159,6 @@
                             <li>
                                 <a href="${context}/TDCS/exam/checkScore">ผลคะแนนการสอบ</a>
                             </li>
-
-                            <li>
-                                <a href="${context}/TDCS/exam/autoGeneratePaper">สร้างชุดข้อสอบอัตโนมัติ</a>
-                            </li>
                         </ul>
 
 

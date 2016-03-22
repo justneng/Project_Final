@@ -32,11 +32,14 @@
 </div>
 <hr/>
 
-<button id="print-report" class="btn btn-success" type="button">Click me</button>
+<button id="print-report" class="btn btn-gray btn-sm" type="button">
+    <span class="glyphicon glyphicon-save"></span>&nbsp;ดาวน์โหลด
+</button>
 
 <div class="container">
     <div class="row">
         <table class="table table-bordered table-hover">
+            <col width="15%"/>
             <thead class="bg-primary label-primary small">
             <tr>
                 <th style="text-align: center">รหัสชุดข้อสอบ</th>

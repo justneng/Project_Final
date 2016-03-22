@@ -143,21 +143,17 @@ public class AutoGeneratePaperController {
         HttpStatus httpStatus = HttpStatus.OK;
         User user = queryUserDomain.getCurrentUser(request);
         Integer paperId = 0;
+        Integer currentPaperTime = queryAutoGeneratePaperDomain.getCurrentExamPaperNo(cid);
+
 
         if(queryAutoGeneratePaperDomain.isNotCreated(cid)){
             paperId = queryAutoGeneratePaperDomain.generateNewPaper(cid, 1, user.getPosition());
             return new ResponseEntity<Integer>(paperId, headers, httpStatus.CREATED);
         }
         else{
-            if((queryAutoGeneratePaperDomain.currentNumber(cid, user) != 0)){
-                if(queryAutoGeneratePaperDomain.checkExamPaperTime(queryAutoGeneratePaperDomain.currentNumber(cid, user)) != 0){
-                    paperId = queryAutoGeneratePaperDomain.checkExamPaperTime(queryAutoGeneratePaperDomain.currentNumber(cid, user));
-                    return new ResponseEntity<Integer>(paperId, headers, httpStatus.CREATED);
-                }
-                else{
-                    paperId = queryAutoGeneratePaperDomain.generateNewPaper(cid, queryAutoGeneratePaperDomain.getCurrentExamPaperNo(cid) + 1, user.getPosition());
-                    return new ResponseEntity<Integer>(paperId, headers, httpStatus.CREATED);
-                }
+            if(currentPaperTime != 0){
+                paperId = queryAutoGeneratePaperDomain.generateNewPaper(cid, queryAutoGeneratePaperDomain.getCurrentExamPaperNo(cid) + 1, user.getPosition());
+                return new ResponseEntity<Integer>(paperId, headers, httpStatus.CREATED);
             }
             else{
                 paperId = queryAutoGeneratePaperDomain.generateNewPaper(cid, 1, user.getPosition());
@@ -173,8 +169,8 @@ public class AutoGeneratePaperController {
         User user = queryUserDomain.getCurrentUser(request);
         modelMap.addAttribute("paper", examPaper);
         modelMap.addAttribute("user", user);
-
         ExamRecord examRecord = queryExamRecordDomain.getExamRecordByPaperAndUser(examPaper,user);
+
         if(examRecord == null && examPaper != null){
             examRecord = new ExamRecord();
             examRecord.setUser(user);
@@ -184,7 +180,8 @@ public class AutoGeneratePaperController {
             HibernateUtil.beginTransaction();
             queryExamRecordDomain.saveExamRecord(examRecord);
             HibernateUtil.commitTransaction();
-        }else{
+        }
+        else{
             examRecord = null;
         }
 

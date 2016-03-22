@@ -79,43 +79,6 @@ public class QueryAutoGeneratePaperDomain extends HibernateUtil{
         return paperGenerateTemplate.getExamPaper().getId();
     }
 
-    public int currentNumber(String cid, User user){
-        getSession().flush();
-        Criteria criteria = getSession().createCriteria(PaperGenerateTemplate.class);
-        criteria.add(Restrictions.eq("category.id", cid));
-        criteria.addOrder(Order.desc("examPaper.id"));
-        List<PaperGenerateTemplate> paperGenerateTemplates = criteria.list();
-        int i = 0;
-        if(paperGenerateTemplates.size() != 0){
-            List<Integer> paperIds = new ArrayList();
-            for(i = 0; i < paperGenerateTemplates.size(); i ++){
-                paperIds.add(paperGenerateTemplates.get(i).getExamPaper().getId());
-            }
-            Criteria criteria1 = getSession().createCriteria(ExamRecord.class);
-            criteria1.add(Restrictions.in("paper.id", paperIds));
-            criteria1.add(Restrictions.eq("user", user));
-            criteria1.addOrder(Order.desc("count"));
-            criteria1.setMaxResults(1);
-            ExamRecord examRecords = (ExamRecord) criteria1.uniqueResult();
-            int count = 0;
-            if(examRecords != null){
-                count = examRecords.getCount() + 1;
-                if(count > 0){
-                    return count;
-                }
-                else{
-                    return 0;
-                }
-            }
-            else{
-                return 0;
-            }
-        }
-        else{
-            return 0;
-        }
-    }
-
     public int getCurrentExamPaperNo(String cid){
         getSession().flush();
         Criteria criteria = getSession().createCriteria(PaperGenerateTemplate.class);
@@ -123,7 +86,14 @@ public class QueryAutoGeneratePaperDomain extends HibernateUtil{
         criteria.addOrder(Order.desc("id"));
         criteria.setMaxResults(1);
         PaperGenerateTemplate paperGenerateTemplate = (PaperGenerateTemplate) criteria.uniqueResult();
-        return paperGenerateTemplate.getNo();
+
+        if(paperGenerateTemplate == null){
+            return 0;
+        }
+        else{
+            return paperGenerateTemplate.getNo();
+        }
+
     }
 
     public int generateNewPaper(String cid, int time, Position position){

@@ -6,7 +6,7 @@ var categoryIdArray = new Array();
 
 $(document).ready(function () {
     //viewCategory();
-    searchResultNotFound();
+    //searchResultNotFound();
     $("#deleteCategory").on('click', function () {
         deleteCategory();
     });
@@ -315,7 +315,7 @@ function listcat() {
 
 
 function search(){
-    var categoryIdRequest = $("#categoryName").val();
+    var categoryIdRequest = $("#selectCategoryToSelection").val();
     categoryIdRequest +=' ';
     categoryIdRequest =categoryIdRequest.substr(0,categoryIdRequest.indexOf(' '));
 
