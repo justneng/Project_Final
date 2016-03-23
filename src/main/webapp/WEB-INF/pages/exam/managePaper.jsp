@@ -18,12 +18,12 @@
         font-size: 13px;
     }
 
-    .alert-info, .alert-danger{
+    .alert-info, .alert-danger {
         margin-top: 3px;
 
     }
 
-    #tbodyManagePaper label{
+    #tbodyManagePaper label {
         font-weight: normal !important;
     }
 
@@ -35,20 +35,37 @@
         padding-left: 0;
     }
 
-    span .glyphicon-triangle-bottom, .glyphicon-triangle-top{
+    span .glyphicon-triangle-bottom, .glyphicon-triangle-top {
         font-size: 1px;
         cursor: pointer;
         color: #777777;
     }
 
-    .sorting-column{
+    .sorting-column {
         display: inline-block;
         width: 15px;
-        vertical-align: middle;"
+        vertical-align: middle;
+    "
     }
 
-    #paper-not-found-message ,#deletePapers{
+    #paper-not-found-message, #deletePapers {
         display: none;
+    }
+
+    .release-exam {
+        cursor: pointer;
+    }
+
+    #release-exam-time-from, #release-exam-time-to{
+        padding-left: 0;
+    }
+
+    .well{
+        padding-bottom: 0;
+    }
+
+    .label-on-release-exam-modal{
+        font-weight: normal;
     }
 
 </style>
@@ -112,21 +129,21 @@
                         <span class="glyphicon glyphicon-triangle-bottom" value="asc"></span>
                     </span>
                 </th>
-                <th width="21%">
+                <th width="18%">
                     <label value="position">ประเภทผู้สอบ</label>
                     <span class="sorting-column">
                         <span class="glyphicon glyphicon-triangle-top" value="desc"></span><br/>
                         <span class="glyphicon glyphicon-triangle-bottom" value="asc"></span>
                     </span>
                 </th>
-                <th width="8%">
+                <th width="">
                     <label value="paperStatus">สถานะ</label>
                     <span class="sorting-column">
                         <span class="glyphicon glyphicon-triangle-top" value="desc"></span><br/>
                         <span class="glyphicon glyphicon-triangle-bottom" value="asc"></span>
                     </span>
                 </th>
-                <th width="5%"style="vertical-align: middle;">
+                <th width="5%" style="vertical-align: middle;">
                     แก้ไข
                 </th>
             </tr>
@@ -149,11 +166,94 @@
 
 </div>
 
+<%--Modal Release Modal Details--%>
+<div id="release-exam-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <label><span class="glyphicon glyphicon-cog"></span>&nbsp;ตั้งค่า</label>
+                <div class="well">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label text-right label-on-release-exam-modal">วันที่เปิดสอบ</label>
+                            <div class="col-sm-7">
+                                <div class="input-group">
+                                    <input id="release-exam-date-field" type="text" data-date-format="dd/mm/yyyy" placeholder="&nbsp;&nbsp;วันที่เปิดสอบ" date-format="dd/mm/yyyy"
+                                           maxlength="10" class="form-control input-sm datepicker">
+                                    <span id="release-exam-date-btn" class="input-group-addon"><span href="#"
+                                                                                                 class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label text-right label-on-release-exam-modal">เวลาตั้งแต่</label>
+
+                            <div id="release-exam-time-from" class="col-sm-6">
+                                <div class="col-sm-6">
+                                    <input id="hour-from" class="form-control input-sm" type="number" min="0" max="24" placeholder="ชม." oninput="validity.valid||(value='');" required/>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <input id="minute-from" class="col-sm-5 form-control input-sm" type="number" min="0" max="24" placeholder="น." oninput="validity.valid||(value='');" required/>
+                                </div>
+                            </div>
+
+                            <label class="control-label label-on-release-exam-modal">นาฬิกา</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label text-right label-on-release-exam-modal">ถึง</label>
+
+                            <div id="release-exam-time-to" class="col-sm-6">
+                                <div class="col-sm-6">
+                                    <input id="hour-to" class="form-control input-sm" type="number" min="0" max="24" placeholder="ชม." oninput="validity.valid||(value='');" required/>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <input id="minute-to" class="col-sm-5 form-control input-sm" min="0" max="24" type="number" placeholder="น." oninput="validity.valid||(value='');" required/>
+                                </div>
+                            </div>
+
+                            <label class="control-label label-on-release-exam-modal">นาฬิกา</label>
+                        </div>
+                    </form>
+                </div>
+
+                <label><span class="glyphicon glyphicon-user"></span>&nbsp;เพิ่มนักศึกษา</label>
+                <div class="well">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-3 text-right">
+                                <input type="checkbox"/>
+                            </div>
+
+                            <div class="col-sm-7">
+                                วันชนะ กรรขำ
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/paper.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/selectEmployee.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/categoryDropdown.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/orderPaper.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/releaseExamPaper.js" />"></script>
 
 
 

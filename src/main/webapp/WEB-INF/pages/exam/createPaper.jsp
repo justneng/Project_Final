@@ -99,7 +99,7 @@
         </div>
 
         <div class="row">
-            <div class="well">
+            <%--<div class="well">--%>
                 <form class="form-horizontal" role="form">
                     <div class="row">
                         <div class="col-sm-6">
@@ -193,8 +193,12 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="well">
+
+                    </div>
                 </form>
-            </div>
+            <%--</div>--%>
         </div>
 
         <div class="row">

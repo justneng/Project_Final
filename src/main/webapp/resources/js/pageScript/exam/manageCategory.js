@@ -51,7 +51,49 @@ $(document).ready(function () {
         $("#categoryId").val('');
         $("#categoryName").val('');
     });
+
+//
+    var buttonUpdateCategory = $('.update-category');
+    buttonUpdateCategory.on('click', function(){
+        var categoryId = $(this).attr('cateoryId');
+        fillValueToModalManageCategory(categoryId);
+    });
+
+    var buttonAddSubcategory = $('#add-subcategory');
+    buttonAddSubcategory.on('click', function(){
+        addNewSubcategory()
+    });
+
+
+
 });
+
+function addNewSubcategory(){
+    $('form[where="subcategories"]').append(
+        '<div class="form-group">'+
+            '<div class="col-sm-offset-2 col-sm-8">'+
+                '<input class="form-control input-sm new-category" value="'+$(this).text()+'"/>'+
+            '</div>'+
+            '<button class="btn btn-link btn-sm" type="button"><span class="glyphicon glyphicon-remove-sign"></span>'+
+        '</div>'
+    )
+}
+
+function fillValueToModalManageCategory(categoryId){
+    $('.label-category-id').text(categoryId);
+    $('.input-category').val($('.label'+categoryId).text());
+    $('form[where="subcategories"]').empty();
+    $('.' + categoryId + ' td:first-child span').each(function(){
+        $('form[where="subcategories"]').append(
+            '<div class="form-group">'+
+                '<div class="col-sm-offset-2 col-sm-8">'+
+                    '<input class="form-control input-sm" value="'+$(this).text()+'"/>'+
+                '</div>'+
+            '</div>'
+        );
+    });
+}
+//
 
 function checkCategoryNameInUse(categoryId){
     var check = $.ajax({
@@ -176,7 +218,7 @@ function editCategory(categoryId) {
 }
 
 function updateCategory(categoryId) {
-
+    alert(categoryId)
     if ($("#editData" + categoryId).val() == "") {
         alert("ชื่อหมวดหมู่ต้องไม่เป็นค่าว่าง")
     }

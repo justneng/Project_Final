@@ -265,13 +265,8 @@ public class InPageController {
     // Create by Wanchana K
     @RequestMapping(method = RequestMethod.GET, value = "/exam/manageCategory")
     public String editCategories(HttpServletRequest request , Model model){
-        Criteria criteria = HibernateUtil.getSession().createCriteria(Category.class);
-        criteria.setProjection(Projections.projectionList().add(Projections.property("name") , "name"));
-        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
-        List<Map> categories = criteria.list();
-
         model.addAttribute("LIST_OF_CATEOGRIES", queryCategoryDomain.getListCategories());
-
+        model.addAttribute("LIST_OF_SUBCATEGORIES", querySubCategoryDomain.getAllSubCategory());
         return "manageCategory";
     }
 

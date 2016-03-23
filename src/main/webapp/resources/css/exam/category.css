@@ -10,3 +10,16 @@ thead th{
     font-size: 12px;
     text-align: center;
 }
+
+td + label{
+    font-weight: normal;
+    font-size: 14px;
+}
+
+/*.on-modal{*/
+    /*padding: 0;*/
+/*}*/
+
+label + .btn-link{
+    border:1px solid gainsboro;
+}

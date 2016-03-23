@@ -25,6 +25,8 @@ $(document).ready(function(){
     //    paperNotFound();
     //}
 
+    getStudentBySection();
+
     $("#advPaperResetBtn").unbind('click').click(function(){
         resetAdvInput();
     });
@@ -35,14 +37,6 @@ $(document).ready(function(){
 
     $('#tbodyManagePaper tr').mouseover(function(){
         $(this).css('cursor', 'pointer');
-    });
-
-    $('#tbodyManagePaper').on('click','td:not(.pCheck):not(.pSelect):not(.pButton)',function(){
-        var paperId = $(this).parent().find("button").attr('id');
-        pId = $(this).parent().siblings().map(function(){
-            return $(this).text();
-        }).get(0);
-        window.location.href = context+"/TDCS/exam/editPaper?pId="+paperId+"#info";
     });
 
     $("#searchPaperStatus").on('change', function(){
@@ -221,7 +215,6 @@ function getAllPapers(){
         type : "POST",
         url : context+"/TDCS/exam/getAllPapers",
         contentType: "application/json",
-        async: false,
         success : function(data){
             $("#checkPaperAll").prop('checked', false);
             records = data;

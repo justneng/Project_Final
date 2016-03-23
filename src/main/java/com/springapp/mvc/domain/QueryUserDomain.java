@@ -454,8 +454,8 @@ public class QueryUserDomain extends HibernateUtil {
         Criteria criteria = getSession().createCriteria(User.class);
         criteria.setProjection(Projections.projectionList()
                 .add(Projections.property("empId"), "empId")
-                .add(Projections.property("thFname"),"thFname")
-                .add(Projections.property("thLname"),"thLname"));
+                .add(Projections.property("thFname"), "thFname")
+                .add(Projections.property("thLname"), "thLname"));
         Criterion cri = Restrictions.eq("aptId", 1);
         Criterion cri2 = Restrictions.eq("aptId", 2);
         criteria.add(Restrictions.or(cri,cri2));
@@ -464,4 +464,18 @@ public class QueryUserDomain extends HibernateUtil {
         List<User> allUserTrainee = criteria.list();
         return allUserTrainee;
     }
+
+    //Add by wanchana
+    public List<User> getAllStudent(){
+
+        getSession().flush();
+        Criteria criteria = getSession().createCriteria(User.class);
+        Criterion cri1 = Restrictions.eq("aptId", 1);
+        Criterion cri2 = Restrictions.eq("aptId", 2);
+        criteria.add(Restrictions.or(cri1, cri2));
+        List<User> users = criteria.list();
+
+        return users;
+    }
 }
+

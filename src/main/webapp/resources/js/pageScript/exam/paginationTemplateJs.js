@@ -157,17 +157,15 @@ var printRecords = function (records){
             '<tr>'+
             '<td style="display: none;"><label id="'+value.examPaper.id+'">'+value.examPaper.id+'</label></td>'+
             '<td class="pCheck"><input class="checkPaper" '+str1+' type="checkbox" check="'+check+'"/></td>'+
-            '<td><label id="lpaperCode'+value.examPaper.code+'">'+value.examPaper.code+'</label></td>'+
+            '<td><label id="lpaperCode'+value.examPaper.code+'">'+value.examPaper.code+'&nbsp;<span class="glyphicon glyphicon-calendar release-exam" data-toggle="modal" positionid="'+posiId+'" data-target="#release-exam-modal" style="color: #00b5e5;"></span></label></td>'+
             '<td style="text-align: left;"><label id="lpaperName'+paperName+'">'+paperName+'</label></td>'+
             '<td><label id="lpaperCreateBy'+value.examPaper.createBy.empId+'">'+value.examPaper.createBy.thFname+' '+value.examPaper.createBy.thLname+'</label></td>'+
             '<td><label id="lpaperScore'+value.examPaper.maxScore+'" class="label-control">'+value.examPaper.maxScore+'</label></td>'+
             '<td><label id="lpaperForPosition'+posiId+'" class="label-control">'+posiName+'</label></td>'+
             '<td class="pSelect">'+
             '<select id="dropdownId'+value.examPaper.id+'" name="paperStatus"'+str2+' class="dropdown" style="color: white; width: 80px; text-align: center;">'+
-                //'<option value="3">ยังไม่เผยแพร่</option>'+
             '<option value="1"><strong>เปิดใช้งาน</strong></option>'+
             '<option value="2">ปิดใช้งาน</option>'+
-            '</select>'+
             '</td>'+
             '<td class="pButton"><button id="'+value.examPaper.id+'" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span></button></td>'+
             '</tr>'

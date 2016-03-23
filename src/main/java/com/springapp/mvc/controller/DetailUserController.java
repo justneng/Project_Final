@@ -4,7 +4,9 @@ import com.springapp.mvc.domain.QueryCompanyDomain;
 import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.pojo.Company;
 import com.springapp.mvc.pojo.User;
+import com.springapp.mvc.pojo.exam.ListenUsersInPosition;
 import com.springapp.mvc.util.ConvertListToJson;
+import flexjson.JSONSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,7 +17,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sound.midi.Soundbank;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -95,5 +99,24 @@ public class DetailUserController {
             e.printStackTrace();
         }
         return new ResponseEntity<String>(jsonList, headers, HttpStatus.OK);
+    }
+
+//    Add by wanchana
+    @RequestMapping(value = "/exam/getUsersInPosition", method = RequestMethod.POST)
+    public ResponseEntity<String> getUsersInPosition(HttpServletRequest request, HttpServletResponse response){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        List<ListenUsersInPosition> usersInPositionList = new ArrayList<ListenUsersInPosition>();
+        List<User> users = queryUserDomain.getAllStudent();
+
+        for(User user : users){
+            usersInPositionList.add(new ListenUsersInPosition(user.getUserId(), user.getThFname(), user.getThLname(),
+                                                              user.getPosition().getPosiId(), user.getPosition().getPosiName()));
+        }
+
+        String toJson = new JSONSerializer().exclude("*.class").serialize(usersInPositionList);
+        return new ResponseEntity<String>(toJson, headers, HttpStatus.OK);
     }
 }
