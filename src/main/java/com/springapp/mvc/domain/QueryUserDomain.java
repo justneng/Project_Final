@@ -466,13 +466,18 @@ public class QueryUserDomain extends HibernateUtil {
     }
 
     //Add by wanchana
-    public List<User> getAllStudent(){
+    public List<User> getAllStudentInPosition(int positionId){
 
         getSession().flush();
         Criteria criteria = getSession().createCriteria(User.class);
         Criterion cri1 = Restrictions.eq("aptId", 1);
         Criterion cri2 = Restrictions.eq("aptId", 2);
         criteria.add(Restrictions.or(cri1, cri2));
+
+        if(positionId != 0){
+            criteria.add(Restrictions.eq("position.posiId", positionId));
+        }
+
         List<User> users = criteria.list();
 
         return users;

@@ -515,6 +515,7 @@ function addQuestionToPaper(qId){
     questionIdString.push(qId);
     var newScore = $('#labelScore'+qId).text();
 
+    $('.checkAllQuestionFromCreatePaperPage').checked = false;
     $("#tbSelectedQuestionToPaper").show();
     $('#sum-score').show();
     $("#tbodySelectedQuestionToPaper").append(
@@ -1250,6 +1251,13 @@ function countQuestionReady(){
                 $('#check-only-hard').removeAttr('disabled', 'disabled');
             }
 
+            if((sp[1] == 0) && (sp[2] == 0) && (sp[3] == 0)){
+                $('#randBtn').attr('disabled', 'disabled');
+            }
+            else{
+                $('#randBtn').removeAttr('disabled');
+            }
+
             $('[data-toggle="tooltip"]').tooltip();
             sp="";
         },
@@ -1395,7 +1403,7 @@ function randomQuestion(){
         contentType: "application/json",
         data: obj,
         success: function(data){
-            $("#checkAllQuestionFromCreatePaperPage").checked = false;
+            $(".checkAllQuestionFromCreatePaperPage").checked = false;
             $("#tbSelectedQuestionToPaper").show();
             $("#removeRowQuestionSelect").show();
             $("#questionNotFoundDesc").hide();

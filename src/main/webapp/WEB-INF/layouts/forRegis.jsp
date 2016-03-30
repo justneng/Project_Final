@@ -54,7 +54,7 @@
     <div class="dv-background" style="display: none">
         <div class="dv-loading">
             <spring:url value="/resources/images/loading.gif" var="image_loader_url" />
-            <div class="image-contain" style="background-image: url(<c:url value="/resources/images/loading.gif" />); width:30px;height:30px;">
+            <div class="image-contain" style="background-image: url(<c:url value="/resources/js/pageScript/exam/loading.gif" />); width:30px;height:30px;">
                 <jsp:text/>
             </div>
         </div>

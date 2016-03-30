@@ -1,8 +1,10 @@
 package com.springapp.mvc.domain.exam;
 
+import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.pojo.Position;
 import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.*;
+import com.springapp.mvc.util.DateUtil;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
@@ -13,6 +15,7 @@ import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,8 +31,12 @@ public class QueryPaperDomain extends HibernateUtil {
 
     @Autowired
     QueryStatusDomain queryStatusDomain;
+
     @Autowired
     QueryExamRecordDomain queryExamRecordDomain;
+
+    @Autowired
+    QueryUserDomain queryUserDomain;
 
     public ExamPaper getPaperById(Integer paperId) {
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
@@ -160,7 +167,6 @@ public class QueryPaperDomain extends HibernateUtil {
         HibernateUtil.beginTransaction();
         getSession().merge(examPaper);
         HibernateUtil.commitTransaction();
-        HibernateUtil.closeSession();
     }
 
     public List<ExamPaper> generalSearchPaper(List empIds, String code, String name) {
@@ -250,10 +256,53 @@ public class QueryPaperDomain extends HibernateUtil {
         return papers;
     }
 
+//    public static Boolean checkReleasing(User user, ExamPaper examPaper){
+    public static ReleaseExam checkReleasing(User user, ExamPaper examPaper){
+        HibernateUtil.getSession().flush();
+        Criteria criteria = getSession().createCriteria(ReleaseExam.class, "release");
+        criteria.add(Restrictions.eq("pk.user", user));
+        criteria.add(Restrictions.eq("pk.examPaper", examPaper));
+        criteria.add(Restrictions.eq("checkRelease", 'Y'));
+        ReleaseExam releaseExam = (ReleaseExam) criteria.uniqueResult();
+        if(releaseExam != null){
+            return releaseExam;
+        }
+        else{
+            return null;
+        }
+    }
+
+    public Boolean checkUserInRule(ExamPaper examPaper, User user){
+        HibernateUtil.getSession().flush();
+        Criteria criteria = getSession().createCriteria(ReleaseExam.class, "release");
+        criteria.add(Restrictions.eq("pk.user", user));
+        criteria.add(Restrictions.eq("pk.examPaper", examPaper));
+        List<ReleaseExam> releaseExamList = criteria.list();
+        if(releaseExamList.size() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public Boolean checkPaperRule(ExamPaper examPaper){
+        HibernateUtil.getSession().flush();
+        Criteria criteria = getSession().createCriteria(ReleaseExam.class, "release");
+        criteria.add(Restrictions.eq("pk.examPaper", examPaper));
+        criteria.add(Restrictions.ne("checkRelease", 'N'));
+        List<ReleaseExam> releaseExamList = criteria.list();
+        if(releaseExamList.size() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public List<ExamPaper> getOpenedPaperForUser(User user) {
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
         criteria.add(Restrictions.ne("code", "SYSTM"));
-
         criteria.add(Restrictions.eq("paperStatus", queryStatusDomain.getOpenStatus()));
 
         Criterion c1 = Restrictions.isNull("position");
@@ -274,7 +323,35 @@ public class QueryPaperDomain extends HibernateUtil {
             criteria.add(Restrictions.not(Restrictions.in("id", EPidList)));
         }
 
-        return criteria.list();
+        List<ExamPaper> papers = criteria.list();
+        List list = new ArrayList();
+        for(ExamPaper pap: papers){
+            if(checkPaperRule(pap)){
+                if(checkUserInRule(pap, user)){
+                    ReleaseExam releaseExam = checkReleasing(user, pap);
+                    if(releaseExam != null){
+                        ExamPaper examPaper = new ExamPaper();
+                        examPaper.setId(releaseExam.getExamPaper().getId());
+                        examPaper.setName(releaseExam.getExamPaper().getName());
+                        examPaper.setCreateDate(releaseExam.getExamPaper().getCreateDate());
+                        examPaper.setMaxScore(releaseExam.getExamPaper().getMaxScore());
+                        examPaper.setCreateBy(releaseExam.getExamPaper().getCreateBy());
+                        examPaper.setCode(releaseExam.getExamPaper().getCode());
+                        examPaper.setUpdateDate(releaseExam.getExamPaper().getUpdateDate());
+                        examPaper.setTimeLimit(releaseExam.getExamPaper().getTimeLimit());
+                        examPaper.setPosition(releaseExam.getExamPaper().getPosition());
+                        examPaper.setPaperStatus(releaseExam.getExamPaper().getPaperStatus());
+                        list.add(examPaper);
+                    }
+                }
+            }
+            else{
+                list.add(pap);
+            }
+
+        }
+
+        return list;
     }
 
     public List<ExamPaper> getDonePaperForUser(User user) {
@@ -448,5 +525,29 @@ public class QueryPaperDomain extends HibernateUtil {
         }
 
         return papers;
+    }
+
+    public void addRule(int userId, String paperCode, User updateBy, String date){
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+        QueryPaperDomain queryPaperDomain = new QueryPaperDomain();
+        ExamPaper examPaper = queryPaperDomain.getPaperByCode(paperCode);
+        Date currentDate = new Date();
+        try{
+            currentDate = simpleDateFormat.parse(date);
+            HibernateUtil.beginTransaction();
+            User user = queryUserDomain.getUserById(userId);
+            ReleaseExamPk releaseExamPk = new ReleaseExamPk();
+            releaseExamPk.setUser(user);
+            releaseExamPk.setExamPaper(examPaper);
+            releaseExamPk.setUpdateBy(updateBy);
+
+            ReleaseExam releaseExam = new ReleaseExam(releaseExamPk, null, currentDate, 'Y', null);
+            getSession().save(releaseExam);
+            HibernateUtil.commitTransaction();
+
+        } catch (ParseException e){
+            e.printStackTrace();
+        }
     }
 }

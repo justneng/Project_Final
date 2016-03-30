@@ -93,6 +93,7 @@
 		<mapping class="com.springapp.mvc.pojo.exam.PaperQuestion"/>
 
 		<mapping class="com.springapp.mvc.pojo.exam.PaperGenerateTemplate"/>
+		<mapping class="com.springapp.mvc.pojo.exam.ReleaseExam"/>
 
 	</session-factory>
 </hibernate-configuration>

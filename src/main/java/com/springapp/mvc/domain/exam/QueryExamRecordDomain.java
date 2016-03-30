@@ -64,6 +64,19 @@ public class QueryExamRecordDomain extends HibernateUtil {
         }
     }
 
+    public List<ExamRecord> getAllExamRecord(){
+
+        Criteria criteria = getSession().createCriteria(ExamRecord.class);
+        List<ExamRecord> records = criteria.list();
+
+        if(records.size() > 0){
+            return records;
+        }
+        else{
+            return null;
+        }
+    }
+
     public void mergeUpdateExamRecord(ExamRecord examRecord){
         getSession().merge(examRecord);
     }

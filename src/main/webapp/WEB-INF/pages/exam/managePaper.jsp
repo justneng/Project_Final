@@ -68,12 +68,47 @@
         font-weight: normal;
     }
 
+    #setting-1, #setting-2{
+        display: none;
+    }
+
+    #on-loading{
+        /*display: none;*/
+        top: 50%;
+        left: 48%;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        width: 105px;
+        height: 100px;
+        border: 10px solid gray;
+        background-color: whitesmoke;
+        border-radius: 50%;
+    }
+
+    #inner{
+        height: 50%;
+        margin-top: 35%;
+        margin-left: 10%;
+    }
+
+    /*body:not(#on-loading){*/
+        /*filter: blur(5px);*/
+        /*-webkit-filter: blur(5px);*/
+    /*}*/
+
 </style>
 
 <script>
     var context = '${context}';
-    $('#flash').hide();
+    if ('${status}' != 'staff') {
+        window.location.href = context+"/TDCS/index.html";
+    }
 </script>
+
+<%--<div id="on-loading">--%>
+    <%--<label id="inner">โปรดรอ...</label>--%>
+<%--</div>--%>
 
 <div class="container-fluid">
     <div class="row">
@@ -96,6 +131,7 @@
                 &nbsp;<strong>ลบออก</strong></label></span></button>
         </div>
     </div>
+
     <div class="row table-responsive">
         <table id="tbManagePaper" class="table table-bordered table-hovered" width="100%">
             <thead class="table-header small">
@@ -171,89 +207,118 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <label id="label-modal-header"></label>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <div class="modal-body">
                 <label><span class="glyphicon glyphicon-cog"></span>&nbsp;ตั้งค่า</label>
-                <div class="well">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label text-right label-on-release-exam-modal">วันที่เปิดสอบ</label>
-                            <div class="col-sm-7">
-                                <div class="input-group">
-                                    <input id="release-exam-date-field" type="text" data-date-format="dd/mm/yyyy" placeholder="&nbsp;&nbsp;วันที่เปิดสอบ" date-format="dd/mm/yyyy"
-                                           maxlength="10" class="form-control input-sm datepicker">
-                                    <span id="release-exam-date-btn" class="input-group-addon"><span href="#"
-                                                                                                 class="glyphicon glyphicon-calendar"></span></span>
+                <div id="setting-1">
+                    <div class="well">
+                        <form class="form-horizontal">
+                            <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label text-right label-on-release-exam-modal">วันที่เปิดสอบ</label>--%>
+                            <%--<div class="col-sm-7">--%>
+                            <%--<div class="input-group">--%>
+                            <%--<input id="release-exam-date-field" type="text" data-date-format="dd/mm/yyyy" placeholder="&nbsp;&nbsp;วันที่เปิดสอบ" date-format="dd/mm/yyyy"--%>
+                            <%--maxlength="10" class="form-control input-sm datepicker">--%>
+                            <%--<span id="release-exam-date-btn" class="input-group-addon"><span href="#"--%>
+                            <%--class="glyphicon glyphicon-calendar"></span></span>--%>
+                            <%--</div>--%>
+                            <%--</div>--%>
+                            <%--</div>--%>
+
+                            <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label text-right label-on-release-exam-modal">เวลาตั้งแต่</label>--%>
+
+                            <%--<div id="release-exam-time-from" class="col-sm-6">--%>
+                            <%--<div class="col-sm-6">--%>
+                            <%--<input id="hour-from" class="form-control input-sm" type="number" min="0" max="24" placeholder="ชม." oninput="validity.valid||(value='');" required/>--%>
+                            <%--</div>--%>
+
+                            <%--<div class="col-sm-6">--%>
+                            <%--<input id="minute-from" class="col-sm-5 form-control input-sm" type="number" min="0" max="24" placeholder="น." oninput="validity.valid||(value='');" required/>--%>
+                            <%--</div>--%>
+                            <%--</div>--%>
+
+                            <%--<label class="control-label label-on-release-exam-modal">นาฬิกา</label>--%>
+                            <%--</div>--%>
+
+                            <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label text-right label-on-release-exam-modal">ถึง</label>--%>
+
+                            <%--<div id="release-exam-time-to" class="col-sm-6">--%>
+                            <%--<div class="col-sm-6">--%>
+                            <%--<input id="hour-to" class="form-control input-sm" type="number" min="0" max="24" placeholder="ชม." oninput="validity.valid||(value='');" required/>--%>
+                            <%--</div>--%>
+
+                            <%--<div class="col-sm-6">--%>
+                            <%--<input id="minute-to" class="col-sm-5 form-control input-sm" min="0" max="24" type="number" placeholder="น." oninput="validity.valid||(value='');" required/>--%>
+                            <%--</div>--%>
+                            <%--</div>--%>
+
+                            <%--<label class="control-label label-on-release-exam-modal">นาฬิกา</label>--%>
+                            <%--</div>--%>
+
+                            <div class="form-group">
+                                <div class="col-sm-3 text-right">
+                                    <input id="open-exam-only-today" type="checkbox" data-toggle="collapse" data-target="#add-student-collapse"/>
+                                </div>
+
+                                <div class="col-sm-7">
+                                    <label class="label-on-release-exam-modal">เปิดสอบเฉพาะวันนี้&nbsp;
+                                        <span class="label label-primary get-currentdate">
+
+                                        </span>
+                                    </label>
                                 </div>
                             </div>
+                        </form>
+                    </div>
+
+                    <div id="add-student-collapse" class="collapse">
+                        <label><span class="glyphicon glyphicon-user"></span>&nbsp;เพิ่มนักศึกษา</label>
+                        <div class="well">
+                            <form class="form-horizontal" where="add-student">
+
+                            </form>
                         </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label text-right label-on-release-exam-modal">เวลาตั้งแต่</label>
-
-                            <div id="release-exam-time-from" class="col-sm-6">
-                                <div class="col-sm-6">
-                                    <input id="hour-from" class="form-control input-sm" type="number" min="0" max="24" placeholder="ชม." oninput="validity.valid||(value='');" required/>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <input id="minute-from" class="col-sm-5 form-control input-sm" type="number" min="0" max="24" placeholder="น." oninput="validity.valid||(value='');" required/>
-                                </div>
-                            </div>
-
-                            <label class="control-label label-on-release-exam-modal">นาฬิกา</label>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label text-right label-on-release-exam-modal">ถึง</label>
-
-                            <div id="release-exam-time-to" class="col-sm-6">
-                                <div class="col-sm-6">
-                                    <input id="hour-to" class="form-control input-sm" type="number" min="0" max="24" placeholder="ชม." oninput="validity.valid||(value='');" required/>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <input id="minute-to" class="col-sm-5 form-control input-sm" min="0" max="24" type="number" placeholder="น." oninput="validity.valid||(value='');" required/>
-                                </div>
-                            </div>
-
-                            <label class="control-label label-on-release-exam-modal">นาฬิกา</label>
-                        </div>
-                    </form>
+                    </div>
                 </div>
 
-                <label><span class="glyphicon glyphicon-user"></span>&nbsp;เพิ่มนักศึกษา</label>
-                <div class="well">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <div class="col-sm-3 text-right">
-                                <input type="checkbox"/>
-                            </div>
+                <div id="setting-2" class="alert alert-info">
+                    <label>ข้อสอบชุดนี้เปิดสอบในวันที่  <label class="get-currentdate"></label></label><br/>
+                    <label>นักศึกษาที่สามารถทำชุดข้อสอบนี้</label>
+                    <ul id="student-in-rule">
 
-                            <div class="col-sm-7">
-                                วันชนะ กรรขำ
-                            </div>
-                        </div>
-                    </form>
+                    </ul>
                 </div>
             </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+
+
+            <div class="modal-footer" hidden>
+                <div class="row text-center">
+                    <button id="save-rule-btn" class="btn btn-primary btn-sm" type="button" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-saved"></span>&nbsp;<label>บันทึก</label>
+                    </button>
+
+                    <button class="btn btn-default btn-sm" type="button" data-dismiss="modal">
+                        <label>ปิด</label>
+                    </button>
+                </div>
             </div>
         </div>
 
     </div>
 </div>
 
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/releaseExamPaper.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/paper.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/selectEmployee.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/managePaper.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/categoryDropdown.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/orderPaper.js" />"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/releaseExamPaper.js" />"></script>
 
 
 

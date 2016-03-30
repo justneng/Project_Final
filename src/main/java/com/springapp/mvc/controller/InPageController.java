@@ -2,16 +2,14 @@ package com.springapp.mvc.controller;
 
 import com.springapp.mvc.controller.exam.PrepareCategory;
 import com.springapp.mvc.domain.*;
-import com.springapp.mvc.domain.exam.QueryAutoGeneratePaperDomain;
-import com.springapp.mvc.domain.exam.QueryCategoryDomain;
+import com.springapp.mvc.domain.exam.*;
 
-import com.springapp.mvc.domain.exam.QueryExamRecordDomain;
-import com.springapp.mvc.domain.exam.QuerySubCategoryDomain;
 import com.springapp.mvc.pojo.*;
 import com.springapp.mvc.pojo.exam.Category;
 import com.springapp.mvc.pojo.exam.ExamPaper;
 import com.springapp.mvc.pojo.exam.ExamRecord;
 import com.springapp.mvc.pojo.exam.PaperGenerateTemplate;
+import com.springapp.mvc.util.DateUtil;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -28,10 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.print.Paper;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/TDCS")
@@ -71,6 +66,9 @@ public class InPageController {
     private QueryAutoGeneratePaperDomain queryAutoGeneratePaperDomain;
     @Autowired
     private QueryExamRecordDomain queryExamRecordDomain;
+    @Autowired
+    private QueryReleaseExamDomain queryReleaseExamDomain;
+
     //add jokizz
     @Autowired
     private QuerySubCategoryDomain querySubCategoryDomain;
@@ -385,6 +383,8 @@ public class InPageController {
     }
     @RequestMapping(method = RequestMethod.GET, value = "/exam/managePapers")
     public String editPapers(HttpServletRequest request){
+        Date today = DateUtil.getCurrentDateWithRemovedTime();
+        queryReleaseExamDomain.checkExpireRule(today);
         return "managePapers";
     }
     @RequestMapping(method = RequestMethod.GET, value = "/exam/editButtonOnPageManagePapers")

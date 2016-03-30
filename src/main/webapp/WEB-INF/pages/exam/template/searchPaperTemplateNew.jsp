@@ -45,8 +45,8 @@
                 </div>
 
                 <div id="btnSearch" class="col-sm-2">
-                    <button id="searchPaper" class="btn btn-primary btn-sm" type="button">ค้นหา&nbsp;<span
-                            class="glyphicon glyphicon-search"></span></button>
+                    <button id="searchPaper" class="btn btn-primary btn-sm" type="button"><span
+                            class="glyphicon glyphicon-search"></span>&nbsp;ค้นหา</button>
                     <button id="resetSearchPaper" class="btn btn-gray btn-sm" type="button">ล้างข้อมูล</button>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                         <div id="pStartTime" class="input-group date">
                             <input id="searchCreateDateFromInput" type="text" class="form-control input-sm datepicker"
                                    maxlength="10" data-date-format="dd/mm/yyyy"
-                                   placeholder="สร้างชุดข้อสอบตั้งแต่วันที่"/>
+                                   placeholder="  สร้างชุดข้อสอบตั้งแต่วันที่"/>
                         <span id="createDateFromBtn" class="input-group-addon"><span
                                 class="glyphicon glyphicon-calendar" href="#"></span></span>
                         </div>
@@ -77,7 +77,7 @@
                     <div class="col-sm-3">
                         <div id="pToTime" class="input-group date">
                             <input id="searchCreateDateToInput" type="text" class="form-control input-sm datepicker"
-                                   maxlength="10" data-date-format="dd/mm/yyyy" placeholder="ถึง"/>
+                                   maxlength="10" data-date-format="dd/mm/yyyy" placeholder="  ถึง"/>
                         <span id="createDateToBtn" class="input-group-addon"><span class="glyphicon glyphicon-calendar"
                                                                                    href="#"></span></span>
                         </div>
@@ -128,8 +128,8 @@
 
     <div id="btnAdvanceSearch" class="panel-footer" hidden>
         <div class="row text-center">
-            <button id="advPaperSearchBtn" class="btn btn-primary btn-sm" type="button">ค้นหา&nbsp;<span
-                    class="glyphicon glyphicon-search"></span></button>
+            <button id="advPaperSearchBtn" class="btn btn-primary btn-sm" type="button"><span
+                    class="glyphicon glyphicon-search"></span>&nbsp;ค้นหา</button>
             <button id="advPaperResetBtn" class="btn btn-gray btn-sm" type="button">ล้างข้อมูล</button>
         </div>
     </div>

@@ -1,5 +1,7 @@
 package com.springapp.mvc.pojo.exam;
 
+import java.util.Date;
+
 /**
  * Created by wanchana on 24/3/2559.
  */
@@ -10,13 +12,19 @@ public class ListenUsersInPosition {
     private String lname;
     private Integer positionId;
     private String positionName;
+    private Boolean permiss;
+    private Date dateTo;
+    private char release;
+    private Integer intime;
 
-    public ListenUsersInPosition(Integer userId, String fname, String lname, Integer sectionId, String sectionName) {
+    public ListenUsersInPosition(Integer userId, String fname, String lname, Integer sectionId, String sectionName, char release, Integer intime) {
         this.userId = userId;
         this.fname = fname;
         this.lname = lname;
         this.positionId = sectionId;
         this.positionName = sectionName;
+        this.release = release;
+        this.intime = intime;
     }
 
     public Integer getUserId() {
@@ -43,20 +51,51 @@ public class ListenUsersInPosition {
         this.lname = lname;
     }
 
-    public Integer getSectionId() {
+    public Integer getPositionId() {
         return positionId;
     }
 
-    public void setSectionId(Integer sectionId) {
-        this.positionId = sectionId;
+    public void setPositionId(Integer positionId) {
+        this.positionId = positionId;
     }
 
-    public String getSectionName() {
+    public String getPositionName() {
         return positionName;
     }
 
-    public void setSectionName(String sectionName) {
-        this.positionName = sectionName;
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
     }
 
+    public Boolean getPermiss() {
+        return permiss;
+    }
+
+    public void setPermiss(Boolean permiss) {
+        this.permiss = permiss;
+    }
+
+    public Date getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(Date dateTo) {
+        this.dateTo = dateTo;
+    }
+
+    public char getRelease() {
+        return release;
+    }
+
+    public void setRelease(char release) {
+        this.release = release;
+    }
+
+    public Integer getIntime() {
+        return intime;
+    }
+
+    public void setIntime(Integer intime) {
+        this.intime = intime;
+    }
 }

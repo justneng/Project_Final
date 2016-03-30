@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.MathContext;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -71,14 +72,19 @@ public class DoExamController {
     @Autowired
     QueryPaperQuestionDomain queryPaperQuestionDomain;
 
+//    Add by wanchana
+    @Autowired
+    QueryReleaseExamDomain queryReleaseExamDomain;
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/exam/mainPageStudent")
     public String mainPageStudent(ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
 
         User user = queryUserDomain.getCurrentUser(request);
-        modelMap.addAttribute("openPaperList",queryPaperDomain.getOpenedPaperForUser(user));
+        Date today = DateUtil.getCurrentDateWithRemovedTime();
+        queryReleaseExamDomain.checkExpireRule(today);
+        modelMap.addAttribute("openPaperList", queryPaperDomain.getOpenedPaperForUser(user));
         modelMap.addAttribute("donePaperList",queryPaperDomain.getDonePaperForUser(user));
-
 
         return "mainPageStudent";
     }
@@ -196,6 +202,9 @@ public class DoExamController {
 
             queryExamResultDomain.saveExamResult(examResult);
 
+//
+            queryReleaseExamDomain.setDoExamInTime(user, examRecord.getPaper());
+//
             HibernateUtil.commitTransaction();
             HibernateUtil.closeSession();
 

@@ -2,9 +2,13 @@ package com.springapp.mvc.controller;
 
 import com.springapp.mvc.domain.QueryCompanyDomain;
 import com.springapp.mvc.domain.QueryUserDomain;
+import com.springapp.mvc.domain.exam.QueryPaperDomain;
+import com.springapp.mvc.domain.exam.QueryReleaseExamDomain;
 import com.springapp.mvc.pojo.Company;
 import com.springapp.mvc.pojo.User;
+import com.springapp.mvc.pojo.exam.ExamPaper;
 import com.springapp.mvc.pojo.exam.ListenUsersInPosition;
+import com.springapp.mvc.pojo.exam.ReleaseExam;
 import com.springapp.mvc.util.ConvertListToJson;
 import flexjson.JSONSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +23,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sound.midi.Soundbank;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by l3eal2 on 17/2/2558.
@@ -32,6 +38,12 @@ public class DetailUserController {
     QueryUserDomain queryUserDomain;
     @Autowired
     private QueryCompanyDomain queryCompanyDomain;
+
+    @Autowired
+    private QueryPaperDomain queryPaperDomain;
+
+    @Autowired
+    private QueryReleaseExamDomain queryReleaseExamDomain;
 
 
     @RequestMapping(method = RequestMethod.POST, value = "detail")
@@ -103,20 +115,39 @@ public class DetailUserController {
 
 //    Add by wanchana
     @RequestMapping(value = "/exam/getUsersInPosition", method = RequestMethod.POST)
-    public ResponseEntity<String> getUsersInPosition(HttpServletRequest request, HttpServletResponse response){
+    public ResponseEntity<String> getUsersInPosition(HttpServletRequest request, HttpServletResponse response,
+                                                     @RequestParam(value = "paperCode") String paperCode,
+                                                     @RequestParam(value = "positionId") Integer positionId){
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
 
+        ExamPaper paper = queryPaperDomain.getPaperByCode(paperCode);
         List<ListenUsersInPosition> usersInPositionList = new ArrayList<ListenUsersInPosition>();
-        List<User> users = queryUserDomain.getAllStudent();
+        List<User> users = queryUserDomain.getAllStudentInPosition(positionId);
+        List<ReleaseExam> releaseExamList = queryReleaseExamDomain.getReleaseExam(users, paper);
 
-        for(User user : users){
-            usersInPositionList.add(new ListenUsersInPosition(user.getUserId(), user.getThFname(), user.getThLname(),
-                                                              user.getPosition().getPosiId(), user.getPosition().getPosiName()));
+        if(releaseExamList.size() > 0){
+            for(ReleaseExam releaseExam : releaseExamList){
+                ListenUsersInPosition rel = new ListenUsersInPosition(releaseExam.getPk().getUser().getUserId()
+                        , releaseExam.getPk().getUser().getThFname()
+                        , releaseExam.getPk().getUser().getThLname()
+                        , releaseExam.getPk().getUser().getPosition().getPosiId()
+                        , releaseExam.getPk().getUser().getPosition().getPosiName(), 'Y', releaseExam.getCheckInTime());
+                usersInPositionList.add(rel);
+            }
+
+            String toJson = new JSONSerializer().exclude("*.class").serialize(usersInPositionList);
+            return new ResponseEntity<String>(toJson, headers, HttpStatus.OK);
         }
+        else{
+            for(User user : users){
+                usersInPositionList.add(new ListenUsersInPosition(user.getUserId(), user.getThFname(), user.getThLname(),
+                        user.getPosition().getPosiId(), user.getPosition().getPosiName(), 'N', null));
+            }
 
-        String toJson = new JSONSerializer().exclude("*.class").serialize(usersInPositionList);
-        return new ResponseEntity<String>(toJson, headers, HttpStatus.OK);
+            String toJson = new JSONSerializer().exclude("*.class").serialize(usersInPositionList);
+            return new ResponseEntity<String>(toJson, headers, HttpStatus.OK);
+        }
     }
 }

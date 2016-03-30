@@ -17,6 +17,9 @@ public class ReleaseExamPk implements Serializable{
     @ManyToOne
     private ExamPaper examPaper;
 
+    @ManyToOne
+    private User updateBy;
+
     public User getUser() {
         return user;
     }
@@ -31,5 +34,13 @@ public class ReleaseExamPk implements Serializable{
 
     public void setExamPaper(ExamPaper examPaper) {
         this.examPaper = examPaper;
+    }
+
+    public User getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(User updateBy) {
+        this.updateBy = updateBy;
     }
 }

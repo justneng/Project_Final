@@ -18,15 +18,6 @@ var checkCurrent;
 
 $(document).ready(function(){
 
-    //getAllPapers();
-    //paperNotFound();
-
-    //if($("#tbodyManagePaper tr").length == 0){
-    //    paperNotFound();
-    //}
-
-    getStudentBySection();
-
     $("#advPaperResetBtn").unbind('click').click(function(){
         resetAdvInput();
     });
@@ -239,7 +230,7 @@ function updatePaperStatus(paperId) {
         },
         success: function () {
             alert('อัพเดทสถานะเรียบร้อยแล้ว');
-            getAllPapers();
+            window.location.reload();
         },
         error: function () {
             alert('error');
@@ -433,7 +424,7 @@ function generalSearchPaper(btnSearchStatus) {
 }
 
 function paperNotFound(){
-    $('.paging').attr('hidden');
+    $('.paging').show();
     $('#orderPaper').hide();
     if($('#init-message-show').is(':visible')){
         $('#init-message-show').hide();
@@ -445,7 +436,7 @@ function paperNotFound(){
 }
 
 function paperFound(){
-    $('.paging').removeAttr('hidden');
+    $('.paging').hide();
     if($('#init-message-show').is(':visible')){
         $('#init-message-show').hide();
     }
@@ -525,3 +516,5 @@ function counter(){
         }
     });
 }
+
+

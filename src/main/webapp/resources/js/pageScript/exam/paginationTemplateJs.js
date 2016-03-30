@@ -141,6 +141,7 @@ var printRecords = function (records){
 
         var str1 = "";
         var str2 = "";
+        var str3 = "";
         var check = false;
 
         if(value.check == 'true') {
@@ -151,13 +152,22 @@ var printRecords = function (records){
         if(value.examPaper.paperStatus.id == 1){
             str1 = "disabled";
             str2 = "";
+
+        }
+
+        if(str1 == "disabled"){
+            str3 = '<span class="glyphicon glyphicon-calendar release-exam" data-toggle="modal" papercode="'+value.examPaper.code+'" positionid="'+posiId+'" style="color: #00b5e5;" papername="'+paperName+'"></span>';
+        }
+        else{
+            str3 = "";
         }
 
         $("#tbodyManagePaper").append(
             '<tr>'+
             '<td style="display: none;"><label id="'+value.examPaper.id+'">'+value.examPaper.id+'</label></td>'+
             '<td class="pCheck"><input class="checkPaper" '+str1+' type="checkbox" check="'+check+'"/></td>'+
-            '<td><label id="lpaperCode'+value.examPaper.code+'">'+value.examPaper.code+'&nbsp;<span class="glyphicon glyphicon-calendar release-exam" data-toggle="modal" positionid="'+posiId+'" data-target="#release-exam-modal" style="color: #00b5e5;"></span></label></td>'+
+            '<td><label id="lpaperCode'+value.examPaper.code+'" class="paper-code">'+value.examPaper.code+'</label>&nbsp;' + str3 +'</td>'+
+            //'<td><label id="lpaperCode'+value.examPaper.code+'">'+value.examPaper.code+'&nbsp;<span class="glyphicon glyphicon-calendar release-exam" data-toggle="modal" papercode="'+value.examPaper.code+'" positionid="'+posiId+'" data-target="#release-exam-modal" style="color: #00b5e5;"></span></label></td>'+
             '<td style="text-align: left;"><label id="lpaperName'+paperName+'">'+paperName+'</label></td>'+
             '<td><label id="lpaperCreateBy'+value.examPaper.createBy.empId+'">'+value.examPaper.createBy.thFname+' '+value.examPaper.createBy.thLname+'</label></td>'+
             '<td><label id="lpaperScore'+value.examPaper.maxScore+'" class="label-control">'+value.examPaper.maxScore+'</label></td>'+

@@ -53,6 +53,10 @@
         }
     }
 
+    #copyPaperLov + ul li{
+        font-size: 13px;
+    }
+
 </style>
 
 <ul id="create-paper-tabs" class="nav nav-tabs">
@@ -91,12 +95,7 @@
                     ย้อนกลับ
                 </button>
             </a>
-        </div>
-
-        <div class="row">
-            <label><h2 id="paper-code"></h2></label>
-            <label><h4 id="paper-name"></h4></label>
-        </div>
+        </div><br/>
 
         <div class="row">
             <%--<div class="well">--%>
@@ -193,13 +192,9 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="well">
-
-                    </div>
                 </form>
             <%--</div>--%>
-        </div>
+        </div><br/>
 
         <div class="row">
             <button id="removeRowQuestionSelect" class="btn btn-gray btn-sm" type="button"
