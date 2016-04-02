@@ -5,6 +5,9 @@ var last = 0;
 $(document).ready(function(){
     $('.pagination').on('click', 'li > a', function(){
         currentPage($(this));
+        if(typeof toPage == 'function'){
+            toPage(getCurrentPageNumber,10);
+        }
     });
 });
 
@@ -51,7 +54,7 @@ function currentPage(currentElem) {
         }
     }
 
-    if (where === "questions") {
+    else if (where === "question") {
         if (elem.attr('id') == 'first-page') {
             var first = elem.siblings().find('a:contains("1")');
             printRecordsSelectQuestion(getRecordsPerPage(Number(first.text()), records));
@@ -89,6 +92,40 @@ function currentPage(currentElem) {
             setStyle(currentElem);
         }
     }
+    else{
+        if (elem.attr('id') == 'first-page') {
+            var first = elem.siblings().find('a:contains("1")');
+            setStyle(first);
+        }
+        else if (elem.attr('id') == 'last-page') {
+            var last = elem.siblings().find('a:contains("' + Math.ceil(records.length / 10) + '")');
+            setStyle(last);
+        }
+        else if (elem.attr('id') == 'next-page') {
+            var next = elem.siblings().find('a').filter('.currentPage').parent().next().find('a');
+
+            if (next.parent().attr('id') == 'next-page') {
+                return;
+            }
+            else {
+                setStyle(next);
+            }
+        }
+        else if (elem.attr('id') == 'prev-page') {
+            var prev = elem.siblings().find('a').filter('.currentPage').parent().prev().find('a');
+
+            if (prev.parent().attr('id') == 'prev-page') {
+                return;
+            }
+            else {
+                setStyle(prev);
+            }
+        }
+        else {
+            setStyle(currentElem);
+        }
+    }
+
 }
 
 function setStyle(elem){
@@ -100,7 +137,7 @@ function setStyle(elem){
 
     $(".pagination > li > a").not(elem).not('#next-page').css({
         'background-color': 'white',
-        'color': '#337ab7'
+        'color':     '#337ab7'
     }).removeClass('currentPage');
 }
 
@@ -244,7 +281,7 @@ var totalPage = function(lenght, where){
         );
     }
 
-    if(where === "questions"){
+    else if(where === "questions"){
         for(var i = 1; i <= allPages; i ++){
             str = str + '<li><a>'+i+'</a></li>';
         }
@@ -256,6 +293,20 @@ var totalPage = function(lenght, where){
             str +
             '<li id="next-page" where="questions"><a>&#x276f;</a></li>' +
             '<li id="last-page" where="questions"><a>&#x276f;&#x276f;</a></li>'
+        );
+    }
+    else{
+        for(var i = 1; i <= allPages; i ++){
+            str = str + '<li><a>'+i+'</a></li>';
+        }
+
+        $('.pagination').empty();
+        $('.pagination').append(
+            '<li id="first-page" where=""><a>&#x276e;&#x276e;</a></li>' +
+            '<li id="prev-page" where=""><a>&#x276e;</a></li>' +
+            str +
+            '<li id="next-page" where=""><a>&#x276f;</a></li>' +
+            '<li id="last-page" where=""><a>&#x276f;&#x276f;</a></li>'
         );
     }
 };
@@ -283,3 +334,11 @@ var notShowPagingSelectQuestions = function(){
     $('#page-component').hide();
     printRecordsSelectQuestion(records);
 };
+
+var getCurrentPageNumber = function(){
+    return parseInt($('.currentPage').text());
+}
+
+
+
+

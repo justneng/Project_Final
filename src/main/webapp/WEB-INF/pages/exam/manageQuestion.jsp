@@ -73,8 +73,8 @@
             </div>
         </div>
         <div class="table-responsive table-container hidden">
-            <table class="table">
-                <thead class="bg-primary label-primary small">
+            <table class="table table-bordered table-hovered">
+                <thead class="table-header small">
                 <tr>
                     <%--<th style="text-align: center">หมายเลขข้อสอบ</th>--%>
                     <th width="3%" style="vertical-align: middle;"><input type="checkbox" id="selectAllItem"/></th>
@@ -102,11 +102,13 @@
             <%--</p>--%>
         </div>
 
-        <div class="row">
-            <div class="col-md-12 clearfix">
-                <div id="pagination" class="pagination light-theme simple-pagination" style="float:right"></div>
-            </div>
-        </div>
+        <%--<div class="row">--%>
+            <%--<div class="col-md-12 clearfix">--%>
+                <%--<div id="pagination" class="pagination light-theme simple-pagination" style="float:right"></div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+
+        <%@include file="template/paginationTemplate.jsp" %>
 
 
         <%--</div>--%>
@@ -116,6 +118,7 @@
 
 <script src="${context}/resources/js/pageScript/exam/manageQuestion.js" charset="UTF-8"></script>
 <script type="text/javascript" src="${context}/resources/js/jquery.simplePagination.js"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/utils.js" />"></script>
 <link type="text/css" rel="stylesheet" href="${context}/resources/css/simplePagination.css"/>
 
 <style>
