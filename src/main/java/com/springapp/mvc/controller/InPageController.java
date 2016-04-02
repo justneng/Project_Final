@@ -5,10 +5,7 @@ import com.springapp.mvc.domain.*;
 import com.springapp.mvc.domain.exam.*;
 
 import com.springapp.mvc.pojo.*;
-import com.springapp.mvc.pojo.exam.Category;
-import com.springapp.mvc.pojo.exam.ExamPaper;
-import com.springapp.mvc.pojo.exam.ExamRecord;
-import com.springapp.mvc.pojo.exam.PaperGenerateTemplate;
+import com.springapp.mvc.pojo.exam.*;
 import com.springapp.mvc.util.DateUtil;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
@@ -263,8 +260,32 @@ public class InPageController {
     // Create by Wanchana K
     @RequestMapping(method = RequestMethod.GET, value = "/exam/manageCategory")
     public String editCategories(HttpServletRequest request , Model model){
-        model.addAttribute("LIST_OF_CATEOGRIES", queryCategoryDomain.getListCategories());
-        model.addAttribute("LIST_OF_SUBCATEGORIES", querySubCategoryDomain.getAllSubCategory());
+        List<Category> categories = queryCategoryDomain.getAllCategory();
+        List tmp = null;
+        if(categories.size() > 0){
+            tmp = new ArrayList();
+            for(int i = 0 ; i < categories.size(); i ++){
+                Boolean check = queryCategoryDomain.checkCategoryInUse(categories.get(i));
+                CheckCategoryInUse checkCategoryInUse = new CheckCategoryInUse();
+                checkCategoryInUse.setId(categories.get(i).getId());
+                checkCategoryInUse.setName(categories.get(i).getName());
+                checkCategoryInUse.setCreateBy(categories.get(i).getCreateBy());
+                checkCategoryInUse.setCheck(check);
+                System.out.println(checkCategoryInUse.getCheck());
+                tmp.add(checkCategoryInUse);
+            }
+        }
+
+        model.addAttribute("LIST_OF_CATEOGRIES", tmp);
+        List<SubCategory> subCategories = querySubCategoryDomain.getAllSubCategory();
+        Set<Integer> usedSubCatIdsSet = new HashSet<Integer>(querySubCategoryDomain.getUsedSubCategoryIds());
+        List<SubCategoryAndUsed> subCategoryAndUseds = new ArrayList<SubCategoryAndUsed>();
+        for (SubCategory sc : subCategories) {
+            SubCategoryAndUsed scau = new SubCategoryAndUsed();
+            scau = scau.cloneFromSubCategory(sc, usedSubCatIdsSet);
+            subCategoryAndUseds.add(scau);
+        }
+        model.addAttribute("LIST_OF_SUBCATEGORIES", subCategoryAndUseds);
         return "manageCategory";
     }
 

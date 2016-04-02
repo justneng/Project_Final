@@ -43,42 +43,42 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <label><strong>ค้นหา</strong></label>
-            </div>
+    <%--<div class="row">--%>
+        <%--<div class="panel panel-default">--%>
+            <%--<div class="panel-heading">--%>
+                <%--<label><strong>ค้นหา</strong></label>--%>
+            <%--</div>--%>
 
-            <div class="panel-body ">
-                <div class="row">
-                    <div class="form-group">
-                        <%@include file="template/selectCategoryInput.jsp" %>
-                        &nbsp;&nbsp;
-                        <button id="searchCategory" class="btn btn-primary btn-sm" type="button">
-                            <span class="glyphicon glyphicon-search"></span>&nbsp;ค้นหา</button>
-                        <button id="resetBtnSearchCategory" type="button" class="btn btn-gray btn-sm" >ล้างข้อมูล</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+            <%--<div class="panel-body ">--%>
+                <%--<div class="row">--%>
+                    <%--<div class="form-group">--%>
+                        <%--<%@include file="template/selectCategoryInput.jsp" %>--%>
+                        <%--&nbsp;&nbsp;--%>
+                        <%--<button id="searchCategory" class="btn btn-primary btn-sm" type="button">--%>
+                            <%--<span class="glyphicon glyphicon-search"></span>&nbsp;ค้นหา</button>--%>
+                        <%--<button id="resetBtnSearchCategory" type="button" class="btn btn-gray btn-sm" >ล้างข้อมูล</button>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
 
     <div class="row">
-        <button id="addCategory" data-toggle="modal" data-target="#createCat" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span></button>
+        <button id="addCategory" data-toggle="modal" data-target="#createCat" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus">&nbsp;เพิ่มหมวดหมู่</span></button>
     </div>
 
     <div class="row">
         <table class="table table-bordered table-hover" id="tblCategory">
             <col width=""/>
             <col width="10%"/>
-            <col width="15%"/>
+            <col width="20%"/>
             <tbody>
                 <c:forEach items="${LIST_OF_CATEOGRIES}" var="category">
                     <tr>
                         <td>
-                            <label class="label${category.id}" hidden>${category.name}</label>
+                            <%--<label class="label${category.id}" hidden>${category.name}</label>--%>
                             <b><c:out value="${category.id} : "></c:out></b>
-                            <label class="label${category.id}" style="font-size: 13; font-weight: normal;">${category.name}</label>
+                            <label class="label${category.id}" style="font-size: 14px; font-weight: normal;">${category.name}</label>
                             &nbsp;<input class="input${category.id}" type="text" value="${category.name}" style="display: none;" size="50">
                         </td>
 
@@ -86,11 +86,19 @@
                             <%--<button class="btn btn-primary btn-sm update-category" type="button" cateoryId="${category.id}" data-toggle="modal" data-target="#category-details"><span class="glyphicon glyphicon-pencil"></span></button>--%>
                             <button class="btn btn-primary btn-sm update-category" type="button" cateoryId="${category.id}"><span class="glyphicon glyphicon-pencil"></span></button>
                             <button class="btn btn-success btn-sm save-update-category" type="button" cateoryId="${category.id}" style="display: none;"><span class="glyphicon glyphicon-ok"></span></button>
-                            <button class="btn btn-gray btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span></button>
+
+                            <c:choose>
+                                <c:when test="${category.check eq false}">
+                                    <button class="btn btn-gray btn-sm remove-category" cateoryId="${category.id}" type="button"><span class="glyphicon glyphicon-trash"></span></button>
+                                </c:when>
+                            </c:choose>
+
+                            <button class="btn btn-danger btn-sm cancel-update-category" cateoryId="${category.id}" type="button" style="display: none;"><span class="glyphicon glyphicon-remove"></span></button>
                         </td>
 
                         <td>
                             <button class="btn btn-link btn-sm" type="button" data-toggle="collapse" data-target=".${category.id}">ดูหัวข้อเรื่องทั้งหมด&nbsp;<span class="caret"></span></button>
+                            <button class="btn btn-primary btn-sm manage-subcategory" cateoryId="${category.id}" type="button" data-toggle="modal" data-target="#category-details"><span class="glyphicon glyphicon-edit"></span></button>
                         </td>
                     </tr>
                     <c:forEach items="${LIST_OF_SUBCATEGORIES}" var="subcategory">
@@ -99,10 +107,19 @@
                         <c:choose>
                             <c:when test="${op1 eq op2}">
                                 <tr class="collapse ${subcategory.category.id} info" subid="${subcategory.id}">
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"/>&nbsp;<c:out value="${subcategory.name}"/></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag" inuse="${subcategory.isUsed}"/>
+                                        &nbsp;<c:out value="${subcategory.name}"/>
+
+                                    </td>
                                     <%--<td>--%>
                                         <%--<button class="btn btn-primary btn-sm" type="button"><span class="glyphicon glyphicon-pencil"></span></button>--%>
                                         <%--<button class="btn btn-gray btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span></button>--%>
+                                    <%--</td>--%>
+                                    <%--<td>--%>
+                                        <%--<button class="btn btn-primary btn-sm update-subcategory" type="button" cateoryId="${subcategory.category.id}"><span class="glyphicon glyphicon-pencil"></span></button>--%>
+                                        <%--<button class="btn btn-success btn-sm save-update-subcategory" type="button" cateoryId="${subcategory.category.id}" style="display: none;"><span class="glyphicon glyphicon-ok"></span></button>--%>
+                                        <%--<button class="btn btn-gray btn-sm delete-subcategory" type="button" cateoryId="${subcategory.category.id}"><span class="glyphicon glyphicon-trash"></span></button>--%>
+                                        <%--<button class="btn btn-danger btn-sm cancel-update-subcategory" cateoryId="${subcategory.category.id}" type="button" style="display: none;"><span class="glyphicon glyphicon-remove"></span></button>--%>
                                     <%--</td>--%>
                                 </tr>
                             </c:when>
@@ -123,17 +140,17 @@
             </div>
 
             <div class="modal-body">
-                <label>หมวดหมู่</label>
-                <div class="well">
-                    <form class="form-horizontal" where="category">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label text-right label-category-id"></label>
-                            <div class="col-sm-8 on-modal">
-                                <input class="form-control input-sm input-category" value=""/>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                <%--<label>หมวดหมู่</label>--%>
+                <%--<div class="well">--%>
+                    <%--<form class="form-horizontal" where="category">--%>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-2 control-label text-right label-category-id"></label>--%>
+                            <%--<div class="col-sm-8 on-modal">--%>
+                                <%--<input class="form-control input-sm input-category" value=""/>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                    <%--</form>--%>
+                <%--</div>--%>
 
                 <label>หัวข้อเรื่อง</label>
                 <button id="add-subcategory" class="btn btn-link btn-sm" type="button"><span class="glyphicon glyphicon-plus"></span></button>
@@ -146,10 +163,13 @@
             </div>
 
             <div class="modal-footer">
-                <button id="update-category" class="btn btn-primary btn-sm">
-                    <span class="glyphicon glyphicon-save"></span>
-                    &nbsp;บันทึก
-                </button>
+                <div class="text-center">
+                    <button id="update-subcategoory-btn" class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-save"></span>
+                        &nbsp;บันทึก
+                    </button>
+                </div>
+
                 <%--<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>--%>
             </div>
         </div>

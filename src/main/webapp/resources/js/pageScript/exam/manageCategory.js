@@ -3,7 +3,9 @@ var checkAll;
 var checkCurrent;
 var categoryIdArray = new Array();
 
-
+//
+var categoryId = "";
+//
 $(document).ready(function () {
     $("#deleteCategory").on('click', function () {
         deleteCategory();
@@ -54,16 +56,58 @@ $(document).ready(function () {
 
     var buttonUpdateCategory = $('.update-category');
     buttonUpdateCategory.on('click', function(){
-        //var categoryId = $(this).attr('cateoryId');
-        //fillValueToModalManageCategory(categoryId);
         $('.label'+$(this).attr('cateoryid')).hide();
         $('.input'+$(this).attr('cateoryid')).show();
         $(this).hide();
         $(this).next().show();
+        $(this).next().next().hide();
+        $(this).siblings('.cancel-update-category').show();
+    });
+
+    $('.manage-subcategory').on('click', function(){
+        var categoryId = $(this).attr('cateoryId');
+        fillValueToModalManageCategory(categoryId);
+    });
+
+    $('.update-subcategory').on('click', function(){
+        $('.label'+$(this).attr('cateoryid')).hide();
+        $('.input'+$(this).attr('cateoryid')).show();
+        $(this).hide();
+        $(this).next().show();
+        $(this).next().next().hide();
+        $(this).next().next().next().show();
+    });
+
+    $('.cancel-update-category').on('click', function(){
+        $('.input'+$(this).attr('cateoryid')).hide();
+        $('.label'+$(this).attr('cateoryid')).show();
+        if($(this).siblings().length == 3){
+            $(this).hide();
+            $(this).prev().show();
+            $(this).prev().prev().hide();
+            $(this).siblings('.remove-category').show();
+            $(this).siblings('.update-category').show();
+        }
+        else{
+            $(this).prev().hide();
+            $(this).hide();
+            $(this).siblings('.remove-category').show();
+            $(this).siblings('.update-category').show();
+        }
+
+    });
+
+    $('.cancel-update-subcategory').on('click', function(){
+        $('.input'+$(this).attr('subcateoryid')).hide();
+        $('.label'+$(this).attr('subcateoryid')).show();
+        $(this).hide();
+        $(this).prev().show();
+        $(this).prev().prev().hide();
+        $(this).prev().prev().prev().show();
     });
 
     $('.save-update-category').on('click', function(){
-        window.location.reload();
+        updateCategory($(this).attr('cateoryId'));
     });
 
     var buttonAddSubcategory = $('#add-subcategory');
@@ -71,6 +115,40 @@ $(document).ready(function () {
         addNewSubcategory()
     });
 
+    $('.remove-category').on('click', function(){
+        deleteCategory();
+    })
+
+    $('#update-subcategoory-btn').on('click', function(){
+        var jsonOldSubcategory = {};
+        var jsonNewSubcategory = {};
+        var tmpArray = [];
+        $('.old-subcategory').each(function(){
+            var remove;
+            if($('.check-remove-subcategory-'+$(this).attr('subid-in-modal')).is(':checked')){
+                remove = true;
+            }
+            else{
+                remove = false;
+            }
+            var item = {
+                "id" : $(this).attr('subid-in-modal'),
+                "name" : $(this).val(),
+                "remove" : remove
+            };
+            tmpArray.push(item);
+        });
+        jsonOldSubcategory = JSON.stringify(tmpArray);
+        tmpArray = [];
+        $('.new-subcategory').each(function(){
+            var item = {
+                "name" : $(this).val()
+            };
+            tmpArray.push(item);
+        });
+        jsonNewSubcategory = JSON.stringify(tmpArray);
+        updateAndSaveSubcategory(categoryId, jsonOldSubcategory,jsonNewSubcategory);
+    });
 });
 
 function addNewSubcategory(){
@@ -84,20 +162,25 @@ function addNewSubcategory(){
     )
 }
 
-function fillValueToModalManageCategory(categoryId){
-    $('.label-category-id').text(categoryId);
-    $('.input-category').val($('.label'+categoryId).text());
+function fillValueToModalManageCategory(categoryid){
+    //$('.label-category-id').text(categoryId);
+    //$('.input-category').val($('.label'+categoryId).text());
+    categoryId = "";
+    categoryId = categoryid;
     $('form[where="subcategories"]').empty();
-    $('.' + categoryId + ' td:first-child span').each(function(){
+    $('.' + categoryid + ' td:first-child span').each(function(){
+        var inUse = "";
+        if($(this).attr('inuse') == 'false'){
+            inUse = '<div class="col-sm-1">'+
+                        '<input class="check-remove-subcategory-'+$(this).parent().parent().attr('subid')+'" type="checkbox"/><span class="glyphicon glyphicon-remove" style="color: red;"></span>'+
+                    '</div>'
+        }
         $('form[where="subcategories"]').append(
             '<div class="form-group">'+
                 '<div class="col-sm-offset-2 col-sm-8" style="padding: 0;">'+
-                //'<div class="col-sm-offset-2 col-sm-7 input-group">'+
-                    '<input class="form-control input-sm" value="'+$(this).text()+'"/>'+
-                //    '<span class="input-group-addon">'+
-                //        '<input subcategoryid="" type="checkbox"/>'+
-                //    '</span>'+
-                //'</div>'+
+                    '<input class="form-control input-sm old-subcategory" subid-in-modal="'+$(this).parent().parent().attr('subid')+'" value="'+$(this).text().trim()+'"/>'+
+                '</div>'+
+                inUse+
             '</div>'
         );
     });
@@ -105,6 +188,50 @@ function fillValueToModalManageCategory(categoryId){
 
 function removeNewSubcategory(element){
     element.parent('.form-group').remove();
+}
+
+function updateCategory(categoryId) {
+    if ($(".input" + categoryId).val() == "") {
+        alert("ชื่อหมวดหมู่ต้องไม่เป็นค่าว่าง");
+    }
+    else {
+        var id = categoryId;
+        var name = $(".input" + categoryId).val();
+        var dataResponse = $.ajax({
+            type: "POST",
+            url: context + "/TDCS/exam/editCategory",
+            data: "id=" + id + "&name=" + name,
+            success: function () {
+                alert("แก้ไขข้อมูลสำเร็จ");
+                window.location.reload();
+
+            },
+            error: function(){
+                alert("แก้ไขข้อมูลไม่สำเร็จ");
+            }
+        });
+    }
+}
+
+function updateAndSaveSubcategory(categoryId, jsonOldSubcategory, jsonNewSubcategory){
+
+    $.ajax({
+        type: "POST",
+        url: context + "/TDCS/exam/updateAndSaveSubcategory",
+        data: {
+            jsonOldSubcategory: jsonOldSubcategory,
+            jsonNewSubcategory: jsonNewSubcategory,
+            categoryId: categoryId
+        },
+        success: function () {
+            alert("บันทึกข้อมูลสำเร็จ");
+            window.location.reload();
+
+        },
+        error: function(){
+            alert("แก้ไขข้อมูลไม่สำเร็จ");
+        }
+    });
 }
 //
 
@@ -216,52 +343,6 @@ function deleteCategory() {
             }
         });
     });
-}
-function editCategory(categoryId) {
-
-    $("#tbodyCategory").find('catid').val(categoryId).hide();
-
-    $("#editBtn" + categoryId).hide();
-    $("#data" + categoryId).hide();
-    $("#thEdit").text("บันทึก");
-    $("#editData" + categoryId).show();
-    //$("#updateBtn" + categoryId).show();
-    $("#save" + categoryId).show();
-    $("#cancel" + categoryId).show();
-}
-
-function updateCategory(categoryId) {
-    alert(categoryId)
-    if ($("#editData" + categoryId).val() == "") {
-        alert("ชื่อหมวดหมู่ต้องไม่เป็นค่าว่าง")
-    }
-    else {
-        var id = $("#id" + categoryId).text();
-        var name = $("#editData" + categoryId).val();
-        var dataResponse = $.ajax({
-            type: "POST",
-            url: context + "/TDCS/exam/editCategory",
-            data: "id=" + id + "&name=" + name,
-            complete: function (xhr) {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
-                        alert("แก้ไขข้อมูลสำเร็จ");
-                        //listcat();
-                        cancel(id);
-                        $("#data" + categoryId).show();
-                        $("#data" + categoryId).text(name);
-                    }
-                    else {
-                        alert("แก้ไขข้อมูลไม่สำเร็จ");
-                        return false;
-                    }
-                } else {
-                    alert("แก้ไขข้อมูลไม่สำเร็จ");
-                    return false;
-                }
-            }
-        });
-    }
 }
 
 function getCategoryUpdated(categoryId) {

@@ -90,14 +90,11 @@ public class CategoryController {
     public ResponseEntity editCategory(@Valid Category category,
                                        HttpServletRequest request) {
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json;charset=UTF-8");
-
         User createBy = queryUserDomain.getCurrentUser(request);
         category.setCreateBy(createBy);
         queryCategoryDomain.editCategory(category);
 
-        return new ResponseEntity(headers, HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/exam/searchCategory", method = RequestMethod.POST)
@@ -111,17 +108,17 @@ public class CategoryController {
         List<Category> categories = queryCategoryDomain.searchCategory(categoryId);
         List tmp = null;
 
-        if(categories.size() > 0){
-            tmp = new ArrayList();
-            for(int i = 0 ; i < categories.size(); i ++){
-                Boolean check = queryCategoryDomain.checkCategoryInUse(categories.get(i));
-                CheckCategoryInUse checkCategoryInUse = new CheckCategoryInUse();
-                checkCategoryInUse.setCategory(categories.get(i));
-                checkCategoryInUse.setCheck(check);
-
-                tmp.add(checkCategoryInUse);
-            }
-        }
+//        if(categories.size() > 0){
+//            tmp = new ArrayList();
+//            for(int i = 0 ; i < categories.size(); i ++){
+//                Boolean check = queryCategoryDomain.checkCategoryInUse(categories.get(i));
+//                CheckCategoryInUse checkCategoryInUse = new CheckCategoryInUse();
+//                checkCategoryInUse.setCategory(categories.get(i));
+//                checkCategoryInUse.setCheck(check);
+//
+//                tmp.add(checkCategoryInUse);
+//            }
+//        }
 
 //        String json = new Gson().toJson(tmp);
         String toJson = new JSONSerializer().include("choices").exclude("*.class").serialize(tmp);

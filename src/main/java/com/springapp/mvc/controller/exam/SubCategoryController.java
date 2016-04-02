@@ -10,6 +10,8 @@ import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.*;
 import flexjson.JSONSerializer;
 import org.hibernate.exception.ConstraintViolationException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -199,68 +201,69 @@ public class SubCategoryController {
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 
-}
 
-class SubCategoryAndUsed {
-    private Integer id;
-    private String name;
-    private User createBy;
-    private Category category;
-    private Boolean isUsed;
+//    Add by wanchana
+    @RequestMapping(value = "/exam/updateAndSaveSubcategory", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> getSubCategoryByCategoryId(@RequestParam(value = "jsonOldSubcategory") String jsonOldSubcategory
+                                                            ,@RequestParam(value = "jsonNewSubcategory") String jsonNewSubcategory
+                                                            ,@RequestParam(value = "categoryId") String categoryId
+                                                            ,HttpServletRequest request, HttpServletResponse response) {
 
-    public SubCategoryAndUsed cloneFromSubCategory(SubCategory sc, Set<Integer> usedSubCatIds) {
-        this.id = sc.getId();
-        this.name = sc.getName();
-        this.createBy = sc.getCreateBy();
-        this.category = sc.getCategory();
-        this.isUsed = false;
+        User currentUser = queryUserDomain.getCurrentUser(request);
+        JSONArray jsonArray1 = null;
+        JSONArray jsonArray2 = null;
+        List subcategoryRemove = new ArrayList();
+        List<Map> update = new ArrayList<Map>();
+        List newSubcategoryNames = new ArrayList();
+        int i = 0;
 
-        for (Integer i : usedSubCatIds) {
-            if (this.id.equals(i)) {
-                this.isUsed = true;
-                System.out.println(isUsed);
+        if (!jsonOldSubcategory.equals("")) {
+            jsonArray1 = new JSONArray(jsonOldSubcategory);
+            for (i = 0; i < jsonArray1.length(); i++) {
+                JSONObject jsonObject = jsonArray1.getJSONObject(i);
+                if (jsonObject.getBoolean("remove") == true) {
+                    subcategoryRemove.add(jsonObject.getInt("id"));
+                } else {
+                    Map subcategoryUpdate = new HashMap();
+                    subcategoryUpdate.put("id", jsonObject.getInt("id"));
+                    subcategoryUpdate.put("name", jsonObject.getString("name"));
+                    update.add(subcategoryUpdate);
+                }
             }
         }
-        return this;
-    }
+        if (!jsonNewSubcategory.equals("")) {
+            jsonArray2 = new JSONArray(jsonNewSubcategory);
+            for (i = 0; i < jsonArray2.length(); i++) {
+                JSONObject jsonObject = jsonArray2.getJSONObject(i);
+                newSubcategoryNames.add(jsonObject.getString("name"));
+            }
+        }
 
-    public Integer getId() {
-        return id;
-    }
+        if (subcategoryRemove != null) {
+            for (i = 0; i < subcategoryRemove.size(); i++) {
+                querySubCategoryDomain.deleteSubCategory((Integer) subcategoryRemove.get(i));
+            }
+        }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+        if (update != null) {
+            for (i = 0; i < update.size(); i++) {
+                SubCategory subCategory = querySubCategoryDomain.getSubCategoryById((Integer) update.get(i).get("id"));
+                subCategory.setName((String) update.get(i).get("name"));
+                querySubCategoryDomain.editSubCategory(subCategory);
+            }
+        }
 
-    public String getName() {
-        return name;
-    }
+        if (newSubcategoryNames != null) {
+            for (i = 0; i < newSubcategoryNames.size(); i++) {
+                SubCategory subCategory = new SubCategory();
+                subCategory.setName((String) newSubcategoryNames.get(i));
+                subCategory.setCategory(queryCategoryDomain.getCategoryById(categoryId));
+                subCategory.setCreateBy(currentUser);
+                querySubCategoryDomain.insertSubCategory(subCategory);
+            }
+        }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public User getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(User createBy) {
-        this.createBy = createBy;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Boolean getIsUsed() {
-        return isUsed;
-    }
-
-    public void setIsUsed(Boolean isUsed) {
-        this.isUsed = isUsed;
+        return new ResponseEntity<String>(HttpStatus.CREATED);
     }
 }

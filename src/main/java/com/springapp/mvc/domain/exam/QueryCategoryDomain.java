@@ -121,7 +121,7 @@ public class QueryCategoryDomain extends HibernateUtil {
             getSession().merge(category);
             HibernateUtil.commitTransaction();
         } catch(Exception e){
-            System.out.println("======ERROR while edit category======\n"+e);
+            e.printStackTrace();
         } finally {
             HibernateUtil.closeSession();
         }
@@ -132,8 +132,9 @@ public class QueryCategoryDomain extends HibernateUtil {
 
         Criteria criteria = getSession().createCriteria(SubCategory.class);
         criteria.add(Restrictions.eq("category", category));
+        List<SubCategory> subCategory = criteria.list();
 
-        if(criteria.list().size() > 0){
+        if(subCategory.size() > 0){
             return true;
         }
         else{
