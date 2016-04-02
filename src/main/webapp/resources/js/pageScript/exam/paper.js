@@ -425,6 +425,7 @@ function generalSearchPaper(btnSearchStatus) {
 
 function paperNotFound(){
     $('.paging').show();
+
     $('#orderPaper').hide();
     if($('#init-message-show').is(':visible')){
         $('#init-message-show').hide();

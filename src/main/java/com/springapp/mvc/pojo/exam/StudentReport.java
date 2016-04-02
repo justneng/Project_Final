@@ -7,14 +7,32 @@ public class StudentReport {
 
     private String paperCode;
     private String paperName;
-    private Float grade;
-    private char gradeChar;
+    private Float maxScore;
+    private Float realScore;
+    private String gradeChar;
 
-    public StudentReport(String paperCode, String paperName, Float grade, char gradeChar) {
+    public StudentReport(String paperCode, String paperName, Float maxScore, Float realScore, String gradeChar) {
         this.paperCode = paperCode;
         this.paperName = paperName;
-        this.grade = grade;
+        this.maxScore = maxScore;
+        this.realScore = realScore;
         this.gradeChar = gradeChar;
+    }
+
+    public Float getMaxScore() {
+        return maxScore;
+    }
+
+    public void setMaxScore(Float maxScore) {
+        this.maxScore = maxScore;
+    }
+
+    public Float getRealScore() {
+        return realScore;
+    }
+
+    public void setRealScore(Float realScore) {
+        this.realScore = realScore;
     }
 
     public String getPaperCode() {
@@ -33,19 +51,11 @@ public class StudentReport {
         this.paperName = paperName;
     }
 
-    public Float getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Float grade) {
-        this.grade = grade;
-    }
-
-    public char getGradeChar() {
+    public String getGradeChar() {
         return gradeChar;
     }
 
-    public void setGradeChar(char gradeChar) {
+    public void setGradeChar(String gradeChar) {
         this.gradeChar = gradeChar;
     }
 }

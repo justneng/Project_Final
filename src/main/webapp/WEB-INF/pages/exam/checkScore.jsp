@@ -9,22 +9,6 @@
     if('${status}' == ''||'${status}' == 'staff'){
         window.location.href = context+"/TDCS/index.html";
     }
-
-    $(document).ready(function(){
-        $('#print-report').on('click', function(){
-            $.ajax({
-                type: "POST",
-                url: context+"/TDCS/exam/printReport",
-                async: false,
-                success: function(){
-                    alert('Success');
-                },
-                error: function(){
-                    alert("เกิดข้อผิดพลาดขณะร้องขอข้อมูล...");
-                }
-            });
-        });
-    });
 </script>
 
 <div class="container row">
@@ -32,9 +16,7 @@
 </div>
 <hr/>
 
-<button id="print-report" class="btn btn-gray btn-sm" type="button">
-    <span class="glyphicon glyphicon-save"></span>&nbsp;ดาวน์โหลด
-</button>
+<a href="printReport"><span class="glyphicon glyphicon-save"></span>&nbsp;ดาวน์โหลดผลสอบ</a>
 
 <div class="container">
     <div class="row">

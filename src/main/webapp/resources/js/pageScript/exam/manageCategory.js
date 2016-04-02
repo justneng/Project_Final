@@ -5,8 +5,6 @@ var categoryIdArray = new Array();
 
 
 $(document).ready(function () {
-    //viewCategory();
-    //searchResultNotFound();
     $("#deleteCategory").on('click', function () {
         deleteCategory();
     });
@@ -53,10 +51,19 @@ $(document).ready(function () {
     });
 
 //
+
     var buttonUpdateCategory = $('.update-category');
     buttonUpdateCategory.on('click', function(){
-        var categoryId = $(this).attr('cateoryId');
-        fillValueToModalManageCategory(categoryId);
+        //var categoryId = $(this).attr('cateoryId');
+        //fillValueToModalManageCategory(categoryId);
+        $('.label'+$(this).attr('cateoryid')).hide();
+        $('.input'+$(this).attr('cateoryid')).show();
+        $(this).hide();
+        $(this).next().show();
+    });
+
+    $('.save-update-category').on('click', function(){
+        window.location.reload();
     });
 
     var buttonAddSubcategory = $('#add-subcategory');
@@ -64,17 +71,15 @@ $(document).ready(function () {
         addNewSubcategory()
     });
 
-
-
 });
 
 function addNewSubcategory(){
     $('form[where="subcategories"]').append(
         '<div class="form-group">'+
-            '<div class="col-sm-offset-2 col-sm-8">'+
-                '<input class="form-control input-sm new-category" value="'+$(this).text()+'"/>'+
+            '<div class="col-sm-offset-2 col-sm-8" style="padding: 0;">'+
+                '<input class="form-control input-sm new-subcategory" value="'+$(this).text()+'"/>'+
             '</div>'+
-            '<button class="btn btn-link btn-sm" type="button"><span class="glyphicon glyphicon-remove-sign"></span>'+
+            '<button class="btn btn-link" type="button" onclick="removeNewSubcategory($(this))"><span class="glyphicon glyphicon-remove-sign"></span></button>'+
         '</div>'
     )
 }
@@ -86,12 +91,20 @@ function fillValueToModalManageCategory(categoryId){
     $('.' + categoryId + ' td:first-child span').each(function(){
         $('form[where="subcategories"]').append(
             '<div class="form-group">'+
-                '<div class="col-sm-offset-2 col-sm-8">'+
+                '<div class="col-sm-offset-2 col-sm-8" style="padding: 0;">'+
+                //'<div class="col-sm-offset-2 col-sm-7 input-group">'+
                     '<input class="form-control input-sm" value="'+$(this).text()+'"/>'+
-                '</div>'+
+                //    '<span class="input-group-addon">'+
+                //        '<input subcategoryid="" type="checkbox"/>'+
+                //    '</span>'+
+                //'</div>'+
             '</div>'
         );
     });
+}
+
+function removeNewSubcategory(element){
+    element.parent('.form-group').remove();
 }
 //
 

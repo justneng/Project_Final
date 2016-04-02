@@ -29,7 +29,7 @@ public class QueryReportDomain {
     @Autowired
     QueryTeamDomain queryTeamDomain;
 
-    public Map getParameterStudentReport(User user){
+    public Map getParameterStudentReport(User user, float percentage){
         User staff = queryUserDomain.getUserById(user.getStaffId());
         Map parameterReport = new HashMap();
         parameterReport.put("studentId", user.getEmpId());
@@ -43,6 +43,8 @@ public class QueryReportDomain {
         parameterReport.put("apprentice", user.getApprentice().getAptName());
         parameterReport.put("staff", staff.getThFname() + " " + staff.getThLname());
         parameterReport.put("image", getImageUser(user.getImange()));
+        parameterReport.put("percentage", percentage);
+        parameterReport.put("sumGrade", calculateGrade(100, percentage));
 
         return parameterReport;
     }
@@ -62,5 +64,62 @@ public class QueryReportDomain {
         }
 
         return bufferedImage;
+    }
+
+    public static Double revertGradeStringToNumber(String grade){
+        if(grade.equals("A")){
+            return 4.0;
+        }
+        else if(grade.equals("B+")){
+            return 3.5;
+        }
+        else if(grade.equals("B")){
+            return 3.0;
+        }
+        else if(grade.equals("C+")){
+            return 2.5;
+        }
+        else if(grade.equals("C")){
+            return 2.0;
+        }
+        else if(grade.equals("D+")){
+            return 1.5;
+        }
+        else if(grade.equals("D")){
+            return 1.0;
+        }
+        else{
+            return 0.0;
+        }
+    }
+
+    public static String calculateGrade(float maxScore, float userScore){
+        float percentage = maxScore / 100;
+        float realPercentage = userScore / percentage;
+
+        if(realPercentage >= 80){
+            return "A";
+        }
+        else if(realPercentage >= 75 && realPercentage <= 79){
+            return "B+";
+        }
+        else if(realPercentage >= 70 && realPercentage <= 74){
+            return "B";
+        }
+        else if(realPercentage >= 65 && realPercentage <= 69){
+            return "C+";
+        }
+        else if(realPercentage >= 60 && realPercentage <= 64){
+            return "C";
+        }
+        else if(realPercentage >= 55 && realPercentage <= 59){
+            return "D+";
+        }
+        else if(realPercentage >= 50 && realPercentage <= 54){
+            return "D";
+        }
+        else{
+            return "F";
+        }
     }
 }

@@ -23,8 +23,17 @@
     td{
         font-size: 14px;
     }
+    
     #tblCategory{
         margin-top: 5px;
+    }
+    
+    .glyphicon-remove-sign{
+        color: red;
+    }
+
+    .on-modal{
+        padding: 0;
     }
 </style>
 
@@ -66,10 +75,17 @@
             <tbody>
                 <c:forEach items="${LIST_OF_CATEOGRIES}" var="category">
                     <tr>
-                        <td><label class="label${category.id}" hidden>${category.name}</label><c:out value="${category.id} : ${category.name}"/></td>
+                        <td>
+                            <label class="label${category.id}" hidden>${category.name}</label>
+                            <b><c:out value="${category.id} : "></c:out></b>
+                            <label class="label${category.id}" style="font-size: 13; font-weight: normal;">${category.name}</label>
+                            &nbsp;<input class="input${category.id}" type="text" value="${category.name}" style="display: none;" size="50">
+                        </td>
 
                         <td>
-                            <button class="btn btn-primary btn-sm update-category" type="button" cateoryId="${category.id}" data-toggle="modal" data-target="#category-details"><span class="glyphicon glyphicon-pencil"></span></button>
+                            <%--<button class="btn btn-primary btn-sm update-category" type="button" cateoryId="${category.id}" data-toggle="modal" data-target="#category-details"><span class="glyphicon glyphicon-pencil"></span></button>--%>
+                            <button class="btn btn-primary btn-sm update-category" type="button" cateoryId="${category.id}"><span class="glyphicon glyphicon-pencil"></span></button>
+                            <button class="btn btn-success btn-sm save-update-category" type="button" cateoryId="${category.id}" style="display: none;"><span class="glyphicon glyphicon-ok"></span></button>
                             <button class="btn btn-gray btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span></button>
                         </td>
 
@@ -82,7 +98,7 @@
                         <c:set var="op2">${category.id}</c:set>
                         <c:choose>
                             <c:when test="${op1 eq op2}">
-                                <tr class="collapse ${subcategory.category.id} info">
+                                <tr class="collapse ${subcategory.category.id} info" subid="${subcategory.id}">
                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"/>&nbsp;<c:out value="${subcategory.name}"/></td>
                                     <%--<td>--%>
                                         <%--<button class="btn btn-primary btn-sm" type="button"><span class="glyphicon glyphicon-pencil"></span></button>--%>
@@ -130,7 +146,11 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                <button id="update-category" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-save"></span>
+                    &nbsp;บันทึก
+                </button>
+                <%--<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>--%>
             </div>
         </div>
 
