@@ -280,7 +280,7 @@ public List<Integer> getSubCategoryIdsByName(String subName) {
 
             criteria.add(Restrictions.or(cri,cri2));
         }
-        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+//        criteria.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         List<SubCategory> subCategoriesToDropDown = criteria.list();
         closeSession();
         return subCategoriesToDropDown;
