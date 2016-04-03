@@ -55,12 +55,12 @@ $(document).ready(function () {
     //});
 })
 
-function initCategoryDropdown(){
+function initCategoryDropdown() {
     var data = $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: context+"/TDCS/exam/getAllSubCategory",
-        async :false,
+        url: context + "/TDCS/exam/getAllSubCategory",
+        async: false,
         success: function (data) {
             $("#selectSubCategoryToSelection").append(
                 '<option value="" ></option>'
@@ -70,17 +70,17 @@ function initCategoryDropdown(){
                 catNameArr.push(value.subName);
             });
             var uniqueSubName = [];
-            $.each(catNameArr, function(i, el){
-                if($.inArray(el, uniqueSubName) === -1) uniqueSubName.push(el);
+            $.each(catNameArr, function (i, el) {
+                if ($.inArray(el, uniqueSubName) === -1) uniqueSubName.push(el);
             });
 
-            for(var i = 0; i < uniqueSubName.length; i ++){
+            for (var i = 0; i < uniqueSubName.length; i++) {
                 $("#selectSubCategoryToSelection").append(
                     '<option>' + uniqueSubName[i] + '</option>'
                 )
             }
         },
-        error :function(data){
+        error: function (data) {
 
         }
     });
@@ -145,7 +145,7 @@ var listSubCategory = function () {
         categoryId = categoryId2;
         var data = $.ajax({
             type: "POST",
-            url: context+"/TDCS/exam/getSubCategoryToDropDown",
+            url: context + "/TDCS/exam/getSubCategoryToDropDown",
             data: {
                 categoryId: categoryId
             },
@@ -153,9 +153,11 @@ var listSubCategory = function () {
 
             success: function (data) {
                 data.forEach(function (value) {
-                    $("#selectSubCategoryToSelection").append(
-                        '<option >' + value.SubCategory.name + '</option>'
-                    )
+                    if (value.name != null && value.name != undefined && value.name != "undefined") {
+                        $("#selectSubCategoryToSelection").append(
+                            '<option >' + value.name + '</option>'
+                        )
+                    }
                 });
             },
             error: function (data) {
@@ -175,7 +177,7 @@ var listSubCategory = function () {
     } else {
         var data = $.ajax({
             type: "POST",
-            url: context+"/TDCS/exam/getSubCategoryToDropDown",
+            url: context + "/TDCS/exam/getSubCategoryToDropDown",
             data: {
                 categoryId: ""
             },
@@ -183,9 +185,11 @@ var listSubCategory = function () {
 
             success: function (data) {
                 data.forEach(function (value) {
-                    $("#selectSubCategoryToSelection").append(
-                        '<option >' + value.SubCategory.name + '</option>'
-                    )
+                    if (value.name != null && value.name != undefined && value.name != "undefined") {
+                        $("#selectSubCategoryToSelection").append(
+                            '<option >' + value.name + '</option>'
+                        )
+                    }
                 });
 
             },
