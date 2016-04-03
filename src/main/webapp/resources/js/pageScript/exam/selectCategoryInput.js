@@ -177,14 +177,14 @@ var listSubCategory = function () {
             type: "POST",
             url: context+"/TDCS/exam/getSubCategoryToDropDown",
             data: {
-                categoryId: categoryId
+                categoryId: ""
             },
             async: false,
 
             success: function (data) {
                 data.forEach(function (value) {
                     $("#selectSubCategoryToSelection").append(
-                        '<option >' + value.name + '</option>'
+                        '<option >' + value.SubCategory.name + '</option>'
                     )
                 });
 
