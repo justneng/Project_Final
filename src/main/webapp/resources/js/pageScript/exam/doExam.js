@@ -199,7 +199,7 @@ var getExamPaperBody = function () {
                     '<div class="panel-body">' +
                     '<div class="row">' +
                     '<div class="col-md-10 col-md-offset-1">' +
-                    'ข้อที่ ' + questionNo + '.&nbsp;<h5>' + checkString(question.description) + '</h5>' +
+                    'ข้อที่ ' + questionNo + '.&nbsp;<h5>' + transformString(question.description) + '</h5>' +
                     '</div>' +
                     '</div>'
 
@@ -232,7 +232,7 @@ var getExamPaperBody = function () {
                                 '<form role="form">' +
                                 '<div class="radio">' +
                                 '<label><input class="answer" type="radio" name="' + question.id + '" value="' + c.id + '">' +
-                                choiceLabel + '.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + checkString(c.description) + '</label>' +
+                                choiceLabel + '.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + transformString(c.description) + '</label>' +
                                 '</div>' +
                                 '</form>' +
                                 '</div>' +

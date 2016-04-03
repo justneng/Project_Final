@@ -381,12 +381,12 @@ $(document).ready(function(){
 
     //        genarate username & email ssg //////////////
     $("#engfname").keyup(function(){
-        $("#username").val($("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
-        $("#ssgMail").val($("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+        //$("#username").val($("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+        //$("#ssgMail").val($("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
     });
     $("#englname").keyup(function(){
-        $("#username").val($("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
-        $("#ssgMail").val($("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+        //$("#username").val($("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+        //$("#ssgMail").val($("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
     });
     //        check compare password /////////////////////
     $("#password").change(function() {

@@ -31,12 +31,12 @@ $(document).ready(function () {
 
 $("#selectOrderType").on('change', function () {
     orderType = $(this).val()
-    listSearchQuestion("pageChange", pagination.pagination("getCurrentPageNumber"))
+    listSearchQuestion("pageChange", getCurrentPageNumber())
 })
 
 $("#selectOrderBy").on('change', function () {
     orderBy = $(this).val()
-    listSearchQuestion("pageChange", pagination.pagination("getCurrentPageNumber"))
+    listSearchQuestion("pageChange", getCurrentPageNumber())
 })
 
 
@@ -183,7 +183,7 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
                     '<td style="vertical-align: middle;" class="questionType">' + q.questionType.description + '</td>' +
                     '<td style="vertical-align: middle;" class="questionCategory">' + q.subCategory.category.name + '</td>' +
                     '<td style="vertical-align: middle;" class="questionSubCategory">' + q.subCategory.name + '</td>' +
-                    '<td style="vertical-align: middle;" class="questionDescription" align="left">' + q.description.substring(0, 100) + '</td>' +
+                    '<td style="vertical-align: middle;" class="questionDescription" align="left">' + transformString(q.description.substring(0, 100)) + '</td>' +
                         //'<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
                     '<td style="vertical-align: middle;" class="questionScore">' + q.score + '</td>' +
                     '<td style="vertical-align: middle;" class="questionCreateBy">' + q.createBy.thFname + ' ' + q.createBy.thLname + '</td>' +
@@ -227,11 +227,11 @@ var setEditModalParameter = function (questionId) {
             setCreateModalQuestionType(question.questionType.description);
             setCreateModalDufficulty(question.difficultyLevel.level);
             setCreateModalScore(question.score);
-            setCreateModalQuestionDesc(checkString(question.description));
+            setCreateModalQuestionDesc(transformString(question.description));
             updateCreateModalLayout();
             var ith = 1;
             question.choices.forEach(function (choice) {
-                setCreateModalIthChoice(checkString(choice.description), ith);
+                setCreateModalIthChoice(transformString(choice.description), ith);
                 if (choice.correction) {
                     setCreateModalCorrectQuestion(ith);
                 }
@@ -270,6 +270,7 @@ var deleteQuestions = function (questionIds) {
 
 var listSearchQuestion = function (btn, page) {
     $('#pagination').hide();
+    $('#init-message-show').hide();
     $('#first-page').attr('where','');
     var data = null;
     if (btn != "pageChange") {
@@ -294,7 +295,9 @@ var listSearchQuestion = function (btn, page) {
         $('#pagination').hide();
         hidePagination();
         $(".table-container").addClass("hidden")
+        $('.deleteSelectedBtn').addClass("hidden")
     } else {
+        $('.deleteSelectedBtn').removeClass('hidden')
         $(".table-container").removeClass("hidden")
         data.forEach(function (q) {
             var createDate = new Date(q.createDate);
@@ -305,7 +308,7 @@ var listSearchQuestion = function (btn, page) {
             '<td style="vertical-align: middle;" class="questionType">' + q.questionType.description + '</td>' +
             '<td style="vertical-align: middle;" class="questionCategory">' + q.subCategory.category.name + '</td>' +
             '<td style="vertical-align: middle;" class="questionSubCategory">' + q.subCategory.name + '</td>' +
-            '<td style="vertical-align: middle;" class="questionDescription" align="left">' + checkString(qDesc) + '</td>' +
+            '<td style="vertical-align: middle;" class="questionDescription" align="left">' + transformString(qDesc) + '</td>' +
                 //'<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
             '<td style="vertical-align: middle;" class="questionScore">' + q.score + '</td>' +
             '<td style="vertical-align: middle;" class="questionCreateBy">' + q.createBy.thFname + ' ' + q.createBy.thLname + '</td>' +
