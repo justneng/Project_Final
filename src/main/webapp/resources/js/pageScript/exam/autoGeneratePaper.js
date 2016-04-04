@@ -93,7 +93,7 @@ function onLoadPage(){
                             '<tr class="collapse select-paper'+category.category.id+'">'+
                                 '<td>'+
                                     '<span class="glyphicon glyphicon-open-file"></span>'+
-                                    '<span class="newTemplate glyphicon glyphicon-plus"> '+category.category.name+'ครั้งที่'+no+'</span>'+
+                                    '<span class="newTemplate glyphicon glyphicon-plus"> '+category.category.name+' ครั้งที่ '+no+'</span>'+
                                 '</td>'+
                                 '<td>'+
                                     '<button cid="'+category.category.id+'" class="btn btn-primary btn-sm active do-exam" type="button">'+

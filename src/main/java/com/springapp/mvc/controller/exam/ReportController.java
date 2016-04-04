@@ -69,6 +69,7 @@ public class ReportController {
             inputStream = new FileInputStream(report);
 
             float tmp = 0;
+            int count = 0;
 
             for(ExamResult result: examResults){
                 String grade = queryReportDomain.calculateGrade(result.getExamRecord().getPaper().getMaxScore(), (result.getObjectiveScore() + result.getSubjectiveScore()));
@@ -80,9 +81,10 @@ public class ReportController {
 
                 tmp = (float) (tmp + queryReportDomain.revertGradeStringToNumber(grade));
                 studentReports.add(studentReport);
+                count = count + 1;
             }
 
-            Map param = queryReportDomain.getParameterStudentReport(user, Math.round((tmp/4)*100)/100);
+            Map param = queryReportDomain.getParameterStudentReport(user, Math.round((tmp/4)*100)/100, count);
             File file = ReportUtils.viewReport(studentReports, inputStream, param, filePdf, fileXMLToCompile);
 
 //            For download pdf

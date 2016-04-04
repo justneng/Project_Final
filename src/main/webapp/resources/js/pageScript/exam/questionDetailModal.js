@@ -52,13 +52,13 @@ var updateDetailModal = function (tr) {
             $('#createByDetail').text(question.createBy.thFname + " " + question.createBy.thLname);
             $('#createDateDetail').text(formattedCreateDate);
             $('#questionTypeDetail').text(question.questionType.description);
-            $('#questionDescDetail').text(checkString(question.description));
+            $('#questionDescDetail').text(question.description);
             //$('#updateDetail').text(formattedUpdateDate);
 
             var i = 1;
             question.choices.forEach(function (choice) {
                 var currentChoice = $('#choiceDetail' + i)
-                currentChoice.text(checkString(choice.description));
+                currentChoice.text(choice.description);
                 if (choice.correction) {
                     //$('#correctDetail' + i).show();
                     //currentChoice.parent().addClass("bg-success")

@@ -200,16 +200,12 @@
                     <%--End Objective--%>
 
                     <div class="col-md-12" id="submitBtnContainer" hidden align="center">
-                        <div class="col-md-2 col-md-offset-3">
-                            <button class="btn btn-primary col-md-12" id="submitCreateBtn">บันทึก</button>
+                        <div class="col-md-1 col-md-offset-5">
+                            <button class="btn btn-primary" id="submitCreateBtn">บันทึก</button>
                         </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-gray col-md-12" id="clearCreateQuestionInputBtn">ล้างข้อมูล</button>
+                        <div class="col-md-1">
+                            <button class="btn btn-danger" dat-dismiss="modal">ยกเลิก</button>
                         </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-danger col-md-12" dat-dismiss="modal">ยกเลิก</button>
-                        </div>
-
                     </div>
 
 

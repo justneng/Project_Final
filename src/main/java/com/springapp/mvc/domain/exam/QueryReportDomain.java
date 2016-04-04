@@ -29,7 +29,7 @@ public class QueryReportDomain {
     @Autowired
     QueryTeamDomain queryTeamDomain;
 
-    public Map getParameterStudentReport(User user, float percentage){
+    public Map getParameterStudentReport(User user, float percentage, int count){
         User staff = queryUserDomain.getUserById(user.getStaffId());
         Map parameterReport = new HashMap();
         parameterReport.put("studentId", user.getEmpId());
@@ -44,7 +44,7 @@ public class QueryReportDomain {
         parameterReport.put("staff", staff.getThFname() + " " + staff.getThLname());
         parameterReport.put("image", getImageUser(user.getImange()));
         parameterReport.put("percentage", percentage);
-        parameterReport.put("sumGrade", calculateGrade(100, percentage));
+        parameterReport.put("sumGrade", calculateGrade(percentage , new Float(count * 100)));
 
         return parameterReport;
     }
@@ -68,25 +68,25 @@ public class QueryReportDomain {
 
     public static Double revertGradeStringToNumber(String grade){
         if(grade.equals("A")){
-            return 4.0;
+            return 100.0;
         }
         else if(grade.equals("B+")){
-            return 3.5;
+            return 75.0;
         }
         else if(grade.equals("B")){
-            return 3.0;
+            return 70.0;
         }
         else if(grade.equals("C+")){
-            return 2.5;
+            return 65.0;
         }
         else if(grade.equals("C")){
-            return 2.0;
+            return 60.0;
         }
         else if(grade.equals("D+")){
-            return 1.5;
+            return 55.0;
         }
         else if(grade.equals("D")){
-            return 1.0;
+            return 50.0;
         }
         else{
             return 0.0;
@@ -94,8 +94,9 @@ public class QueryReportDomain {
     }
 
     public static String calculateGrade(float maxScore, float userScore){
-        float percentage = maxScore / 100;
-        float realPercentage = userScore / percentage;
+//        float percentage = maxScore / 100;
+//        float realPercentage = userScore / percentage;
+        float realPercentage = maxScore / userScore;
 
         if(realPercentage >= 80){
             return "A";

@@ -34,10 +34,6 @@ $("#createSubCategoryCancleBtn").on('click', function () {
     hideCreateSubCategory()
 })
 
-$("#clearCreateQuestionInputBtn").on('click',function(){
-    createQuestionModalClearInput()
-})
-
 $(".choiceRadioAddon").on('click', function () {
     $(this).children().prop("checked", true);
     var correctRadioNotChecked = $('.correctRadio:not(:checked)')

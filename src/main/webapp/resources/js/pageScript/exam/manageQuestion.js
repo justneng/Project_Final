@@ -2,20 +2,19 @@
  * Created by Phuthikorn_T on 14/8/2558.
  */
 var pagination = $('#pagination')
-var itemOnPage = 10;
+var itemOnPage = 20;
 var orderBy = "id"
 var orderType = "desc"
-var itemCount;
 
 $(function () {
-    //pagination.pagination({
-    //    items: 0,
-    //    itemsOnPage: itemOnPage,
-    //    cssStyle: 'light-theme',
-    //    onPageClick: function () {
-    //        //listSearchQuestion("pageChange", pagination.pagination("getCurrentPage"))
-    //    }
-    //});
+    pagination.pagination({
+        items: 0,
+        itemsOnPage: itemOnPage,
+        cssStyle: 'light-theme',
+        onPageClick: function () {
+            listSearchQuestion("pageChange", pagination.pagination("getCurrentPage"))
+        }
+    });
 });
 
 $(document).ready(function () {
@@ -31,12 +30,12 @@ $(document).ready(function () {
 
 $("#selectOrderType").on('change', function () {
     orderType = $(this).val()
-    listSearchQuestion("pageChange", getCurrentPageNumber())
+    listSearchQuestion("pageChange", pagination.pagination("getCurrentPage"))
 })
 
 $("#selectOrderBy").on('change', function () {
     orderBy = $(this).val()
-    listSearchQuestion("pageChange", getCurrentPageNumber())
+    listSearchQuestion("pageChange", pagination.pagination("getCurrentPage"))
 })
 
 
@@ -183,7 +182,7 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
                     '<td style="vertical-align: middle;" class="questionType">' + q.questionType.description + '</td>' +
                     '<td style="vertical-align: middle;" class="questionCategory">' + q.subCategory.category.name + '</td>' +
                     '<td style="vertical-align: middle;" class="questionSubCategory">' + q.subCategory.name + '</td>' +
-                    '<td style="vertical-align: middle;" class="questionDescription" align="left">' + transformString(q.description.substring(0, 100)) + '</td>' +
+                    '<td style="vertical-align: middle;" class="questionDescription" align="left">' + q.description.substring(0, 100) + '</td>' +
                         //'<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
                     '<td style="vertical-align: middle;" class="questionScore">' + q.score + '</td>' +
                     '<td style="vertical-align: middle;" class="questionCreateBy">' + q.createBy.thFname + ' ' + q.createBy.thLname + '</td>' +
@@ -227,11 +226,11 @@ var setEditModalParameter = function (questionId) {
             setCreateModalQuestionType(question.questionType.description);
             setCreateModalDufficulty(question.difficultyLevel.level);
             setCreateModalScore(question.score);
-            setCreateModalQuestionDesc(transformString(question.description));
+            setCreateModalQuestionDesc(question.description);
             updateCreateModalLayout();
             var ith = 1;
             question.choices.forEach(function (choice) {
-                setCreateModalIthChoice(transformString(choice.description), ith);
+                setCreateModalIthChoice(choice.description, ith);
                 if (choice.correction) {
                     setCreateModalCorrectQuestion(ith);
                 }
@@ -259,7 +258,7 @@ var deleteQuestions = function (questionIds) {
                 pagination.pagination("destroy")
                 $(".table-container").addClass("hidden")
             }else{
-                listSearchQuestion("pageChange",pagination.pagination('getCurrentPageNumber'));
+                listSearchQuestion("pageChange",pagination.pagination('getCurrentPage'));
             }
         }, error: function () {
             alert("ลบข้อมูลไม่สำเร็จ");
@@ -269,10 +268,8 @@ var deleteQuestions = function (questionIds) {
 }
 
 var listSearchQuestion = function (btn, page) {
-    $('#pagination').hide();
-    $('#init-message-show').hide();
-    $('#first-page').attr('where','');
     var data = null;
+    var itemCount = 0;
     if (btn != "pageChange") {
         if (btn.attr('id') != 'advSearchBtn') {
             data = getSearchQuestionResultListBasic();
@@ -292,23 +289,18 @@ var listSearchQuestion = function (btn, page) {
     if (!(data.length > 0)) {
         $("#searchCatNotFound").show()
         $('#pagination').pagination('destroy');
-        $('#pagination').hide();
-        hidePagination();
         $(".table-container").addClass("hidden")
-        $('.deleteSelectedBtn').addClass("hidden")
     } else {
-        $('.deleteSelectedBtn').removeClass('hidden')
         $(".table-container").removeClass("hidden")
         data.forEach(function (q) {
             var createDate = new Date(q.createDate);
-            var qDesc = (q.description.substring(0, 100));
             var formattedDate = createDate.getDate() + "/" + (parseInt(createDate.getMonth()) + 1) + "/" + createDate.getFullYear();
             $("#tableBody").append('<tr questionId=' + q.id + '>' +
             '<td style="vertical-align: middle;" class="questionSelect"><input type="checkbox" class="questionSelectBox"/></td>' +
             '<td style="vertical-align: middle;" class="questionType">' + q.questionType.description + '</td>' +
             '<td style="vertical-align: middle;" class="questionCategory">' + q.subCategory.category.name + '</td>' +
             '<td style="vertical-align: middle;" class="questionSubCategory">' + q.subCategory.name + '</td>' +
-            '<td style="vertical-align: middle;" class="questionDescription" align="left">' + transformString(qDesc) + '</td>' +
+            '<td style="vertical-align: middle;" class="questionDescription" align="left">' + q.description.substring(0, 100) + '</td>' +
                 //'<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
             '<td style="vertical-align: middle;" class="questionScore">' + q.score + '</td>' +
             '<td style="vertical-align: middle;" class="questionCreateBy">' + q.createBy.thFname + ' ' + q.createBy.thLname + '</td>' +
@@ -319,40 +311,25 @@ var listSearchQuestion = function (btn, page) {
             if (q.description.length > 100) {
                 $('td[class="questionDescription"]:last').append("....")
             }
-            itemCount = q.itemCount;
+            if (itemCount == 0) {
+                itemCount = q.itemCount;
+            }
+
         })
 
         $('tbody tr td:not(.questionSelect)').css('cursor', 'pointer');
         $('.questionSelectBox').css('cursor', 'pointer');
-        //pagination.pagination('redraw');
-        //pagination.pagination("updateItems", itemCount);
-        if (btn != "pageChange"){
-            showPagination(itemCount);
-            $('.currentPage').css({
-                'background-color': '#2F4133',
-                'color': 'white'
-            })
-        }
+        pagination.pagination('redraw');
+        pagination.pagination("updateItems", itemCount);
     }
-}
-
-var showPagination = function(totalRecordLength){
-    $('.paging').show();
-    totalPage(totalRecordLength,"");
-    setStyle($('#prev-page').next().find('a'));
-}
-
-var hidePagination = function(){
-    $('.paging').hide();
-}
-
-var toPage = function(pageNumber,row){
-    $('#pagination').hide();
-    listSearchQuestion("pageChange", getCurrentPageNumber());
 }
 
 //===================================================================================EVENT TRIGGER=================================================================================================//
 
+
+$(".searchInputSubmitBtn").on('click', function () {
+    listSearchQuestion()
+})
 
 
 

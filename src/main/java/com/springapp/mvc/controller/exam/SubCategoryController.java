@@ -197,7 +197,7 @@ public class SubCategoryController {
 
         List<SubCategory> subCategoriesToDropDown = querySubCategoryDomain.getSubCategoryToDropDown(categoryIdOrName);
 
-        String json = new JSONSerializer().exclude("*.class").exclude("*.category").serialize(subCategoriesToDropDown);
+        String json = new JSONSerializer().include("choices").exclude("*.class").serialize(subCategoriesToDropDown);
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="hopez" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ed77365a-e309-472a-8a67-35e2fa73d616">
 	<property name="ireport.zoom" value="1.2100000000000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="31"/>
+	<property name="ireport.y" value="79"/>
 	<parameter name="studentId" class="java.lang.String"/>
 	<parameter name="studentName" class="java.lang.String"/>
 	<parameter name="faculty" class="java.lang.String"/>
@@ -255,13 +255,6 @@
 				<text><![CDATA[รหัสชุดข้อสอบ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="167" y="0" width="100" height="20" uuid="7f6e4dab-30ef-4bb2-b8be-ef8f8d78b6d7"/>
-				<textElement>
-					<font fontName="TH Sarabun New" size="12" isBold="true" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[ชื่อชุดข้อสอบ]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="348" y="0" width="60" height="20" uuid="ae2231af-d9c1-4683-aceb-91605ab8d8bf"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" isBold="true" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
@@ -282,6 +275,13 @@
 				</textElement>
 				<text><![CDATA[เกรด]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="130" y="1" width="100" height="20" uuid="7f6e4dab-30ef-4bb2-b8be-ef8f8d78b6d7"/>
+				<textElement>
+					<font fontName="TH Sarabun New" size="12" isBold="true" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ชื่อชุดข้อสอบ]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -294,7 +294,7 @@
 				<textFieldExpression><![CDATA[$F{paperCode}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="155" y="1" width="193" height="20" uuid="8a7fad65-99e3-43e9-bed0-453fbf16ab27"/>
+				<reportElement x="131" y="1" width="209" height="20" uuid="8a7fad65-99e3-43e9-bed0-453fbf16ab27"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
