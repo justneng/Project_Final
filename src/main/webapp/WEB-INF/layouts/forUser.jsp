@@ -41,7 +41,8 @@
 
 </head>
 
-<body  style="background-color: #f2f2f2;margin-top: 100px;">
+<body  style="background-color: #f2f2f2;margin-top: 100px; " >
+<%--<body  style="background-color: #f2f2f2;margin-top: 100px; 	background-image: url('http://25.media.tumblr.com/tumblr_maxansPyBh1rovtiso1_1280.jpg');" >--%>
     <tiles:insertAttribute name="header" />
 
     <div class="col-md-12">

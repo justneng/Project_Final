@@ -116,35 +116,67 @@ $(document).ready(function () {
     });
 
     $('.remove-category').on('click', function(){
-        deleteCategory();
-    })
+        var categoryid = $(this).attr('cateoryid');
+        $.ajax({
+            type: "POST",
+            url: context + "/TDCS/exam/removeCategory",
+            data: {
+                "categoryid": categoryid
+            },
+            success: function () {
+                alert("ลบหมวดหมู่เรียบร้อยแล้ว");
+                window.location.reload();
+            },
+            error: function () {
+                alert("แก้ไขหมวดหมู่เรียบร้อยแล้ว");
+            }
+        });
+    });
 
     $('#update-subcategoory-btn').on('click', function(){
         var jsonOldSubcategory = {};
         var jsonNewSubcategory = {};
         var tmpArray = [];
-        $('.old-subcategory').each(function(){
+        var check = 0;
+        $('.old-subcategory').each(function() {
             var remove;
-            if($('.check-remove-subcategory-'+$(this).attr('subid-in-modal')).is(':checked')){
+            if ($('.check-remove-subcategory-' + $(this).attr('subid-in-modal')).is(':checked')) {
                 remove = true;
             }
-            else{
+            else {
                 remove = false;
             }
+
+            if ($(this).val().trim() == "") {
+                $(this).css('border', '1px solid red');
+                check = 1;
+                return false;
+            }
+            else {
+                check = 0;
+            }
+
             var item = {
-                "id" : $(this).attr('subid-in-modal'),
-                "name" : $(this).val(),
-                "remove" : remove
+                "id": $(this).attr('subid-in-modal'),
+                "name": $(this).val(),
+                "remove": remove
             };
             tmpArray.push(item);
         });
+
+        if(check == 1){
+            return false;
+        }
+
         jsonOldSubcategory = JSON.stringify(tmpArray);
         tmpArray = [];
         $('.new-subcategory').each(function(){
-            var item = {
-                "name" : $(this).val()
-            };
-            tmpArray.push(item);
+            if($(this).val().trim() != ""){
+                var item = {
+                    "name" : $(this).val()
+                };
+                tmpArray.push(item);
+            }
         });
         jsonNewSubcategory = JSON.stringify(tmpArray);
         updateAndSaveSubcategory(categoryId, jsonOldSubcategory,jsonNewSubcategory);
@@ -206,8 +238,12 @@ function updateCategory(categoryId) {
                 window.location.reload();
 
             },
-            error: function(){
-                alert("แก้ไขข้อมูลไม่สำเร็จ");
+            error: function(xhr){
+                if (xhr.status == 418) {
+                    alert('บันทึกข้อมูลไม่สำเร็จ : รหัสหมวดหมู่นี้มีอยู่แล้วในระบบ')
+                } else {
+                    alert('บันทึกข้อมูลไม่สำเร็จ : ไม่ทราบสาเหตุ')
+                }
             }
         });
     }
@@ -515,19 +551,3 @@ function count(){
         }
     });
 }
-
-//function checkCategoryCode(code){
-//
-//    var check = $.ajax({
-//        type: "POST",
-//        url: context + "/TDCS/exam/checkCategoryCode",
-//        async: false,
-//        data: {
-//            code : code
-//        },
-//        success: function(check){
-//        }
-//    }).responseText;
-//
-//    return check;
-//}

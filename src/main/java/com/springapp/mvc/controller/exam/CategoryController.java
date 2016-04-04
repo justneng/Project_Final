@@ -97,6 +97,17 @@ public class CategoryController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/exam/removeCategory", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity editCategory(@RequestParam(value = "categoryid") String categoryid,
+                                       HttpServletRequest request) {
+
+        Category category = queryCategoryDomain.getCategoryById(categoryid);
+        queryCategoryDomain.deleteCategory(category);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/exam/searchCategory", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> searchCategory(@ModelAttribute("id") String categoryId,

@@ -90,20 +90,22 @@ function ajax(){
                 $("#paperNotFound").show();
                 $('#tbExamRecordSearch').hide();
                 $('#sortBy').hide();
+                $('#init-message-show').hide();
             }
 
             for(var i = 0; i < data.length; i ++){
                 $("#paperNotFound").hide();
                 $('#tbExamRecordSearch').show();
                 $('#sortBy').show();
+                $('#init-message-show').hide();
                 var testResult;
                 var paperName = data[i].examRecord.paper.name;
                 testResult =  Number(data[i].objectiveScore)+ Number (data[i].subjectiveScore);
                     if (data[i].examRecord.user.position.posiName == "Software Developer Trainee") {
-                        data[i].examRecord.user.position.posiName = "Dev";
+                        data[i].examRecord.user.position.posiName = "Software Developer Trainee";
                     }
                     if (data[i].examRecord.user.position.posiName == "Assistant Business Analyst") {
-                        data[i].examRecord.user.position.posiName = "BA";
+                        data[i].examRecord.user.position.posiName = "Assistant Business Analyst";
                     }if (paperName == null) {
                         paperName = "";
                     }
@@ -116,7 +118,7 @@ function ajax(){
                         '<td class="text-center"><label >' + data[i].examRecord.user.position.posiName + '</label></td>' +
                         '<td class="text-center" resultId="' + data[i].id + '"><label >'+(data[i].objectiveScore + data[i].subjectiveScore)+'</label></td>' +
                         '<td class="text-center">' + data[i].examRecord.paper.maxScore + '</td>' +
-                        '<td><label >' + data[i].examRecord.paper.createBy.thFname + '</label></td>' +
+                        //'<td><label >' + data[i].examRecord.paper.createBy.thFname + '</label></td>' +
                         '<td class="text-center"><label >' + data[i].status.description + '</label></td>' +
                        '</tr>'
                     );

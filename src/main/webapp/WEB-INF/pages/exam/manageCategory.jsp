@@ -107,7 +107,7 @@
                         <c:choose>
                             <c:when test="${op1 eq op2}">
                                 <tr class="collapse ${subcategory.category.id} info" subid="${subcategory.id}">
-                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag" inuse="${subcategory.isUsed}"/>
+                                    <td colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag" inuse="${subcategory.isUsed}"/>
                                         &nbsp;<c:out value="${subcategory.name}"/>
 
                                     </td>

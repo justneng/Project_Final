@@ -27,6 +27,9 @@ public class QueryReleaseExamDomain extends HibernateUtil{
     @Autowired
     private QueryExamRecordDomain queryExamRecordDomain;
 
+    @Autowired
+    private QueryStatusDomain queryStatusDomain;
+
     public List<ReleaseExam> getReleaseExam(List<User> users, ExamPaper paper){
         List<ReleaseExam> releaseExamList = new ArrayList<ReleaseExam>();
         List<ExamRecord> examRecordList = queryExamRecordDomain.getAllExamRecord();
@@ -77,6 +80,9 @@ public class QueryReleaseExamDomain extends HibernateUtil{
                     logger.info("base : " + examPapers.get(0).getReleaseDateTo() + " vs " + date);
                     pap.setCheckRelease('N');
                     pap.setCheckInTime(0);
+                    ExamPaper examPaper = pap.getExamPaper();
+                    examPaper.setPaperStatus(queryStatusDomain.getDeletedStatus());
+                    getSession().merge(examPaper);
                     getSession().merge(pap);
                 }
             }

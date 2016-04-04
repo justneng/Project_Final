@@ -15,8 +15,8 @@ $(document).ajaxComplete(function(){
 $(document).on('click', '.release-exam', function(){
     $('#open-exam-only-today').prop('checked', false);
     $('.get-currentdate').text(getCurrentDateThaiFormat());
-    currentPaperCode = paperCode;
     var paperCode = $(this).attr('papercode');
+    currentPaperCode = paperCode;
     var paperName = $(this).attr('paperName');
     var positionId = $(this).attr('positionid');
     var currentDate = getCurrentDateSQLFormat(new Date());

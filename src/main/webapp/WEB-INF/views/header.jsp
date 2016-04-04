@@ -118,11 +118,11 @@
                                         <%--<c:if test="${status == 'user'}">ประเมินผล</c:if>--%>
                                 </a>
                             </li>
-                            <li>
-                                <a href="${context}/TDCS/exam/manageSubCategory">
-                                    <c:if test="${status == 'staff'}">จัดการหัวข้อเรื่อง</c:if>
-                                </a>
-                            </li>
+                            <%--<li>--%>
+                                <%--<a href="${context}/TDCS/exam/manageSubCategory">--%>
+                                    <%--<c:if test="${status == 'staff'}">จัดการหัวข้อเรื่อง</c:if>--%>
+                                <%--</a>--%>
+                            <%--</li>--%>
                             <li>
                                 <a href="${context}/TDCS/exam/manageQuestion">
                                     <c:if test="${status == 'staff'}">จัดการข้อสอบ</c:if>
