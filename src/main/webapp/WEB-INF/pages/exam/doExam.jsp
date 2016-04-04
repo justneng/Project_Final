@@ -33,9 +33,11 @@
                 </div>
             </div>
             <br>
+
             <div class="row">
                 <div class="col-md-7">
-                    <h4 style="display:inline;">ออกโดย&nbsp;:&nbsp;</h4>${paper.createBy.thFname}&nbsp;&nbsp;${paper.createBy.thLname}
+                    <h4 style="display:inline;">
+                        ออกโดย&nbsp;:&nbsp;</h4>${paper.createBy.thFname}&nbsp;&nbsp;${paper.createBy.thLname}
                 </div>
                 <div class="col-md-5 text-right">
                     คะแนนเต็ม&nbsp;:&nbsp;${paper.maxScore}&nbsp;คะแนน

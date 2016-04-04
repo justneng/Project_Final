@@ -50,7 +50,7 @@ $('tbody').on('change', '.questionSelectBox', function () {
 
 $('body').on('click', '.detailEditBtn', function () {
     $('#questionDetailModal').modal('hide')
-    $('#submitCreateBtn').text('ยืนยัน');
+    $('#submitCreateBtn').text('บันทึก');
     $('#createQuestModalTitle').text('แก้ไขข้อสอบ');
     var qId = $(this).closest('tr').attr('questionId');
     if (qId == undefined) {
@@ -81,7 +81,7 @@ $('.deleteSelectedBtn').on('click', function () {
 $('.createQuestionBtn').on('click', function () {
     if ($('#createQuestModalTitle').text() != 'สร้างข้อสอบ') {
         $('#createQuestModalTitle').text('สร้างข้อสอบ');
-        $('#submitCreateBtn').text('ตกลง');
+        $('#submitCreateBtn').text('บันทึก');
         createQuestionModalClearInput();
     }
 })

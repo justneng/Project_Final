@@ -400,7 +400,7 @@ $("#categoryInputForCreateQuestion").on('change', function () {
                     success: function (data) {
                         data.forEach(function (value) {
                             $("#sSubCat").append(
-                                '<option value="' + value.SubCategory.name + '">' + value.SubCategory.name + '</option>'
+                                '<option value="' + value.name + '">' + value.name + '</option>'
                             )
                         });
                     },
@@ -424,7 +424,7 @@ $("#categoryInputForCreateQuestion").on('change', function () {
                     success: function (data) {
                         data.forEach(function (value) {
                             $("#sSubCat").append(
-                                '<option value="' + value.SubCategory.name + '">' + value.SubCategory.name + '</option>'
+                                '<option value="' + value.name + '">' + value.name + '</option>'
                             )
                         });
 

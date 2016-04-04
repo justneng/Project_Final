@@ -266,12 +266,12 @@
                 </div>
 
                 <div class="col-md-4 col-md-offset-4 text-center">
-                    <input type="button" id="subEvaluation" class="btn btn-primary"
-                           value="&nbsp;&nbsp;ตกลง&nbsp;&nbsp;"/>&nbsp;&nbsp;
-                    <button id="disEvaluation" type="button" class="btn btn-danger" data-toggle="modal"
-                            data-target="">
-                        ล้างข้อมูล
-                    </button>
+                        <input type="button" id="subEvaluation" class="btn btn-primary col-md-5"
+                               value="บันทึกการประเมิน"/>
+                        <button id="disEvaluation" type="button" class="btn btn-gray col-md-5 col-md-offset-1" data-toggle="modal"
+                                data-target="">
+                            ล้างข้อมูล
+                        </button>
                 </div>
 
 

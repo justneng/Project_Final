@@ -408,7 +408,7 @@
 <div class="form-group">
     <div class="row">
         <div class="col-md-1 col-md-offset-3">
-            <input class="btn btn-primary" type="button" value="ตกลง" onclick="checkEmpty()"/>
+            <input class="btn btn-primary" type="button" value="บันทึกการแก้ไข" onclick="checkEmpty()"/>
         </div>
         <div class="col-md-2 col-md-offset-0" style="margin-left: 5px">
             <input id="changePassword" type="button" class="btn btn-primary" value="เปลี่ยนรหัสผ่าน" />
