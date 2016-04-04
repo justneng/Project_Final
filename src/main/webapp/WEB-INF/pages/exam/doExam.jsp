@@ -109,6 +109,7 @@
 
     <script src="${context}/resources/js/pageScript/exam/doExam.js"></script>
     <script src="${context}/resources/js/jquery.timer.js"></script>
+    <script src="${context}/resources/js/pageScript/exam/utils.js"></script>
 </c:if>
 
 <c:if test="${user == null}">
