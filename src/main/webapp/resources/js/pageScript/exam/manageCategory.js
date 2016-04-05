@@ -332,7 +332,7 @@ function viewCategory() {
                     '</td>' +
                     '<td class="col-sm-1" style="text-align: center; padding-right: 0; padding-left: 0;"><button id="editBtn' + value.id + '" class="btn btn-primary btn-sm" onclick="editCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>' +
                     '<button class="btn btn-success btn-sm" id="save' + value.id + '" style="display: none; margin: 5px;" type="button" onclick="updateCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-ok"></span></button>' +
-                    '<button class="btn btn-danger btn-sm" id="cancel' + value.id + '" style="display: none;" type="button" onclick="cancel(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-remove"></span></button>' +
+                    '<button class="btn btn-gray btn-sm" id="cancel' + value.id + '" style="display: none;" type="button" onclick="cancel(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-remove"></span></button>' +
                         //'&nbsp;<button id="updateBtn' + value.id + '" class="btn btn-primary btn-sm" style="display: none;" onclick="updateCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button></td>' +
                         //    '<td style="text-align: center;"><button class="btn btn-danger" id="deleteBtn'+value.id+'" type="button" onclick="deleteCategory('+ "'" +value.id+ "'"+')"><span class="glyphicon glyphicon-trash"></span></button></td>'+
 
@@ -526,7 +526,7 @@ function search(){
                         '</td>' +
                         '<td check="'+value.check+'" class="col-sm-1" style="text-align: center; padding-right: 0; padding-left: 0;"><button id="editBtn' + value.category.id + '" class="btn btn-primary btn-sm" onclick="editCategory(' + "'" + value.category.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>' +
                         '<button class="btn btn-success btn-sm" id="save' + value.category.id + '" style="display: none; margin: 5px;" type="button" onclick="updateCategory(' + "'" + value.category.id + "'" + ')"><span class="glyphicon glyphicon-ok"></span></button>' +
-                        '<button class="btn btn-danger btn-sm" id="cancel' + value.category.id + '" style="display: none;" type="button" onclick="cancel(' + "'" + value.category.id + "'" + ')"><span class="glyphicon glyphicon-remove"></span></button>' +
+                        '<button class="btn btn-gray btn-sm" id="cancel' + value.category.id + '" style="display: none;" type="button" onclick="cancel(' + "'" + value.category.id + "'" + ')"><span class="glyphicon glyphicon-remove"></span></button>' +
 
                         '</td>' +
                         '</tr>'

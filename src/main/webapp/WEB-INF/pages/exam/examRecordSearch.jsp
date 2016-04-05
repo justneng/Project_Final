@@ -47,7 +47,7 @@
 
 <tiles:insertTemplate template="/WEB-INF/pages/exam/modal/addEmployeeToInputModal.jsp"/>
 
-<h3>ตรวจข้อสอบ</h3>
+<h3>เลือกตรวจข้อสอบ</h3>
 <hr>
 
 <div class="panel panel-default">
@@ -212,7 +212,7 @@
                 <center>
                     <button id="okBtnChangPage" class="btn btn-sm btn-primary" data-dismiss="modal">ตกลง
                     </button>
-                    <button id="cancleBtnChangPage" class="btn btn-sm btn-danger"
+                    <button id="cancleBtnChangPage" class="btn btn-sm btn-gray"
                             data-dismiss="modal">ยกเลิก
                     </button>
                 </center>

@@ -498,14 +498,14 @@ $(document).ready(function(){
 //        ////////////////////////////////////////////
 
 //        genarate username & email ssg //////////////
-    $("#engfname").keyup(function(){
-        $("#username").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
-        $("#ssgMail").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
-    });
-    $("#englname").keyup(function(){
-        $("#username").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
-        $("#ssgMail").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
-    });
+//    $("#engfname").keyup(function(){
+//        $("#username").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+//        $("#ssgMail").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+//    });
+//    $("#englname").keyup(function(){
+//        $("#username").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+//        $("#ssgMail").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+//    });
 
 //        ////////////////////////////////////////////
     $("#birthday").change(function(){

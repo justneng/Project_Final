@@ -71,7 +71,7 @@
                         <button id="submitCreateSubCategoryBtn" class="btn btn-primary" type="submit"  onclick="saveSubCategory()">บันทึก
                         </button>
 
-                        <button id="hiddenBtn2" class="btn btn-danger" class="hidden" data-dismiss="modal">
+                        <button id="hiddenBtn2" class="btn btn-gray" class="hidden" data-dismiss="modal">
                             ยกเลิก
                         </button>
                     </div>

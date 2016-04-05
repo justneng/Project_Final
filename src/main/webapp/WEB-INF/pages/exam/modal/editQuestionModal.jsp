@@ -86,7 +86,7 @@
                 </div>
                 <div class="btn col-md-offset-1">
                   <button class="btn btn-primary">ตกลง</button>
-                  <button class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                  <button class="btn btn-gray" data-dismiss="modal">ยกเลิก</button>
                 </div>
               </div>
 
@@ -129,7 +129,7 @@
                 <br>
                 <div class="btn col-md-offset-1">
                   <button class="btn btn-primary">แก้ไข</button>
-                  <button class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                  <button class="btn btn-gray" data-dismiss="modal">ยกเลิก</button>
                 </div>
               </div>
               <div class="col-md-1 col-md-offset-1">

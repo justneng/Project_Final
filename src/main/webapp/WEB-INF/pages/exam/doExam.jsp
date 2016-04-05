@@ -98,7 +98,7 @@
                     </span>
                         <button id="confirmSubmitExam" class="btn btn-primary">ส่งข้อสอบ</button>
                         &nbsp;
-                        <button id="cancleSubmitExam" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                        <button id="cancleSubmitExam" class="btn btn-gray" data-dismiss="modal">ยกเลิก</button>
 
 
                     </div>

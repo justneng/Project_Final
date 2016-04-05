@@ -59,7 +59,7 @@
                     <td style="text-align: center;">
                         <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
                         </button>
-                        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>
+                        <button type="button" class="btn btn-gray"><span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </td>
                 </tr>
@@ -68,7 +68,7 @@
                     <td style="text-align: center;">
                         <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
                         </button>
-                        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>
+                        <button type="button" class="btn btn-gray"><span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </td>
                 </tr>
@@ -93,7 +93,7 @@
                     <td style="text-align: center;">
                         <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
                         </button>
-                        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>
+                        <button type="button" class="btn btn-gray"><span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </td>
                 </tr>
@@ -103,7 +103,7 @@
                     <td style="text-align: center;">
                         <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
                         </button>
-                        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>
+                        <button type="button" class="btn btn-gray"><span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </td>
                 </tr>

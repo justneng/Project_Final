@@ -25,8 +25,8 @@
 
 		<!--<property name="connection.driver_class">oracle.jdbc.OracleDriver</property>-->
 		<property name="connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
-		<property name="connection.username">TDCS</property>
-		<property name="connection.password">tdcs</property>
+		<property name="connection.username">user1</property>
+		<property name="connection.password">1234</property>
 
 		<!--<property name="connection.username">root</property>-->
 		<!--<property name="connection.password">root</property>-->

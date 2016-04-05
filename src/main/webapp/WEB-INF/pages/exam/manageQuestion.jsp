@@ -46,7 +46,7 @@
                         data-toggle="modal" data-target="#createQuest">
                     <span class="glyphicon glyphicon-plus"></span>
                 </button>
-                <button class="btn btn-danger btn-sm deleteSelectedBtn"><span
+                <button class="btn btn-gray btn-sm deleteSelectedBtn"><span
                         class="glyphicon glyphicon-minus"></span>
                 </button>
             </div>
