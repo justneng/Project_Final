@@ -621,6 +621,17 @@ public class QuestionController {
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/exam/getLastQuestion", method= RequestMethod.POST)
+    public ResponseEntity<String> orderPaper(){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+        Question question = queryQuestionDomain.getLastQuestion();
+        String json = new JSONSerializer().include("choices").exclude("*.class").serialize(question);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
+
     // ---------------------------------------------------------------------------------------------------------
     @RequestMapping(method = RequestMethod.POST, value = "/exam/searchQuestion")
     @ResponseBody

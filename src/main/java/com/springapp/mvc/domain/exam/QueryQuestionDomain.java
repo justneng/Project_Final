@@ -656,4 +656,25 @@ public class QueryQuestionDomain extends HibernateUtil {
 
         return quetions;
     }
+
+    public Question getLastQuestion(){
+        HibernateUtil.beginTransaction();
+        Criteria criteria1 = getSession().createCriteria(Question.class);
+        criteria1.add(Restrictions.eq("questionType.id", 1));
+        List<Question> list = criteria1.list();
+
+        Integer maxId = 0;
+        for(Question question: list){
+            if(question.getId() > maxId){
+                maxId = question.getId();
+            }
+        }
+
+        Criteria criteria = getSession().createCriteria(Question.class);
+        criteria.add(Restrictions.eq("id", maxId));
+        Question question = (Question) criteria.list().get(0);
+        HibernateUtil.commitTransaction();
+
+        return question;
+    }
 }

@@ -405,5 +405,6 @@
         rerultShow += m+" เดือน";
     }
     $("#workload").val(rerultShow);
+
 </script>
 <script src="<c:url value="/resources/js/pageScript/homeStaff.js" />"></script>

@@ -251,6 +251,11 @@ public class InPageController {
         return "createPaper";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/createPaperByRandomQuestions")
+    public String createPaperByRandomQuestions(HttpServletRequest request) {
+        return "createPaperByRandomQuestions";
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/exam/searchPaper")
     public String searchPaper(HttpServletRequest request) {
         return "searchPaper";
