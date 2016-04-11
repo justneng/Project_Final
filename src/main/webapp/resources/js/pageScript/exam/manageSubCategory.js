@@ -170,7 +170,7 @@ function search() {
                     '<td style="text-align: center">' +
                     '<button id="editBtn' + value.id + '" type="button" class="btn btn-primary btn-sm" onclick="editSubCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-pencil"></span></button>' +
                     '<button id="updateBtn' + value.id + '" class="btn-sm btn btn-success" style="display: none;" onclick="updateSubCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-ok"></span></button>' +
-                    '&nbsp;<button id="cancleUpdateBtn' + value.id + '" class="btn-sm btn btn-danger" style="display: none;" onclick="cancleEditSubCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-remove"></span></button></td>' +
+                    '&nbsp;<button id="cancleUpdateBtn' + value.id + '" class="btn-sm btn btn-gray" style="display: none;" onclick="cancleEditSubCategory(' + "'" + value.id + "'" + ')"><span class="glyphicon glyphicon-remove"></span></button></td>' +
                     '</td>' +
                     '</tr>'
 

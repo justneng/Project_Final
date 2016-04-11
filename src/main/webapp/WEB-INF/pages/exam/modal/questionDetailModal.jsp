@@ -99,7 +99,7 @@
                         <button class="btn btn-primary btn-block detailEditBtn" id="detailEditBtn">แก้ไข</button>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-danger btn-block" data-dismiss="modal">ปิด</button>
+                        <button class="btn btn-gray btn-block" data-dismiss="modal">ปิด</button>
                     </div>
                 </div>
 

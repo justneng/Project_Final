@@ -93,11 +93,11 @@
                                 </c:when>
                             </c:choose>
 
-                            <button class="btn btn-danger btn-sm cancel-update-category" cateoryId="${category.id}" type="button" style="display: none;"><span class="glyphicon glyphicon-remove"></span></button>
+                            <button class="btn btn-gray btn-sm cancel-update-category" cateoryId="${category.id}" type="button" style="display: none;"><span class="glyphicon glyphicon-remove"></span></button>
                         </td>
 
                         <td>
-                            <button class="btn btn-link btn-sm" type="button" data-toggle="collapse" data-target=".${category.id}">ดูหัวข้อเรื่องทั้งหมด&nbsp;<span class="caret"></span></button>
+                            <button class="btn btn-link btn-sm" type="button" data-toggle="collapse" data-target=".${category.id}">ดูหัวข้อเรื่อง&nbsp;<span class="caret"></span></button>
                             <button class="btn btn-primary btn-sm manage-subcategory" cateoryId="${category.id}" type="button" data-toggle="modal" data-target="#category-details"><span class="glyphicon glyphicon-edit"></span></button>
                         </td>
                     </tr>

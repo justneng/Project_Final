@@ -84,7 +84,7 @@
             </button>
             <button id="saveCopyPaperBtn" class="btn btn-success btn-sm" type="button" style="display: none;">บันทึก
             </button>
-            <button id="cancelBtn" class="btn btn-danger btn-sm" type="button" style="display: none;">ยกเลิก</button>
+            <button id="cancelBtn" class="btn btn-gray btn-sm" type="button" style="display: none;">ยกเลิก</button>
             <button id="copyPaperBtn" class="btn btn-default btn-sm" type="button" style="display: none;">
                 คัดลอกชุดข้อสอบ
             </button>

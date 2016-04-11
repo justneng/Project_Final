@@ -1,5 +1,7 @@
 package com.springapp.mvc.pojo;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 /**
@@ -11,8 +13,8 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "TDCS_USER_ID_SEQ_GEN")
-    @SequenceGenerator(name = "TDCS_USER_ID_SEQ_GEN", sequenceName = "TDCS_USER_ID_SEQ")
+    @GenericGenerator(name = "user_id", strategy = "increment")
+    @GeneratedValue(generator = "user_id")
     @Column(name = "USER_ID")
     private Integer userId;
 

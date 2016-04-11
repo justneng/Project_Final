@@ -135,7 +135,7 @@ window.onbeforeunload = function (e) {
 //        if(i>=element.length){
 //            break;
 //        }
-        if(element[i] != elementStart[i] || image!="") {
+        if(element[i] != elementStart[i]) {
 //            console.log(element[i]+"!="+elementStart[i]);
             // For IE and Firefox prior to version 4
             if (e) {
@@ -498,14 +498,14 @@ $(document).ready(function(){
 //        ////////////////////////////////////////////
 
 //        genarate username & email ssg //////////////
-    $("#engfname").keyup(function(){
-        $("#username").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
-        $("#ssgMail").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
-    });
-    $("#englname").keyup(function(){
-        $("#username").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
-        $("#ssgMail").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
-    });
+//    $("#engfname").keyup(function(){
+//        $("#username").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+//        $("#ssgMail").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+//    });
+//    $("#englname").keyup(function(){
+//        $("#username").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+//        $("#ssgMail").val('its-'+$("#engfname").val().toLowerCase()+'_'+$("#englname").val().toLowerCase().charAt(0));
+//    });
 
 //        ////////////////////////////////////////////
     $("#birthday").change(function(){

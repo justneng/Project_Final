@@ -29,7 +29,7 @@
             <h3 style="display: inline">ตรวจข้อสอบ</h3>
         </div>
         <div class="col-md-2" style="display: inline;">
-            <button class="btn btn-danger backBtn" style="width: 100%;">ย้อนกลับ</button>
+            <button class="btn btn-gray backBtn" style="width: 100%;">ย้อนกลับ</button>
         </div>
     </div>
     <hr>
@@ -281,7 +281,7 @@
         </c:if>
 
         <div class="col-md-2 <c:if test="${examResult.status.id  == 7}">col-md-offset-6</c:if>">
-            <button class="btn btn-danger backBtn" style="width: 100%;">ย้อนกลับ</button>
+            <button class="btn btn-gray backBtn" style="width: 100%;">ย้อนกลับ</button>
         </div>
     </div>
 
@@ -315,7 +315,7 @@
                             <%--ยืนยันผลตรวจ--%>
                             <%--</button>--%>
                             <%--&nbsp;--%>
-                        <button id="cancleSubmitMarking" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                        <button id="cancleSubmitMarking" class="btn btn-gray" data-dismiss="modal">ยกเลิก</button>
                     </div>
                 </div>
             </div>

@@ -81,7 +81,7 @@
             <td>Hard</td>
             <td>2</td>
             <td>EmployeeA</td>
-            <td style = "text-align: center;"><button class = "btn btn-danger"><span class = "glyphicon glyphicon-trash"></span></button></td>
+            <td style = "text-align: center;"><button class = "btn btn-gray"><span class = "glyphicon glyphicon-trash"></span></button></td>
           </tr>
           <tr>
             <td><input class = "form-control" type = "checkbox"/></td>
@@ -91,7 +91,7 @@
             <td>Hard</td>
             <td>2</td>
             <td>EmployeeA</td>
-            <td style = "text-align: center;"><button class = "btn btn-danger"><span class = "glyphicon glyphicon-trash"></span></button></td>
+            <td style = "text-align: center;"><button class = "btn btn-gray"><span class = "glyphicon glyphicon-trash"></span></button></td>
           </tr>
         </tbody>
       </table>

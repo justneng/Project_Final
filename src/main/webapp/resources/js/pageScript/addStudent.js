@@ -6,7 +6,7 @@
     $('#telMoblie').bind('blur', function(e) {
         var $this = $(this)
         if ($this.val().length < 10 && $this.val().length != 0) {
-            alert('คุณกรอกเบอร์มือถือไม่ครบ');
+            //alert('คุณกรอกเบอร์มือถือไม่ครบ');
 //                $("#Amount").focus();
             $this.attr('style','border:solid 1px red');
             return false;
@@ -20,7 +20,7 @@
     $('#password').bind('blur', function(e) {
         var $this = $(this)
         if ($this.val().length < 6) {
-            alert('คุณกรอกรหัสผ่านไม่ครบ');
+            //alert('คุณกรอกรหัสผ่านไม่ครบ');
 //                $("#Amount").focus();
             $this.attr('style','border:solid 1px red');
             return false;
@@ -35,7 +35,7 @@
     $('#phoneNumber').bind('blur', function(e) {
         var $this = $(this)
         if ($this.val().length < 10 && $this.val().length != 0) {
-            alert('คุณกรอกเบอร์โทรศัพท์มือถือไม่ครบ');
+            //alert('คุณกรอกเบอร์โทรศัพท์มือถือไม่ครบ');
 //                $("#Amount").focus();
             $this.attr('style','border:solid 1px red');
             return false;
@@ -49,24 +49,22 @@
 ///////////////////////////////////check compare password /////////////////////
 
 $("#password").change(function() {
-    if($("#password").val().length>=6) {
-        if ($("#password").val() != "") {
-            $("#passdiv").attr('class', 'col-md-12 has-success has-feedback');
-            $("#passspan").attr('class', 'glyphicon glyphicon-ok form-control-feedback');
-        } else if ($("#password").val() == "") {
-            $("#passdiv").attr('class', 'col-md-12');
-            $("#passspan").attr('class', '');
+    if ($("#password").val().length >= 6) {
+        $("#passdiv").attr('class', 'col-md-12 has-success has-feedback');
+        $("#passspan").attr('class', 'glyphicon glyphicon-ok form-control-feedback');
+    } else {
+        $("#passdiv").attr('class', 'col-md-12 has-error has-feedback');
+        $("#passspan").attr('class', 'glyphicon glyphicon-remove form-control-feedback');
 
-            $("#cpassdiv").attr('class', 'col-md-12');
-            $("#cpassspan").attr('class', '');
-        }
-        if ($("#cpassword").val() == $("#password").val()) {
-            $("#cpassdiv").attr('class', 'col-md-12 has-success has-feedback');
-            $("#cpassspan").attr('class', 'glyphicon glyphicon-ok form-control-feedback');
-        } else {
-            $("#cpassdiv").attr('class', 'col-md-12 has-error has-feedback');
-            $("#cpassspan").attr('class', 'glyphicon glyphicon-remove form-control-feedback');
-        }
+        $("#cpassdiv").attr('class', 'col-md-12  has-error has-feedback');
+        $("#cpassspan").attr('class', 'glyphicon glyphicon-remove form-control-feedback');
+    }
+    if ($("#cpassword").val() == $("#password").val() && $("#cpassword").val() != "") {
+        $("#cpassdiv").attr('class', 'col-md-12 has-success has-feedback');
+        $("#cpassspan").attr('class', 'glyphicon glyphicon-ok form-control-feedback');
+    } else {
+        $("#cpassdiv").attr('class', 'col-md-12 has-error has-feedback');
+        $("#cpassspan").attr('class', 'glyphicon glyphicon-remove form-control-feedback');
     }
 });
 
@@ -307,13 +305,6 @@ $(document).ready(function(){
         }
     });
 
-    $("#cleardata").click(function(){
-        var element = document.body.childNodes;
-        for (var i = 0; i < c.length; i++) {
-            txt = txt + c[i].nodeName + "<br>";
-        }
-    });
-
     //combobox click
     $('.combobox').combobox();
 //        datepicker ////////////////////////////////
@@ -363,8 +354,8 @@ function saveData(){
         '&enFname='+$("#engfname").val()+
         '&enLname='+$("#englname").val()+
         '&nickName='+$("#nickname").val()+
-        '&grade='+$("#inputGrade").val()+
-        '&levelStu='+$("#level").val()+
+        //'&grade='+$("#inputGrade").val()+
+        //'&levelStu='+$("#level").val()+
         '&birthDate='+$("#birthday").val()+
         '&tell1='+$("#telHome").val()+
         '&tell2='+$("#telMoblie").val()+
@@ -375,8 +366,8 @@ function saveData(){
         '&startWork='+$("#startTime").val()+
         '&endWork='+$("#endTime").val()+
         '&staffId='+$("#advisor").val()+
-        '&uniFacMajId='+$("#depid").val()+
-        '&aptId='+$("#type").val()+
+        //'&uniFacMajId='+$("#depid").val()+
+        //'&aptId='+$("#type").val()+
         '&posiId='+$("#position").val()+
         '&status=3';
 
@@ -448,15 +439,15 @@ function checkEmpty(){
     var countError = 0;
     var elementFirst;
     var element = [ $("#stuid"), $("#username"), $("#password"),$("#cpassword"), $("#fname"), $("#lname"), $("#engfname"), $("#englname"),
-        $("#nickname"),  $("#birthday"),$("#university"), $("#comboFac"),$("#comboDep"),$("#position"),$("#inputGrade"), $("#address"),
-        /*$("#telHome"),$("#ssgMail"),*/$("#email"), $("#startTime"),$("#endTime"),$("#skypeAcc"),$("#level"),
-        $("#type"),$("#job"), $("#advisor"), $("#telMoblie"), $("#univerName"),$("#advisor")];
+        $("#nickname"),  $("#birthday"),/*$("#university"), $("#comboFac"),$("#comboDep"),*/$("#position"),/*$("#inputGrade"),*/ $("#address"),
+        /*$("#telHome"),$("#ssgMail"),*//*$("#email"),*/ $("#startTime"),$("#endTime"),$("#skypeAcc"),/*$("#level"),*/
+        /*$("#type")*//*,$("#job")*//*,*/ $("#advisor"), $("#telMoblie")/*,*//* $("#univerName"),*/];
     if($("#password").val()!=$("#cpassword").val()){
         $("#password").val("");
         $("#cpassword").val("");
     }
     for(var i=0;i<element.length;i++){
-        if(element[i].val()==""){
+        if(element[i].val()=="" || element[i].val() == undefined){
 //            alert(element[i].val()+"~~~"+element[i].selector);
             countError++;
             if(countError==1){
@@ -467,6 +458,13 @@ function checkEmpty(){
             element[i].attr('style','');
         }
     }
+    if(!checkEmailString()){
+        countError++;
+        $("#email").attr('style','border:solid 1px red');
+    }else{
+        $("#email").attr('style','');
+    }
+
     if(countError>0){
 //        alert(elementFirst);
 //        $("#btnSubmit").click();
@@ -474,7 +472,7 @@ function checkEmpty(){
         return false;
     }
     if( $("#startTime").val()==""||$("#endTime").val()==""|| $("#birthday").val()==""){
-        alert("คุณกรอกข้อมูลไม่ครบ");
+        //alert("คุณกรอกข้อมูลไม่ครบ");
         return false;
     }
 
@@ -505,9 +503,15 @@ function checkEmpty(){
     if (confirm('====== ยืนยันการเพิ่มข้อมูล ? ======')) {
         saveData();
         alert("บันทึกข้อมูลสำเร็จ");
+        window.location.href = context+"/TDCS/signup.html";
     }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////vilidate
+
+var checkEmailString = function(){
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test($("#email").val());
+}
 
 
 $("#stuid").change(function(){
@@ -605,15 +609,22 @@ function timediff(start_actual_time, end_actual_time) {
         alert("คุณใส่เวลาไม่ถูกต้อง");
         $("#startTime").val("");
         $("#endTime").val("");
+        $("#address").val("");
     }
     return formatted;
 }
 
 function reloadfunc(){
     if(confirm("คุณต้องการล้างข้อมูลหรือไม่")){
-        window.location.href = context+"/TDCS/signup.html";
+        clearForm()
     }
 
+}
+
+function clearForm(){
+    $('input:not(.btn)').val('')
+    $('#position').val("")
+    $('textarea').val("")
 }
 //function canclefunc(){
 //    if(confirm("คุณต้องการล้างข้อมูลหรือไม่")){

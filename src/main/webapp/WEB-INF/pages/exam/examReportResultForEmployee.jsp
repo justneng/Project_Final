@@ -143,7 +143,7 @@
         <center>
           <button id="okBtnChangPage" class="btn btn-sm btn-primary" data-dismiss="modal">ตกลง
           </button>
-          <button id="cancleBtnChangPage" class="btn btn-sm btn-danger"
+          <button id="cancleBtnChangPage" class="btn btn-sm btn-gray"
                   data-dismiss="modal">ยกเลิก
           </button>
         </center>
