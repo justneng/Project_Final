@@ -53,12 +53,12 @@
     <%--</div>--%>
 <%--</div>--%>
 <form:form method="POST" action="" modelAttribute="studentData" id="formregis">
-<div class="col-md-2 col-md-offset-1 text-center">
-    <input type='file' id="image" name="image" style="display: none" autocomplete="off"/>
-    <img id="myImg" src="<c:url value="/resources/images/blank.jpg" />" alt="your image" width="100%" height="190px"/>
-    <label for="image">แก้ไข</label>
-</div>
-<div class="col-md-8">
+<%--<div class="col-md-2 col-md-offset-1 text-center">--%>
+    <%--<input type='file' id="image" name="image" style="display: none" autocomplete="off"/>--%>
+    <%--<img id="myImg" src="<c:url value="/resources/images/blank.jpg" />" alt="your image" width="100%" height="190px"/>--%>
+    <%--<label for="image">แก้ไข</label>--%>
+<%--</div>--%>
+<div class="col-md-10 col-md-offset-1">
 <div class="form-horizontal">
 
 <div class="form-group">
@@ -167,88 +167,88 @@
     </div>
 </div>
 
-<div class="form-group">
-    <div class="row col-md-12">
-        <label class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px">
-            <small>สถาบันการศึกษา</small><small style="color: red">*</small>
-        </label>
-        <div class="col-md-10">
-            <input type="hidden" id="universityId" name="universityId" value="0" />
-            <div class="input-group">
+<%--<div class="form-group">--%>
+    <%--<div class="row col-md-12">--%>
+        <%--<label class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px">--%>
+            <%--<small>สถาบันการศึกษา</small><small style="color: red">*</small>--%>
+        <%--</label>--%>
+        <%--<div class="col-md-10">--%>
+            <%--<input type="hidden" id="universityId" name="universityId" value="0" />--%>
+            <%--<div class="input-group">--%>
 
-                <input id="univerName" name="universityName" type="text" class="form-control" onchange="listuni()" required="true"/>
-                <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-search" onclick="listuni()" style="cursor: pointer"></i>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="row col-md-12">
-        <label class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px">
-            <small>คณะ</small><small style="color: red">*</small>
-        </label>
-        <div class="col-md-4">
-            <%--<form:input path="facId" type="hidden" id="facData" value="" />--%>
-            <%--<input id="comboFac" class="form-control" list="browsers" name="facName" autocomplete="off" required="true"/>--%>
-            <%--<datalist id="browsers">--%>
-            <%--</datalist>--%>
-            <div class="input-group">
-                <%--<form:input path="uniFacId" type="hidden" id="facid" name="facid" value="0" />--%>
-                <input id="comboFac" name="facName" type="text" class="form-control" onchange="showFacuty()" required="true"/>
-                <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-search" onclick="showFacuty()" style="cursor: pointer"></i>
-                </span>
-            </div>
-        </div>
-        <label for="depid" class="col-md-2 control-label" style="padding: 7px 0px 7px 0px;">
-            <small>สาขา</small><small style="color: red">*</small>
-        </label>
-        <div class="col-md-4">
-            <%--<form:input path="majId" type="hidden" id="depData" value="" />--%>
-            <%--<input id="comboDep" class="form-control" list="depList" name="depaName" autocomplete="off" required="true"/>--%>
-            <%--<datalist id="depList">--%>
-            <%--</datalist>--%>
-            <form:input path="uniFacMajId" type="hidden" id="depid" name="depid" value="0" />
-            <div class="input-group">
-
-                <input id="comboDep" name="depaName" type="text" class="form-control" onchange="shoeDepartMent()" required="true"/>
-                <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-search" onclick="shoeDepartMent()" style="cursor: pointer"></i>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="row col-md-12">
-        <label class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px">
-            <small>ชั้นปี</small><small style="color: red">*</small>
-        </label>
-        <%--<div class="col-md-9">--%>
-            <div class="col-md-2">
-                <form:select path="levelStu" id="level" class="form-control" required="true">
-                    <option value="">เลือก</option>
-                    <c:forEach var="i" begin="1" end="8">
-                        <option value="${i}"><c:out value="${i}"/></option>
-                    </c:forEach>
-                </form:select>
-            </div>
-            <label for="inputGrade" class="col-md-4 control-label" style="padding: 7px 0px 7px 0px;">
-                <small>เกรดเฉลี่ยสะสม</small><small style="color: red">*</small>
-            </label>
-            <div class="col-md-4">
-                <%--<div class="col-md-12">--%>
-                    <form:input id="inputGrade" path="grade" class="form-control" maxlength="4"
-                                onchange="fullfulegrade()" onkeypress="return isNumberPoint(event)" required="true"/>
-                <%--</div>--%>
-            </div>
+                <%--<input id="univerName" name="universityName" type="text" class="form-control" onchange="listuni()" required="true"/>--%>
+                <%--<span class="input-group-addon">--%>
+                    <%--<i class="glyphicon glyphicon-search" onclick="listuni()" style="cursor: pointer"></i>--%>
+                <%--</span>--%>
+            <%--</div>--%>
         <%--</div>--%>
-    </div>
-</div>
+    <%--</div>--%>
+<%--</div>--%>
+
+<%--<div class="form-group">--%>
+    <%--<div class="row col-md-12">--%>
+        <%--<label class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px">--%>
+            <%--<small>คณะ</small><small style="color: red">*</small>--%>
+        <%--</label>--%>
+        <%--<div class="col-md-4">--%>
+            <%--&lt;%&ndash;<form:input path="facId" type="hidden" id="facData" value="" />&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<input id="comboFac" class="form-control" list="browsers" name="facName" autocomplete="off" required="true"/>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<datalist id="browsers">&ndash;%&gt;--%>
+            <%--&lt;%&ndash;</datalist>&ndash;%&gt;--%>
+            <%--<div class="input-group">--%>
+                <%--&lt;%&ndash;<form:input path="uniFacId" type="hidden" id="facid" name="facid" value="0" />&ndash;%&gt;--%>
+                <%--<input id="comboFac" name="facName" type="text" class="form-control" onchange="showFacuty()" required="true"/>--%>
+                <%--<span class="input-group-addon">--%>
+                    <%--<i class="glyphicon glyphicon-search" onclick="showFacuty()" style="cursor: pointer"></i>--%>
+                <%--</span>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<label for="depid" class="col-md-2 control-label" style="padding: 7px 0px 7px 0px;">--%>
+            <%--<small>สาขา</small><small style="color: red">*</small>--%>
+        <%--</label>--%>
+        <%--<div class="col-md-4">--%>
+            <%--&lt;%&ndash;<form:input path="majId" type="hidden" id="depData" value="" />&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<input id="comboDep" class="form-control" list="depList" name="depaName" autocomplete="off" required="true"/>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<datalist id="depList">&ndash;%&gt;--%>
+            <%--&lt;%&ndash;</datalist>&ndash;%&gt;--%>
+            <%--<form:input path="uniFacMajId" type="hidden" id="depid" name="depid" value="0" />--%>
+            <%--<div class="input-group">--%>
+
+                <%--<input id="comboDep" name="depaName" type="text" class="form-control" onchange="shoeDepartMent()" required="true"/>--%>
+                <%--<span class="input-group-addon">--%>
+                    <%--<i class="glyphicon glyphicon-search" onclick="shoeDepartMent()" style="cursor: pointer"></i>--%>
+                <%--</span>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
+
+<%--<div class="form-group">--%>
+    <%--<div class="row col-md-12">--%>
+        <%--<label class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px">--%>
+            <%--<small>ชั้นปี</small><small style="color: red">*</small>--%>
+        <%--</label>--%>
+        <%--&lt;%&ndash;<div class="col-md-9">&ndash;%&gt;--%>
+            <%--<div class="col-md-2">--%>
+                <%--<form:select path="levelStu" id="level" class="form-control" required="true">--%>
+                    <%--<option value="">เลือก</option>--%>
+                    <%--<c:forEach var="i" begin="1" end="8">--%>
+                        <%--<option value="${i}"><c:out value="${i}"/></option>--%>
+                    <%--</c:forEach>--%>
+                <%--</form:select>--%>
+            <%--</div>--%>
+            <%--<label for="inputGrade" class="col-md-4 control-label" style="padding: 7px 0px 7px 0px;">--%>
+                <%--<small>เกรดเฉลี่ยสะสม</small><small style="color: red">*</small>--%>
+            <%--</label>--%>
+            <%--<div class="col-md-4">--%>
+                <%--&lt;%&ndash;<div class="col-md-12">&ndash;%&gt;--%>
+                    <%--<form:input id="inputGrade" path="grade" class="form-control" maxlength="4"--%>
+                                <%--onchange="fullfulegrade()" onkeypress="return isNumberPoint(event)" required="true"/>--%>
+                <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+            <%--</div>--%>
+        <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+    <%--</div>--%>
+<%--</div>--%>
 
 <div class="form-group">
     <div class="row col-md-12">
@@ -350,19 +350,19 @@
     </div>
 </div>
 
-<div class="form-group">
-    <div class="row col-md-12">
-        <label class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px"><small>ประเภทการฝึก</small><small style="color: red">*</small></label>
-        <div class="col-md-10">
-            <form:select path="aptId" id="type" class="form-control" required="true">
-                <option value="">เลือกประเภทการฝึก</option>
-                <c:forEach var="getApp" items="${listApp}">
-                    <option value="${getApp.aptId}"> ${getApp.aptName} </option>
-                </c:forEach>
-            </form:select>
-        </div>
-    </div>
-</div>
+<%--<div class="form-group">--%>
+    <%--<div class="row col-md-12">--%>
+        <%--<label class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px"><small>ประเภทการฝึก</small><small style="color: red">*</small></label>--%>
+        <%--<div class="col-md-10">--%>
+            <%--<form:select path="aptId" id="type" class="form-control" required="true">--%>
+                <%--<option value="">เลือกประเภทการฝึก</option>--%>
+                <%--<c:forEach var="getApp" items="${listApp}">--%>
+                    <%--<option value="${getApp.aptId}"> ${getApp.aptName} </option>--%>
+                <%--</c:forEach>--%>
+            <%--</form:select>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
 
 <div class="form-group">
     <div class="row col-md-12">
@@ -406,7 +406,7 @@
 </div>
 <form:input path="imange" type="file" name="file" id="fileUpload" style="display: none"/>
 <div class="form-group">
-    <div class="row col-md-6 col-md-offset-3">
+    <div class="row col-md-6 col-md-offset-4">
         <input type="submit" id="btnSubmit" style="display: none"/>
         <input type="button" class="btn btn-primary pull-left" value="&nbsp;&nbsp;&nbsp;&nbsp;ตกลง&nbsp;&nbsp;&nbsp;&nbsp;"
                onclick="checkEmpty()" />
@@ -502,8 +502,8 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<form id="formAfterAdd" action="${context}/TDCS/showStudentData" method="post">
-    <input type="hidden" id="ID" name="ID" value=""/>
-</form>
+<%--<form id="formAfterAdd" action="${context}/TDCS/showStudentData" method="post">--%>
+    <%--<input type="hidden" id="ID" name="ID" value=""/>--%>
+<%--</form>--%>
 
 <script src="<c:url value="/resources/js/pageScript/addStudent.js" />"></script>

@@ -788,7 +788,7 @@ window.onbeforeunload = function (e) {
 //        if(i>=element.length){
 //            break;
 //        }
-        if(element[i] != elementStart[i] || image!="") {
+        if(element[i] != elementStart[i]) {
 //            console.log(element[i]+"!="+elementStart[i]);
             // For IE and Firefox prior to version 4
             if (e) {

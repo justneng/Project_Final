@@ -25,12 +25,12 @@
 <br/><br/>
 <div class="row">
 <form:form method="POST" action="${context}/TDCS/insertStaff" modelAttribute="staffData" id="formregis">
-<div class="col-md-2 col-md-offset-1 text-center">
-    <input type='file' id="image" name="image" style="display: none" autocomplete="off"/>
-    <img id="myImg" src="<c:url value="/resources/images/blank.jpg" />" alt="your image" width="100%" height="190px"/>
-    <label for="image">แก้ไข</label>
-</div>
-<div class="col-md-8">
+<%--<div class="col-md-2 col-md-offset-1 text-center">--%>
+    <%--<input type='file' id="image" name="image" style="display: none" autocomplete="off"/>--%>
+    <%--<img id="myImg" src="<c:url value="/resources/images/blank.jpg" />" alt="your image" width="100%" height="190px"/>--%>
+    <%--<label for="image">แก้ไข</label>--%>
+<%--</div>--%>
+<div class="col-md-10 col-md-offset-1">
 <div class="form-horizontal">
 
 <div class="form-group">
@@ -306,12 +306,12 @@
 
 <form:input path="imange" type="file" name="file" id="fileUpload" style="display: none"/>
 <div class="form-group">
-    <div class="row col-md-6 col-md-offset-3">
+    <div class="row col-md-6 col-md-offset-4">
         <input type="submit" id="btnSubmit" style="display: none" />
 
         <input type="button" class="btn btn-primary pull-left" value="&nbsp;&nbsp;&nbsp;&nbsp;ตกลง&nbsp;&nbsp;&nbsp;&nbsp;" onclick="checkEmpty()" />
 
-        <a id="cleardata" class="btn btn-primary pull-left" style="margin-left: 20px" onclick="window.location.href =${context}'/TDCS/addStaff.html'">
+        <a id="cleardata" class="btn btn-primary pull-left" style="margin-left: 20px" onclick="reloadfunc()">
             &nbsp;ล้างข้อมูล&nbsp;
         </a>
         <a id="cancel" class="btn" style="background-color: rgba(193, 193, 198, 0.83); color: #000000;margin-left: 20px" href=${context}"/TDCS/home.html">

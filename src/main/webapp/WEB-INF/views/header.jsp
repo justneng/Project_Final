@@ -24,6 +24,9 @@
 
 <script>
     var context = '${context}';
+    if ('${status}' == '') {
+        window.location.href = context + "/TDCS/index.html";
+    }
 </script>
 <!-- Brand and toggle get grouped for better mobile display -->
 <nav class="navbar navbar-default navbar-fixed-top">

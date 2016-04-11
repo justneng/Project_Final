@@ -61,7 +61,7 @@ function imageIsLoaded(e) {
     $('#telMoblie').bind('blur', function (e) {
         var $this = $(this)
         if ($this.val().length < 10) {
-            alert('คุณกรอกเบอร์มือถือไม่ครบ');
+            //alert('คุณกรอกเบอร์มือถือไม่ครบ');
 //                $("#Amount").focus();
             $this.attr('style', 'border:solid 1px red');
 //            setTimeout(function(){$this.focus()}, 1);
@@ -76,7 +76,7 @@ function imageIsLoaded(e) {
     $('#password').bind('blur', function (e) {
         var $this = $(this)
         if ($this.val().length < 6 && $this.val().length != 0) {
-            alert('คุณกรอกรหัสผ่านไม่ครบ');
+            //alert('คุณกรอกรหัสผ่านไม่ครบ');
 //                $("#Amount").focus();
             $this.attr('style', 'border:solid 1px red');
 //            setTimeout(function(){$this.focus()}, 1);
@@ -87,6 +87,20 @@ function imageIsLoaded(e) {
         }
     });
 })(jQuery);
+
+
+function reloadfunc(){
+    if(confirm("คุณต้องการล้างข้อมูลหรือไม่")){
+        clearForm()
+    }
+
+}
+
+function clearForm(){
+    $('input:not(.btn)').val('')
+    $('select').val("")
+    $('textarea').val("")
+}
 
 //(function($) {
 //    $('#telHome').bind('blur', function(e) {
@@ -506,16 +520,15 @@ $(document).ready(function () {
     //check compare password /////////////////////
 
     $("#password").change(function () {
-        if ($("#password").val().length >= 6) {
-            if ($("#password").val() != "") {
+            if ($("#password").val().length >= 6) {
                 $("#passdiv").attr('class', 'col-md-12 has-success has-feedback');
                 $("#passspan").attr('class', 'glyphicon glyphicon-ok form-control-feedback');
-            } else if ($("#password").val() == "") {
-                $("#passdiv").attr('class', 'col-md-12');
-                $("#passspan").attr('class', '');
+            } else {
+                $("#passdiv").attr('class', 'col-md-12 has-error has-feedback');
+                $("#passspan").attr('class', 'glyphicon glyphicon-remove form-control-feedback');
 
-                $("#cpassdiv").attr('class', 'col-md-12');
-                $("#cpassspan").attr('class', '');
+                $("#cpassdiv").attr('class', 'col-md-12  has-error has-feedback');
+                $("#cpassspan").attr('class', 'glyphicon glyphicon-remove form-control-feedback');
             }
             if ($("#cpassword").val() == $("#password").val()) {
                 $("#cpassdiv").attr('class', 'col-md-12 has-success has-feedback');
@@ -524,7 +537,7 @@ $(document).ready(function () {
                 $("#cpassdiv").attr('class', 'col-md-12 has-error has-feedback');
                 $("#cpassspan").attr('class', 'glyphicon glyphicon-remove form-control-feedback');
             }
-        }
+
     });
 
     $("#cpassword").change(function () {
@@ -584,7 +597,7 @@ $(document).ready(function () {
     $("#stuid").change(function () {
         var $this = $(this);
         if ($this.val().length < 5 && $this.val().length != 0) {
-            alert('คุณกรอกรหัสพนักงานไม่ครบ');
+            //alert('คุณกรอกรหัสพนักงานไม่ครบ');
 //                $("#Amount").focus();
 //            setTimeout(function(){$this.focus()}, 1);
             $this.attr('style', 'border:solid 1px red');
@@ -724,11 +737,11 @@ function checkEmpty() {
     var element = [$("#stuid"), $("#username"), $("#password"), $("#cpassword"), $("#fname"), $("#lname"), $("#engfname"), $("#englname"),
         $("#nickname"), $("#birthday"), $("#university"), $("#comboFac"), $("#comboDep")/*,$("#level")*/, $("#inputGrade"), $("#address"),
 //        $("#telHome"),
-        $("#telMoblie"), $("#ssgMail"), $("#email"), $("#startTime"), $("#skypeAcc"), $("#othEmail"), $("#ddlCom"),
-        $("#section"), $("#job"), $("#startWork")/*, $("#type"),$("#job"), $("#advisor")*/];
+        $("#telMoblie"), $("#ssgMail"), $("#email"), $("#startTime"), $("#skypeAcc")/*, $("#othEmail")*/, $("#ddlCom"),
+        $("#section"), $("#job"), $("#startWork")/*, $("#type"),$("#job"), $("#advisor")*/,$('#team')];
 
     var countError = 0;
-    $('#team').removeAttr('disabled');
+    //$('#team').removeAttr('disabled');
 
     if ($("#txbTeam").css('display') == 'none') {
 //            $('#team').attr('disabled', 'disabled');
@@ -741,19 +754,26 @@ function checkEmpty() {
         $("#password").val("");
         $("#cpassword").val("");
         $("#piority").val("");
-        $('#team').attr('disabled', 'disabled');
+        //$('#team').attr('disabled', 'disabled');
     }
     for (var i = 0; i < element.length; i++) {
-        if (element[i].val() == "") {
+        if (element[i].val() == "" || element[i].val() == null) {
             countError++;
             element[i].attr('style', 'border:solid 1px red');
-            $('#team').attr('disabled', 'disabled');
+            //$('#team').attr('disabled', 'disabled');
         } else {
             element[i].attr('style', '');
         }
     }
+    if(!checkEmailString()){
+        $("#othEmail").attr('style','border:solid 1px red');
+        countError++;
+        return false;
+    }else{
+        $("#othEmail").attr('style','');
+    }
+
     if (countError > 0) {
-        alert("คุณกรอกข้อมูลไม่ครบ");
 //        $("#btnSubmit").click();
         return false;
     }
@@ -789,11 +809,19 @@ function checkEmpty() {
         return false;
     }
 
+
+
     if (confirm('====== ยืนยันการเพิ่มข้อมูล ? ======')) {
         saveData();
         alert("บันทึกข้อมูลสำเร็จ");
+        clearForm()
     }
 //    $("#btnSubmit").click();
+}
+
+var checkEmailString = function(){
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test($("#othEmail").val());
 }
 
 //var i=1;

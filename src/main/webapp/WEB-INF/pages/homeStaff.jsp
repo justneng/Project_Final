@@ -25,29 +25,29 @@
 <br/><br/>
 <div class="row">
 <form method="POST" action="${context}/TDCS/insertStaff" modelAttribute="staffData" id="formregis">
-<div class="col-md-offset-1 col-md-2">
-    <input type="hidden" id="userId" value="${user[0].userId}" />
-    <%--<input type="hidden" id="piority" value="${user[0].piority}" />--%>
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <input type='file' id="image" name="image" style="display: none" autocomplete="off"/>
-                <c:choose>
-                    <c:when test="${user[0].imange == null}">
-                        <img id="myImg" src="<c:url value="/resources/images/blank.jpg" />" alt="your image" width="100%" height="190px"/>
-                    </c:when>
-                    <c:otherwise>
-                        <img id="myImg" src="<c:url value="/resources/pictureUpload/${user[0].imange}" />" alt="your image" width="100%" height="190px"/>
-                    </c:otherwise>
-                </c:choose>
-                <%--</div>--%>
-                <label for="image">แก้ไข</label>
-            </div>
+<%--<div class="col-md-offset-1 col-md-2">--%>
+    <%--<input type="hidden" id="userId" value="${user[0].userId}" />--%>
+    <%--&lt;%&ndash;<input type="hidden" id="piority" value="${user[0].piority}" />&ndash;%&gt;--%>
+    <%--<div class="form-group">--%>
+        <%--<div class="row">--%>
+            <%--<div class="col-md-12 text-center">--%>
+                <%--<input type='file' id="image" name="image" style="display: none" autocomplete="off"/>--%>
+                <%--<c:choose>--%>
+                    <%--<c:when test="${user[0].imange == null}">--%>
+                        <%--<img id="myImg" src="<c:url value="/resources/images/blank.jpg" />" alt="your image" width="100%" height="190px"/>--%>
+                    <%--</c:when>--%>
+                    <%--<c:otherwise>--%>
+                        <%--<img id="myImg" src="<c:url value="/resources/pictureUpload/${user[0].imange}" />" alt="your image" width="100%" height="190px"/>--%>
+                    <%--</c:otherwise>--%>
+                <%--</c:choose>--%>
+                <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+                <%--<label for="image">แก้ไข</label>--%>
+            <%--</div>--%>
 
-        </div>
-    </div>
-</div>
-<div class="col-md-9">
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
+<div class="col-md-10 col-md-offset-1">
 <div class="form-horizontal">
 
 <div class="form-group">
@@ -297,7 +297,7 @@
 <br/>
 <div class="form-group">
     <div class="row">
-        <div class="col-md-2 col-md-offset-2">
+        <div class="col-md-2 col-md-offset-4">
             <input class="btn btn-primary" type="button" value="บันทึกการแก้ไข" onclick="checkEmpty()"/>
         </div>
         <div class="col-md-2 col-md-offset-0" style="margin-left: 5px">
