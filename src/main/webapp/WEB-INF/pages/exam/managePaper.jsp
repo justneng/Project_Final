@@ -122,11 +122,11 @@
 
     <div class="row">
         <div class="col-sm-6 add-paper">
-            <a href="${context}/TDCS/exam/createPaper" style="bottom: 0;">
-                <button class="btn btn-primary btn-sm" align="center">
-                    <span class="glyphicon glyphicon-plus"><label>&nbsp;<strong>สร้างชุดข้อสอบ</strong></label></span>
-                </button>
-            </a>
+            <%--<a href="${context}/TDCS/exam/createPaper" style="bottom: 0;">--%>
+                <%--<button class="btn btn-primary btn-sm" align="center">--%>
+                    <%--<span class="glyphicon glyphicon-plus"><label>&nbsp;<strong>สร้างชุดข้อสอบ</strong></label></span>--%>
+                <%--</button>--%>
+            <%--</a>--%>
             <button id="deletePapers" class="btn btn-gray btn-sm"><span class="glyphicon glyphicon-minus"><label>
                 &nbsp;<strong>ลบออก</strong></label></span></button>
         </div>

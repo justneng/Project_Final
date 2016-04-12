@@ -156,6 +156,7 @@ function saveQuestion() {
                 pagination.pagination("updateItems",itemCount);
             }
 
+            viewQuestions();
         },
         error: function () {
 

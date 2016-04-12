@@ -6,25 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <div class="row">
-    <button id="createPaperBtn" class="btn btn-primary btn-sm" type="button">
-        <span class="glyphicon glyphicon-saved"></span>&nbsp;
-        บันทึก
-    </button>
-
-    <button class="btn btn-primary btn-sm createQuestionBtn" data-target="#createQuest" data-toggle="modal">
-        <span class="glyphicon glyphicon-plus"></span>&nbsp;
-        สร้างข้อสอบใหม่
-    </button>
-
-    <a href="${context}/TDCS/exam/managePapers">
-        <button id="cancelCreatePaperBtn" class="btn btn-gray btn-sm" type="button">
-            <span class="glyphicon glyphicon-circle-arrow-left"></span> &nbsp;
-            ย้อนกลับ
-        </button>
-    </a>
-</div>
-<br/>
+    <h3 class="h3">แบบฟอร์มสร้างชุดข้อสอบแบบสุ่ม</h3>
+    <hr>
+</div><br/><br/>
 
 <div class="row">
     <%--<div class="well">--%>
@@ -59,7 +45,7 @@
                     <span style="color:red;">*</span><label for="newPaperScore" class="label-control"><h5
                         style="margin-top: 5px">คะแนน</h5></label>
                 </div>
-                <div class="col-sm-7" style="padding: 0;">
+                <div class="col-sm-4" style="padding: 0;">
                     <input id="newPaperScore" class="form-control input-sm" type="number" min="0"
                            oninput="validity.valid||(value='');" placeholder="โปรดกรอกคะแนน" required/>
                 </div>
@@ -92,66 +78,35 @@
                         <input id="hours" class="form-control input-sm" type="number" style="width: 35%;"
                                max="60" min="0" placeholder="ชม." oninput="validity.valid||(value='');"
                                required/>
-                        <label style="width: 15%;">ชั่วโมง</label>
+                        ชั่วโมง
                         <input id="minutes" class="form-control input-sm" type="number" style="width: 35%;"
                                max="60" min="0" placeholder="น." oninput="validity.valid||(value='');"
                                required/>
-                        <label style="width: 10%;">นาที</label>
+                        นาที
                     </div>
                 </div>
             </div>
         </div>
 
-        <%--<div class="row" id="copyPaperField">--%>
-        <%--<div class="col-sm-6">--%>
-        <%--<div class="label-create-paper col-sm-4 col-sm-offset-1 text-right">--%>
-        <%--<label class="label-control"><h5 style="margin-top: 5px">คัดลอกชุดข้อสอบ</h5></label>--%>
-        <%--</div>--%>
-
-        <%--<div class="col-sm-7" style="padding: 0;">--%>
-        <%--<div class="input-group">--%>
-        <%--<input id="copyPaperLov" class="form-control input-sm" type="text"--%>
-        <%--placeholder="รหัสชุดข้อสอบ : ชื่อชุดข้อสอบ" autocomplete="off"/>--%>
-        <%--<span id="selectPaper" class="input-group-addon input-sm">--%>
-        <%--<i onclick="listPaperToLov()" style="cursor: pointer;">--%>
-        <%--<span class="glyphicon glyphicon-search"></span>--%>
-        <%--</i>--%>
-        <%--</span>--%>
-        <%--</div>--%>
-        <%--</div>--%>
-        <%--</div>--%>
-        <%--</div>--%>
-
     </form>
     <%--</div>--%>
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="label-create-paper col-sm-4 col-sm-offset-1 text-right">
-                <button class="btn btn-default btn-sm createQuestionBtn" data-toggle="collapse"
-                        data-target="#random-question">
-                    สุ่มข้อสอบอัตโนมัติ <span class="caret"></span>
-                </button>
-            </div>
-        </div>
-    </div>
-    <br/>
 
-    <div id="random-question" class="collapse">
+    <div id="random-question" class="">
         <div class="row">
             <div class="col-sm-6">
                 <div class="label-create-paper col-sm-4 col-sm-offset-1 text-right">
-                    หมวดหมู่ / หัวข้อเรื่อง
+                    <span class='label label-primary'>หมวดหมู่ / หัวข้อเรื่อง</span>
                 </div>
 
-                <div class="col-sm-7" style="padding: 0;">
-                    <input id="check-random-by-category" type="checkbox" data-toggle="collapse"
-                           data-target="#random-by-category"/>
-                </div>
+                <%--<div class="col-sm-7" style="padding: 0;">--%>
+                    <%--<input id="check-random-by-category" type="checkbox" data-toggle="collapse"--%>
+                           <%--data-target="#random-by-category"/>--%>
+                <%--</div>--%>
             </div>
         </div>
         <br/>
 
-        <div id="random-by-category" class="row collapse">
+        <div id="random-by-category" class="row">
             <div class="col-sm-6">
                 <div class="label-create-paper col-sm-4 col-sm-offset-1 text-right">
                     หมวดหมู่
@@ -186,17 +141,17 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="col-sm-4 col-sm-offset-1 text-right">
-                    กำหนดคะแนน
+                    <spna class="label label-primary">กำหนดจำนวนข้อ</spna>
                 </div>
 
-                <div class="col-sm-7" style="padding: 0;">
-                    <input type="checkbox" data-toggle="collapse" data-target="#random-by-question"/>
-                </div>
+                <%--<div class="col-sm-7" style="padding: 0;">--%>
+                    <%--<input type="checkbox" data-toggle="collapse" data-target="#random-by-question"/>--%>
+                <%--</div>--%>
             </div>
         </div>
         <br/>
 
-        <div id="random-by-question" class="collapse">
+        <div id="random-by-question">
             <div class="row form-group">
                 <div class="col-sm-6">
                     <div class="col-sm-4 col-sm-offset-1 text-right">
@@ -239,6 +194,25 @@
     </div>
 </div>
 
+<div class="row col-sm-12 text-right">
+    <button id="createPaperBtn" class="btn btn-primary btn-sm" type="button">
+        <span class="glyphicon glyphicon-saved"></span>&nbsp;
+        บันทึก
+    </button>
+
+    <button class="btn btn-primary btn-sm createQuestionBtn" data-target="#createQuest" data-toggle="modal">
+        <span class="glyphicon glyphicon-plus"></span>&nbsp;
+        สร้างข้อสอบใหม่
+    </button>
+
+    <%--<a href="${context}/TDCS/exam/managePapers">--%>
+    <%--<button id="cancelCreatePaperBtn" class="btn btn-gray btn-sm" type="button">--%>
+    <%--<span class="glyphicon glyphicon-circle-arrow-left"></span> &nbsp;--%>
+    <%--ย้อนกลับ--%>
+    <%--</button>--%>
+    <%--</a>--%>
+</div>
+
 <div class="row">
     <button id="removeRowQuestionSelect" class="btn btn-gray btn-sm" type="button"
             style="height: 30px; display: none;">
@@ -276,23 +250,19 @@
 
         </tbody>
     </table>
-
-    <div id="questionNotFoundDesc" class="alert alert-info text-center">
-        <strong>ยังไม่มีข้อสอบในชุดข้อสอบ</strong>
-    </div>
 </div>
 <br/>
 
 <div id="sum-score" class="form-inline text-right" hidden>
     <div class="form-group">
-        <label>คะแนน </label>
+        คะแนน
         <input class="form-control input-sm" readonly="true" size="4" name="score" id="score"
                style="text-align: center">
     </div>
     &nbsp;
 
     <div class="form-group">
-        <label>เต็ม </label>
+        เต็ม
         <input class="form-control input-sm" readonly="true" size="4" name="score" id="maxScore"
                style="text-align: center">
     </div>

@@ -72,11 +72,11 @@
         </a>
     </li>
 
-    <li id="randomtabs" class="">
-        <a href="#random-questions-content" data-toggle="tab">
-            เลือกข้อสอบจากการสุ่ม
-        </a>
-    </li>
+    <%--<li id="randomtabs" class="">--%>
+        <%--<a href="#random-questions-content" data-toggle="tab">--%>
+            <%--เลือกข้อสอบจากการสุ่ม--%>
+        <%--</a>--%>
+    <%--</li>--%>
 
 </ul>
 
@@ -84,30 +84,26 @@
 
     <div class="container tab-pane fade in active" id="create-paper-form-content">
         <br/>
-
-        <div class="row">
-            <button id="createPaperBtn" class="btn btn-primary btn-sm" type="button">
-                <span class="glyphicon glyphicon-saved"></span>&nbsp;
-                บันทึก
-            </button>
-
-            <button class="btn btn-primary btn-sm createQuestionBtn" data-target="#createQuest" data-toggle="modal">
-                <span class="glyphicon glyphicon-plus"></span>&nbsp;
-                สร้างข้อสอบใหม่
-            </button>
-
-            <a href="${context}/TDCS/exam/managePapers">
-                <button id="cancelCreatePaperBtn" class="btn btn-gray btn-sm" type="button">
-                    <span class="glyphicon glyphicon-circle-arrow-left"></span> &nbsp;
-                    ย้อนกลับ
-                </button>
-            </a>
-        </div>
         <br/>
 
         <div class="row">
             <%--<div class="well">--%>
             <form class="form-horizontal" role="form">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="label-paper-type col-sm-4 col-sm-offset-1 text-right">
+                            <span style="color:red;">*</span><label for="newPaperId" class="label-control"><h5
+                                style="margin-top: 5px">ประเภทชุดข้อสอบ</h5></label>
+                        </div>
+                        <div class="col-sm-7" style="padding: 0;">
+                            <select id="select-paper-type" class="form-control input-sm">
+                                <option active="" value="static">กำหนดเอง</option>
+                                <option value="random">สุ่ม</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="label-create-paper col-sm-4 col-sm-offset-1 text-right">
@@ -181,76 +177,51 @@
                     </div>
                 </div>
 
-                <%--<div class="row" id="copyPaperField">--%>
-                <%--<div class="col-sm-6">--%>
-                <%--<div class="label-create-paper col-sm-4 col-sm-offset-1 text-right">--%>
-                <%--<label class="label-control"><h5 style="margin-top: 5px">คัดลอกชุดข้อสอบ</h5></label>--%>
-                <%--</div>--%>
-
-                <%--<div class="col-sm-7" style="padding: 0;">--%>
-                <%--<div class="input-group">--%>
-                <%--<input id="copyPaperLov" class="form-control input-sm" type="text"--%>
-                <%--placeholder="รหัสชุดข้อสอบ : ชื่อชุดข้อสอบ" autocomplete="off"/>--%>
-                <%--<span id="selectPaper" class="input-group-addon input-sm">--%>
-                <%--<i onclick="listPaperToLov()" style="cursor: pointer;">--%>
-                <%--<span class="glyphicon glyphicon-search"></span>--%>
-                <%--</i>--%>
-                <%--</span>--%>
-                <%--</div>--%>
-                <%--</div>--%>
-                <%--</div>--%>
-                <%--</div>--%>
-
-            </form>
-            <%--</div>--%>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="label-create-paper col-sm-4 col-sm-offset-1 text-right">
-                        <button class="btn btn-default btn-sm createQuestionBtn" data-toggle="collapse" data-target="#random-question">
-                            สุ่มข้อสอบอัตโนมัติ <span class="caret"></span>
-                        </button>
-                    </div>
-                </div>
-            </div><br/>
-
-            <div id="random-question" class="collapse">
-                <div class="row">
+                <div class="row" id="copyPaperField">
                     <div class="col-sm-6">
                         <div class="label-create-paper col-sm-4 col-sm-offset-1 text-right">
-                            หมวดหมู่ / หัวข้อเรื่อง
-                        </div>
-
-                        <div class="col-sm-7" style="padding: 0;">
-                            <input id="check-random-by-category" type="checkbox" data-toggle="collapse" data-target="#random-by-category"/>
-                        </div>
-                    </div>
-                </div><br/>
-
-                <div id="random-by-category" class="row collapse">
-                    <div class="col-sm-6">
-                        <div class="label-create-paper col-sm-4 col-sm-offset-1 text-right">
-                            หมวดหมู่
+                            <label class="label-control"><h5 style="margin-top: 5px">คัดลอกชุดข้อสอบ</h5></label>
                         </div>
 
                         <div class="col-sm-7" style="padding: 0;">
                             <div class="input-group">
-                                <input type="text" class="form-control input-sm" name="cat" id="selectCategoryToSelection"
-                                       placeholder="ค้นหาหมวดหมู่"
-                                       data-width="100%" autocomplete="off"/>
-                        <span class="input-group-addon input-group-sm input-sm" id="selectCat">
-                            <i onclick="listcatSelectInput()" style="cursor: pointer; height: 20px;">
-                                <span class="glyphicon glyphicon-search"></span></i>
-                        </span>
+                                <input id="copyPaperLov" class="form-control input-sm" type="text"
+                                                           placeholder="รหัสชุดข้อสอบ : ชื่อชุดข้อสอบ" autocomplete="off"/>
+                                    <span id="selectPaper" class="input-group-addon input-sm">
+                                        <i onclick="listPaperToLov()" style="cursor: pointer;">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </i>
+                                    </span>
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <div id="div-save-create-paper" class="row col-sm-12 text-right">
+                    <button id="createPaperBtn" class="btn btn-primary btn-sm" type="button">
+                        <span class="glyphicon glyphicon-saved"></span>&nbsp;
+                        บันทึก
+                    </button>
+
+                    <%--<button class="btn btn-primary btn-sm createQuestionBtn" data-target="#createQuest" data-toggle="modal">--%>
+                        <%--<span class="glyphicon glyphicon-plus"></span>&nbsp;--%>
+                        <%--สร้างข้อสอบใหม่--%>
+                    <%--</button>--%>
+
+                    <%--<a href="${context}/TDCS/exam/managePapers">--%>
+                    <%--<button id="cancelCreatePaperBtn" class="btn btn-gray btn-sm" type="button">--%>
+                    <%--<span class="glyphicon glyphicon-circle-arrow-left"></span> &nbsp;--%>
+                    <%--ย้อนกลับ--%>
+                    <%--</button>--%>
+                    <%--</a>--%>
+                </div>
+            </form><br/>
+            <%--</div>--%>
+            <div id="div-random-questions" hidden>
+                <div class="row">
                     <div class="col-sm-6">
-                        <div class="label-create-paper col-sm-4 text-right">
-                            หัวข้อเรื่อง
-                        </div>
-                        <div class="label-create-paper col-sm-7" style="padding: 0;">
-                            <select id="selectSubCategoryToSelection" class="form-control input-sm" data-width="100%"></select>
+                        <div class="label-create-paper col-sm-4 col-sm-offset-1 text-right">
+                            <strong>สุ่มข้อสอบอัตโนมัติ</strong>
                         </div>
                     </div>
                 </div><br/>
@@ -258,16 +229,12 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="col-sm-4 col-sm-offset-1 text-right">
-                            กำหนดคะแนน
-                        </div>
-
-                        <div class="col-sm-7" style="padding: 0;">
-                            <input type="checkbox" data-toggle="collapse" data-target="#random-by-question"/>
+                            <spna class="label label-primary">กำหนดจำนวนข้อ</spna>
                         </div>
                     </div>
                 </div><br/>
 
-                <div id="random-by-question" class="collapse">
+                <div id="random-by-question">
                     <div class="row form-group">
                         <div class="col-sm-6">
                             <div class="col-sm-4 col-sm-offset-1 text-right">
@@ -275,7 +242,8 @@
                             </div>
 
                             <div class="col-sm-4" style="padding: 0;">
-                                <input type="number" class="form-control input-sm" min="0" step="1" oninput="validity.valid||(value='');" placeholder="จำนวนข้อ"/>
+                                <input type="number" class="form-control input-sm" min="0" step="1"
+                                       oninput="validity.valid||(value='');" placeholder="จำนวนข้อ"/>
                             </div>
                         </div>
                     </div>
@@ -287,7 +255,8 @@
                             </div>
 
                             <div class="col-sm-4" style="padding: 0;">
-                                <input type="number" class="form-control input-sm" min="0" step="1" oninput="validity.valid||(value='');" placeholder="จำนวนข้อ"/>
+                                <input type="number" class="form-control input-sm" min="0" step="1"
+                                       oninput="validity.valid||(value='');" placeholder="จำนวนข้อ"/>
                             </div>
                         </div>
                     </div>
@@ -299,13 +268,21 @@
                             </div>
 
                             <div class="col-sm-4" style="padding: 0;">
-                                <input type="number" class="form-control input-sm" min="0" step="1" oninput="validity.valid||(value='');" placeholder="จำนวนข้อ"/>
+                                <input type="number" class="form-control input-sm" min="0" step="1"
+                                       oninput="validity.valid||(value='');" placeholder="จำนวนข้อ"/>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="row col-sm-12 text-right">
+                    <button id="createPaperRandomQuestionBtn" class="btn btn-primary btn-sm" type="button">
+                        <span class="glyphicon glyphicon-saved"></span>&nbsp;
+                        บันทึก
+                    </button>
+                </div>
             </div>
-        </div>
+        </div><hr/>
 
         <div class="row">
             <button id="removeRowQuestionSelect" class="btn btn-gray btn-sm" type="button"
@@ -381,10 +358,10 @@
 
 <%@include file="modal/createQuestionModal.jsp" %>
 <script src="${context}/resources/js/pageScript/exam/selectCategoryInput.js" charset="utf-8"></script>
+<script src="${context}/resources/js/pageScript/exam/radomQuestions.js" charset="utf-8"></script>
 <script>
     if ('${status}' != 'staff') {
         window.location.href = context + "/TDCS/index.html";
     }
-
 
 </script>

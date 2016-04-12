@@ -55,9 +55,9 @@ $("#orderPaperType").on('change', function(){
 
 function getQuestionIds(){
     questionIds = [];
-    //$("#tbSelectQuestion tr td:nth-child(1)").each(function(){
-    //    questionIds.push($(this).text());
-    //});
+    $("#tbSelectQuestion tr td:nth-child(1)").each(function(){
+        questionIds.push($(this).text());
+    });
 
 }
 

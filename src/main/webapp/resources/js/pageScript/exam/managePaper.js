@@ -510,6 +510,33 @@ function viewQuestions(){
     }
 }
 
+//function addAQuestionToPaper(question){
+//
+//    dataFound();
+//    questionIdString = [];
+//    questionIdString.push(question.id);
+//    var newScore = question.score;
+//
+//    $('.checkAllQuestionFromCreatePaperPage').checked = false;
+//    $("#tbSelectedQuestionToPaper").show();
+//    $('#sum-score').show();
+//    $("#tbodySelectedQuestionToPaper").append(
+//        '<tr>'+
+//        '<td qid="'+question.id+'" style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
+//        '<td>'+question.subCategory.category.name+'</td>'+
+//        '<td>'+question.subCategory.name+'</td>'+
+//        '<td>'+checkString(question.description)+'</td>'+
+//        '<td style="text-align: center;">'+question.questionType.description+'</td>'+
+//        '<td style="text-align: center;">'+question.difficultyLevel.description+'</td>'+
+//        '<td><input id="newScore'+question.id+'" onchange="scoreOnChange()" name="newScore" type="number" class="form-control input-sm"  min="1" max="50" value="'+newScore+'"/></td>'+
+//        '</tr>'
+//    );
+//    $("#questionNotFound").hide();
+//    questionsInPaper.push(question.id);
+//    sumScore(Number($("#newScore"+question.id).val()));
+//    $("#score").val(sumPaperScore);
+//}
+
 function addQuestionToPaper(qId){
     questionIdString = [];
     questionIdString.push(qId);
