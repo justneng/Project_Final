@@ -71,6 +71,9 @@ public class PaperController {
     @Autowired
     QueryExamResultDomain queryExamResultDomain;
 
+    @Autowired
+    QueryPaperTypeDomain queryPaperTypeDomain;
+
     private static final Logger logger = Logger.getLogger(PaperController.class.getName());
 
     @RequestMapping(value = "/exam/createPaper", method = RequestMethod.POST)
@@ -81,6 +84,10 @@ public class PaperController {
                                               @RequestParam(value = "paperTime", required = true) String paperTime,
                                               @RequestParam(value = "paperForPosition", required = true) Integer paperForPosition,
                                               @RequestParam(value = "jsonObjQuestion", required = true) String jsonObjQuestion,
+                                              @RequestParam(value = "questionEasyCount", required = true) Integer questionEasyCount,
+                                              @RequestParam(value = "questionNormalCount", required = true) Integer questionNormalCount,
+                                              @RequestParam(value = "questionHardCount", required = true) Integer questionHardCount,
+                                              @RequestParam(value = "paperType", required = true) String paperType,
                                               HttpServletRequest request,
                                               HttpServletResponse response) throws JSONException {
 
@@ -115,16 +122,38 @@ public class PaperController {
             qScores.add(tempQScore);
         }
 
-        ExamPaper examPaper = new ExamPaper();
-        examPaper.setCreateBy(createBy);
-        examPaper.setCode(paperCode);
-        examPaper.setName(paperName);
-        examPaper.setMaxScore(paperMaxScore);
-        examPaper.setCreateDate(curDate);
-        examPaper.setTimeLimit(pTime);
-        examPaper.setPaperStatus(paperStatus);
-        examPaper.setPosition(pForPosition);
-        queryPaperDomain.createPaper(examPaper, qIds, qScores);
+        if(paperType.equals("static")){
+            ExamPaper examPaper = new ExamPaper();
+            examPaper.setCreateBy(createBy);
+            examPaper.setCode(paperCode);
+            examPaper.setName(paperName);
+            examPaper.setMaxScore(paperMaxScore);
+            examPaper.setCreateDate(curDate);
+            examPaper.setTimeLimit(pTime);
+            examPaper.setPaperStatus(paperStatus);
+            examPaper.setPosition(pForPosition);
+            examPaper.setPaperType(queryPaperTypeDomain.getPaperTypeById(1));
+            queryPaperDomain.createPaper(examPaper, qIds, qScores);
+        }
+
+        if(paperType.equals("random")){
+            ExamPaper examPaper = new ExamPaper();
+            examPaper.setCreateBy(createBy);
+            examPaper.setCode(paperCode);
+            examPaper.setName(paperName);
+            examPaper.setMaxScore(paperMaxScore);
+            examPaper.setCreateDate(curDate);
+            examPaper.setTimeLimit(pTime);
+            examPaper.setPaperStatus(paperStatus);
+            examPaper.setPosition(pForPosition);
+            examPaper.setPaperType(queryPaperTypeDomain.getPaperTypeById(2));
+            examPaper.setQuestionEasy(questionEasyCount);
+            examPaper.setQuestionNormal(questionNormalCount);
+            examPaper.setQuestionHard(questionHardCount);
+            queryPaperDomain.createPaper(examPaper, qIds, qScores);
+        }
+
+
 
         Integer paperId = queryPaperDomain.getId(paperCode);
         String json = new Gson().toJson(paperId);

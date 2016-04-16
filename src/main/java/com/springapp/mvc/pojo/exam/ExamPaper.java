@@ -33,9 +33,22 @@ public class ExamPaper implements Serializable {
     @Column(name = "PAPER_MAX_SCORE")
     private Float maxScore;
 
+    @Column(name = "QUESTION_EASY_COUNT")
+    private Integer questionEasy;
+
+    @Column(name = "QUESTION_NORMAL_COUNT")
+    private Integer questionNormal;
+
+    @Column(name = "QUESTION_HARD_COUNT")
+    private Integer questionHard;
+
     @ManyToOne
     @JoinColumn(name = "PAPER_CREATE_BY")
     private User createBy;
+
+    @ManyToOne
+    @JoinColumn(name = "PAPER_TYPE")
+    private PaperType paperType;
 
     @Column(name = "PAPER_CODE")
     private String code;
@@ -188,5 +201,37 @@ public class ExamPaper implements Serializable {
 
     public void setPaperStatus(Status paperStatus) {
         this.paperStatus = paperStatus;
+    }
+
+    public Integer getQuestionEasy() {
+        return questionEasy;
+    }
+
+    public void setQuestionEasy(Integer questionEasy) {
+        this.questionEasy = questionEasy;
+    }
+
+    public Integer getQuestionNormal() {
+        return questionNormal;
+    }
+
+    public void setQuestionNormal(Integer questionNormal) {
+        this.questionNormal = questionNormal;
+    }
+
+    public Integer getQuestionHard() {
+        return questionHard;
+    }
+
+    public void setQuestionHard(Integer questionHard) {
+        this.questionHard = questionHard;
+    }
+
+    public PaperType getPaperType() {
+        return paperType;
+    }
+
+    public void setPaperType(PaperType paperType) {
+        this.paperType = paperType;
     }
 }

@@ -568,6 +568,20 @@ public class QueryQuestionDomain extends HibernateUtil {
         return questions;
     }
 
+    public List<Question> getQuestionBySubcategoryId(Integer subcategoryId, List<Integer> questionIds){
+
+        Criteria criteria = getSession().createCriteria(Question.class, "question");
+        criteria.createAlias("question.subCategory", "subCategory");
+        criteria.add(Restrictions.eq("subCategory.id", subcategoryId));
+        criteria.add(Restrictions.ne("status.id", 4));
+        if(questionIds != null){
+            criteria.add(Restrictions.not(Restrictions.in("id", questionIds)));
+        }
+        List<Question> questions = criteria.list();
+
+        return questions;
+    }
+
     public List<Question> getQuestionsObjectBy(String categoryId){
 
         Criteria criteria = getSession().createCriteria(Question.class, "question");
@@ -676,5 +690,26 @@ public class QueryQuestionDomain extends HibernateUtil {
         HibernateUtil.commitTransaction();
 
         return question;
+    }
+
+    public Integer countQuestionRemainingBySubcategory(SubCategory subCategory, List questionIds){
+
+        HibernateUtil.beginTransaction();
+        Criteria criteria = getSession().createCriteria(Question.class, "question");
+        criteria.createAlias("question.status", "status");
+        criteria.add(Restrictions.eq("question.subCategory", subCategory));
+        criteria.add(Restrictions.ne("status.id", 4));
+
+        if(questionIds != null){
+            criteria.add(Restrictions.not(Restrictions.in("question.id", questionIds)));
+        }
+        List<Question> questions = criteria.list();
+
+        if(questions.size() > 0){
+            return questions.size();
+        }
+        else{
+            return 0;
+        }
     }
 }

@@ -632,6 +632,56 @@ public class QuestionController {
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/exam/getQuestionsBySubcategoryId", method= RequestMethod.POST)
+    public ResponseEntity<String> getQuestionsBySubcategoryId(@RequestParam(value = "subcategoriesId") JSONArray subcategoriesId
+                                                             ,@RequestParam(value = "allQuestionIdOnTableCreatePaper") JSONArray allQuestionIdOnTableCreatePaper){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        List<Question> questions = new ArrayList<Question>();
+        List questionIds = new ArrayList<Integer>();
+        int i = 0;
+
+        if(allQuestionIdOnTableCreatePaper.length() > 0){
+            for(i = 0; i < allQuestionIdOnTableCreatePaper.length(); i ++){
+                Integer id = subcategoriesId.optInt(i);
+                questionIds.add(id);
+            }
+
+            for(i = 0; i < subcategoriesId.length(); i ++){
+                Integer id = subcategoriesId.optInt(i);
+                List<Question> list = queryQuestionDomain.getQuestionBySubcategoryId(id, questionIds);
+
+                if((list.size() > 0) || (list != null)){
+                    for(Question question: list){
+                        questions.add(question);
+                    }
+                }
+
+            }
+        }
+
+        else{
+            for(i = 0; i < subcategoriesId.length(); i ++){
+                Integer id = subcategoriesId.optInt(i);
+                List<Question> list = queryQuestionDomain.getQuestionBySubcategoryId(id, null);
+
+                if((list.size() > 0) || (list != null)){
+                    for(Question question: list){
+                        questions.add(question);
+                    }
+                }
+
+            }
+        }
+
+
+        String json = new JSONSerializer().include("choices").exclude("*.class").serialize(questions);
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
+
     // ---------------------------------------------------------------------------------------------------------
     @RequestMapping(method = RequestMethod.POST, value = "/exam/searchQuestion")
     @ResponseBody

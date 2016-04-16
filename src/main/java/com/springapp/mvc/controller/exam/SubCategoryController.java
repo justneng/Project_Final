@@ -176,7 +176,6 @@ public class SubCategoryController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
-
         List<SubCategory> subcategories = null;
         if (searchSubCategory != null && searchSubCategory != "") {
             Category category = queryCategoryDomain.getCategoryById(searchSubCategory);
@@ -185,6 +184,49 @@ public class SubCategoryController {
 //            subcategories = querySubCategoryDomain.getSubCategoryListByCategory(null);
         }
         String json = new Gson().toJson(subcategories);
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/exam/getSubCategoryByCatId", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> getSubCategoryByCatId(@RequestParam(value = "catId") String catId,
+                                                        @RequestParam(value = "allQuestionIdOnTableCreatePaper") JSONArray allQuestionIdOnTableCreatePaper) {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        Category category = queryCategoryDomain.getCategoryById(catId);
+        List<SubCategory> subcategories = querySubCategoryDomain.getSubCategoryListByCategory(category);
+        List<CountQuestionsInSubcategory> countQuestionsInSubcategories = new ArrayList<CountQuestionsInSubcategory>();
+        List questionIds = new ArrayList();
+
+        if(allQuestionIdOnTableCreatePaper.length() > 0){
+            for(int i = 0; i < allQuestionIdOnTableCreatePaper.length(); i ++){
+                Integer id = allQuestionIdOnTableCreatePaper.optInt(i);
+                questionIds.add(id);
+            }
+
+            for(SubCategory subCategory : subcategories){
+                countQuestionsInSubcategories.add(new CountQuestionsInSubcategory(subCategory.getId()
+                        , subCategory.getName()
+                        , subCategory.getCategory()
+                        , subCategory.getCreateBy()
+                        , queryQuestionDomain.countQuestionRemainingBySubcategory(subCategory, questionIds)));
+            }
+        }
+        else{
+            for(SubCategory subCategory : subcategories){
+                countQuestionsInSubcategories.add(new CountQuestionsInSubcategory(subCategory.getId()
+                        , subCategory.getName()
+                        , subCategory.getCategory()
+                        , subCategory.getCreateBy()
+                        , queryQuestionDomain.countQuestionRemainingBySubcategory(subCategory, null)));
+            }
+        }
+
+
+        String json = new JSONSerializer().exclude("*.class").serialize(countQuestionsInSubcategories);
+
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 

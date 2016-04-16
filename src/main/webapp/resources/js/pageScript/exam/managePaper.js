@@ -259,7 +259,7 @@ $(document).ready(function(){
             hours = $("#hours").val();
             if(hours == ""? hours = 0: hours = $("#hours").val());
 
-            createPaper();
+            createPaper('static');
         }
         if($('#createPaperBtn').attr('button-status') == "update") {
             questionsInPaper = [];
@@ -365,12 +365,17 @@ $(document).ready(function(){
 
     $("#addQuestionBtn").unbind('click').click(function(){
 
+        var isRandom = false;
+        if($('#select-paper-type').val() == 'random'){
+            isRandom = true;
+        }
+
         if($("#tbodySelectQuestion tr input[type=checkbox]:checked").length > 0){
             $("#tbodySelectQuestion tr input[type=checkbox]:checked").each(function(){
                 var qId = $(this).parent().siblings().map(function(){
                     return $(this).text();
                 }).get(0);
-                addQuestionToPaper(qId);
+                addQuestionToPaper(qId, isRandom);
                 scoreOnChange();
                 checkAll2 = checkAll2 + 1;
             });
@@ -379,7 +384,7 @@ $(document).ready(function(){
                 $("#removeRowQuestionSelect").show();
             }
 
-            $('<span class="label label-default" style="font-size: 13px;">เพิ่มข้อสอบลงชุดข้อสอบเรียบร้อบแล้ว</span>')
+            $('<span class="label label-success" style="font-size: 13px;">เพิ่มข้อสอบลงชุดข้อสอบเรียบร้อบแล้ว</span>')
                 .insertAfter('#addQuestionBtn')
                 .delay(1500)
                 .fadeOut(function() {
@@ -537,10 +542,19 @@ function viewQuestions(){
 //    $("#score").val(sumPaperScore);
 //}
 
-function addQuestionToPaper(qId){
+function addQuestionToPaper(qId, isRandom){
     questionIdString = [];
     questionIdString.push(qId);
     var newScore = $('#labelScore'+qId).text();
+    var str = "";
+
+    if(isRandom){
+        str = '<input id="newScore'+qId+'" type="number" name="newScore" class="form-control input-sm" value="1" readonly/>';
+    }
+    else{
+        str = '<input id="newScore'+qId+'" onchange="scoreOnChange()" name="newScore" type="number" class="form-control input-sm"  min="1" max="50" value="'+newScore+'"/>';
+
+    }
 
     $('.checkAllQuestionFromCreatePaperPage').checked = false;
     $("#tbSelectedQuestionToPaper").show();
@@ -553,9 +567,10 @@ function addQuestionToPaper(qId){
         '<td>'+checkString($("#labelQuestionDesc"+qId).text())+'</td>'+
         '<td style="text-align: center;">'+$("#labelQuestionTypeDesc"+qId).text()+'</td>'+
         '<td style="text-align: center;">'+$("#labelDiffDesc"+qId).text()+'</td>'+
-        '<td><input id="newScore'+qId+'" onchange="scoreOnChange()" name="newScore" type="number" class="form-control input-sm"  min="1" max="50" value="'+newScore+'"/></td>'+
+        '<td>'+str+'</td>'+
         '</tr>'
     );
+
     $("#questionNotFound").hide();
     questionsInPaper.push(qId);
     sumScore(Number($("#newScore"+qId).val()));
@@ -618,20 +633,29 @@ function createPaperValidation(){
 
 function validateScore(){
     if($("#score").val() > $("#maxScore").val()){
-        alert('คะแนนมากกว่าที่กำหนด');
+        alert('คะแนนรวมข้อสอบมากกว่าที่กำหนด');
         $("#maxScore").focus();
         $("#score").css('border-color', 'red');
         return false;
     }
     if($("#score").val() < $("#maxScore").val()){
-        alert('คะแนนน้อยกว่าที่กำหนด');
+        alert('คะแนนรวมข้อสอบน้อยกว่าที่กำหนด');
         $("#maxScore").focus();
         $("#score").css('border-color', 'red');
         return false;
     }
 }
 
-function createPaper(){
+function validateScoreRandom(){
+    if($("#score").val() > $("#maxScore").val()){
+        alert('คะแนนรวมข้อสอบมากกว่าที่กำหนด');
+        $("#maxScore").focus();
+        $("#score").css('border-color', 'red');
+        return false;
+    }
+}
+
+function createPaper(status){
 
     var check = true;
     $.ajax({
@@ -653,17 +677,6 @@ function createPaper(){
         }
     });
 
-    if(check == false){
-        return false;
-    }
-
-    if(createPaperValidation() == false){
-        return false;
-    }
-    if(validateScore() == false){
-        return false;
-    }
-
     var paperCode = $("#newPaperId").val();
     var paperName = $("#newPaperName").val();
     var paperScore = $("#newPaperScore").val();
@@ -674,23 +687,6 @@ function createPaper(){
     var tempArrayQuestion = new Array();
 
     for(var idx = 0; idx < questionsInPaper.length; idx++){
-        //if((newQuestionScore[idx] == null) || (questionsInPaper[idx] == null)){
-        //    if(newQuestionScore[idx] == null){
-        //        alert('empty newQuestionScore' + newQuestionScore);
-        //        break;
-        //    }
-        //    if(questionsInPaper[idx] == null){
-        //        alert('empty questionsInPaper' + questionsInPaper);
-        //        break;
-        //    }
-        //}
-        //else{
-        //    var item = {
-        //        "qId": questionsInPaper[idx],
-        //        "qScore" : newQuestionScore[idx]
-        //    };
-        //    tempArrayQuestion.push(item);
-        //}
         var item = {
             "qId": questionsInPaper[idx],
             "qScore" : newQuestionScore[idx]
@@ -699,26 +695,90 @@ function createPaper(){
     }
     jsonObjQuestion = JSON.stringify(tempArrayQuestion);
 
-    $.ajax({
-        type: "POST",
-        url:context+ "/TDCS/exam/createPaper",
-        data: {
-            paperCode : paperCode,
-            paperName : paperName,
-            paperScore : paperScore,
-            paperTime : paperTime,
-            paperForPosition : paperForPosition,
-            jsonObjQuestion : jsonObjQuestion
-        },
-        success: function(paperId){
-            alert('บันทึกข้อมูลสำเร็จ');
-            window.location.href = context+"/TDCS/exam/managePapers";
-            //toUrl(paperId);
-        },
-        error: function(){
-            alert('เกิดข้อผิดพลาด');
+    if(status === "static"){
+        if(check == false){
+            return false;
         }
-    });
+
+        if(createPaperValidation() == false){
+            return false;
+        }
+
+        if(validateScore() == false){
+            return false;
+        }
+
+        $.ajax({
+            type: "POST",
+            url:context+ "/TDCS/exam/createPaper",
+            data: {
+                paperCode : paperCode,
+                paperName : paperName,
+                paperScore : paperScore,
+                paperTime : paperTime,
+                paperForPosition : paperForPosition,
+                jsonObjQuestion : jsonObjQuestion,
+                questionEasyCount : null,
+                questionNormalCount : null,
+                questionHardCount : null,
+                paperType : 'static'
+            },
+            success: function(paperId){
+                alert('บันทึกข้อมูลสำเร็จ');
+                window.location.href = context+"/TDCS/exam/managePapers";
+                //toUrl(paperId);
+            },
+            error: function(){
+                alert('เกิดข้อผิดพลาด');
+            }
+        });
+    }
+
+    if(status === "random") {
+
+        if(check == false){
+            return false;
+        }
+
+        if(createPaperValidation() == false){
+            return false;
+        }
+
+        if(validateScoreRandom() == false){
+            return false;
+        }
+
+        var questionEasyCount = $('#questionEasyCount').val();
+        if(questionEasyCount == ""? questionEasyCount = 0: questionEasyCount = questionEasyCount);
+        var questionNormalCount = $('#questionNormalCount').val();
+        if(questionNormalCount == ""? questionNormalCount = 0: questionNormalCount = questionNormalCount);
+        var questionHardCount = $('#questionHardCount').val();
+        if(questionHardCount == ""? questionHardCount = 0: questionHardCount = questionHardCount);
+
+        $.ajax({
+            type: "POST",
+            url: context + "/TDCS/exam/createPaper",
+            data: {
+                paperCode: paperCode,
+                paperName: paperName,
+                paperScore: paperScore,
+                paperTime: paperTime,
+                paperForPosition: paperForPosition,
+                jsonObjQuestion: jsonObjQuestion,
+                questionEasyCount: questionEasyCount,
+                questionNormalCount: questionNormalCount,
+                questionHardCount: questionHardCount,
+                paperType: 'random'
+            },
+            success: function (paperId) {
+                alert('บันทึกข้อมูลสำเร็จ');
+                window.location.href = context + "/TDCS/exam/managePapers";
+            },
+            error: function () {
+                alert('เกิดข้อผิดพลาด');
+            }
+        });
+    }
 
     newQuestionScore = [];
 }

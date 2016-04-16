@@ -40,13 +40,13 @@
         <span class="glyphicon glyphicon-transfer">&nbsp;<strong>เพิ่มลงในชุดข้อสอบ</strong></span>
     </button>
 
+    <button class="btn btn-primary btn-sm createQuestionBtn" data-target="#createQuest" data-toggle="modal">
+        <span class="glyphicon glyphicon-plus"><strong>&nbsp;สร้างข้อสอบใหม่</strong></span>
+    </button>
+
     <span id="span-random-questions" hidden>
         <button class="btn btn-primary btn-sm add-from-subcategory" data-toggle="modal" data-target="#select-questions-by-category">
             <span class="glyphicon glyphicon-list-alt"><strong>&nbsp;เพิ่มจากหัวข้อเรื่อง</strong></span>
-        </button>
-
-        <button class="btn btn-primary btn-sm createQuestionBtn" data-target="#createQuest" data-toggle="modal">
-            <span class="glyphicon glyphicon-plus"><strong>&nbsp;สร้างข้อสอบใหม่</strong></span>
         </button>
     </span>
 

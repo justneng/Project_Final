@@ -200,7 +200,7 @@
         บันทึก
     </button>
 
-    <button class="btn btn-primary btn-sm createQuestionBtn" data-target="#createQuest" data-toggle="modal">
+    <button class="btn btn-default btn-sm createQuestionBtn" data-target="#createQuest" data-toggle="modal">
         <span class="glyphicon glyphicon-plus"></span>&nbsp;
         สร้างข้อสอบใหม่
     </button>

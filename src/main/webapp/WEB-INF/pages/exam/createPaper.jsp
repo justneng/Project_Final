@@ -235,40 +235,40 @@
                 </div><br/>
 
                 <div id="random-by-question">
-                    <div class="row form-group">
+                    <div class="row">
                         <div class="col-sm-6">
-                            <div class="col-sm-4 col-sm-offset-1 text-right">
+                            <div class="col-sm-4 col-sm-offset-1 text-right" style="top: 3px;">
                                 ระดับง่าย
                             </div>
 
                             <div class="col-sm-4" style="padding: 0;">
-                                <input type="number" class="form-control input-sm" min="0" step="1"
+                                <input id="questionEasyCount" type="number" class="form-control input-sm" min="0" step="1"
                                        oninput="validity.valid||(value='');" placeholder="จำนวนข้อ"/>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row form-group">
+                    <div class="row" style="margin-top: 6px;">
                         <div class="col-sm-6">
-                            <div class="col-sm-4 col-sm-offset-1 text-right">
+                            <div class="col-sm-4 col-sm-offset-1 text-right" style="top: 3px;">
                                 ระดับปานกลาง
                             </div>
 
                             <div class="col-sm-4" style="padding: 0;">
-                                <input type="number" class="form-control input-sm" min="0" step="1"
+                                <input id="questionNormalCount" type="number" class="form-control input-sm" min="0" step="1"
                                        oninput="validity.valid||(value='');" placeholder="จำนวนข้อ"/>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row form-group">
+                    <div class="row" style="margin-top: 6px;">
                         <div class="col-sm-6">
-                            <div class="col-sm-4 col-sm-offset-1 text-right">
+                            <div class="col-sm-4 col-sm-offset-1 text-right" style="top: 3px;">
                                 ระดับยาก
                             </div>
 
                             <div class="col-sm-4" style="padding: 0;">
-                                <input type="number" class="form-control input-sm" min="0" step="1"
+                                <input id="questionHardCount" type="number" class="form-control input-sm" min="0" step="1"
                                        oninput="validity.valid||(value='');" placeholder="จำนวนข้อ"/>
                             </div>
                         </div>

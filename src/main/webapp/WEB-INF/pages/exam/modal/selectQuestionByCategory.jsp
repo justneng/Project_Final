@@ -11,20 +11,35 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <strong>เพิ่มข้อสอบจากหัวข้อเรื่อง</strong>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <div class="modal-body">
-                <select id="selectCategories" class="form-control input-sm">
+                <div class="well">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="selectCategories" class="control-label"><strong>หมวดหมู่</strong>&nbsp;&nbsp;&nbsp;</label>
+                            <select id="selectCategories" class="form-control input-sm">
 
-                </select>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="well">
+                    <strong>หัวข้อเรื่อง</strong><br/><br/>
+                    <div id="selectSubcategories" class="form-horizontal">
+
+                    </div>
+                </div>
             </div>
 
             <div class="modal-footer">
                 <div class="text-center">
-                    <button id="update-subcategoory-btn" class="btn btn-primary btn-sm">
-                        <span class="glyphicon glyphicon-save"></span>
-                        &nbsp;บันทึก
+                    <button id="add-questions-to-paper" class="btn btn-primary btn-sm" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-transfer"></span>
+                        &nbsp;เพิ่มข้อสอบ
                     </button>
                 </div>
 

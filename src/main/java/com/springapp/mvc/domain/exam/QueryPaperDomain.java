@@ -131,7 +131,6 @@ public class QueryPaperDomain extends HibernateUtil {
         criteria.addOrder(Order.asc("id"));
         List<ExamPaper> papers = criteria.list();
         HibernateUtil.commitTransaction();
-        HibernateUtil.closeSession();
 
         return papers;
     }
