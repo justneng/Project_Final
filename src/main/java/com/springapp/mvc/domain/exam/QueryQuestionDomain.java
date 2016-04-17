@@ -34,6 +34,8 @@ public class QueryQuestionDomain extends HibernateUtil {
     QueryUserDomain queryUserDomain;
     @Autowired
     QueryDifficultyDomain queryDifficultyDomain;
+    @Autowired
+    QueryQuestionTypeDomain queryQuestionTypeDomain;
 
 
     private static final Logger logger = Logger.getLogger(QueryQuestionDomain.class.getName());
@@ -330,6 +332,7 @@ public class QueryQuestionDomain extends HibernateUtil {
 
         Criteria criteria = getSession().createCriteria(Question.class);
         criteria.add(Restrictions.ne("status.id", 4));
+        criteria.add(Restrictions.eq("questionType", queryQuestionTypeDomain.getQuestionTypeById(1)));
 
         List<Question> questions = criteria.list();
         return questions;
@@ -340,6 +343,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         Criteria criteria = getSession().createCriteria(Question.class);
         criteria.add(Restrictions.not(Restrictions.in("id", qId)));
         criteria.add(Restrictions.ne("status.id", 4));
+        criteria.add(Restrictions.eq("questionType", queryQuestionTypeDomain.getQuestionTypeById(1)));
 
         List<Question> questions = criteria.list();
 
@@ -367,6 +371,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         criteria.createAlias("question.subCategory", "subCategory");
         criteria.createAlias("question.createBy", "createBy");
         criteria.createAlias("subCategory.category", "category");
+        criteria.add(Restrictions.eq("questionType", queryQuestionTypeDomain.getQuestionTypeById(1)));
         criteria.add(Restrictions.ne("status.id", 4));
 
 //        if (users != null) {
@@ -417,6 +422,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         criteria.createAlias("question.subCategory", "subCategory");
         criteria.createAlias("question.createBy", "createBy");
         criteria.createAlias("subCategory.category", "category");
+        criteria.add(Restrictions.eq("questionType", queryQuestionTypeDomain.getQuestionTypeById(1)));
         criteria.add(Restrictions.ne("status.id", 4));
 
         if (users != null) {
@@ -497,6 +503,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         Criteria criteria = getSession().createCriteria(Question.class, "question");
         criteria.createAlias("question.subCategory", "subCategory");
         criteria.createAlias("subCategory.category", "category");
+        criteria.add(Restrictions.eq("questionType", queryQuestionTypeDomain.getQuestionTypeById(1)));
         criteria.add(Restrictions.ne("status.id", 4));
 
         if (level != 0) {
@@ -529,6 +536,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         criteria.createAlias("question.subCategory", "subCategory");
         criteria.createAlias("subCategory.category", "category");
 
+        criteria.add(Restrictions.eq("questionType", queryQuestionTypeDomain.getQuestionTypeById(1)));
         criteria.add(Restrictions.eq("difficultyLevel", difficulty));
         criteria.add(Restrictions.ne("status.id", 4));
 
@@ -562,6 +570,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         Criteria criteria = getSession().createCriteria(Question.class, "question");
         criteria.createAlias("question.subCategory", "subCategory");
         criteria.createAlias("subCategory.category", "category");
+        criteria.add(Restrictions.eq("questionType", queryQuestionTypeDomain.getQuestionTypeById(1)));
         criteria.add(Restrictions.eq("category.id", categoryId));
         List<Question> questions = criteria.list();
 
@@ -574,6 +583,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         criteria.createAlias("question.subCategory", "subCategory");
         criteria.add(Restrictions.eq("subCategory.id", subcategoryId));
         criteria.add(Restrictions.ne("status.id", 4));
+        criteria.add(Restrictions.eq("questionType", queryQuestionTypeDomain.getQuestionTypeById(1)));
         if(questionIds != null){
             criteria.add(Restrictions.not(Restrictions.in("id", questionIds)));
         }
@@ -622,6 +632,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         criteria.createAlias("question.subCategory", "subCategory");
         criteria.createAlias("subCategory.category", "category");
         criteria.createAlias("question.questionType", "questionType");
+        criteria.add(Restrictions.eq("questionType", queryQuestionTypeDomain.getQuestionTypeById(1)));
         criteria.add(Restrictions.ne("status.id", 4));
 
         if(orderType.equals("asc")){
@@ -675,6 +686,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         HibernateUtil.beginTransaction();
         Criteria criteria1 = getSession().createCriteria(Question.class);
         criteria1.add(Restrictions.eq("questionType.id", 1));
+        criteria1.add(Restrictions.eq("questionType", queryQuestionTypeDomain.getQuestionTypeById(1)));
         List<Question> list = criteria1.list();
 
         Integer maxId = 0;
@@ -699,6 +711,7 @@ public class QueryQuestionDomain extends HibernateUtil {
         criteria.createAlias("question.status", "status");
         criteria.add(Restrictions.eq("question.subCategory", subCategory));
         criteria.add(Restrictions.ne("status.id", 4));
+        criteria.add(Restrictions.eq("questionType", queryQuestionTypeDomain.getQuestionTypeById(1)));
 
         if(questionIds != null){
             criteria.add(Restrictions.not(Restrictions.in("question.id", questionIds)));

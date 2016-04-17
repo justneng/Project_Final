@@ -26,32 +26,68 @@ $(document).ready(function(){
                     $("#questionNotFound").hide();
                     $("#removeRowQuestionSelect").show();
                     $("#tbSelectedQuestionToPaper").show();
+                    $(".label-difficulty-level").show();
+                    $("#esy, #nrm, #hrd").text(0).show();
                     $('#sum-score').show();
                     $("#tbodySelectedQuestionToPaper").empty();
                     for(var i = 0; i < value.length; i ++){
+                        var str = "";
+                        if($('#select-paper-type').val() == 'random'){
+                            alert(value.length)
+                            $("#score").val(value.length);
+                            str = '<input id="newScore'+value[i].question.id+'" type="number" name="newScore" class="form-control input-sm" value="1" readonly/>';
+                        }
+                        else{
+                            sumScore(value[i].score);
+                            $("#score").val(sumPaperScore);
+                            str = '<input id="newScore'+value[i].question.id+'" onchange="scoreOnChange()" name="newScore" type="number" class="form-control input-sm"  min="1" max="50" value="'+value[i].score+'"/>';
+                        }
+
                         $("#tbodySelectedQuestionToPaper").append(
                             '<tr>'+
-                            '<td qid="'+value[i].question.id+'"style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
+                            '<td level="'+value[i].question.difficultyLevel.level+'" qid="'+value[i].question.id+'"style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
                             '<td>'+ value[i].question.subCategory.category.name+'</td>'+
                             '<td>'+ value[i].question.subCategory.name+'</td>'+
                             '<td style="text-align: left;">'+ checkString(value[i].question.description)+'</td>'+
                             '<td style="text-align: left;">'+ value[i].question.questionType.description+'</td>'+
                             '<td style="text-align: center;">'+ value[i].question.difficultyLevel.description+'</td>'+
-                            '<td><input id="newScore'+value[i].question.id+'" onkeypress="return isNumber(event)" onchange="scoreOnChange()" name="newScore" type="number" class="form-control input-sm"  min="1" max="50" value="'+value[i].score+'"/></td>'+
+                            '<td>'+str+'</td>'+
                             '</tr>'
                         );
 
+                        var esy = Number($("#esy").text());
+                        var nrm = Number($("#nrm").text());
+                        var hrd = Number($("#hrd").text());
+
+                        if(Number(value[i].question.difficultyLevel.level) == 1){
+                            esy = esy + 1;
+                        }
+
+                        if(Number(value[i].question.difficultyLevel.level) == 2){
+                            nrm = nrm + 1;
+                        }
+
+                        if(Number(value[i].question.difficultyLevel.level) == 3){
+                            hrd = hrd + 1;
+                        }
+
+                        $("#esy").text(esy);
+                        $("#nrm").text(nrm);
+                        $("#hrd").text(hrd);
+                        $('#maxScore').val($('#newPaperScore').val());
+
                         questionsInPaper.push(value[i].question.id);
                         newQuestionScore.push(value[i].score);
-                        sumScore(value[i].score);
-                        $("#score").val(sumPaperScore);
                     }
                     sumPaperScore = 0;
+
                 }
                 else{
                     $("#tbodySelectedQuestionToPaper").empty();
                     $("#score").val(0);
                     $("#tbSelectedQuestionToPaper").hide();
+                    $(".label-difficulty-level").hide();
+                    $("#esy, #nrm, #hrd").text(0).hide();
                     $('#sum-score').hide();
                     $("#removeRowQuestionSelect").hide();
                     $("#questionNotFound").show();

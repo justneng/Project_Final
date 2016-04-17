@@ -170,6 +170,10 @@ public class PaperController {
                                               @RequestParam(value = "paperForPositionUpdate", required = true) Integer paperForPosition,
                                               @RequestParam(value = "jsonObjQuestionUpdate", required = true) String jsonObjQuestion,
                                               @RequestParam(value = "paperIdUpdate", required = true) Integer pId,
+                                              @RequestParam(value = "questionEasyCount", required = true) Integer questionEasyCount,
+                                              @RequestParam(value = "questionNormalCount", required = true) Integer questionNormalCount,
+                                              @RequestParam(value = "questionHardCount", required = true) Integer questionHardCount,
+                                              @RequestParam(value = "paperType", required = true) String paperType,
                                               HttpServletRequest request,
                                               HttpServletResponse response) throws JSONException {
 
@@ -189,19 +193,25 @@ public class PaperController {
         User updateBy = queryUserDomain.getCurrentUser(request);
         Status paperStatus = queryPaperStatusDomain.getStatusById(2);
 //        long time = System.currentTimeMillis();
-//        Date updateDate = new Date(time);
+//        Date curDate = new Date(time);
         java.util.Date updateDate = DateUtil.getCurrentDateWithRemovedTime();
 
         for(int i = 0; i < jsonArray.length(); i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
-            Integer tempQId = new Integer(jsonObject.getString("qId"));
+            Integer tempQId = new Integer(jsonObject.getInt("qId"));
             tempQId.getClass().getName();
             Float tempQScore = new Float(jsonObject.getString("qScore"));
             qIds.add(tempQId);
             qScores.add(tempQScore);
         }
 
-        queryPaperDomain.updatePaper(qIds, qScores, pId, updateBy, paperCode, paperName, paperMaxScore, updateDate, pTime, paperStatus, pForPosition);
+        if(paperType.equals("static")) {
+            queryPaperDomain.updatePaper(qIds, qScores, pId, updateBy, paperCode, paperName, paperMaxScore, updateDate, pTime, paperStatus, pForPosition, queryPaperTypeDomain.getPaperTypeById(1), questionEasyCount, questionNormalCount, questionHardCount);
+        }
+
+        if(paperType.equals("random")) {
+            queryPaperDomain.updatePaper(qIds, qScores, pId, updateBy, paperCode, paperName, paperMaxScore, updateDate, pTime, paperStatus, pForPosition, queryPaperTypeDomain.getPaperTypeById(2), questionEasyCount, questionNormalCount, questionHardCount);
+        }
 
         return new ResponseEntity<String>(HttpStatus.OK);
     }

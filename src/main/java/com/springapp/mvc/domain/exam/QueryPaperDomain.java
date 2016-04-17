@@ -79,7 +79,7 @@ public class QueryPaperDomain extends HibernateUtil {
         HibernateUtil.closeSession();
     }
 
-    public void updatePaper(List<Integer> qIds, List<Float> newScores, Integer paperId, User updateBy, String paperCode, String paperName, Float paperMaxScore, Date updateDate, Integer paperTime, Status paperStatus, Position paperForPosition){
+    public void updatePaper(List<Integer> qIds, List<Float> newScores, Integer paperId, User updateBy, String paperCode, String paperName, Float paperMaxScore, Date updateDate, Integer paperTime, Status paperStatus, Position paperForPosition, PaperType paperType, Integer easy, Integer normal, Integer hard){
 
         QueryPaperDomain queryPaperDomain = new QueryPaperDomain();
         ExamPaper examPaper = queryPaperDomain.getPaperById(paperId);
@@ -108,6 +108,10 @@ public class QueryPaperDomain extends HibernateUtil {
         examPaper.setUpdateDate(updateDate);
         examPaper.setTimeLimit(paperTime);
         examPaper.setPaperStatus(paperStatus);
+        examPaper.setPaperType(paperType);
+        examPaper.setQuestionEasy(easy);
+        examPaper.setQuestionNormal(normal);
+        examPaper.setQuestionHard(hard);
 
         if (paperForPosition != null) {
             examPaper.setPosition(paperForPosition);

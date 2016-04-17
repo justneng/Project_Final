@@ -8,12 +8,14 @@ $(document).ready(function(){
             $('#div-random-questions').show();
             $('#div-save-create-paper').hide();
             $('#span-random-questions').show();
+            sumPaperScore = 0;
             clearQuestionsInPaper();
         }
         if($('#select-paper-type').val() == 'static'){
             $('#div-random-questions').hide();
             $('#div-save-create-paper').show();
             $('#span-random-questions').hide();
+            sumPaperScore = 0;
             clearQuestionsInPaper();
         }
     });
@@ -69,15 +71,21 @@ $(document).ready(function(){
             success: function (questions) {
                 $(".checkAllQuestionFromCreatePaperPage").checked = false;
                 $("#tbSelectedQuestionToPaper").show();
+                $(".label-difficulty-level").show();
+                $("#esy, #nrm, #hrd").show();
                 $("#removeRowQuestionSelect").show();
                 $("#questionNotFoundDesc").hide();
                 $('#sum-score').show();
+
+                var esy = Number($("#esy").text());
+                var nrm = Number($("#nrm").text());
+                var hrd = Number($("#hrd").text());
 
                 if(questions.length > 0){
                     questions.forEach(function(value){
                         $("#tbodySelectedQuestionToPaper").append(
                             '<tr>'+
-                            '<td qid="'+value.id+'" style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
+                            '<td level="'+value.difficultyLevel.level+'" qid="'+value.id+'" style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
                             '<td>'+value.subCategory.category.name+'</td>'+
                             '<td>'+value.subCategory.name+'</td>'+
                             '<td>'+checkString(value.description)+'</td>'+
@@ -86,6 +94,18 @@ $(document).ready(function(){
                             '<td><input id="newScore'+value.id+'" onchange="scoreOnChange()" type="number" name="newScore" class="form-control input-sm" value="1" readonly/></td>'+
                             '</tr>'
                         );
+
+                        if(value.difficultyLevel.level == 1){
+                            esy = esy + 1;
+                        }
+
+                        if(value.difficultyLevel.level == 2){
+                            nrm = nrm + 1;
+                        }
+
+                        if(value.difficultyLevel.level == 3){
+                            hrd = hrd + 1;
+                        }
                     });
 
                     var elem;
@@ -107,6 +127,10 @@ $(document).ready(function(){
                     scoreOnChange();
                 }
 
+                $("#esy").text(esy);
+                $("#nrm").text(nrm);
+                $("#hrd").text(hrd);
+
                 viewQuestions();
             },
             error: function () {
@@ -116,16 +140,71 @@ $(document).ready(function(){
     });
 
     $('#createPaperRandomQuestionBtn').on('click', function(){
-        newQuestionScore = [];
-        $("#tbodySelectedQuestionToPaper tr input[type='number']").each(function(){
-            newQuestionScore.push($(this).val());
-        });
-        minutes =  $("#minutes").val();
-        if(minutes == ""? minutes = 0: minutes =  $("#minutes").val());
-        hours = $("#hours").val();
-        if(hours == ""? hours = 0: hours = $("#hours").val());
+        if($('#createPaperRandomQuestionBtn').attr('button-status') == "create"){
+            newQuestionScore = [];
+            $("#tbodySelectedQuestionToPaper tr input[type='number']").each(function(){
+                newQuestionScore.push($(this).val());
+            });
+            minutes =  $("#minutes").val();
+            if(minutes == ""? minutes = 0: minutes =  $("#minutes").val());
+            hours = $("#hours").val();
+            if(hours == ""? hours = 0: hours = $("#hours").val());
 
-        createPaper('random');
+            createPaper('random');
+        }
+
+        if($('#createPaperRandomQuestionBtn').attr('button-status') == "update"){
+            questionsInPaper = [];
+            $(".selectedQuestion").each(function(){
+                questionsInPaper.push($(this).parent().attr("qid"));
+            });
+            newQuestionScore = [];
+            $("#tbodySelectedQuestionToPaper tr input[type='number']").each(function(){
+                newQuestionScore.push($(this).val());
+            });
+            minutes =  $("#minutes").val();
+            hours = $("#hours").val();
+            if(minutes == ""? minutes = 0: minutes =  $("#minutes").val());
+            if(hours == ""? hours = 0: hours =  $("#hours").val());
+            updatePaper('random');
+        }
+
+    });
+
+    $('#questionEasyCount').keyup(function(){
+        if($('.label-difficulty-level').is(':visible')){
+            if(Number($('#questionEasyCount').val()) > Number($('#esy').text())){
+                $('#not-enough-easy-exam').show();
+                return false;
+            }
+            else{
+                $('#not-enough-easy-exam').hide();
+            }
+        }
+    });
+
+    $('#questionNormalCount').keyup(function(){
+        if($('.label-difficulty-level').is(':visible')){
+            if(Number($('#questionNormalCount').val()) > Number($('#nrm').text())){
+                $('#not-enough-normal-exam').show();
+                return false;
+            }
+            else{
+                $('#not-enough-normal-exam').hide();
+            }
+        }
+    });
+
+    $('#questionHardCount').keyup(function(){
+        if($('.label-difficulty-level').is(':visible')){
+            if(Number($('#questionHardCount').val()) > Number($('#hrd').text())){
+                $('#not-enough-hard-exam').show();
+                return false;
+            }
+            else{
+                $('#not-enough-hard-exam').hide();
+            }
+        }
     });
 });
 
@@ -184,6 +263,8 @@ function clearQuestionsInPaper(){
     $("#removeRowQuestionSelect").hide();
     $("#tbSelectedQuestionToPaper tbody").empty();
     $("#tbSelectedQuestionToPaper").hide();
+    $(".label-difficulty-level").hide();
+    $("#esy, #nrm, #hrd").text(0).hide();
     $('#sum-score').hide();
     $("#removeRowSelected").removeAttr('disabled');
     $("#addQuestionBtn").removeAttr('disabled');

@@ -197,7 +197,7 @@
                     </div>
                 </div>
 
-                <div id="div-save-create-paper" class="row col-sm-12 text-right">
+                <div id="div-save-create-paper" class="text-right">
                     <button id="createPaperBtn" class="btn btn-primary btn-sm" type="button">
                         <span class="glyphicon glyphicon-saved"></span>&nbsp;
                         บันทึก
@@ -245,6 +245,8 @@
                                 <input id="questionEasyCount" type="number" class="form-control input-sm" min="0" step="1"
                                        oninput="validity.valid||(value='');" placeholder="จำนวนข้อ"/>
                             </div>
+
+                            &nbsp;<span id="not-enough-easy-exam" class="label label-danger" style="display: none;">ข้อสอบไม่เพียงพอ</span>
                         </div>
                     </div>
 
@@ -258,6 +260,8 @@
                                 <input id="questionNormalCount" type="number" class="form-control input-sm" min="0" step="1"
                                        oninput="validity.valid||(value='');" placeholder="จำนวนข้อ"/>
                             </div>
+
+                            &nbsp;<span id="not-enough-normal-exam" class="label label-danger" style="display: none;">ข้อสอบไม่เพียงพอ</span>
                         </div>
                     </div>
 
@@ -271,11 +275,13 @@
                                 <input id="questionHardCount" type="number" class="form-control input-sm" min="0" step="1"
                                        oninput="validity.valid||(value='');" placeholder="จำนวนข้อ"/>
                             </div>
+
+                            &nbsp;<span id="not-enough-hard-exam" class="label label-danger" style="display: none;">ข้อสอบไม่เพียงพอ</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="row col-sm-12 text-right">
+                <div class="text-right">
                     <button id="createPaperRandomQuestionBtn" class="btn btn-primary btn-sm" type="button">
                         <span class="glyphicon glyphicon-saved"></span>&nbsp;
                         บันทึก
@@ -321,6 +327,12 @@
 
                 </tbody>
             </table>
+
+            <div class="text-right label-difficulty-level" style="display: none;">
+                <span class="label label-primary">ระดับง่าย&nbsp;<label id="esy">0</label>&nbsp;ข้อ</span>
+                <span class="label label-primary">ระดับปานกลาง&nbsp;<label id="nrm">0</label>&nbsp;ข้อ</span>
+                <span class="label label-primary">ระดับยาก&nbsp;<label id="hrd">0</label>&nbsp;ข้อ</span>
+            </div>
 
             <div id="questionNotFoundDesc" class="alert alert-info text-center">
                 <strong>ยังไม่มีข้อสอบในชุดข้อสอบ</strong>
