@@ -128,7 +128,8 @@ function saveQuestion() {
             correctChoice: correctChoice,
             questionType: questionType,
             difficulty: parseInt(difficulty),
-            score: parseFloat(score)
+            //score: parseFloat(score)
+            score : 1
         }
         ,
         success: function (q) {
@@ -152,8 +153,8 @@ function saveQuestion() {
                 $("#searchCatNotFound").hide();
                 $('tbody tr td:not(.questionSelect)').css('cursor', 'pointer');
                 $('.questionSelectBox').css('cursor', 'pointer');
-                pagination.pagination('redraw');
-                pagination.pagination("updateItems",itemCount);
+                //pagination.pagination('redraw');
+                //pagination.pagination("updateItems",itemCount);
             }
 
             viewQuestions();
@@ -217,21 +218,21 @@ var checkCreateQuestionModalFieldComplete = function () {
         subcat.removeClass("validate-fail")
     }
 
-    var questType = $("#select-QuestionType")
-    if (questType.val() == "" || questType.val() == null) {
-        questType.addClass("validate-fail")
-        complete = false
-    } else {
-        questType.removeClass("validate-fail")
-    }
+    //var questType = $("#select-QuestionType")
+    //if (questType.val() == "" || questType.val() == null) {
+    //    questType.addClass("validate-fail")
+    //    complete = false
+    //} else {
+    //    questType.removeClass("validate-fail")
+    //}
 
-    var qScore = $("#questionScoreForCreateQuestion")
-    if (qScore.val() == "" || isNaN(qScore.val()) || qScore.val() > 999) {
-        qScore.addClass("validate-fail")
-        complete = false
-    } else {
-        qScore.removeClass("validate-fail")
-    }
+    //var qScore = $("#questionScoreForCreateQuestion")
+    //if (qScore.val() == "" || isNaN(qScore.val()) || qScore.val() > 999) {
+    //    qScore.addClass("validate-fail")
+    //    complete = false
+    //} else {
+    //    qScore.removeClass("validate-fail")
+    //}
 
     var qDescr = $("#questionDescription")
     if (qDescr.val() == "") {
@@ -271,14 +272,14 @@ var createQuestionModalClearInput = function () {
     $("#categoryInputForCreateQuestion").val("");
 
     $("#sSubCat").empty();
-    $("#select-QuestionType").val("");
+    $("#select-QuestionType").val("Objective");
     $("#questionScoreForCreateQuestion").val("");
     $("#questionDescription").val("");
     $("input[name='level']").attr('checked', false);
     //$(".correctRadio").attr('checked', false);
     $(".choiceDesc").val("");
-    $("#submitBtnContainer").hide();
-    $("#answerInput").hide()
+    //$("#submitBtnContainer").hide();
+    //$("#answerInput").hide()
     //var correctRadioNotChecked = $('.correctRadio:not(:checked)')
     //correctRadioNotChecked.parent().removeClass('success');
     //correctRadioNotChecked.show();
@@ -401,7 +402,7 @@ $("#categoryInputForCreateQuestion").on('change', function () {
                     success: function (data) {
                         data.forEach(function (value) {
                             $("#sSubCat").append(
-                                '<option value="' + value.name + '">' + value.name + '</option>'
+                                '<option value="' + value.name + '">' + value.SubCategory.name + '</option>'
                             )
                         });
                     },
@@ -425,7 +426,7 @@ $("#categoryInputForCreateQuestion").on('change', function () {
                     success: function (data) {
                         data.forEach(function (value) {
                             $("#sSubCat").append(
-                                '<option value="' + value.name + '">' + value.name + '</option>'
+                                '<option value="' + value.name + '">' + value.SubCategory.name + '</option>'
                             )
                         });
 

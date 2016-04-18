@@ -5,14 +5,13 @@ $(document).ready(function () {
 
         if ($("#advanceBtn").children("span").hasClass("glyphicon glyphicon-chevron-down")) {
             $("#advanceBtn").children("span").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-up");
-            $("#btnSearch").hide();
-            $("#btnAdvanceSearch").show();
+            $("#buttons-search").hide();
+            $("#buttons-adv-search").show();
         }
         else {
             $("#advanceBtn").children("span").removeClass("glyphicon glyphicon-chevron-up").addClass("glyphicon glyphicon-chevron-down");
-
-            $("#btnSearch").show();
-            $("#btnAdvanceSearch").hide();
+            $("#buttons-search").show();
+            $("#buttons-adv-search").hide();
         }
     });
     $(".datepicker").datepicker();
@@ -75,8 +74,8 @@ var submitSearchQuestion = function (mode, page) {
         SI.questionDesc = $("#searchQuestionDescInput").val()
         SI.createDateFrom = $('#searchCreateDateFromInput').val()
         SI.createDateTo = $("#searchCreateDateToInput").val()
-        SI.scoreFrom = $("#searchScoreFromInput").val()
-        SI.scoreTo = $("#searchScoreToInput").val()
+        SI.scoreFrom = null
+        SI.scoreTo = null
     }
 
     var ajaxDat = $.ajax({

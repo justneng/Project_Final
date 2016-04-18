@@ -45,13 +45,13 @@ var updateDetailModal = function (tr) {
             }
 
             $('#detailEditBtn').val(question.id);
-            $('#scoreDetail').text(question.score);
+            //$('#scoreDetail').text(question.score);
             $('#categoryDetail').text(question.subCategory.category.name + " : " + question.subCategory.category.id);
             $('#subCategoryDetail').text(question.subCategory.name);
             $('#difficultyDetail').text(question.difficultyLevel.description);
             $('#createByDetail').text(question.createBy.thFname + " " + question.createBy.thLname);
             $('#createDateDetail').text(formattedCreateDate);
-            $('#questionTypeDetail').text(question.questionType.description);
+            //$('#questionTypeDetail').text(question.questionType.description);
             $('#questionDescDetail').text(question.description);
             //$('#updateDetail').text(formattedUpdateDate);
 

@@ -48,15 +48,17 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-default" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li id="userData"><a id="linkhome" href="${context}/TDCS/home.html">ข้อมูลผู้ใช้</a></li>
+                <li id="userData"><a id="linkhome" href="${context}/TDCS/home.html">จัดการบัญชีผู้ใช้</a></li>
                 <c:if test="${status == 'admin' || status == 'staff'}">
                     <c:if test="${status == 'admin'}">
                         <li id="addData" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false">เพิ่มข้อมูล <span class="caret"></span></a>
+                               aria-expanded="false">จัดการบัญชีผู้ใช้ <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="${context}/TDCS/addStudent.html">เพิ่มข้อมูลนักศึกษา</a></li>
                                 <li><a href="${context}/TDCS/addStaff.html">เพิ่มข้อมูลพนักงาน</a></li>
+                                <li><a href="${context}/TDCS/addUser.html">เพิ่มบัญชีผู้ใช้</a></li>
+                                <li><a href="${context}/TDCS/manageUser.html">จัดการบัญชีผู้ใช้</a></li>
                             </ul>
                         </li>
                     </c:if>

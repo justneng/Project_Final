@@ -7,7 +7,7 @@
 <!--Create Question Modal-->
 
 
-<div class="modal fade" id="createQuest">
+<div class="modal fade noselect" id="createQuest">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -92,14 +92,14 @@
                 </div>
 
 
-                <div class="row form-group">
+                <div class="row form-group" hidden>
                     <div class="col-md-4" align="right">
                         <h5><label style="font-weight: 100"><span class="mandatory">*</span>ประเภทข้อสอบ :</label></h5>
                     </div>
                     <div class="col-md-5">
                         <select class="form-control" id="select-QuestionType">
-                            <option disabled selected></option>
-                            <option id="obj" value="Objective">ปรนัย</option>
+                            <option disabled></option>
+                            <option id="obj" value="Objective" selected>ปรนัย</option>
                             <option id="sub" value="Subjective">อัตนัย</option>
                         </select>
                     </div>
@@ -137,18 +137,18 @@
                         </div>
 
                     </div>
-                    <div class="row form-group">
-                        <div class="col-md-4 text-right">
-                            <h5><label style="font-weight: 100"><span class="mandatory">*</span>คะแนน :</label></h5>
-                        </div>
-                        <div class="col-md-2" style="padding: 0;">
-                            <input class="form-control" type="number" min="0" step="0.01" max="999"
-                                   oninput="validity.valid||(value='');" id="questionScoreForCreateQuestion"
-                                   style="width: 100%">
-                        </div>
-                    </div>
+                    <%--<div class="row form-group">--%>
+                        <%--<div class="col-md-4 text-right">--%>
+                            <%--<h5><label style="font-weight: 100"><span class="mandatory">*</span>คะแนน :</label></h5>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-md-2" style="padding: 0;">--%>
+                            <%--<input class="form-control" type="number" min="0" step="0.01" max="999"--%>
+                                   <%--oninput="validity.valid||(value='');" id="questionScoreForCreateQuestion"--%>
+                                   <%--style="width: 100%">--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
 
-                    <div class="row form-group" id="answerInput" style="display: none">
+                    <div class="row form-group" id="answerInput">
                         <div class="col-md-4 choiceLabelContainer">
                             <h5><span class="mandatory">*</span>ตัวเลือกคำตอบ</h5>
                         </div>
@@ -199,7 +199,7 @@
                     </div>
                     <%--End Objective--%>
 
-                    <div class="col-md-12" id="submitBtnContainer" hidden align="center">
+                    <div class="col-md-12" id="submitBtnContainer"  align="center">
                         <div class="col-md-1 col-md-offset-5">
                             <button class="btn btn-primary" id="submitCreateBtn">บันทึก</button>
                         </div>
@@ -250,6 +250,17 @@
 
     .mandatory {
         color: red;
+    }
+
+    .noselect {
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Chrome/Safari/Opera */
+        -khtml-user-select: none; /* Konqueror */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none;
+        /* Non-prefixed version, currently
+                               not supported by any browser */
     }
 
 </style>

@@ -482,5 +482,37 @@ public class QueryUserDomain extends HibernateUtil {
 
         return users;
     }
+
+    public void addUser(User user){
+
+        HibernateUtil.beginTransaction();
+        getSession().save(user);
+        getSession().flush();
+        HibernateUtil.commitTransaction();
+        closeSession();
+    }
+
+    public User getUserByUsername(String username){
+        Criteria criteria = getSession().createCriteria(User.class);
+        Criterion cri = Restrictions.eq("userName", username);
+        criteria.add(cri);
+        List<User> users = criteria.list();
+        if(users.size() == 0){
+            return null;
+        }
+        return (User)criteria.list().get(0);
+    }
+
+    public User getUserByEmpId(String empId){
+        Criteria criteria = getSession().createCriteria(User.class);
+        Criterion cri = Restrictions.eq("empId", empId);
+        criteria.add(cri);
+        List<User> users = criteria.list();
+        if(users.size() == 0){
+            return null;
+        }
+
+        return (User)criteria.list().get(0);
+    }
 }
 

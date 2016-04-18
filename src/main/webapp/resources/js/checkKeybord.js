@@ -60,6 +60,15 @@ function isThai(evt) {
     }
     return false;
 }
+function isNotThai(evt){
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if ((charCode >= 3585 && charCode <= 3660)) {
+        return false;
+    }
+    return true;
+}
+
 function otherKey(evt) {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
