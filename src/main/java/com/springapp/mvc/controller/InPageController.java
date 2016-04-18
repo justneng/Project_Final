@@ -452,4 +452,10 @@ public class InPageController {
     //CREATE BY JOB
     @RequestMapping(method = RequestMethod.GET,value = "/exam/examReportResultForEmployee")
     public String examReportResultForEmployee(HttpServletRequest request) {return "examReportResultForEmployee";}
+
+    @RequestMapping(method = RequestMethod.GET,value = "/addUser")
+    public String addUser(HttpServletRequest request) {return "addUser";}
+
+    @RequestMapping(method = RequestMethod.GET,value = "/manageUser")
+    public String manageUser(HttpServletRequest request) {return "manageUser";}
 }

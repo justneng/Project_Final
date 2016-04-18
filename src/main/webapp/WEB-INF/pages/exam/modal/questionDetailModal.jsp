@@ -26,7 +26,10 @@
                     <span class="col-md-2" id="categoryDetail"></span>
 
                     <div class="col-md-2 text-right">หัวข้อเรื่อง :</div>
-                    <span class="col-md-4" id="subCategoryDetail"></span>
+                    <span class="col-md-2" id="subCategoryDetail"></span>
+
+                    <div class="col-md-2 text-right">ความยาก :</div>
+                    <span class="col-md-2" id="difficultyDetail"></span>
                 </div>
                 <br>
 
@@ -42,17 +45,17 @@
                 </div>
                 <br>
 
-                <div class="row">
-                    <div class="col-md-2 text-right">ประเภท :</div>
-                    <span class="col-md-2" id="questionTypeDetail"></span>
+                <%--<div class="row">--%>
+                    <%--<div class="col-md-2 text-right">ประเภท :</div>--%>
+                    <%--<span class="col-md-2" id="questionTypeDetail"></span>--%>
 
-                    <div class="col-md-2 text-right">ความยาก :</div>
-                    <span class="col-md-2" id="difficultyDetail"></span>
+                    <%--<div class="col-md-2 text-right">ความยาก :</div>--%>
+                    <%--<span class="col-md-2" id="difficultyDetail"></span>--%>
 
-                    <div class="col-md-2 text-right">คะแนน :</div>
-                    <span class="col-md-2" id="scoreDetail"></span>
-                </div>
-                <br>
+                    <%--<div class="col-md-2 text-right">คะแนน :</div>--%>
+                    <%--<span class="col-md-2" id="scoreDetail"></span>--%>
+                <%--</div>--%>
+                <%--<br>--%>
 
                 <div class="row">
                     <div class="col-md-2 text-right">คำถาม :</div>

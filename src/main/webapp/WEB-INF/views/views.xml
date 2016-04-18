@@ -194,4 +194,14 @@
         <put-attribute name="title" value="รายงานแสดงผลการสอบ"/>
         <put-attribute name="body" value="/WEB-INF/pages/exam/examReportResultForEmployee.jsp"/>
     </definition>
+
+    <definition name="addUser" extends="tempForUser">
+        <put-attribute name="title" value="เพิ่มผู้ใช้งาน"/>
+        <put-attribute name="body" value="/WEB-INF/pages/addUser.jsp"/>
+    </definition>
+
+    <definition name="manageUser" extends="tempForUser">
+        <put-attribute name="title" value="เพิ่มผู้ใช้งาน"/>
+        <put-attribute name="body" value="/WEB-INF/pages/manageUser.jsp"/>
+    </definition>
 </tiles-definitions>

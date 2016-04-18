@@ -12,6 +12,18 @@
 <%@include file="../modal/addEmployeeToInputModal.jsp" %>
 
 <style>
+    .noselect {
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Chrome/Safari/Opera */
+        -khtml-user-select: none; /* Konqueror */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none;
+
+        /* Non-prefixed version, currently
+                               not supported by any browser */
+    }
+
     .glyphicon-triangle-bottom, .glyphicon-triangle-top{
         font-size: 1px;
         cursor: pointer;
@@ -71,55 +83,12 @@
 
 </style>
 
-<script>
-    var context = '${context}';
-
-    $(document).ready(function () {
-        $("#advanceBtn").click(function(){
-            if ($('#advanceBtn span').hasClass('glyphicon-triangle-bottom')) {
-                $('#advanceBtn span').removeClass('glyphicon-triangle-bottom').addClass('glyphicon-triangle-top');
-                $('#buttons-search').hide();
-                $('#buttons-adv-search').show();
-            }
-            else {
-                $('#advanceBtn span').removeClass('glyphicon-triangle-top').addClass('glyphicon-triangle-bottom');
-                $('#buttons-search').show();
-                $('#buttons-adv-search').hide();
-            }
-        });
-
-        $("#selectAllEmployeeName").click(function (event) {
-            if (this.checked) {
-                $(".userSelectCheckbox").each(function () {
-                    this.checked = true;
-                });
-            }
-            else {
-                $(".userSelectCheckbox").each(function () {
-                    this.checked = false;
-                });
-            }
-        });
-
-        $("#searchCreateDateFromInput").datepicker({
-            format: 'dd/mm/yyyy',
-            autoclose: true,
-            todayHighlight: true
-        });
-        $("#searchCreateDateToInput").datepicker({
-            format: 'dd/mm/yyyy',
-            autoclose: true,
-            todayHighlight: true
-        });
-    });
-</script>
-
-<div class="panel panel-default">
+<div id="searchPanel" class="panel panel-default ">
     <div class="panel-heading">
         <label><strong>ค้นหา</strong></label>
         <button id="advanceBtn" class="btn btn-default btn-sm" data-toggle="collapse"
                 data-target="#question-advance-search-panel" type="button">
-            <span class="glyphicon glyphicon-triangle-bottom"></span>
+            <span class="glyphicon glyphicon-chevron-down"></span>
         </button>
     </div>
 
@@ -142,7 +111,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2 col-xm-2 col-lg-2 text-right label-create-by" for="addEmpCreateByBtn">สร้างโดย</label>
                     <div class="col-sm-9 col-xm-9 col-lg-9 show-employee-selected">
-                        <button id="addEmpCreateByBtn" data-toggle="modal" data-target="#modalSearchByEmployeeName" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-user"></span></button>
+                        <button id="addEmpCreateByBtn" data-toggle="modal" data-target="#modalSearchByEmployeeName" class=" btn btn-primary btn-sm" ><span class="glyphicon glyphicon-user"></span></button>
                         <div id="showEmployeeSelected" class="">
 
                         </div>
@@ -188,27 +157,27 @@
                 </div>
             </div>
 
-            <div class="row" where="search-question">
-                <div class="form-group">
-                    <div class="col-sm-2 col-xm-2 col-lg-2 text-right">
-                        <label for="searchScoreFromInput">คะแนน</label>
-                    </div>
+            <%--<div class="row" where="search-question">--%>
+                <%--<div class="form-group">--%>
+                    <%--<div class="col-sm-2 col-xm-2 col-lg-2 text-right">--%>
+                        <%--<label for="searchScoreFromInput">คะแนน</label>--%>
+                    <%--</div>--%>
 
-                    <div class="col-md-3 col-xm-3 col-lg-3 form-group" style="padding: 0;">
-                        <input id="searchScoreFromInput" class="form-control input-sm" placeholder="ตั้งแต่"
-                               min=0 oninput="validity.valid||(value='');" type="number" step="0.1"/>
-                    </div>
+                    <%--<div class="col-md-3 col-xm-3 col-lg-3 form-group" style="padding: 0;">--%>
+                        <%--<input id="searchScoreFromInput" class="form-control input-sm" placeholder="ตั้งแต่"--%>
+                               <%--min=0 oninput="validity.valid||(value='');" type="number" step="0.1"/>--%>
+                    <%--</div>--%>
 
-                    <div class="col-sm-1 col-xm-1 col-lg-1 col-sm-offset-1 text-right">
-                        <label for="searchScoreToInput">ถึง</label>
-                    </div>
+                    <%--<div class="col-sm-1 col-xm-1 col-lg-1 col-sm-offset-1 text-right">--%>
+                        <%--<label for="searchScoreToInput">ถึง</label>--%>
+                    <%--</div>--%>
 
-                    <div class="col-md-3 col-xm-3 col-lg-3 form-group" style="padding: 0;">
-                        <input id="searchScoreToInput" class="form-control input-sm" placeholder="ถึง"
-                               min=0 oninput="validity.valid||(value='');" type="number" step="0.1"/>
-                    </div>
-                </div>
-            </div>
+                    <%--<div class="col-md-3 col-xm-3 col-lg-3 form-group" style="padding: 0;">--%>
+                        <%--<input id="searchScoreToInput" class="form-control input-sm" placeholder="ถึง"--%>
+                               <%--min=0 oninput="validity.valid||(value='');" type="number" step="0.1"/>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
 
             <div class="row" where="search-question">
                 <div class="form-group">
@@ -252,3 +221,70 @@
 <script src="${context}/resources/js/pageScript/exam/selectEmployee.js" ></script>
 <script src="${context}/resources/js/pageScript/exam/selectCreateByInput.js"></script>
 <script src="${context}/resources/js/pageScript/exam/searchQuestionTemplate.js" charset="UTF-8"></script>
+
+<script>
+    var context = '${context}';
+    var showAdvSearchBtn = function(){}
+    var hideAdvSearchBtn = function(){}
+    var chevronDown = true;
+
+    $(document).ready(function () {
+
+        showAdvSearchBtn = function(){
+            $('#buttons-search').hide();
+            $('#buttons-adv-search').show();
+        }
+
+        hideAdvSearchBtn = function(){
+            $('#buttons-search').show();
+            $('#buttons-adv-search').hide();
+        }
+
+        $("#selectAllEmployeeName").click(function (event) {
+            if (this.checked) {
+                $(".userSelectCheckbox").each(function () {
+                    this.checked = true;
+                });
+            }
+            else {
+                $(".userSelectCheckbox").each(function () {
+                    this.checked = false;
+                });
+            }
+        });
+
+        $("#searchCreateDateFromInput").datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true,
+            todayHighlight: true
+        });
+        $("#searchCreateDateToInput").datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true,
+            todayHighlight: true
+        });
+    });
+
+//    $("#advanceBtn").on('click',function(){
+//        var glyphicon = $(this).find('span')
+//        if (chevronDown) {
+//            console.log("hello")
+//            glyphicon.removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+////            $("#searchPanel").find("#buttons-search").hide()
+////            $("#searchPanel").find('#buttons-adv-search').show()
+////            $('#buttons-search').hide();
+////            $('#buttons-adv-search').show();
+//            showAdvSearchBtn()
+//            chevronDown=false
+//        }
+//        else {
+//            glyphicon.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+////            $("#searchPanel").find("#buttons-search").show()
+////            $("#searchPanel").find('#buttons-adv-search').hide()
+////            $('#buttons-search').show();
+////            $('#buttons-adv-search').hide();
+//            hideAdvSearchBtn()
+//            chevronDown=true
+//        }
+//    });
+</script>

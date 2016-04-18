@@ -1,20 +1,20 @@
 /**
  * Created by Phuthikorn_T on 14/8/2558.
  */
-var pagination = $('#pagination')
-var itemOnPage = 20;
+var itemOnPage = 10;
 var orderBy = "id"
 var orderType = "desc"
+var itemCount;
 
 $(function () {
-    pagination.pagination({
-        items: 0,
-        itemsOnPage: itemOnPage,
-        cssStyle: 'light-theme',
-        onPageClick: function () {
-            listSearchQuestion("pageChange", pagination.pagination("getCurrentPage"))
-        }
-    });
+    //pagination.pagination({
+    //    items: 0,
+    //    itemsOnPage: itemOnPage,
+    //    cssStyle: 'light-theme',
+    //    onPageClick: function () {
+    //        //listSearchQuestion("pageChange", pagination.pagination("getCurrentPage"))
+    //    }
+    //});
 });
 
 $(document).ready(function () {
@@ -22,7 +22,6 @@ $(document).ready(function () {
     $('#selectAllItem').prop('checked', false)
     //listSearchQuestion();
     $("#searchCatNotFound").hide();
-    pagination.pagination("destroy")
 
 //    ---------------------------------------------------------------------
 
@@ -30,12 +29,12 @@ $(document).ready(function () {
 
 $("#selectOrderType").on('change', function () {
     orderType = $(this).val()
-    listSearchQuestion("pageChange", pagination.pagination("getCurrentPage"))
+    listSearchQuestion("pageChange", getCurrentPageNumber())
 })
 
 $("#selectOrderBy").on('change', function () {
     orderBy = $(this).val()
-    listSearchQuestion("pageChange", pagination.pagination("getCurrentPage"))
+    listSearchQuestion("pageChange", getCurrentPageNumber())
 })
 
 
@@ -50,7 +49,7 @@ $('tbody').on('change', '.questionSelectBox', function () {
 
 $('body').on('click', '.detailEditBtn', function () {
     $('#questionDetailModal').modal('hide')
-    $('#submitCreateBtn').text('บันทึก');
+    $('#submitCreateBtn').text('ยืนยัน');
     $('#createQuestModalTitle').text('แก้ไขข้อสอบ');
     var qId = $(this).closest('tr').attr('questionId');
     if (qId == undefined) {
@@ -81,7 +80,7 @@ $('.deleteSelectedBtn').on('click', function () {
 $('.createQuestionBtn').on('click', function () {
     if ($('#createQuestModalTitle').text() != 'สร้างข้อสอบ') {
         $('#createQuestModalTitle').text('สร้างข้อสอบ');
-        $('#submitCreateBtn').text('บันทึก');
+        $('#submitCreateBtn').text('ตกลง');
         createQuestionModalClearInput();
     }
 })
@@ -89,6 +88,12 @@ $('.createQuestionBtn').on('click', function () {
 $('.searchSubmitBtn').on('click', function () {
     listSearchQuestion($(this));
 })
+
+$('#advSearchBtn').on('click',function(){
+    listSearchQuestion($(this));
+})
+
+
 
 var deleteSelectedQuestion = function () {
     var selectedQuestions = $('.questionSelectBox:checked');
@@ -159,7 +164,8 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
                 correctChoice: parseInt(correctChoice),
                 questionType: questionType,
                 difficulty: parseInt(difficulty),
-                score: parseInt(score)
+                //score: parseInt(score)
+                score: 1
             }
             ,
             success: function (q) {
@@ -182,7 +188,7 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
                     '<td style="vertical-align: middle;" class="questionType">' + q.questionType.description + '</td>' +
                     '<td style="vertical-align: middle;" class="questionCategory">' + q.subCategory.category.name + '</td>' +
                     '<td style="vertical-align: middle;" class="questionSubCategory">' + q.subCategory.name + '</td>' +
-                    '<td style="vertical-align: middle;" class="questionDescription" align="left">' + q.description.substring(0, 100) + '</td>' +
+                    '<td style="vertical-align: middle;" class="questionDescription" align="left">' + transformString(q.description.substring(0, 100)) + '</td>' +
                         //'<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
                     '<td style="vertical-align: middle;" class="questionScore">' + q.score + '</td>' +
                     '<td style="vertical-align: middle;" class="questionCreateBy">' + q.createBy.thFname + ' ' + q.createBy.thLname + '</td>' +
@@ -226,11 +232,11 @@ var setEditModalParameter = function (questionId) {
             setCreateModalQuestionType(question.questionType.description);
             setCreateModalDufficulty(question.difficultyLevel.level);
             setCreateModalScore(question.score);
-            setCreateModalQuestionDesc(question.description);
+            setCreateModalQuestionDesc(transformString(question.description));
             updateCreateModalLayout();
             var ith = 1;
             question.choices.forEach(function (choice) {
-                setCreateModalIthChoice(choice.description, ith);
+                setCreateModalIthChoice(transformString(choice.description), ith);
                 if (choice.correction) {
                     setCreateModalCorrectQuestion(ith);
                 }
@@ -253,13 +259,8 @@ var deleteQuestions = function (questionIds) {
         },
         success: function () {
             alert("ลบข้อมูลสำเร็จ");
-            if($("#tableBody tr").size() <= 1 ){
-                $("#searchCatNotFound").show();
-                pagination.pagination("destroy")
-                $(".table-container").addClass("hidden")
-            }else{
-                listSearchQuestion("pageChange",pagination.pagination('getCurrentPage'));
-            }
+            listSearchQuestion("pageChange", getCurrentPageNumber);
+
         }, error: function () {
             alert("ลบข้อมูลไม่สำเร็จ");
         }
@@ -268,8 +269,9 @@ var deleteQuestions = function (questionIds) {
 }
 
 var listSearchQuestion = function (btn, page) {
+    $('#init-message-show').hide();
+    $('#first-page').attr('where', '');
     var data = null;
-    var itemCount = 0;
     if (btn != "pageChange") {
         if (btn.attr('id') != 'advSearchBtn') {
             data = getSearchQuestionResultListBasic();
@@ -288,19 +290,24 @@ var listSearchQuestion = function (btn, page) {
     }
     if (!(data.length > 0)) {
         $("#searchCatNotFound").show()
-        $('#pagination').pagination('destroy');
+        hidePagination();
         $(".table-container").addClass("hidden")
+        $('.deleteSelectedBtn').addClass("hidden")
+        $(".init-message-show").removeClass("hidden")
     } else {
+        $('.deleteSelectedBtn').removeClass('hidden')
         $(".table-container").removeClass("hidden")
+        $(".init-message-show").addClass("hidden")
         data.forEach(function (q) {
             var createDate = new Date(q.createDate);
+            var qDesc = (q.description.substring(0, 100));
             var formattedDate = createDate.getDate() + "/" + (parseInt(createDate.getMonth()) + 1) + "/" + createDate.getFullYear();
             $("#tableBody").append('<tr questionId=' + q.id + '>' +
             '<td style="vertical-align: middle;" class="questionSelect"><input type="checkbox" class="questionSelectBox"/></td>' +
             '<td style="vertical-align: middle;" class="questionType">' + q.questionType.description + '</td>' +
             '<td style="vertical-align: middle;" class="questionCategory">' + q.subCategory.category.name + '</td>' +
             '<td style="vertical-align: middle;" class="questionSubCategory">' + q.subCategory.name + '</td>' +
-            '<td style="vertical-align: middle;" class="questionDescription" align="left">' + q.description.substring(0, 100) + '</td>' +
+            '<td style="vertical-align: middle;" class="questionDescription" align="left">' + transformString(qDesc) + '</td>' +
                 //'<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
             '<td style="vertical-align: middle;" class="questionScore">' + q.score + '</td>' +
             '<td style="vertical-align: middle;" class="questionCreateBy">' + q.createBy.thFname + ' ' + q.createBy.thLname + '</td>' +
@@ -311,25 +318,153 @@ var listSearchQuestion = function (btn, page) {
             if (q.description.length > 100) {
                 $('td[class="questionDescription"]:last').append("....")
             }
-            if (itemCount == 0) {
-                itemCount = q.itemCount;
-            }
+            itemCount = q.itemCount;
 
         })
-
         $('tbody tr td:not(.questionSelect)').css('cursor', 'pointer');
         $('.questionSelectBox').css('cursor', 'pointer');
-        pagination.pagination('redraw');
-        pagination.pagination("updateItems", itemCount);
+        //pagination.pagination('redraw');
+        //pagination.pagination("updateItems", itemCount);
+        if (btn != "pageChange") {
+            showPagination(itemCount);
+            $('.currentPage').css({
+                'background-color': '#2F4133',
+                'color': 'white'
+            })
+        }
     }
+}
+
+var showPagination = function (totalRecordLength) {
+    $('.paging').show();
+    totalPage(totalRecordLength, "");
+    setStyle($('#prev-page').next().find('a'));
+}
+
+var hidePagination = function () {
+    $('.paging').hide();
+}
+
+var toPage = function (pageNumber, row) {
+    listSearchQuestion("pageChange", getCurrentPageNumber());
+}
+
+var getCurrentPageNumber = function () {
+    return parseInt($('.currentPage').text());
+}
+
+var totalPage = function (lenght, where) {
+
+    var allPages = Math.ceil(lenght / 10);
+    var str = '';
+
+    if (where === "paper") {
+        for (var i = 1; i <= allPages; i++) {
+            str = str + '<li><a>' + i + '</a></li>';
+        }
+
+        $('.pagination').empty();
+        $('.pagination').append(
+            '<li id="first-page" where="paper"><a>&#x276e;&#x276e;</a></li>' +
+            '<li id="prev-page" where="paper"><a>&#x276e;</a></li>' +
+            str +
+            '<li id="next-page" where="paper"><a>&#x276f;</a></li>' +
+            '<li id="last-page" where="paper"><a>&#x276f;&#x276f;</a></li>'
+        );
+    }
+
+    else if (where === "questions") {
+        for (var i = 1; i <= allPages; i++) {
+            str = str + '<li><a>' + i + '</a></li>';
+        }
+
+        $('.pagination').empty();
+        $('.pagination').append(
+            '<li id="first-page" where="questions"><a>&#x276e;&#x276e;</a></li>' +
+            '<li id="prev-page" where="questions"><a>&#x276e;</a></li>' +
+            str +
+            '<li id="next-page" where="questions"><a>&#x276f;</a></li>' +
+            '<li id="last-page" where="questions"><a>&#x276f;&#x276f;</a></li>'
+        );
+    }
+    else {
+        for (var i = 1; i <= allPages; i++) {
+            str = str + '<li><a>' + i + '</a></li>';
+        }
+
+        $('.pagination').empty();
+        $('.pagination').append(
+            '<li id="first-page" where=""><a>&#x276e;&#x276e;</a></li>' +
+            '<li id="prev-page" where=""><a>&#x276e;</a></li>' +
+            str +
+            '<li id="next-page" where=""><a>&#x276f;</a></li>' +
+            '<li id="last-page" where=""><a>&#x276f;&#x276f;</a></li>'
+        );
+    }
+};
+
+$(document).ready(function () {
+    $('.pagination').on('click', 'li > a', function () {
+        currentPage($(this));
+        if (typeof toPage == 'function') {
+            toPage(getCurrentPageNumber, 10);
+        }
+    });
+});
+
+function setStyle(elem){
+
+    $(elem).css({
+        'background-color': '#2F4133',
+        'color': 'white'
+    }).addClass('currentPage');
+
+    $(".pagination > li > a").not(elem).not('#next-page').css({
+        'background-color': 'white',
+        'color':     '#337ab7'
+    }).removeClass('currentPage');
+}
+
+function currentPage(currentElem) {
+    var elem = currentElem.parent();
+    var where = $('#first-page').attr('where');
+
+    if (elem.attr('id') == 'first-page') {
+        var first = elem.siblings().find('a:contains("1")');
+        setStyle(first);
+    }
+    else if (elem.attr('id') == 'last-page') {
+        var last = elem.siblings().find('a:contains("' + Math.ceil(itemCount / 10) + '")');
+        setStyle(last);
+    }
+    else if (elem.attr('id') == 'next-page') {
+        var next = elem.siblings().find('a').filter('.currentPage').parent().next().find('a');
+
+        if (next.parent().attr('id') == 'next-page') {
+            return;
+        }
+        else {
+            setStyle(next);
+        }
+    }
+    else if (elem.attr('id') == 'prev-page') {
+        var prev = elem.siblings().find('a').filter('.currentPage').parent().prev().find('a');
+
+        if (prev.parent().attr('id') == 'prev-page') {
+            return;
+        }
+        else {
+            setStyle(prev);
+        }
+    }
+    else {
+        setStyle(currentElem);
+    }
+
 }
 
 //===================================================================================EVENT TRIGGER=================================================================================================//
 
-
-$(".searchInputSubmitBtn").on('click', function () {
-    listSearchQuestion()
-})
 
 
 
