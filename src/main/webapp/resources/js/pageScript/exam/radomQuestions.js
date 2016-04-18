@@ -69,69 +69,71 @@ $(document).ready(function(){
                 "allQuestionIdOnTableCreatePaper": JSON.stringify(allQuestionIdOnTableCreatePaper)
             },
             success: function (questions) {
-                $(".checkAllQuestionFromCreatePaperPage").checked = false;
-                $("#tbSelectedQuestionToPaper").show();
-                $(".label-difficulty-level").show();
-                $("#esy, #nrm, #hrd").show();
-                $("#removeRowQuestionSelect").show();
-                $("#questionNotFoundDesc").hide();
-                $('#sum-score').show();
-
-                var esy = Number($("#esy").text());
-                var nrm = Number($("#nrm").text());
-                var hrd = Number($("#hrd").text());
-
                 if(questions.length > 0){
-                    questions.forEach(function(value){
-                        $("#tbodySelectedQuestionToPaper").append(
-                            '<tr>'+
-                            '<td level="'+value.difficultyLevel.level+'" qid="'+value.id+'" style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
-                            '<td>'+value.subCategory.category.name+'</td>'+
-                            '<td>'+value.subCategory.name+'</td>'+
-                            '<td>'+checkString(value.description)+'</td>'+
-                            '<td style="text-align: center;">'+value.questionType.description+'</td>'+
-                            '<td style="text-align: center;">'+value.difficultyLevel.description+'</td>'+
-                            '<td><input id="newScore'+value.id+'" onchange="scoreOnChange()" type="number" name="newScore" class="form-control input-sm" value="1" readonly/></td>'+
-                            '</tr>'
-                        );
+                    $(".checkAllQuestionFromCreatePaperPage").checked = false;
+                    $("#tbSelectedQuestionToPaper").show();
+                    $(".label-difficulty-level").show();
+                    $("#esy, #nrm, #hrd").show();
+                    $("#removeRowQuestionSelect").show();
+                    $("#questionNotFoundDesc").hide();
+                    $('#sum-score').show();
 
-                        if(value.difficultyLevel.level == 1){
-                            esy = esy + 1;
-                        }
+                    var esy = Number($("#esy").text());
+                    var nrm = Number($("#nrm").text());
+                    var hrd = Number($("#hrd").text());
 
-                        if(value.difficultyLevel.level == 2){
-                            nrm = nrm + 1;
-                        }
+                    if(questions.length > 0){
+                        questions.forEach(function(value){
+                            $("#tbodySelectedQuestionToPaper").append(
+                                '<tr>'+
+                                '<td level="'+value.difficultyLevel.level+'" qid="'+value.id+'" style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
+                                '<td>'+value.subCategory.category.name+'</td>'+
+                                '<td>'+value.subCategory.name+'</td>'+
+                                '<td>'+checkString(value.description)+'</td>'+
+                                '<td style="text-align: center;">'+value.questionType.description+'</td>'+
+                                '<td style="text-align: center;">'+value.difficultyLevel.description+'</td>'+
+                                '<td><input id="newScore'+value.id+'" onchange="scoreOnChange()" type="number" name="newScore" class="form-control input-sm" value="1" readonly/></td>'+
+                                '</tr>'
+                            );
 
-                        if(value.difficultyLevel.level == 3){
-                            hrd = hrd + 1;
-                        }
-                    });
+                            if(value.difficultyLevel.level == 1){
+                                esy = esy + 1;
+                            }
 
-                    var elem;
-                    if($('#span-random-questions').is(':visible')){
-                        elem = $('#addQuestionBtn').siblings("#span-random-questions");
-                    }
-                    else{
-                        elem = $('#addQuestionBtn').siblings(".createQuestionBtn");
+                            if(value.difficultyLevel.level == 2){
+                                nrm = nrm + 1;
+                            }
 
-                    }
-
-                    $('<span class="label label-success" style="font-size: 13px;">เพิ่มข้อสอบลงชุดข้อสอบเรียบร้อบแล้ว</span>')
-                        .insertAfter(elem)
-                        .delay(1500)
-                        .fadeOut(function() {
-                            $(this).remove();
+                            if(value.difficultyLevel.level == 3){
+                                hrd = hrd + 1;
+                            }
                         });
 
-                    scoreOnChange();
+                        var elem;
+                        if($('#span-random-questions').is(':visible')){
+                            elem = $('#addQuestionBtn').siblings("#span-random-questions");
+                        }
+                        else{
+                            elem = $('#addQuestionBtn').siblings(".createQuestionBtn");
+
+                        }
+
+                        $('<span class="label label-success" style="font-size: 13px;">เพิ่มข้อสอบลงชุดข้อสอบเรียบร้อบแล้ว</span>')
+                            .insertAfter(elem)
+                            .delay(1500)
+                            .fadeOut(function() {
+                                $(this).remove();
+                            });
+
+                        scoreOnChange();
+                    }
+
+                    $("#esy").text(esy);
+                    $("#nrm").text(nrm);
+                    $("#hrd").text(hrd);
+
+                    viewQuestions();
                 }
-
-                $("#esy").text(esy);
-                $("#nrm").text(nrm);
-                $("#hrd").text(hrd);
-
-                viewQuestions();
             },
             error: function () {
                 alert('error while request...');

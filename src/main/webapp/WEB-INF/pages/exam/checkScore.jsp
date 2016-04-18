@@ -16,7 +16,7 @@
 </div>
 <hr/>
 
-<a href="printReport"><span class="glyphicon glyphicon-save"></span>&nbsp;ดาวน์โหลดผลสอบ</a>
+<a href="printReport"><button class="btn btn-gray btn-sm" type="button"><strong style="color: whitesmoke;">ดาวน์โหลดผลสอบ</strong>&nbsp;<span class="glyphicon glyphicon-save"></span></button></a>
 
 <div class="container">
     <div class="row">

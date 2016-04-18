@@ -173,10 +173,6 @@ $(document).ready(function(){
         var paperId = $(this).attr('id');
         paperId = paperId.substr(10);
         updatePaperStatus(paperId);
-        //$(".checkPaper").each(function(){
-        //    this.checked = false;
-        //});
-        //$("#checkPaperAll").removeAttr('checked');
         var paperStatus = $("#dropdownId" + paperId).val();
         if(paperStatus == 1){
             $(this).parent().parent().find('input').removeAttr('checked', 'checked');

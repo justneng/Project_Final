@@ -1167,6 +1167,10 @@ function showUpdatePaper(paperId){
                 $('#div-save-create-paper').show();
                 $('#span-random-questions').hide();
 
+                var esy = Number($("#esy").text());
+                var nrm = Number($("#nrm").text());
+                var hrd = Number($("#hrd").text());
+
                 for(var i = 0; i < value.length; i ++){
                     $("#newPaperId").val(value[0].examPaper.code);
                     if($("#newPaperName").val(value[0].examPaper.name) == null? $("#newPaperName").val(''): $("#newPaperName").val(value[0].examPaper.name));
@@ -1190,6 +1194,10 @@ function showUpdatePaper(paperId){
                     $("#hours").val(hours);
                     $("#minutes").val(minutes);
 
+                    $('#questionEasyCount').val(value[0].examPaper.questionEasy);
+                    $('#questionNormalCount').val(value[0].examPaper.questionNormal);
+                    $('#questionHardCount').val(value[0].examPaper.questionHard);
+
                     $("#tbodySelectedQuestionToPaper").append(
                         '<tr>'+
                         '<td qid="'+value[i].question.id+'" style="text-align: center;"><input type="checkbox" class="selectedQuestion"/></td>'+
@@ -1206,7 +1214,22 @@ function showUpdatePaper(paperId){
                     newQuestionScore.push(value[i].score);
                     sumScore(value[i].score);
                     $("#score").val(sumPaperScore);
+
+                    if(value[i].question.difficultyLevel.level == 1){
+                        esy = esy + 1;
+                    }
+
+                    if(value[i].question.difficultyLevel.level == 2){
+                        nrm = nrm + 1;
+                    }
+
+                    if(value[i].question.difficultyLevel.level == 3){
+                        hrd = hrd + 1;
+                    }
                 }
+                $("#esy").text(esy);
+                $("#nrm").text(nrm);
+                $("#hrd").text(hrd);
             }
 
             if(Number(value[0].examPaper.paperType.id == 2)) {

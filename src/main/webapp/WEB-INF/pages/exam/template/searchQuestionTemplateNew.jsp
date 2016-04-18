@@ -170,7 +170,7 @@
 
                     <div class="col-md-3 form-group" style="padding: 0;">
                         <div class="input-group">
-                            <input id="searchCreateDateFromInput" type="text" class="form-control input-sm datepicker" maxlength="10" data-date-format="dd/mm/yyyy" placeholder="สร้างข้อสอบตั้งแต่วันที่"/>
+                            <input id="searchCreateDateFromInput" type="text" class="form-control input-sm datepicker" maxlength="10" data-date-format="dd/mm/yyyy" placeholder="  สร้างข้อสอบตั้งแต่วันที่"/>
                             <span class="input-group-addon btn" id="calendarBtnFrom"><span class="glyphicon glyphicon-calendar" href="#"></span></span>
                         </div>
                     </div>
@@ -181,7 +181,7 @@
 
                     <div class="col-md-3 form-group" style="padding: 0;">
                         <div class="input-group">
-                            <input id="searchCreateDateToInput" type="text" class="form-control input-sm datepicker" maxlength="10" data-date-format="dd/mm/yyyy" placeholder="ถึง"/>
+                            <input id="searchCreateDateToInput" type="text" class="form-control input-sm datepicker" maxlength="10" data-date-format="dd/mm/yyyy" placeholder="  ถึง"/>
                             <span class="input-group-addon btn" id="calendarBtnTo" ><span class="glyphicon glyphicon-calendar" href="#"></span></span>
                         </div>
                     </div>

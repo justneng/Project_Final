@@ -291,11 +291,21 @@
         </div><hr/>
 
         <div class="row">
-            <button id="removeRowQuestionSelect" class="btn btn-gray btn-sm" type="button"
-                    style="height: 30px; display: none;">
-                <span class="glyphicon glyphicon-remove-sign"></span>
-                &nbsp;เอาออก
-            </button>
+            <div class="col-sm-6" style="padding-left: 0;">
+                <button id="removeRowQuestionSelect" class="btn btn-gray btn-sm" type="button"
+                        style="height: 30px; display: none;">
+                    <span class="glyphicon glyphicon-remove-sign"></span>
+                    &nbsp;เอาออก
+                </button>
+            </div>
+
+            <div class="col-sm-6" style="padding-right: 0;">
+                <div class="text-right label-difficulty-level" style="display: none;">
+                    <span class="label label-primary">ระดับง่าย&nbsp;<label id="esy">0</label>&nbsp;ข้อ</span>
+                    <span class="label label-primary">ระดับปานกลาง&nbsp;<label id="nrm">0</label>&nbsp;ข้อ</span>
+                    <span class="label label-primary">ระดับยาก&nbsp;<label id="hrd">0</label>&nbsp;ข้อ</span>
+                </div>
+            </div>
 
             <table id="tbSelectedQuestionToPaper" class="table table-bordered table-hover" style="display: none;">
                 <thead class="bg-default small">
@@ -328,11 +338,11 @@
                 </tbody>
             </table>
 
-            <div class="text-right label-difficulty-level" style="display: none;">
-                <span class="label label-primary">ระดับง่าย&nbsp;<label id="esy">0</label>&nbsp;ข้อ</span>
-                <span class="label label-primary">ระดับปานกลาง&nbsp;<label id="nrm">0</label>&nbsp;ข้อ</span>
-                <span class="label label-primary">ระดับยาก&nbsp;<label id="hrd">0</label>&nbsp;ข้อ</span>
-            </div>
+            <%--<div class="text-right label-difficulty-level" style="display: none;">--%>
+                <%--<span class="label label-primary">ระดับง่าย&nbsp;<label id="esy">0</label>&nbsp;ข้อ</span>--%>
+                <%--<span class="label label-primary">ระดับปานกลาง&nbsp;<label id="nrm">0</label>&nbsp;ข้อ</span>--%>
+                <%--<span class="label label-primary">ระดับยาก&nbsp;<label id="hrd">0</label>&nbsp;ข้อ</span>--%>
+            <%--</div>--%>
 
             <div id="questionNotFoundDesc" class="alert alert-info text-center">
                 <strong>ยังไม่มีข้อสอบในชุดข้อสอบ</strong>

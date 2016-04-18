@@ -5,13 +5,14 @@
 <style>
     .navbar-default{
         color: whitesmoke;
+        /*background-color: green;*/
         background-color: #337ab7;
     }
 
-    /*.navbar-default .navbar-nav li:hover a{*/
-        /*background-color: #005065;*/
-        /*color: whitesmoke;*/
-    /*}*/
+    .navbar-nav li:hover a{
+        background-color: #005065;
+        color: whitesmoke;
+    }
 
     .navbar-default .navbar-nav li a:not(#signOut):not(.managePaper){
         color: whitesmoke;
@@ -20,6 +21,7 @@
     .navbar-default .navbar-brand {
         color: whitesmoke;
     }
+
 </style>
 
 <script>
@@ -145,9 +147,9 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">จัดการชุดข้อสอบ
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a class="managePaper" href="${context}/TDCS/exam/managePapers"><c:if test="${status == 'staff'}">รายการชุดข้อสอบ</c:if></a></li>
-                            <li><a class="managePaper" href="${context}/TDCS/exam/createPaper">สร้างชุดข้อสอบแบบกำหนดเอง</a></li>
-                            <li><a class="managePaper" href="${context}/TDCS/exam/createPaperByRandomQuestions">สร้างชุดข้อสอบแบบสุ่ม</a></li>
+                            <li><a class="managePaper" href="${context}/TDCS/exam/managePapers"><c:if test="${status == 'staff'}">รายการชุดข้อสอบทั้งหมด</c:if></a></li>
+                            <li><a class="managePaper" href="${context}/TDCS/exam/createPaper">สร้างชุดข้อสอบ</a></li>
+                            <%--<li><a class="managePaper" href="${context}/TDCS/exam/createPaperByRandomQuestions">สร้างชุดข้อสอบแบบสุ่ม</a></li>--%>
                         </ul>
                     </li>
 
