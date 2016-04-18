@@ -1,9 +1,20 @@
+<%@ page import="java.util.Calendar" %>
+<%@ page import="java.util.GregorianCalendar" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 <script>
     var context = '${context}';
+
+//    var auto = setInterval(    function ()
+//    {
+//        window.location.reload();
+//    }, 5000);
 </script>
+
 <div class="container" style="background-color: white; padding-bottom: 80px; border-radius: 20px; width: 72%; box-shadow: 10px 10px 5px #888888;">
     <form method="post" action="${context}/TDCS/login.html">
         <div class="form-horizontal">
@@ -15,6 +26,13 @@
                 <div class="row text-center">
                     <c:if test="${ch == 'fail'}">
                         <div class="col-md-offset-4 col-md-4" style="color: red;">คุณป้อนชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</div>
+                    </c:if>
+
+                    <c:if test="${ch == 'block'}">
+                        <div class="text-center" style="color: red;">
+                            ชื่อผู้ใช้งาน "<c:out value="${username}"/>" ถูกระงับชั่วคราว<br/>
+                            กรุณาเข้าสู่ระบบใหม่หลังจาก "<c:out value="${time}" /> " นาที
+                        </div>
                     </c:if>
                 </div>
                 <br/>
@@ -41,9 +59,9 @@
                         <button id="submit" type="submit" class="btn btn-primary">
                             &nbsp;ลงชื่อเข้าใช้
                         </button>
-                        <a class="btn btn-primary" href="${context}/TDCS/signup.html"  style="margin-top: 5px">
-                            &nbsp;ลงทะเบียน&nbsp;
-                        </a>
+                        <%--<a class="btn btn-primary" href="${context}/TDCS/signup.html"  style="margin-top: 5px">--%>
+                            <%--&nbsp;ลงทะเบียน&nbsp;--%>
+                        <%--</a>--%>
                     </div>
                 </div>
             </div>

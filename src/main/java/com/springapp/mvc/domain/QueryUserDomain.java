@@ -3,6 +3,7 @@ package com.springapp.mvc.domain;
 import com.springapp.mvc.pojo.UniversityFacultyMajor;
 import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.util.BeanUtils;
+import com.springapp.mvc.util.DateUtil;
 import com.springapp.mvc.util.HibernateUtil;
 import com.springapp.mvc.util.LengthExpression;
 import org.hibernate.Criteria;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -260,6 +262,120 @@ public class QueryUserDomain extends HibernateUtil {
         closeSession();
         return list;
     }
+
+//    Check Authentication failed
+    public void loginFailedRemaining(User user) throws ParseException {
+        int loginFailed = 0;
+        Date currentDate = new Date();
+
+        if(user.getLoginFailedTimeFrom() == null){
+
+            if(user.getLoginFailed() != null){
+                loginFailed = user.getLoginFailed() + 1;
+            }
+            else{
+                loginFailed = 1;
+            }
+
+            user.setLoginFailedTimeFrom(new Date());
+            user.setLoginFailedTimeTo(new Date(System.currentTimeMillis()+15*60*1000));
+            user.setLoginFailed(loginFailed);
+            HibernateUtil.beginTransaction();
+            getSession().merge(user);
+            HibernateUtil.commitTransaction();
+            closeSession();
+        }
+
+        else{
+            loginFailed = user.getLoginFailed() + 1;
+            user.setLoginFailed(loginFailed);
+            HibernateUtil.beginTransaction();
+            getSession().merge(user);
+            HibernateUtil.commitTransaction();
+            closeSession();
+        }
+
+        if((loginFailed >= 3) && (checkLoginFailedInTime(currentDate, user))){
+            user.setLoginFailed(0);
+            user.setEnabled(0);
+            HibernateUtil.beginTransaction();
+            getSession().merge(user);
+            HibernateUtil.commitTransaction();
+            closeSession();
+        }
+    }
+
+    public User whoIsLoginFailed(String username){
+        Criteria criteria = getSession().createCriteria(User.class);
+        criteria.add(Restrictions.eq("userName", username));
+        User user = (User) criteria.list().get(0);
+        closeSession();
+
+        if(user != null){
+            return user;
+        }
+        else{
+            return null;
+        }
+    }
+
+    public static Boolean checkLoginFailedInTime(Date currDate, User user) throws ParseException {
+
+        System.out.println("<><><><><>" + currDate + " vs " + user.getLoginFailedTimeTo());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.US);
+        String date = dateFormat.format(currDate);
+        System.out.println("<><><><><>" + date + " vs " + user.getLoginFailedTimeTo());
+        Date curDate = dateFormat.parse(date);
+
+        Criteria criteria = getSession().createCriteria(User.class);
+        criteria.add(Restrictions.eq("userName", user.getUserName()));
+        criteria.add(Restrictions.gt("loginFailedTimeTo", curDate));
+        List<User> usr = criteria.list();
+
+        if(usr.size() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void resetBlockingUser() throws ParseException {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.US);
+        String date = dateFormat.format(new Date());
+        Date curDate = dateFormat.parse(date);
+
+        Criteria criteria = getSession().createCriteria(User.class);
+        criteria.add(Restrictions.lt("loginFailedTimeTo", curDate));
+        List<User> users = criteria.list();
+
+        if(users.size() > 0){
+            HibernateUtil.beginTransaction();
+            for(User usr : users){
+                usr.setEnabled(1);
+                usr.setLoginFailedTimeFrom(null);
+                usr.setLoginFailedTimeTo(null);
+                usr.setLoginFailed(0);
+                getSession().merge(usr);
+            }
+            HibernateUtil.commitTransaction();
+            closeSession();
+        }
+    }
+
+    public void resetBlockingAfterLoginSuccess(User user){
+
+        user.setLoginFailed(0);
+        user.setEnabled(1);
+        user.setLoginFailedTimeFrom(null);
+        user.setLoginFailedTimeTo(null);
+        HibernateUtil.beginTransaction();
+        getSession().merge(user);
+        HibernateUtil.commitTransaction();
+        closeSession();
+    }
+//
 
     public Long getCountUserValidate(String staffPiority) {
         Criteria criteria = getSession().createCriteria(User.class);

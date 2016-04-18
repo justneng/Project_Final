@@ -3,6 +3,7 @@ package com.springapp.mvc.pojo;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by Pongpipat on 6/2/2558.
@@ -128,6 +129,21 @@ public class User {
 
     @Column(name = "VIEW_EVA")
     private Integer viewEav;
+
+    @Column(name = "ENABLE")
+    private Integer enabled;
+
+    @Column(name = "BLOCK_TIME")
+    private Date blockTime;
+
+    @Column(name = "LOGIN_FAILED_FROM")
+    private Date loginFailedTimeFrom;
+
+    @Column(name = "LOGIN_FAILED_TO")
+    private Date loginFailedTimeTo;
+
+    @Column(name = "LOGIN_FAILED")
+    private Integer loginFailed;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "SECTION_ID", insertable = false, updatable = false)
@@ -515,6 +531,46 @@ public class User {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public Integer getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Integer enabled) {
+        this.enabled = enabled;
+    }
+
+    public Date getBlockTime() {
+        return blockTime;
+    }
+
+    public void setBlockTime(Date blockTime) {
+        this.blockTime = blockTime;
+    }
+
+    public Integer getLoginFailed() {
+        return loginFailed;
+    }
+
+    public void setLoginFailed(Integer loginFailed) {
+        this.loginFailed = loginFailed;
+    }
+
+    public Date getLoginFailedTimeFrom() {
+        return loginFailedTimeFrom;
+    }
+
+    public void setLoginFailedTimeFrom(Date loginFailedTimeFrom) {
+        this.loginFailedTimeFrom = loginFailedTimeFrom;
+    }
+
+    public Date getLoginFailedTimeTo() {
+        return loginFailedTimeTo;
+    }
+
+    public void setLoginFailedTimeTo(Date loginFailedTimeTo) {
+        this.loginFailedTimeTo = loginFailedTimeTo;
     }
 
     @Override

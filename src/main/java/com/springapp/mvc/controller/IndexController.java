@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -42,13 +45,18 @@ public class IndexController {
     @RequestMapping(value = "login")
     public String checkLogin(ModelMap model,@RequestParam(value = "id",required = false)String username,
                              @RequestParam(value = "pass",required = false)String pass,
-                             HttpServletRequest request,HttpServletResponse response) {
+                             HttpServletRequest request,HttpServletResponse response) throws ParseException {
+
+        queryUserDomain.resetBlockingUser();
 
         if (username != "" && pass != "") {
             List<User> userList = queryUserDomain.checkLogin(username, pass);
 //            System.out.println(userList.get(0).getId());
 
             if (userList.size() > 0) {
+
+                queryUserDomain.resetBlockingAfterLoginSuccess(userList.get(0));
+
                 if(userList.get(0).getValidateStu()==0){
                     model.addAttribute("RegisSuc",1);
                     return "login";
@@ -91,7 +99,26 @@ public class IndexController {
 
                     return "loginComplete";
                 }
+
             } else {
+//              Check login failed
+                User user = queryUserDomain.whoIsLoginFailed(username);
+                if(user != null){
+                    queryUserDomain.loginFailedRemaining(user);
+
+                    if(user.getEnabled() == 0){
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+                        Date date = user.getLoginFailedTimeTo();
+                        String time = dateFormat.format(date);
+
+                        model.addAttribute("ch", "block");
+                        model.addAttribute("time", time);
+                        model.addAttribute("username", user.getUserName());
+
+                        return "login";
+                    }
+                }
+//
                 model.addAttribute("ch", "fail");
                 return "login";
             }

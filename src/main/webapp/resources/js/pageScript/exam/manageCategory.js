@@ -138,6 +138,8 @@ $(document).ready(function () {
         var jsonNewSubcategory = {};
         var tmpArray = [];
         var check = 0;
+        var unfinished = true;
+
         $('.old-subcategory').each(function() {
             var remove;
             if ($('.check-remove-subcategory-' + $(this).attr('subid-in-modal')).is(':checked')) {
@@ -170,14 +172,47 @@ $(document).ready(function () {
 
         jsonOldSubcategory = JSON.stringify(tmpArray);
         tmpArray = [];
+
         $('.new-subcategory').each(function(){
+            var check = true;
+
             if($(this).val().trim() != ""){
+                var newSubcategoryName = $(this).val();
+                var elem = $(this);
+
+                $('.old-subcategory').each(function() {
+                    if (newSubcategoryName === $(this).val()) {
+                        elem.css('border', '1px solid red');
+                        unfinished = false;
+
+                        return false;
+                    }
+
+                    if(unfinished == false){
+                        return false;
+                    }
+
+                });
+
+                if(unfinished == false){
+                    return false;
+                }
+
                 var item = {
                     "name" : $(this).val()
                 };
                 tmpArray.push(item);
             }
+
+            if(unfinished == false){
+                return false;
+            }
         });
+
+        if(unfinished == false){
+            return false;
+        }
+
         jsonNewSubcategory = JSON.stringify(tmpArray);
         updateAndSaveSubcategory(categoryId, jsonOldSubcategory,jsonNewSubcategory);
     });
@@ -418,11 +453,11 @@ function saveCategory() {
         return false;
     }
 
-    //if(checkCategoryCode($("#categoryIdText").val()) == 'false'){
-    //    alert('รหัสหมวดหมู่ซ้ำ');
-    //    $("#categoryIdText").attr('style', 'border:solid 1px red');
-    //    return false;
-    //}
+    if(checkCategoryCode($("#categoryIdText").val()) == 'false'){
+        alert('รหัสหมวดหมู่ซ้ำ');
+        $("#categoryIdText").attr('style', 'border:solid 1px red');
+        return false;
+    }
 
     var categoryName = $("#categoryNameText").val();
     var categoryId = $("#categoryIdText").val();
