@@ -690,6 +690,13 @@ function validateScoreRandom(){
     //else{
     //    alert((countEasy + countNormal + countHard) + ' vs ' + Number($("#maxScore").val()));
     //}
+
+    if(Number($("#maxScore").val()) > Number($("#score").val())){
+        alert('คะแนนมากกว่าที่กำหนด');
+        $("#maxScore").focus();
+        $("#score").css('border-color', 'red');
+        return false;
+    }
 }
 
 function createPaper(status){
@@ -773,13 +780,20 @@ function createPaper(status){
 
     if(status === "random") {
         var tempArrayQuestion = new Array();
-        for(var idx = 0; idx < questionsInPaper.length; idx++){
+        $('.selectedQuestion').each(function(){
             var item = {
-                "qId": questionsInPaper[idx],
-                "qScore" : newQuestionScore[idx]
+                "qId": $(this).parent().attr('qid'),
+                "qScore" : 1
             };
             tempArrayQuestion.push(item);
-        }
+        });
+        //for(var idx = 0; idx < questionsInPaper.length; idx++){
+        //    var item = {
+        //        "qId": questionsInPaper[idx],
+        //        "qScore" : newQuestionScore[idx]
+        //    };
+        //    tempArrayQuestion.push(item);
+        //}
         jsonObjQuestion = JSON.stringify(tempArrayQuestion);
 
         if(check == false){

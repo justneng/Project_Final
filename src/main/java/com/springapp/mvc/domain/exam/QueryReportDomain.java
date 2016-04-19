@@ -31,6 +31,14 @@ public class QueryReportDomain {
 
     public Map getParameterStudentReport(User user, float percentage, int count){
         User staff = queryUserDomain.getUserById(user.getStaffId());
+        String image = "";
+        if(user.getImange() == null){
+            image = "";
+        }
+        else{
+            image = user.getImange();
+        }
+
         Map parameterReport = new HashMap();
         parameterReport.put("studentId", user.getEmpId());
         parameterReport.put("team", staff.getTeam().getTeamName());
@@ -42,7 +50,7 @@ public class QueryReportDomain {
         parameterReport.put("section", user.getPosition().getPosiName());
         parameterReport.put("apprentice", user.getApprentice().getAptName());
         parameterReport.put("staff", staff.getThFname() + " " + staff.getThLname());
-        parameterReport.put("image", getImageUser(user.getImange()));
+        parameterReport.put("image", getImageUser(image));
         parameterReport.put("percentage", percentage);
         parameterReport.put("sumGrade", calculateGrade(percentage , new Float(count * 100)));
 
@@ -51,7 +59,14 @@ public class QueryReportDomain {
 
     public static BufferedImage getImageUser(String image){
         String currentPath = System.getProperty("user.dir");
-        String filePath = currentPath + "\\src\\main\\webapp\\resources\\pictureUpload\\" + image;
+        String filePath = "";
+
+        if(image.equals("")){
+            filePath = currentPath + "\\src\\main\\webapp\\resources\\pictureUpload\\no-image.png";
+        }
+        else{
+            filePath = currentPath + "\\src\\main\\webapp\\resources\\pictureUpload\\" + image;
+        }
 
         BufferedImage bufferedImage = null;
         try{

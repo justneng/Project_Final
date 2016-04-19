@@ -6,20 +6,20 @@
     .navbar-default{
         color: whitesmoke;
         /*background-color: green;*/
-        background-color: #337ab7;
+        /*background-color: #337ab7;*/
     }
 
     .navbar-nav li:hover a{
         background-color: #005065;
-        color: whitesmoke;
+        /*color: whitesmoke;*/
     }
 
     .navbar-default .navbar-nav li a:not(#signOut):not(.managePaper){
-        color: whitesmoke;
+        /*color: whitesmoke;*/
     }
 
     .navbar-default .navbar-brand {
-        color: whitesmoke;
+        /*color: whitesmoke;*/
     }
 
 </style>
@@ -29,6 +29,8 @@
     if ('${status}' == '') {
         window.location.href = context + "/TDCS/index.html";
     }
+
+    $('')
 </script>
 <!-- Brand and toggle get grouped for better mobile display -->
 <nav class="navbar navbar-default navbar-fixed-top">

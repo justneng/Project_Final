@@ -69,6 +69,8 @@ public class QueryReleaseExamDomain extends HibernateUtil{
     private static Logger logger = Logger.getLogger(QueryReleaseExamDomain.class.getName());
     public void checkExpireRule(Date date){
 
+//        Boolean checkClosePaper = false;
+        List<ReleaseExam> rel = new ArrayList<ReleaseExam>();
         try{
             Criteria criteria = getSession().createCriteria(ReleaseExam.class, "release");
             criteria.add(Restrictions.lt("releaseDateTo", date));
@@ -80,6 +82,14 @@ public class QueryReleaseExamDomain extends HibernateUtil{
                     pap.setCheckRelease('N');
                     pap.setCheckInTime(0);
                     ExamPaper examPaper = pap.getExamPaper();
+
+//                    Criteria c = getSession().createCriteria(ReleaseExam.class);
+//                    c.add(Restrictions.lt("releaseDateTo", date));
+//                    c.add(Restrictions.eq("pk.examPaper", examPaper));
+//                    rel = criteria.list();
+//                    if(rel.size() > 0){
+//                        checkClosePaper = true;
+//                    }
 //                    examPaper.setPaperStatus(queryStatusDomain.getDeletedStatus());
                     examPaper.setPaperStatus(queryStatusDomain.getClosedStatus());
                     HibernateUtil.beginTransaction();
@@ -90,6 +100,13 @@ public class QueryReleaseExamDomain extends HibernateUtil{
                     getSession().merge(pap);
                     HibernateUtil.commitTransaction();
                 }
+
+//                if(checkClosePaper == false){
+//                    for(ReleaseExam releaseExam: rel){
+//                        ReleaseExam release = releaseExam;
+//                        release.getExamPaper().setPaperStatus(queryStatusDomain.getDeletedStatus());
+//                    }
+//                }
             }
         }catch (Exception e){
             e.printStackTrace();

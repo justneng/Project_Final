@@ -123,18 +123,16 @@ public class QueryPaperDomain extends HibernateUtil {
         getSession().merge(examPaper);
 
         HibernateUtil.commitTransaction();
-        HibernateUtil.closeSession();
+//        HibernateUtil.closeSession();
     }
 
     public List<ExamPaper> getAllPapers() {
         HibernateUtil.getSession().flush();
-        HibernateUtil.beginTransaction();
         Criteria criteria = getSession().createCriteria(ExamPaper.class);
         criteria.add(Restrictions.ne("paperStatus.id", 4));
         criteria.add(Restrictions.ne("code", "SYSTM"));
         criteria.addOrder(Order.asc("id"));
         List<ExamPaper> papers = criteria.list();
-        HibernateUtil.commitTransaction();
 
         return papers;
     }
