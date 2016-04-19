@@ -39,32 +39,40 @@
                     </c:if>
                 </div>
                 <br/>
+
                 <div class="form-group">
-                    <div class="col-md-offset-4 col-md-4">
+                    <div class="col-md-offset-4 col-md-4" style="padding:0;">
                         <%--<span class="input-group-addon">ชื่อผู้ใช้</span>--%>
-                        <input id="id" name="id" class="form-control" placeholder="ชื่อผู้ใช้" />
+                        <div class="input-group">
+                            <span class="input-group-addon "><span class="glyphicon glyphicon-user"></span></span>
+                            <input id="id" name="id" class="form-control " placeholder="ชื่อผู้ใช้" />
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-offset-4 col-md-4" >
+                    <div class="col-md-offset-4 col-md-4" style="padding:0;">
                         <%--<span class="input-group-addon">รหัสผ่าน</span>--%>
-                        <input id="pass" type="password" name="pass" class="form-control" placeholder="รหัสผ่าน" />
+                        <div class="input-group">
+                            <span class="input-group-addon "><span class="glyphicon glyphicon-lock"></span></span>
+                            <input id="pass" type="password" name="pass" class="form-control" placeholder="รหัสผ่าน" />
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-offset-4 col-md-4">
-                    <div class="col-md-6 text-left" style="padding: 0px">
-                        <button id="forgetPasswordBtn" type="button" class="btn btn-link"
-                                data-toggle="modal" data-target="#forgetPassModal">
-                            ลืมรหัสผ่าน
-                        </button>
-                    </div>
-                    <div class="col-md-6 text-right" style="padding: 0px">
-                        <button id="submit" type="submit" class="btn btn-primary">
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-4 text-right" style="padding: 0px">
+                        <button id="submit" type="submit" class="btn btn-primary btn-lg" style="border-radius: 0;">
                             &nbsp;ลงชื่อเข้าใช้
                         </button>
                         <%--<a class="btn btn-primary" href="${context}/TDCS/signup.html"  style="margin-top: 5px">--%>
-                            <%--&nbsp;ลงทะเบียน&nbsp;--%>
+                        <%--&nbsp;ลงทะเบียน&nbsp;--%>
                         <%--</a>--%>
+                    </div>
+
+                    <div class="col-md-offset-4 col-md-4 text-right" style="padding: 0px">
+                        <button id="forgetPasswordBtn" type="button" class="btn btn-link"
+                                data-toggle="modal" data-target="#forgetPassModal">
+                            ลืมรหัสผ่าน&nbsp;<span class="glyphicon glyphicon-exclamation-sign"></span>
+                        </button>
                     </div>
                 </div>
             </div>

@@ -3,24 +3,41 @@
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <style>
-    .navbar-default{
+    .navbar-inverse{
         color: whitesmoke;
         /*background-color: green;*/
-        /*background-color: #337ab7;*/
+        background-color: #337ab7;
     }
 
-    .navbar-nav li:hover a{
-        background-color: #005065;
+    /*.navbar-inverse li:hover a{*/
+        /*background-color: #005065;*/
         /*color: whitesmoke;*/
+    /*}*/
+
+    /*.navbar-inverse li:active{*/
+        /*background-color: #005065;*/
+        /*color: whitesmoke;*/
+    /*}*/
+
+    .navbar-inverse .navbar-nav li a:not(#signOut):not(.managePaper){
+        color: whitesmoke;
     }
 
-    .navbar-default .navbar-nav li a:not(#signOut):not(.managePaper){
-        /*color: whitesmoke;*/
+    .navbar-inverse .navbar-brand {
+        color: whitesmoke;
     }
+    /*.navbar-default {*/
+        /*background-color: #F8F8F8;*/
+        /*border-color: #E7E7E7;*/
+    /*}*/
+    /*.navbar-default .navbar-nav > li > a {*/
+        /*color: #777777;*/
+    /*}*/
+    /*.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {*/
+        /*background-color: #E7E7E7;*/
+        /*color: #555555;*/
+    /*}*/
 
-    .navbar-default .navbar-brand {
-        /*color: whitesmoke;*/
-    }
 
 </style>
 
@@ -30,10 +47,9 @@
         window.location.href = context + "/TDCS/index.html";
     }
 
-    $('')
 </script>
 <!-- Brand and toggle get grouped for better mobile display -->
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -48,7 +64,7 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-default" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse navbar-inverse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li id="userData"><a id="linkhome" href="${context}/TDCS/home.html">จัดการบัญชีผู้ใช้</a></li>
                 <c:if test="${status == 'admin' || status == 'staff'}">
@@ -206,20 +222,24 @@
 
 
                 <c:if test="${ status == 'user'}">
-                    <li id="dropdownExamStudent" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            ข้อสอบสำหรับนักศึกษา
+                    <li id="dropdownExamStudent">
+                        <a href="${context}/TDCS/exam/mainPageStudent" class="dropdown-toggle" role="button" aria-expanded="false">
+                            ทำข้อสอบ
                         </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="${context}/TDCS/exam/mainPageStudent">ทำข้อสอบ</a>
-                            </li>
-                            <li>
-                                <a href="${context}/TDCS/exam/checkScore">ผลคะแนนการสอบ</a>
-                            </li>
-                        </ul>
+                        <%--<ul class="dropdown-menu" role="menu">--%>
+                            <%--<li>--%>
+                                <%--<a href="${context}/TDCS/exam/mainPageStudent">ทำข้อสอบ</a>--%>
+                            <%--</li>--%>
+                            <%--<li>--%>
+                                <%--<a href="${context}/TDCS/exam/checkScore">ผลคะแนนการสอบ</a>--%>
+                            <%--</li>--%>
+                        <%--</ul>--%>
+                    </li>
 
-
+                    <li>
+                        <a href="${context}/TDCS/exam/checkScore" class="dropdown-toggle" role="button" aria-expanded="false">
+                            ผลคะแนนการสอบ
+                        </a>
                     </li>
                 </c:if>
                 <%--<li>--%>

@@ -52,7 +52,8 @@ public class QueryReportDomain {
         parameterReport.put("staff", staff.getThFname() + " " + staff.getThLname());
         parameterReport.put("image", getImageUser(image));
         parameterReport.put("percentage", percentage);
-        parameterReport.put("sumGrade", calculateGrade(percentage , new Float(count * 100)));
+        parameterReport.put("sumGrade", getGradeByScore(percentage));
+//        parameterReport.put("sumGrade", calculateGrade(percentage , new Float(count * 100)));
 
         return parameterReport;
     }
@@ -132,6 +133,34 @@ public class QueryReportDomain {
             return "D+";
         }
         else if(realPercentage >= 50 && realPercentage <= 54){
+            return "D";
+        }
+        else{
+            return "F";
+        }
+    }
+
+    public String getGradeByScore(Float score){
+
+        if(score >= 80){
+            return "A";
+        }
+        else if(score >= 75 && score <= 79){
+            return "B+";
+        }
+        else if(score >= 70 && score <= 74){
+            return "B";
+        }
+        else if(score >= 65 && score <= 69){
+            return "C+";
+        }
+        else if(score >= 60 && score <= 64){
+            return "C";
+        }
+        else if(score >= 55 && score <= 59){
+            return "D+";
+        }
+        else if(score >= 50 && score <= 54){
             return "D";
         }
         else{

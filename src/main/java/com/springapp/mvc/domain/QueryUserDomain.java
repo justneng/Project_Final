@@ -307,13 +307,12 @@ public class QueryUserDomain extends HibernateUtil {
         }
     }
 
-    public User whoIsLoginFailed(String username){
+    public List<User> whoIsLoginFailed(String username){
         Criteria criteria = getSession().createCriteria(User.class);
         criteria.add(Restrictions.eq("userName", username));
-        User user = (User) criteria.list().get(0);
-        closeSession();
+        List<User> user = criteria.list();
 
-        if(user != null){
+        if(user.size() > 0){
             return user;
         }
         else{

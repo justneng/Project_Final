@@ -19,9 +19,9 @@
         <a href="#select-paper" data-toggle="tab">ชุดข้อสอบออกโดยพนักงาน</a>
     </li>
 
-    <li id="generate-paper-tab" class="">
-        <a href="#select-paper-by-system-generate" data-toggle="tab">ชุดข้อสอบออกโดยระบบ</a>
-    </li>
+    <%--<li id="generate-paper-tab" class="">--%>
+        <%--<a href="#select-paper-by-system-generate" data-toggle="tab">ชุดข้อสอบออกโดยระบบ</a>--%>
+    <%--</li>--%>
 </ul>
 <br/>
 

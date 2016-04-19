@@ -84,7 +84,7 @@ public class ReportController {
                 count = count + 1;
             }
 
-            Map param = queryReportDomain.getParameterStudentReport(user, Math.round((tmp/4)*100)/100, count);
+            Map param = queryReportDomain.getParameterStudentReport(user, Math.round((tmp/count)*100)/100, count);
             File file = ReportUtils.viewReport(studentReports, inputStream, param, filePdf, fileXMLToCompile);
 
 //            For download pdf

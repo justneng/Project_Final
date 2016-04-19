@@ -2,6 +2,14 @@
  * Created by Pongpipat on 13/3/2558.
  */
 
+$(document).ready(function(){
+
+    if(true){
+        $('#userData').removeClass('active');
+    }
+});
+
+
 $("#btnChangePass").click(function(){
     var pass = [$("#oldPassword"),$("#password"),$("#cpassword")];
 

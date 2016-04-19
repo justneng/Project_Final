@@ -102,25 +102,25 @@ public class IndexController {
 
             } else {
 //              Check login failed
-                User user = queryUserDomain.whoIsLoginFailed(username);
-                if(user != null){
-                    queryUserDomain.loginFailedRemaining(user);
+                List<User> user = queryUserDomain.whoIsLoginFailed(username);
+                if(user != null || user.size() > 0){
+                    queryUserDomain.loginFailedRemaining(user.get(0));
 
-                    if(user.getEnabled() == 0){
+                    if(user.get(0).getEnabled() == 0){
                         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-                        Date date = user.getLoginFailedTimeTo();
+                        Date date = user.get(0).getLoginFailedTimeTo();
                         String time = dateFormat.format(date);
 
                         model.addAttribute("ch", "block");
                         model.addAttribute("time", time);
-                        model.addAttribute("username", user.getUserName());
+                        model.addAttribute("username", user.get(0).getUserName());
 
                         return "login";
                     }
                 }
 //
                 model.addAttribute("ch", "fail");
-                model.addAttribute("loginRemaining", 3 - user.getLoginFailed());
+                model.addAttribute("loginRemaining", 3 - user.get(0).getLoginFailed());
                 return "login";
             }
         }
