@@ -59,7 +59,7 @@
             <div class="col-md-12 text-right">
                 <button class="btn btn-primary" id="SendPaper" data-toggle="modal"
                         data-target="#submitExamConfirmModal">
-                    ส่งชุดข้อสอบ
+                    ส่งข้อสอบ
                 </button>
             </div>
         </div>

@@ -644,5 +644,13 @@ public class QueryUserDomain extends HibernateUtil {
 
         return (User)criteria.list().get(0);
     }
+
+    public void updateUser(User user){
+        HibernateUtil.beginTransaction();
+        getSession().merge(user);
+        getSession().flush();
+        HibernateUtil.commitTransaction();
+        closeSession();
+    }
 }
 

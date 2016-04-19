@@ -78,82 +78,82 @@ $("#btnChangePass").click(function(){
 //});
 //})(jQuery);
 
-var updatesucess = false;
-function changeValue(){
-    var datasend =
-            'userName='+$("#username").val() +
-            '&empId='+ $("#stuid").val()+
-            '&thFname='+$("#fname").val()+
-            '&thLname='+$("#lname").val()+
-            '&enFname='+$("#engfname").val()+
-            '&enLname='+$("#englname").val()+
-            '&nickName='+ $("#nickname").val()+
-            '&grade='+$("#inputGrade").val()+
-            '&levelStu='+$("#level").val()+
-            '&birthDate='+$("#birthday").val()+
-            '&tell1='+$("#tel1").val()+
-            '&tell2='+$("#tel2").val()+
-            '&eMail1='+$("#ssgMail").val()+
-            '&eMail2='+$("#mail").val()+
-            '&address='+$("#address").val()+
-            '&skype='+$("#skype").val()+
-            '&imange='+""+
-            '&startWork='+$("#startTime").val()+
-            '&endWork='+$("#endTime").val()+
-            '&staffId='+$("#advisor").val()+
-            '&teamId='+""+
-            '&piority='+$("#position").val()+
-            '&compId='+""+
-            '&spId='+""+
-            '&uniFacMajId='+$("#depid").val()+
-            '&aptId='+$("#type").val()+
-            '&sectionId='+""+
-            '&posiId='+$("#position").val()+
-            '&userId='+$("#userId").val();
-
-
-    var dat = $.ajax({
-        type: "POST",
-        url:context+"/TDCS/saveData",
-        data: datasend,
-        complete: function(data) {
-            if($("#image").val()!=""){
-                prepareLoad();
-            }else {
-                updatesucess = true;
-//            $("#linkhome").click();
-                window.location.href =context+ "/TDCS/home.html";
-            }
-
-        },
-        asyn:false
-    });
-}
+//var updatesucess = false;
+//function changeValue(){
+//    var datasend =
+//            'userName='+$("#username").val() +
+//            '&empId='+ $("#stuid").val()+
+//            '&thFname='+$("#fname").val()+
+//            '&thLname='+$("#lname").val()+
+//            '&enFname='+$("#engfname").val()+
+//            '&enLname='+$("#englname").val()+
+//            '&nickName='+ $("#nickname").val()+
+//            '&grade='+$("#inputGrade").val()+
+//            '&levelStu='+$("#level").val()+
+//            '&birthDate='+$("#birthday").val()+
+//            '&tell1='+$("#tel1").val()+
+//            '&tell2='+$("#tel2").val()+
+//            '&eMail1='+$("#ssgMail").val()+
+//            '&eMail2='+$("#mail").val()+
+//            '&address='+$("#address").val()+
+//            '&skype='+$("#skype").val()+
+//            '&imange='+""+
+//            '&startWork='+$("#startTime").val()+
+//            '&endWork='+$("#endTime").val()+
+//            '&staffId='+$("#advisor").val()+
+//            '&teamId='+""+
+//            '&piority='+$("#position").val()+
+//            '&compId='+""+
+//            '&spId='+""+
+//            '&uniFacMajId='+$("#depid").val()+
+//            '&aptId='+$("#type").val()+
+//            '&sectionId='+""+
+//            '&posiId='+$("#position").val()+
+//            '&userId='+$("#userId").val();
+//
+//
+//    var dat = $.ajax({
+//        type: "POST",
+//        url:context+"/TDCS/saveData",
+//        data: datasend,
+//        complete: function(data) {
+//            if($("#image").val()!=""){
+//                prepareLoad();
+//            }else {
+//                updatesucess = true;
+////            $("#linkhome").click();
+//                window.location.href =context+ "/TDCS/home.html";
+//            }
+//
+//        },
+//        asyn:false
+//    });
+//}
 
 window.onbeforeunload = function (e) {
-    var e = e || window.event;
-    var image = $("#image").val();
-    var element = [$("#stuid").val(),$("#username").val(),$("#fname").val(),$("#lname").val(),$("#engfname").val(),$("#englname").val(),
-        $("#nickname").val(),$("#birthday").val(),$("#depid").val(),$("#level").val(),$("#inputGrade").val(),$("#address").val(),
-        $("#tel1").val(),$("#tel2").val(),$("#ssgMail").val(),$("#mail").val(),$("#skype").val(),$("#startTime").val(),$("#endTime").val(),
-        $("#type").val(),$("#position").val(),$("#advisor").val()+""];
-
-    for(i=0;i<element.length-1&&!updatesucess;i++) {
-//        console.log(i+"<"+element.length);
-//        if(i>=element.length){
-//            break;
+//    var e = e || window.event;
+//    var image = $("#image").val();
+//    var element = [$("#stuid").val(),$("#username").val(),$("#fname").val(),$("#lname").val(),$("#engfname").val(),$("#englname").val(),
+//        $("#nickname").val(),$("#birthday").val(),$("#depid").val(),$("#level").val(),$("#inputGrade").val(),$("#address").val(),
+//        $("#tel1").val(),$("#tel2").val(),$("#ssgMail").val(),$("#mail").val(),$("#skype").val(),$("#startTime").val(),$("#endTime").val(),
+//        $("#type").val(),$("#position").val(),$("#advisor").val()+""];
+//
+//    for(i=0;i<element.length-1&&!updatesucess;i++) {
+////        console.log(i+"<"+element.length);
+////        if(i>=element.length){
+////            break;
+////        }
+//        if(element[i] != elementStart[i]) {
+////            console.log(element[i]+"!="+elementStart[i]);
+//            // For IE and Firefox prior to version 4
+//            if (e) {
+//                e.returnValue = 'เนื้อหามีการแก้ไขคุณต้องการออกจากหน้านี้โดยไม่บันทึกหรือไม่';
+//            }
+////            console.log(element[i]+"!="+elementStart[i]);
+//            // For Safari
+////            return 'เนื้อหามีการแก้ไขคุณต้องการออกจากหน้านี้โดยไม่บันทึกหรือไม่';
 //        }
-        if(element[i] != elementStart[i]) {
-//            console.log(element[i]+"!="+elementStart[i]);
-            // For IE and Firefox prior to version 4
-            if (e) {
-                e.returnValue = 'เนื้อหามีการแก้ไขคุณต้องการออกจากหน้านี้โดยไม่บันทึกหรือไม่';
-            }
-//            console.log(element[i]+"!="+elementStart[i]);
-            // For Safari
-//            return 'เนื้อหามีการแก้ไขคุณต้องการออกจากหน้านี้โดยไม่บันทึกหรือไม่';
-        }
-    }
+//    }
 };
 
 
@@ -194,8 +194,8 @@ $( document ).ready(function(){
 
     selectFacAndgetDepartment(myElement1);
     facutyQuery(universityId);
-    fullfulegrade();
-    callculateAge();
+    //fullfulegrade();
+    //callculateAge();
     $("#startTime").change();
 });
 //        check compare password /////////////////////
@@ -239,13 +239,13 @@ $("#cpassword").blur(function(){
 });
 var picture = "";
 
-function fullfulegrade(){
-    var grade = $("#inputGrade").val();
-    for(var i = $("#inputGrade").val().length;i<4;i++){
-        grade += "0";
-    }
-    $("#inputGrade").val(grade);
-}
+//function fullfulegrade(){
+//    var grade = $("#inputGrade").val();
+//    for(var i = $("#inputGrade").val().length;i<4;i++){
+//        grade += "0";
+//    }
+//    $("#inputGrade").val(grade);
+//}
 
 //$("#fileUpload").on('change',prepareLoad);
 function selectDepartment(department){
@@ -463,18 +463,23 @@ function getTimeWork(){
     }
 }
 
-$(document).ready(function(){
-    $("#inputGrade").keyup(function(){
-        var textValue = $("#inputGrade").val();
+$("#mail").on('blur',function(){
+    checkEmailString()
+})
 
-        if(parseFloat(textValue)>4.0){
-            $("#inputGrade").val("");
-            return false;
-        }
-        if(textValue.length==1){
-            $("#inputGrade").val(textValue+".");
-        }
-    });
+
+$(document).ready(function(){
+    //$("#inputGrade").keyup(function(){
+    //    var textValue = $("#inputGrade").val();
+    //
+    //    if(parseFloat(textValue)>4.0){
+    //        $("#inputGrade").val("");
+    //        return false;
+    //    }
+    //    if(textValue.length==1){
+    //        $("#inputGrade").val(textValue+".");
+    //    }
+    //});
 
     $("#cleardata").click(function(){
         var element = document.body.childNodes;
@@ -544,12 +549,29 @@ $(document).ready(function(){
 //            }
 //        });
 });
+
+var isEmailString = function(){
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test($("#mail").val());
+}
+
+var checkEmailString = function(){
+    var isEmail = isEmailString();
+    if(!isEmail){
+        $('#mail').addClass('validate-fail')
+        return false;
+    }else{
+        $('#mail').removeClass('validate-fail')
+        return true;
+    }
+}
+
 function checkEmpty(){
     var countError = 0;
     var element = [$("#stuid"),$("#username"),$("#fname"),$("#lname"),$("#engfname"),$("#englname"),
-        $("#nickname"),$("#birthday"),$("#depid"),$("#level"),$("#inputGrade"),$("#address"),$("#tel2"),
-        $("#ssgMail"),$("#mail"),$("#skype"),$("#startTime"),$("#endTime"),
-        $("#type"),$("#position"),$("#advisor")];;
+        //$("#nickname"),$("#birthday"),$("#depid"),$("#level"),$("#inputGrade"),$("#address"),$("#tel2"),
+        //$("#ssgMail"),$("#mail"),$("#skype"),$("#startTime"),$("#endTime"),
+        /*$("#type"),$("#position"),$("#advisor")*/$("#mail")];;
     if($("#password").val()!=$("#cpassword").val()){
         $("#password").val("");
         $("#cpassword").val("");
@@ -568,26 +590,124 @@ function checkEmpty(){
         return false;
     }
 
-    if($("#stuid").val().length<6){
-        $("#stuid").change();
-        setTimeout(function(){$("#stuid").focus()}, 1);
+    if(!checkEmailString()){
+        alert("ข้อมูลอีเมลไม่ถูกต้อง")
         return false;
     }
 
-    if($("#tel1").val().length<10&&$("#tel1").val().length>0){
-        $("#tel1").blur();
-        setTimeout(function(){$("#tel1").focus()}, 1);
-        return false;
-    }
 
-    if($("#tel2").val().length<10){
-        $("#tel2").blur();
-        setTimeout(function(){$("#tel2").focus()}, 1);
-        return false;
-    }
 
-    changeValue();
+    //
+    //if($("#stuid").val().length<6){
+    //    $("#stuid").change();
+    //    setTimeout(function(){$("#stuid").focus()}, 1);
+    //    return false;
+    //}
+
+    //if($("#tel1").val().length<10&&$("#tel1").val().length>0){
+    //    $("#tel1").blur();
+    //    setTimeout(function(){$("#tel1").focus()}, 1);
+    //    return false;
+    //}
+    //
+    //if($("#tel2").val().length<10){
+    //    $("#tel2").blur();
+    //    setTimeout(function(){$("#tel2").focus()}, 1);
+    //    return false;
+    //}
+
+    //changeValue();
+
+    saveData();
 }
+
+function saveData(){
+    $("#divloader").show();
+    var datasend = 'empId='+$("#stuid").val()+
+            //'&userName='+$("#username").val()+
+            //'&userId='+$("#userId").val()+
+        '&thFname='+$("#fname").val()+
+        '&thLname='+$("#lname").val()+
+        '&enFname='+$("#engfname").val()+
+        '&enLname='+$("#englname").val()+
+            //'&nickName='+$("#nickname").val()+
+            //'&birthDate='+$("#birthday").val()+
+            //'&compId='+$("#ddlCom").val()+
+            //'&spId='+$("#job").val()+
+            //'&startWork='+$("#startWork").val()+
+            //'&address='+$("#address").val()+
+            //'&tell1='+$("#telHome").val()+
+            //'&tell2='+$("#telMoblie").val()+
+            //'&eMail1='+$("#ssgMail").val()+
+        '&eMail2='+$("#mail").val()
+    //'&skype='+$("#skypeAcc").val()+
+    //'&status=2';
+    if($("#piority").val()!=""){
+        datasend += ('&piority='+$("#piority").val());
+    }
+
+    //if($("#txbTeam").val()!=""){
+//        var datasendTeam = 'teamName='+$("#txbTeam").val();
+//        var dat = $.ajax({
+//            type: "POST",
+//            url:context+"/TDCS/insertTeam",
+//            data: datasendTeam,
+//            success:function(data){
+//                datasend += ('&teamId='+data);
+//                var dat = $.ajax({
+//                    type: "POST",
+//                    url:context+"/TDCS/editprofileStaff",
+//                    data: datasend,
+//                    success:function(data){
+////                $("#ID").val(data);
+////                $("#formAfterAdd").submit();
+////            location.href = "/TDCS/openLoginAfterRegis";
+//
+//                    },complete:function(data){
+//                        //if($("#image").val()!=""){
+//                        //    prepareLoad();
+//                        //}else{
+//                        //    window.location.href = context+"/TDCS/home.html";
+//                        //}
+//                        //updatesucess = true;
+//                    }
+//                }).responseText;
+//            }
+//        }).responseText;
+//    }else{
+    //datasend +=  '&teamId='+$("#team").val();
+    var dat = $.ajax({
+        type: "POST",
+        url:context+"/TDCS/editUser",
+        data: {
+            thFname: $("#fname").val(),
+            thLname: $("#lname").val() ,
+            enFname: $("#engfname").val() ,
+            enLname: $("#englname").val() ,
+            eMail2: $("#mail").val()
+        },
+        success:function(data){
+//                $("#ID").val(data);
+//                $("#formAfterAdd").submit();
+//            location.href = "/TDCS/openLoginAfterRegis";
+
+        },complete:function(data){
+            //if($("#image").val()!=""){
+            //    prepareLoad();
+            //}else{
+            updatesucess = true;
+            alert("บันทึกข้อมูลสำเร็จ")
+
+            //}
+
+//                window.location.href = "/TDCS/home.html";
+        }
+    }).responseText;
+    //}
+
+}
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////vilidate
 $("#stuid").change(function(){
     var $this = $(this);

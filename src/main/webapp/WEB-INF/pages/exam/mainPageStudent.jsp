@@ -47,7 +47,15 @@
                     <c:forEach var="paper" items="${openPaperList}">
                         <tr>
                             <td align="center">${paper.code}</td>
-                            <td>${paper.name}</td>
+                            <td>
+                                    <c:if test="${paper.paperType.id} == 1">
+                                        <span class="label label-default">กำหนดเอง</span>&nbsp;
+                                    </c:if>
+                                    <c:if test="${paper.paperType.id} == 2">
+                                        <span class="label label-primary">สุ่ม</span>&nbsp;
+                                    </c:if>
+                                    ${paper.name}
+                            </td>
                             <td>${paper.createBy.thFname}&nbsp;${paper.createBy.thLname}</td>
                             <c:if test="${paper.position.posiName != null}">
                                 <td>${paper.position.posiName}</td>
@@ -84,7 +92,7 @@
                             <c:set var="hour" value="${f:parseInt(paper.timeLimit / 60)}"/>
                             <td align="center">${hour}.${paper.timeLimit % 60} ชั่วโมง</td>
                             <td style="text-align: center;">
-                                <button class="btn" type="button" disabled >เคยทำข้อสอบชุดนี้ไปแล้ว</button>
+                                <button class="btn" type="button" disabled>เคยทำข้อสอบชุดนี้ไปแล้ว</button>
                             </td>
                         </tr>
                     </c:forEach>
@@ -95,7 +103,8 @@
     </div>
 
     <div id="select-paper-by-system-generate" class="container tab-pane fade">
-        <div id="waiting-icon" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;">
+        <div id="waiting-icon"
+             style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;">
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" width="64" height="64"/>
         </div>
 
@@ -121,12 +130,14 @@
                                 <td>
                                     <c:choose>
                                         <c:when test="${category.numberOfQuestions >= '10'}">
-                                            <button cid="${category.category.id}" class="btn btn-default btn-sm" type="button" data-toggle="collapse" data-target=".select-paper">
+                                            <button cid="${category.category.id}" class="btn btn-default btn-sm"
+                                                    type="button" data-toggle="collapse" data-target=".select-paper">
                                                 เลือกชุดข้อสอบ&nbsp;<span class="caret"></span>
                                             </button>
                                         </c:when>
                                         <c:otherwise>
-                                            <button class="btn btn-primary btn-sm disabled" type="button">ข้อสอบไม่เพียงพอ
+                                            <button class="btn btn-primary btn-sm disabled" type="button">
+                                                ข้อสอบไม่เพียงพอ
                                             </button>
                                         </c:otherwise>
                                     </c:choose>
@@ -141,10 +152,12 @@
                                             <tr class="collapse select-paper info">
                                                 <td>
                                                     <span class="glyphicon glyphicon-triangle-right"></span>
-                                                    <c:out value="${paper.examPaper.name}"/>&nbsp;<span class="badge available">Available</span>
+                                                    <c:out value="${paper.examPaper.name}"/>&nbsp;<span
+                                                        class="badge available">Available</span>
                                                 </td>
                                                 <td>
-                                                    <button cid="${category.category.id}" class="btn btn-primary btn-sm active do-exam" type="button">
+                                                    <button cid="${category.category.id}"
+                                                            class="btn btn-primary btn-sm active do-exam" type="button">
                                                         เริ่มทำข้อสอบ
                                                     </button>
                                                 </td>
@@ -168,7 +181,8 @@
             <div class="modal-header" align="center">
                 เมื่อเริ่มทำข้อสอบแล้วออกจากหน้าระบบจะทำการบันทึกข้อมูลทันที<br>และจะทำให้ไม่สามารถเข้าทำข้อสอบนี้ได้อีก
                 <br><br>
-                ต้องการที่จะทำข้อสอบนี้หรือไม่
+                ต้องการที่จะทำข้อสอบนี้หรือไม่<br><br>
+                คำเตือน : การออกจากหน้าเว็บ กดF5หรือRefreshหน้าเว็บ ระบบจะทำการส่งข้อสอบในทันที
             </div>
             <div class="modal-body" align="center">
                 <div class="row">

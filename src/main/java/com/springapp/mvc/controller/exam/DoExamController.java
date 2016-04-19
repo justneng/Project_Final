@@ -81,10 +81,12 @@ public class DoExamController {
     public String mainPageStudent(ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
 
         User user = queryUserDomain.getCurrentUser(request);
-        Date today = DateUtil.getCurrentDateWithRemovedTime();
-        queryReleaseExamDomain.checkExpireRule(today);
-        modelMap.addAttribute("openPaperList", queryPaperDomain.getOpenedPaperForUser(user));
-        modelMap.addAttribute("donePaperList",queryPaperDomain.getDonePaperForUser(user));
+        if(user != null){
+            Date today = DateUtil.getCurrentDateWithRemovedTime();
+            queryReleaseExamDomain.checkExpireRule(today);
+            modelMap.addAttribute("openPaperList", queryPaperDomain.getOpenedPaperForUser(user));
+            modelMap.addAttribute("donePaperList",queryPaperDomain.getDonePaperForUser(user));
+        }
 
         return "mainPageStudent";
     }

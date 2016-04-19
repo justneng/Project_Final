@@ -81,8 +81,9 @@ $('.createQuestionBtn').on('click', function () {
     if ($('#createQuestModalTitle').text() != 'สร้างข้อสอบ') {
         $('#createQuestModalTitle').text('สร้างข้อสอบ');
         $('#submitCreateBtn').text('ตกลง');
-        createQuestionModalClearInput();
     }
+    createQuestionModalClearInput();
+
 })
 
 $('.searchSubmitBtn').on('click', function () {
@@ -259,7 +260,7 @@ var deleteQuestions = function (questionIds) {
         },
         success: function () {
             alert("ลบข้อมูลสำเร็จ");
-            listSearchQuestion("pageChange", getCurrentPageNumber);
+            listSearchQuestion("pageChange", getCurrentPageNumber());
 
         }, error: function () {
             alert("ลบข้อมูลไม่สำเร็จ");
@@ -309,7 +310,7 @@ var listSearchQuestion = function (btn, page) {
             '<td style="vertical-align: middle;" class="questionSubCategory">' + q.subCategory.name + '</td>' +
             '<td style="vertical-align: middle;" class="questionDescription" align="left">' + transformString(qDesc) + '</td>' +
                 //'<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
-            '<td style="vertical-align: middle;" class="questionScore">' + q.score + '</td>' +
+            //'<td style="vertical-align: middle;" class="questionScore">' + q.score + '</td>' +
             '<td style="vertical-align: middle;" class="questionCreateBy">' + q.createBy.thFname + ' ' + q.createBy.thLname + '</td>' +
             '<td style="vertical-align: middle;" class="questionCreateDate">' + formattedDate + '</td>' +
             '<td style="vertical-align: middle;" class="questionEditColumn"><button class="detailEditBtn btn btn-primary" value="' + q.id + '"><span class="glyphicon glyphicon-pencil"></span></button></td>' +

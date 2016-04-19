@@ -4,6 +4,7 @@ import com.springapp.mvc.domain.QueryPositionDomain;
 import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.util.DateUtil;
+import com.springapp.mvc.util.HibernateUtil;
 import flexjson.JSONSerializer;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,4 +102,38 @@ public class UserController {
         System.out.println("case4");
         return new ResponseEntity<String>(null, headers, HttpStatus.OK);
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/editUser")
+    @ResponseBody
+    public ResponseEntity<String> editUser(ModelMap model,
+                                               @RequestParam(value = "thFname", required = true) String thFname,
+                                               @RequestParam(value = "thLname", required = true) String thLname,
+                                               @RequestParam(value = "enFname", required = true) String enFname,
+                                               @RequestParam(value = "enLname", required = true) String enLname,
+                                               @RequestParam(value = "eMail2", required = false) String email2
+            , HttpServletRequest request, HttpServletResponse response) {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+
+        User user = queryUserDomain.getCurrentUser(request);
+        user.setThFname(thFname);
+        user.setThLname(thLname);
+        user.setEnFname(enFname);
+        user.setEnLname(enLname);
+        user.seteMail2(email2);
+
+        queryUserDomain.updateUser(user);
+
+
+        String json= "";
+//        if (newQuestion == null) {
+//            json = new JSONSerializer().exclude("*.class").serialize(question);
+//        }else{
+//            json = new JSONSerializer().exclude("*.class").serialize(newQuestion);
+//        }
+
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+    }
+
 }

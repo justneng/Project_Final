@@ -41,7 +41,7 @@
         <div class="col-md-4">
             <button class="btn btn-primary btn-sm createQuestionBtn"
                     data-toggle="modal" data-target="#createQuest" align="center">
-                <span class="glyphicon glyphicon-plus"><label>&nbsp;<strong>สร้างชุดข้อสอบ</strong></label></span>
+                <span class="glyphicon glyphicon-plus"><label>&nbsp;<strong>สร้างข้อสอบ</strong></label></span>
             </button>
             <button class="btn btn-gray btn-sm deleteSelectedBtn"><span
                     class="glyphicon glyphicon-minus"><label>
@@ -59,8 +59,8 @@
                 <option value="createBy">ชื่อผู้สร้าง</option>
                 <option value="date">วันที่</option>
                 <option value="qType">ประเภทข้อสอบ</option>
-                <option value="qDesc">คำถาม</option>
-                <option value="score">คะแแนน</option>
+                <%--<option value="qDesc">คำถาม</option>--%>
+                <%--<option value="score">คะแแนน</option>--%>
             </select>
         </div>
         <div class="col-md-2">
@@ -81,7 +81,7 @@
                 <th width="10%" style="vertical-align: middle;">หัวข้อเรื่อง</th>
                 <th width="35%" style="vertical-align: middle;">คำถาม</th>
                 <%--<th style="text-align: center">ระดับความยาก</th>--%>
-                <th width="5%" style="vertical-align: middle;">คะแนน</th>
+                <%--<th width="5%" style="vertical-align: middle;">คะแนน</th>--%>
                 <th width="13%" style="vertical-align: middle;">ผู้สร้าง</th>
                 <th width="10%" style="vertical-align: middle;">วันที่สร้าง</th>
                 <th width="4%" style="vertical-align: middle;">แก้ไข</th>

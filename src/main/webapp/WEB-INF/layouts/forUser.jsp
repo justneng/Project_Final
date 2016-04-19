@@ -57,14 +57,14 @@
         </div>
     </div>
 
-    <div id="divloader" class="dv-background" style="display: none;background-color: #000000">
-        <div class="dv-loading">
-            <spring:url value="/resources/images/loading.gif" var="image_loader_url" />
-            <div class="image-contain" style="background-image: url(<c:url value="/resources/js/pageScript/exam/loading.gif" />); width:30px;height:30px; position: absolute;top: 50%;left: 50%;">
-            <jsp:text/>
-            </div>
-        </div>
-    </div>
+    <%--<div id="divloader" class="dv-background" style="display: none;background-color: #000000">--%>
+        <%--<div class="dv-loading">--%>
+            <%--<spring:url value="/resources/images/loading.gif" var="image_loader_url" />--%>
+            <%--<div class="image-contain" style="background-image: url(<c:url value="/resources/js/pageScript/exam/loading.gif" />); width:30px;height:30px; position: absolute;top: 50%;left: 50%;">--%>
+            <%--<jsp:text/>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
 
 </body>
 </html>

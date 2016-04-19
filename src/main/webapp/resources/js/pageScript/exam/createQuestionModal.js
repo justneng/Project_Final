@@ -94,7 +94,7 @@ function saveQuestion() {
     var catText = $("#categoryInputForCreateQuestion").parent().find('ul li.active').text()
     var categoryId = catText.substr(0, catText.indexOf(":")).trim();
 
-    var subCategoryName = $("#sSubCat").val();
+    var subCategoryName = $("#sSubCat").val().trim();
     var questionTypeString = $("#select-QuestionType").val();
     var score = $("#questionScoreForCreateQuestion").val();
     var choiceDesc = null;
@@ -126,7 +126,7 @@ function saveQuestion() {
             questionDesc: questionDesc,
             choiceDescArray: choiceDesc,
             correctChoice: correctChoice,
-            questionType: questionType,
+            questionType: 1,
             difficulty: parseInt(difficulty),
             //score: parseFloat(score)
             score : 1
@@ -138,14 +138,14 @@ function saveQuestion() {
                 $(".table-container").removeClass("hidden")
                 var createDate = new Date(q.createDate);
                 var formattedDate = createDate.getDate() + "/" + (parseInt(createDate.getMonth()) + 1) + "/" + createDate.getFullYear();
-                $("#tableBody").append('<tr questionId=' + q.id + '>' +
+                $("#tableBody").prepend('<tr questionId=' + q.id + '>' +
                 '<td style="vertical-align: middle;" class="questionSelect"><input type="checkbox" class="questionSelectBox"/></td>' +
                 '<td style="vertical-align: middle;" class="questionType">' + q.questionType.description + '</td>' +
                 '<td style="vertical-align: middle;" class="questionCategory">' + q.subCategory.category.name + '</td>' +
                 '<td style="vertical-align: middle;" class="questionSubCategory">' + q.subCategory.name + '</td>' +
                 '<td style="vertical-align: middle;" class="questionDescription" align="left">' + q.description.substring(0, 100) + '</td>' +
                     //'<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
-                '<td style="vertical-align: middle;" class="questionScore">' + q.score + '</td>' +
+                //'<td style="vertical-align: middle;" class="questionScore">' + q.score + '</td>' +
                 '<td style="vertical-align: middle;" class="questionCreateBy">' + q.createBy.thFname + ' ' + q.createBy.thLname + '</td>' +
                 '<td style="vertical-align: middle;" class="questionCreateDate">' + formattedDate + '</td>' +
                 '<td style="vertical-align: middle;" class="questionEditColumn"><button class="detailEditBtn btn btn-primary" value="' + q.id + '"><span class="glyphicon glyphicon-pencil"></span></button></td>' +
@@ -155,9 +155,9 @@ function saveQuestion() {
                 $('.questionSelectBox').css('cursor', 'pointer');
                 //pagination.pagination('redraw');
                 //pagination.pagination("updateItems",itemCount);
+            }else{
+                viewQuestions();
             }
-
-            viewQuestions();
         },
         error: function () {
 
@@ -248,22 +248,22 @@ var checkCreateQuestionModalFieldComplete = function () {
         $('#diffRadioContainer').removeClass("validate-fail")
     }
 
-    if (questType.val() == "Objective" || questType == null || questType == "") {
-        $.each($(".choiceDesc"), function () {
-            if ($(this).val() == "") {
-                $(this).addClass("validate-fail")
-                complete = false;
-            } else {
-                $(this).removeClass("validate-fail")
-            }
-        })
-
-        if (!$('.correctRadio:checked').length) {
-            $(".choiceRadioAddon").addClass("validate-fail")
-        } else {
-            $(".choiceRadioAddon").removeClass("validate-fail")
-        }
-    }
+    //if (questType.val() == "Objective" || questType == null || questType == "") {
+    //    $.each($(".choiceDesc"), function () {
+    //        if ($(this).val() == "") {
+    //            $(this).addClass("validate-fail")
+    //            complete = false;
+    //        } else {
+    //            $(this).removeClass("validate-fail")
+    //        }
+    //    })
+    //
+    //    if (!$('.correctRadio:checked').length) {
+    //        $(".choiceRadioAddon").addClass("validate-fail")
+    //    } else {
+    //        $(".choiceRadioAddon").removeClass("validate-fail")
+    //    }
+    //}
 
     return complete;
 }
@@ -276,13 +276,14 @@ var createQuestionModalClearInput = function () {
     $("#questionScoreForCreateQuestion").val("");
     $("#questionDescription").val("");
     $("input[name='level']").attr('checked', false);
-    //$(".correctRadio").attr('checked', false);
+    $(".correctRadio").attr('checked', false);
     $(".choiceDesc").val("");
     //$("#submitBtnContainer").hide();
     //$("#answerInput").hide()
-    //var correctRadioNotChecked = $('.correctRadio:not(:checked)')
-    //correctRadioNotChecked.parent().removeClass('success');
-    //correctRadioNotChecked.show();
+    var correctRadioNotChecked = $('.correctRadio:not(:checked)')
+    correctRadioNotChecked.parent().removeClass('success');
+    correctRadioNotChecked.parent().find('.glyphicon').addClass('glyphicon-ok').show();
+    correctRadioNotChecked.show();
     //correctRadioNotChecked.parent().children('div').hide();
     hideCreateCategory()
     hideCreateSubCategory()
@@ -402,7 +403,7 @@ $("#categoryInputForCreateQuestion").on('change', function () {
                     success: function (data) {
                         data.forEach(function (value) {
                             $("#sSubCat").append(
-                                '<option value="' + value.name + '">' + value.SubCategory.name + '</option>'
+                                '<option value="' + value.SubCategory.name + '">' + value.SubCategory.name + '</option>'
                             )
                         });
                     },
@@ -426,7 +427,7 @@ $("#categoryInputForCreateQuestion").on('change', function () {
                     success: function (data) {
                         data.forEach(function (value) {
                             $("#sSubCat").append(
-                                '<option value="' + value.name + '">' + value.SubCategory.name + '</option>'
+                                '<option value="' + value.SubCategory.name + '">' + value.SubCategory.name + '</option>'
                             )
                         });
 

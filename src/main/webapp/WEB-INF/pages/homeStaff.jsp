@@ -22,7 +22,7 @@
     <h3>ข้อมูลส่วนตัว</h3>
     <hr/>
 </div>
-<br/><br/>
+<br/>
 <div class="row">
 <form method="POST" action="${context}/TDCS/insertStaff" modelAttribute="staffData" id="formregis">
 <%--<div class="col-md-offset-1 col-md-2">--%>
@@ -52,11 +52,11 @@
 
 <div class="form-group">
     <div class="row col-md-12">
-        <label for="stuid" class="col-md-3 control-label" style="padding-right: 0px">
+        <label for="stuid" class="col-md-2 control-label" style="padding-right: 0px">
             <small>รหัสพนักงาน</small><small style="color: red">*</small></label>
         <div class="col-md-4">
             <input id="stuid" name="stuid" class="form-control" value="${user[0].empId}"
-                   onkeypress="return numberAndEnglist(event)" maxlength="5" />
+                   onkeypress="return numberAndEnglist(event)" maxlength="5" disabled/>
         </div>
         <label for="username" class="col-md-1 control-label" style="padding-left: 0px;padding-right: 0px;padding-top: 0px">
             <small>ชื่อผู้ใช้</small>
@@ -70,7 +70,7 @@
 
 <div class="form-group">
     <div class="row col-md-12">
-        <label for="fname" class="col-md-3 control-label" style="padding-left: 0px;padding-right: 0px"><small>ชื่อ(ไทย)</small><small style="color: red">*</small></label>
+        <label for="fname" class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px"><small>ชื่อ(ไทย)</small><small style="color: red">*</small></label>
         <div class="col-md-4">
             <input id="fname" name="fname" class="form-control " value="${user[0].thFname}" onkeypress="return isThai(event)" />
         </div>
@@ -84,7 +84,7 @@
 
 <div class="form-group">
     <div class="row col-md-12">
-        <label for="engfname" class="col-md-3 control-label" style="padding-left: 0px;padding-right: 0px"><small>ชื่อ(อังกฤษ)</small><small style="color: red">*</small></label>
+        <label for="engfname" class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px"><small>ชื่อ(อังกฤษ)</small><small style="color: red">*</small></label>
         <div class="col-md-4">
             <input id="engfname" name="engfname" class="form-control " value="${user[0].enFname}"  onkeypress="return isEnglish(event)" />
         </div>
@@ -96,185 +96,185 @@
     </div>
 </div>
 
-<div class="form-group">
-    <div class="row col-md-12">
-        <label class="col-md-3 control-label" style="padding-left: 0px;padding-right: 0px"><small>ชื่อเล่น</small><small style="color: red">*</small></label>
-        <div class="col-md-4">
-            <input id="nickname" name="username" class="form-control" value="${user[0].nickName}" onkeypress="return isThai(event)" />
-        </div>
-    </div>
-</div>
+<%--<div class="form-group">--%>
+    <%--<div class="row col-md-12">--%>
+        <%--<label class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px"><small>ชื่อเล่น</small><small style="color: red">*</small></label>--%>
+        <%--<div class="col-md-4">--%>
+            <%--<input id="nickname" name="username" class="form-control" value="${user[0].nickName}" onkeypress="return isThai(event)" />--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
 
-<div class="form-group">
-    <div class="row col-md-12">
-        <label class="col-md-3 control-label" style="padding-left: 0px;padding-right: 0px"><small>วันเกิด</small><small style="color: red">*</small></label>
-        <div class="col-md-4">
-            <%--<input id="birthday" class="form-control" value="${user[0].birthDate}" />--%>
-                <%--<div class="col-md-5" style="padding: 0px;">--%>
-                    <div class='input-group date' id='sBirthday'>
-                        <input id="birthday" type='text' class="form-control" readonly="true" value="${user[0].birthDate}"
-                               style="cursor:pointer;background-color:white" required="true"/>
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                    </div>
-                <%--</div>--%>
-        </div>
-        <label for="englname" class="col-md-1 control-label" style="padding: 7px 0px 7px 0px;">
-            <small>อายุ</small><small style="color: red">*</small>
-        </label>
-        <div class="col-md-2">
-            <input id="age" class="form-control" disabled/>
-        </div>
-        <div class="col-md-1">
-            <label class="control-label">ปี</label>
-        </div>
-    </div>
-</div>
+<%--<div class="form-group">--%>
+    <%--<div class="row col-md-12">--%>
+        <%--<label class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px"><small>วันเกิด</small><small style="color: red">*</small></label>--%>
+        <%--<div class="col-md-4">--%>
+            <%--&lt;%&ndash;<input id="birthday" class="form-control" value="${user[0].birthDate}" />&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<div class="col-md-5" style="padding: 0px;">&ndash;%&gt;--%>
+                    <%--<div class='input-group date' id='sBirthday'>--%>
+                        <%--<input id="birthday" type='text' class="form-control" readonly="true" value="${user[0].birthDate}"--%>
+                               <%--style="cursor:pointer;background-color:white" required="true"/>--%>
+                            <%--<span class="input-group-addon">--%>
+                                <%--<span class="glyphicon glyphicon-calendar"></span>--%>
+                            <%--</span>--%>
+                    <%--</div>--%>
+                <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+        <%--</div>--%>
+        <%--<label for="englname" class="col-md-1 control-label" style="padding: 7px 0px 7px 0px;">--%>
+            <%--<small>อายุ</small><small style="color: red">*</small>--%>
+        <%--</label>--%>
+        <%--<div class="col-md-2">--%>
+            <%--<input id="age" class="form-control" disabled/>--%>
+        <%--</div>--%>
+        <%--<div class="col-md-1">--%>
+            <%--<label class="control-label">ปี</label>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
 
-<div class="form-group">
-    <div class="row col-md-12">
-        <label class="col-md-3 control-label" style="padding-left: 0px;padding-right: 0px"><small>สังกัด</small><small style="color: red">*</small></label>
-        <div class="col-md-4">
-            <%--<input name="username" class="form-control" value="${user[0].company.compName}" />--%>
-            <c:set var="companyId" scope="session" value="${user[0].compId}"/>
-            <select id="ddlCom" class="form-control" autocomplete="off" required="true">
-                <option value="">เลือกสังกัด</option>
-                <c:forEach var="conpanyList" items="${listComp}">
-                    <option value="${conpanyList.compId}" <c:if test="${conpanyList.compId==companyId}"> selected="selected" </c:if> >
-                            ${conpanyList.compName}
-                    </option>
-                </c:forEach>
-            </select>
-        </div>
-        <label for="englname" class="col-md-1 control-label" style="padding: 7px 0px 7px 0px;"><small>แผนก</small><small style="color: red">*</small></label>
-        <div class="col-md-4">
-            <input type="hidden" id="sectionIdHiden" value="${user[0].sectionPosition.sectionId}" />
-            <%--<input class="form-control" value="${user[0].sectionPosition.section.sectionName}" />--%>
-            <select id="section" class="form-control" required="true">
+<%--<div class="form-group">--%>
+    <%--<div class="row col-md-12">--%>
+        <%--<label class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px"><small>สังกัด</small><small style="color: red">*</small></label>--%>
+        <%--<div class="col-md-4">--%>
+            <%--&lt;%&ndash;<input name="username" class="form-control" value="${user[0].company.compName}" />&ndash;%&gt;--%>
+            <%--<c:set var="companyId" scope="session" value="${user[0].compId}"/>--%>
+            <%--<select id="ddlCom" class="form-control" autocomplete="off" required="true">--%>
+                <%--<option value="">เลือกสังกัด</option>--%>
+                <%--<c:forEach var="conpanyList" items="${listComp}">--%>
+                    <%--<option value="${conpanyList.compId}" <c:if test="${conpanyList.compId==companyId}"> selected="selected" </c:if> >--%>
+                            <%--${conpanyList.compName}--%>
+                    <%--</option>--%>
+                <%--</c:forEach>--%>
+            <%--</select>--%>
+        <%--</div>--%>
+        <%--<label for="englname" class="col-md-1 control-label" style="padding: 7px 0px 7px 0px;"><small>แผนก</small><small style="color: red">*</small></label>--%>
+        <%--<div class="col-md-4">--%>
+            <%--<input type="hidden" id="sectionIdHiden" value="${user[0].sectionPosition.sectionId}" />--%>
+            <%--&lt;%&ndash;<input class="form-control" value="${user[0].sectionPosition.section.sectionName}" />&ndash;%&gt;--%>
+            <%--<select id="section" class="form-control" required="true">--%>
+                <%--&lt;%&ndash;<option value="">เลือกแผนก</option>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<c:set var="sectionId" scope="session" value="${user[0].sectionPosition.sectionId}"/>&ndash;%&gt;--%>
                 <%--<option value="">เลือกแผนก</option>--%>
-                <%--<c:set var="sectionId" scope="session" value="${user[0].sectionPosition.sectionId}"/>--%>
-                <option value="">เลือกแผนก</option>
-                <%--<c:forEach var="listSection" items="${listSection}">--%>
-                    <%--<option value="${listSection.sectionId}" <c:if test="${listSection.sectionId==sectionId}"> selected="selected" </c:if> >--%>
-                            <%--${listSection.sectionName}--%>
-                    <%--</option>--%>
-                <%--</c:forEach>--%>
-            </select>
-        </div>
-    </div>
-</div>
+                <%--&lt;%&ndash;<c:forEach var="listSection" items="${listSection}">&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;<option value="${listSection.sectionId}" <c:if test="${listSection.sectionId==sectionId}"> selected="selected" </c:if> >&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;${listSection.sectionName}&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;</option>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
+            <%--</select>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
+
+<%--<div class="form-group">--%>
+    <%--<div class="row col-md-12">--%>
+        <%--<label class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px"><small>ตำแหน่ง</small><small style="color: red">*</small></label>--%>
+        <%--<div class="col-md-4">--%>
+            <%--&lt;%&ndash;<input name="username" class="form-control" value="${user[0].sectionPosition.position.posiName}" />&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<c:set var="positionId" scope="session" value="${user[0].spId}"/>&ndash;%&gt;--%>
+            <%--<input type="hidden" id="jobIdHiden" value="${user[0].spId}" />--%>
+            <%--<select &lt;%&ndash;path="spId"&ndash;%&gt; id="job" class="form-control" required="true">--%>
+                <%--<option value="">เลือกตำแหน่ง</option>--%>
+                <%--&lt;%&ndash;<c:forEach var="sectionPositionList" items="${listSectionPosition}">&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;<option value="${sectionPositionList.spId}" <c:if test="${sectionPositionList.spId==positionId}"> selected="selected" </c:if> >&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;${sectionPositionList.position.posiName}&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;</option>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
+            <%--</select>--%>
+        <%--</div>--%>
+        <%--&lt;%&ndash;<label for="englname" class="col-md-1 control-label" style="padding: 7px 0px 7px 0px;"><small>ทีม</small><small style="color: red">*</small></label>&ndash;%&gt;--%>
+        <%--&lt;%&ndash;<div class="col-md-4">&ndash;%&gt;--%>
+            <%--&lt;%&ndash;&lt;%&ndash;<input class="form-control" value="${user[0].team.teamName}" />&ndash;%&gt;&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<select id="team" class="form-control" disabled="true"  required="true">&ndash;%&gt;--%>
+                <%--&lt;%&ndash;&lt;%&ndash;<option value="">เลือกทีม</option>&ndash;%&gt;&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<option value="${user[0].teamId}">${user[0].team.teamName}</option>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;</select>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<input class="form-control" id="txbTeam" name="txbTeam" required="true" autocomplete="off" style="display:none" />&ndash;%&gt;--%>
+        <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+    <%--</div>--%>
+<%--</div>--%>
+
+<%--<div class="form-group" id="formGroupPiority" style="display: none">--%>
+    <%--<div class="row col-md-12">--%>
+        <%--<label for="piority" class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px">--%>
+            <%--<small>ชื่อสายรหัส</small>--%>
+            <%--<small style="color: red">*</small>--%>
+        <%--</label>--%>
+        <%--<div class="col-md-4">--%>
+            <%--<div class="col-md-12" style="padding-right: 0px;padding-left: 0px">--%>
+                <%--<input class="form-control" name="piority" id="piority" value="" autocomplete="off" onkeypress="return isEnglish(event)" />--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
+
+<%--<div class="form-group">--%>
+    <%--<div class="row col-md-12">--%>
+        <%--<label class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px">--%>
+            <%--<small>เริ่มทำงาน</small><small style="color: red">*</small>--%>
+        <%--</label>--%>
+        <%--<div class="col-md-9">--%>
+            <%--<div class="col-md-5" style="padding: 0px;">--%>
+                <%--<div class='input-group date' id='dpStartWork'>--%>
+                    <%--<input id="startWork" type='text' class="form-control" readonly="true" value="${user[0].startWork}"--%>
+                                <%--style="cursor:pointer;background-color:white" required="true"/>--%>
+                            <%--<span class="input-group-addon">--%>
+                                <%--<span class="glyphicon glyphicon-calendar"></span>--%>
+                            <%--</span>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="col-md-6">--%>
+                <%--<label class="col-md-2 control-label" style="padding-right: 0px;"><small>รวม</small></label>--%>
+                <%--<div class="col-md-6" style="padding-right: 0px;">--%>
+                    <%--<input id="workeLoad" type="text" class="form-control text-center" disabled="disabled" />--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
+
+<%--<div class="form-group">--%>
+    <%--<div class="row col-md-12">--%>
+        <%--<label class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px">--%>
+            <%--<small>ที่อยู่</small><small style="color: red">*</small>--%>
+        <%--</label>--%>
+        <%--<div class="col-md-9">--%>
+            <%--<textarea id="address" class="form-control" >${user[0].address}</textarea>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
+
+<%--<div class="form-group">--%>
+    <%--<div class="row col-md-12">--%>
+        <%--<label for="stuid" class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px"><small>มือถือ</small><small style="color: red">*</small></label>--%>
+        <%--<div class="col-md-4">--%>
+            <%--<input path="tell2" id="telMoblie" class="form-control" value="${user[0].tell2}" maxlength="10" onkeypress="return isNumber(event)" />--%>
+
+        <%--</div>--%>
+
+        <%--<label for="stuid" class="col-md-1 control-label" style="padding: 7px 0px 7px 0px;"><small>โทร</small>--%>
+        <%--</label>--%>
+        <%--<div class="col-md-4">--%>
+            <%--<input path="tell1" id="telHome" class="form-control " value="${user[0].tell1}" maxlength="10" onkeypress="return isNumber(event)" />--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
+
+<%--<div class="form-group">--%>
+    <%--<div class="row col-md-12">--%>
+        <%--<label for="stuid" class="col-md-2 control-label" style="padding-right: 0px">--%>
+            <%--<small>อีเมล</small><small style="color: red">*</small></label>--%>
+        <%--<div class="col-md-4">--%>
+            <%--<input id="ssgMail" name="stuid" class="form-control" disabled--%>
+                   <%--value="${user[0].eMail1}" />--%>
+        <%--</div>--%>
+        <%--<label class="col-md-2 control-label" style="text-align: left;"><small>@softsquaregroup.com</small></label>--%>
+    <%--</div>--%>
+<%--</div>--%>
 
 <div class="form-group">
     <div class="row col-md-12">
-        <label class="col-md-3 control-label" style="padding-left: 0px;padding-right: 0px"><small>ตำแหน่ง</small><small style="color: red">*</small></label>
-        <div class="col-md-4">
-            <%--<input name="username" class="form-control" value="${user[0].sectionPosition.position.posiName}" />--%>
-            <%--<c:set var="positionId" scope="session" value="${user[0].spId}"/>--%>
-            <input type="hidden" id="jobIdHiden" value="${user[0].spId}" />
-            <select <%--path="spId"--%> id="job" class="form-control" required="true">
-                <option value="">เลือกตำแหน่ง</option>
-                <%--<c:forEach var="sectionPositionList" items="${listSectionPosition}">--%>
-                    <%--<option value="${sectionPositionList.spId}" <c:if test="${sectionPositionList.spId==positionId}"> selected="selected" </c:if> >--%>
-                            <%--${sectionPositionList.position.posiName}--%>
-                    <%--</option>--%>
-                <%--</c:forEach>--%>
-            </select>
-        </div>
-        <label for="englname" class="col-md-1 control-label" style="padding: 7px 0px 7px 0px;"><small>ทีม</small><small style="color: red">*</small></label>
-        <div class="col-md-4">
-            <%--<input class="form-control" value="${user[0].team.teamName}" />--%>
-            <select id="team" class="form-control" disabled="true"  required="true">
-                <%--<option value="">เลือกทีม</option>--%>
-                <option value="${user[0].teamId}">${user[0].team.teamName}</option>
-            </select>
-            <input class="form-control" id="txbTeam" name="txbTeam" required="true" autocomplete="off" style="display:none" />
-        </div>
-    </div>
-</div>
-
-<div class="form-group" id="formGroupPiority" style="display: none">
-    <div class="row col-md-12">
-        <label for="piority" class="col-md-3 control-label" style="padding-left: 0px;padding-right: 0px">
-            <small>ชื่อสายรหัส</small>
-            <small style="color: red">*</small>
-        </label>
-        <div class="col-md-4">
-            <div class="col-md-12" style="padding-right: 0px;padding-left: 0px">
-                <input class="form-control" name="piority" id="piority" value="" autocomplete="off" onkeypress="return isEnglish(event)" />
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="row col-md-12">
-        <label class="col-md-3 control-label" style="padding-left: 0px;padding-right: 0px">
-            <small>เริ่มทำงาน</small><small style="color: red">*</small>
-        </label>
-        <div class="col-md-9">
-            <div class="col-md-5" style="padding: 0px;">
-                <div class='input-group date' id='dpStartWork'>
-                    <input id="startWork" type='text' class="form-control" readonly="true" value="${user[0].startWork}"
-                                style="cursor:pointer;background-color:white" required="true"/>
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <label class="col-md-3 control-label" style="padding-right: 0px;"><small>รวม</small></label>
-                <div class="col-md-6" style="padding-right: 0px;">
-                    <input id="workeLoad" type="text" class="form-control text-center" disabled="disabled" />
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="row col-md-12">
-        <label class="col-md-3 control-label" style="padding-left: 0px;padding-right: 0px">
-            <small>ที่อยู่</small><small style="color: red">*</small>
-        </label>
-        <div class="col-md-9">
-            <textarea id="address" class="form-control" >${user[0].address}</textarea>
-        </div>
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="row col-md-12">
-        <label for="stuid" class="col-md-3 control-label" style="padding-left: 0px;padding-right: 0px"><small>มือถือ</small><small style="color: red">*</small></label>
-        <div class="col-md-4">
-            <input path="tell2" id="telMoblie" class="form-control" value="${user[0].tell2}" maxlength="10" onkeypress="return isNumber(event)" />
-
-        </div>
-
-        <label for="stuid" class="col-md-1 control-label" style="padding: 7px 0px 7px 0px;"><small>โทร</small>
-        </label>
-        <div class="col-md-4">
-            <input path="tell1" id="telHome" class="form-control " value="${user[0].tell1}" maxlength="10" onkeypress="return isNumber(event)" />
-        </div>
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="row col-md-12">
-        <label for="stuid" class="col-md-3 control-label" style="padding-right: 0px">
+        <label for="stuid" class="col-md-2 control-label" style="padding-right: 0px">
             <small>อีเมล</small><small style="color: red">*</small></label>
-        <div class="col-md-4">
-            <input id="ssgMail" name="stuid" class="form-control" disabled
-                   value="${user[0].eMail1}" />
-        </div>
-        <label class="col-md-3 control-label" style="text-align: left;"><small>@softsquaregroup.com</small></label>
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="row col-md-12">
-        <label for="stuid" class="col-md-3 control-label" style="padding-right: 0px">
-            <small>อีเมล(สำรอง)</small><small style="color: red">*</small></label>
         <div class="col-md-4">
             <input id="othEmail" name="stuid" class="form-control"  onkeypress="return checkEmail(event)"
                    value="${user[0].eMail2}" />
@@ -282,29 +282,29 @@
     </div>
 </div>
 
-<div class="form-group">
-    <div class="row col-md-12">
-        <label for="stuid" class="col-md-3 control-label" style="padding-right: 0px">
-            <small>Skype Account</small><small style="color: red">*</small></label>
-        <div class="col-md-4">
-            <input path="skype" id="skypeAcc" name="stuid" class="form-control" onkeypress="return numberEnglishEmegency(event)"
-                   value="${user[0].skype}" />
-        </div>
-    </div>
-</div>
+<%--<div class="form-group">--%>
+    <%--<div class="row col-md-12">--%>
+    <%--<label for="stuid" class="col-md-2 control-label" style="padding-right: 0px">--%>
+    <%--<small>Skype Account</small><small style="color: red">*</small></label>--%>
+    <%--<div class="col-md-4">--%>
+    <%--<input path="skype" id="skypeAcc" name="stuid" class="form-control" onkeypress="return numberEnglishEmegency(event)"--%>
+    <%--value="${user[0].skype}" />--%>
+    <%--</div>--%>
+    <%--</div>--%>
+    <%--</div>--%>
 
-<input path="imange" type="file" name="file" id="fileUpload" style="display: none"/>
-<br/>
-<div class="form-group">
+    <input path="imange" type="file" name="file" id="fileUpload" style="display: none"/>
+    <br/>
+    <div class="form-group">
     <div class="row">
-        <div class="col-md-2 col-md-offset-4">
-            <input class="btn btn-primary" type="button" value="บันทึกการแก้ไข" onclick="checkEmpty()"/>
-        </div>
-        <div class="col-md-2 col-md-offset-0" style="margin-left: 5px">
-            <input id="changePassword" type="button" class="btn btn-primary" value="เปลี่ยนรหัสผ่าน" />
-        </div>
+    <div class="col-md-2 col-md-offset-4">
+    <input class="btn btn-primary" type="button" value="บันทึกการแก้ไข" onclick="checkEmpty()"/>
     </div>
-</div>
+    <div class="col-md-2 col-md-offset-0" style="margin-left: 5px">
+    <input id="changePassword" type="button" class="btn btn-primary" value="เปลี่ยนรหัสผ่าน" />
+    </div>
+    </div>
+    </div>
 </div>
 </div>
 </form>
@@ -324,7 +324,7 @@
                     <div class="form-horizontal">
                         <div class="form-group">
                             <div class="row">
-                                <label for="oldPassword" class="col-md-3 control-label">รหัสผ่านเดิม<label style="color: red">*</label></label>
+                                <label for="oldPassword" class="col-md-2 control-label">รหัสผ่านเดิม<label style="color: red">*</label></label>
                                 <div class="col-md-7">
                                     <input id="oldPassword" type="password" class="form-control"
                                            onkeypress="return numberAndEnglist(event)" autocomplete="off" required="true"/>
@@ -333,7 +333,7 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <label for="password" class="col-md-3 control-label">รหัสผ่านใหม<label style="color: red">*</label></label>
+                                <label for="password" class="col-md-2 control-label">รหัสผ่านใหม<label style="color: red">*</label></label>
                                 <div class="col-md-7">
                                     <%--<input id="newPassword" type="text" class="form-control" />--%>
                                     <div id="passdiv" class="col-md-12" style="padding-right: 0px;padding-left: 0px">
@@ -346,7 +346,7 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <label for="cpassword" class="col-md-3 control-label">ยืนยันรหัสผ่านใหม่<label style="color: red">*</label></label>
+                                <label for="cpassword" class="col-md-2 control-label">ยืนยันรหัสผ่านใหม่<label style="color: red">*</label></label>
                                 <div class="col-md-7">
                                     <%--<input id="confirmNewPassword" type="text" class="form-control" />--%>
                                     <div id="cpassdiv" class="col-md-12" style="padding-right: 0px;padding-left: 0px">
@@ -374,37 +374,43 @@
 <script>
     var elementStart;
     $(document).ready(function () {
-        var age = $("#birthday").val().split("/");
-        $("#age").val(_calculateAge(age[2]+"/"+age[1]+"/"+age[0]));
+//        var age = $("#birthday").val().split("/");
+//        $("#age").val(_calculateAge(age[2]+"/"+age[1]+"/"+age[0]));
 
         <%--elementStart = ['${user[0].empId}','${user[0].userName}','${user[0].thFname}','${user[0].thLname}','${user[0].enFname}','${user[0].enLname}',--%>
             <%--'${user[0].nickName}','${user[0].birthDate}','${user[0].address}','${user[0].tell1}','${user[0].tell2}','${user[0].eMail1}',--%>
             <%--'${user[0].eMail2}','${user[0].skype}','${user[0].startWork}'];--%>
-        elementStart = [ '${user[0].empId}', '${user[0].userName}','${user[0].thFname}','${user[0].thLname}','${user[0].enFname}','${user[0].enLname}',
-            '${user[0].nickName}','${user[0].birthDate}', '${user[0].address}','${user[0].tell1}',
-            '${user[0].tell2}','${user[0].eMail1}','${user[0].skype}','${user[0].eMail2}','${user[0].compId}',
-            '${user[0].spId}','${user[0].startWork}'];
+        <%--elementStart = [ '${user[0].empId}', '${user[0].userName}','${user[0].thFname}','${user[0].thLname}','${user[0].enFname}','${user[0].enLname}',--%>
+            <%--'${user[0].nickName}','${user[0].birthDate}', '${user[0].address}','${user[0].tell1}',--%>
+            <%--'${user[0].tell2}','${user[0].eMail1}','${user[0].skype}','${user[0].eMail2}','${user[0].compId}',--%>
+            <%--'${user[0].spId}','${user[0].startWork}'];--%>
     });
 
 
-    var stDate = $("#startWork").val().split('/');
-    var dString = stDate[2]+","+ stDate[1] +","+ stDate[0];
-    var d1 = new Date(dString);
-    var d2 = new Date();
-    var y = DateDiff.inYears(d1, d2),m = DateDiff.inMonths(d1,d2),d = DateDiff.inDays(d1,d2);
-    var rerultShow = "";
-
-    if(m>=12){
-        y=m/12;
-        rerultShow += parseInt(y+"")+" ปี";
-        if(m%12>0){
-            m%=12;
-            m+" เดือน"
-        }
-    }else{
-        rerultShow += m+" เดือน";
-    }
-    $("#workload").val(rerultShow);
+//    var stDate = $("#startWork").val().split('/');
+//    var dString = stDate[2]+","+ stDate[1] +","+ stDate[0];
+//    var d1 = new Date(dString);
+//    var d2 = new Date();
+//    var y = DateDiff.inYears(d1, d2),m = DateDiff.inMonths(d1,d2),d = DateDiff.inDays(d1,d2);
+//    var rerultShow = "";
+//
+//    if(m>=12){
+//        y=m/12;
+//        rerultShow += parseInt(y+"")+" ปี";
+//        if(m%12>0){
+//            m%=12;
+//            m+" เดือน"
+//        }
+//    }else{
+//        rerultShow += m+" เดือน";
+//    }
+//    $("#workload").val(rerultShow);
 
 </script>
 <script src="<c:url value="/resources/js/pageScript/homeStaff.js" />"></script>
+
+<style>
+    .validate-fail {
+            border: solid 1px red;
+    }
+</style>
