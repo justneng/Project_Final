@@ -110,9 +110,9 @@ public class QueryReportDomain {
     }
 
     public static String calculateGrade(float maxScore, float userScore){
-//        float percentage = maxScore / 100;
-//        float realPercentage = userScore / percentage;
-        float realPercentage = maxScore / userScore;
+        float percentage = maxScore / 100;
+        float realPercentage = userScore / percentage;
+//        float realPercentage = maxScore / userScore;
 
         if(realPercentage >= 80){
             return "A";

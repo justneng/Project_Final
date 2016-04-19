@@ -5,9 +5,6 @@ var last = 0;
 $(document).ready(function(){
     $('.pagination').on('click', 'li > a', function(){
         currentPage($(this));
-        if(typeof toPage == 'function'){
-            toPage(getCurrentPageNumber,10);
-        }
     });
 });
 
@@ -54,7 +51,7 @@ function currentPage(currentElem) {
         }
     }
 
-    else if (where === "question") {
+    if (where === "questions") {
         if (elem.attr('id') == 'first-page') {
             var first = elem.siblings().find('a:contains("1")');
             printRecordsSelectQuestion(getRecordsPerPage(Number(first.text()), records));
@@ -92,40 +89,6 @@ function currentPage(currentElem) {
             setStyle(currentElem);
         }
     }
-    else{
-        if (elem.attr('id') == 'first-page') {
-            var first = elem.siblings().find('a:contains("1")');
-            setStyle(first);
-        }
-        else if (elem.attr('id') == 'last-page') {
-            var last = elem.siblings().find('a:contains("' + Math.ceil(records.length / 10) + '")');
-            setStyle(last);
-        }
-        else if (elem.attr('id') == 'next-page') {
-            var next = elem.siblings().find('a').filter('.currentPage').parent().next().find('a');
-
-            if (next.parent().attr('id') == 'next-page') {
-                return;
-            }
-            else {
-                setStyle(next);
-            }
-        }
-        else if (elem.attr('id') == 'prev-page') {
-            var prev = elem.siblings().find('a').filter('.currentPage').parent().prev().find('a');
-
-            if (prev.parent().attr('id') == 'prev-page') {
-                return;
-            }
-            else {
-                setStyle(prev);
-            }
-        }
-        else {
-            setStyle(currentElem);
-        }
-    }
-
 }
 
 function setStyle(elem){
@@ -137,7 +100,7 @@ function setStyle(elem){
 
     $(".pagination > li > a").not(elem).not('#next-page').css({
         'background-color': 'white',
-        'color':     '#337ab7'
+        'color': '#337ab7'
     }).removeClass('currentPage');
 }
 
@@ -199,22 +162,13 @@ var printRecords = function (records){
             str3 = "";
         }
 
-        var displayPaperStatus = "";
-        if(value.examPaper.paperType.id == 1){
-            displayPaperStatus = '<span class="label label-default">กำหนดเอง</span>&nbsp;';
-        }
-
-        if(value.examPaper.paperType.id == 2){
-            displayPaperStatus = '<span class="label label-primary">สุ่ม</span>&nbsp;';
-        }
-
         $("#tbodyManagePaper").append(
             '<tr>'+
             '<td style="display: none;"><label id="'+value.examPaper.id+'">'+value.examPaper.id+'</label></td>'+
             '<td class="pCheck"><input class="checkPaper" '+str1+' type="checkbox" check="'+check+'"/></td>'+
             '<td><label id="lpaperCode'+value.examPaper.code+'" class="paper-code">'+value.examPaper.code+'</label>&nbsp;' + str3 +'</td>'+
-            //'<td><label id="lpaperCode'+value.examPaper.code+'">'+value.examPaper.code+'&nbsp;<span class="glyphicon glyphicon-calendar release-exam" data-toggle="modal" papercode="'+value.examPaper.code+'" positionid="'+posiId+'" data-target="#release-exam-modal" style="color: #00b5e5;"></span></label></td>'+
-            '<td style="text-align: left;"><label id="lpaperName'+paperName+'">'+displayPaperStatus+paperName+'</label></td>'+
+                //'<td><label id="lpaperCode'+value.examPaper.code+'">'+value.examPaper.code+'&nbsp;<span class="glyphicon glyphicon-calendar release-exam" data-toggle="modal" papercode="'+value.examPaper.code+'" positionid="'+posiId+'" data-target="#release-exam-modal" style="color: #00b5e5;"></span></label></td>'+
+            '<td style="text-align: left;"><label id="lpaperName'+paperName+'">'+paperName+'</label></td>'+
             '<td><label id="lpaperCreateBy'+value.examPaper.createBy.empId+'">'+value.examPaper.createBy.thFname+' '+value.examPaper.createBy.thLname+'</label></td>'+
             '<td><label id="lpaperScore'+value.examPaper.maxScore+'" class="label-control">'+value.examPaper.maxScore+'</label></td>'+
             '<td><label id="lpaperForPosition'+posiId+'" class="label-control">'+posiName+'</label></td>'+
@@ -232,7 +186,7 @@ var printRecords = function (records){
 
 var printRecordsSelectQuestion = function (result){
     dataFound();
-    
+
     $("#tbodySelectQuestion").empty();
     result.forEach(function(value){
 
@@ -260,7 +214,6 @@ var printRecordsSelectQuestion = function (result){
             '<td style="text-align: left;"><label id="labelQuestionDesc'+value.id+'">'+ checkString(value.description) +'</label></td>'+
             '<td style="text-align: center;"><label id="labelQuestionTypeDesc'+value.id+'">'+value.questionType.description+'</td>'+
             '<td style="text-align: center;"><label id="labelDiffDesc'+value.id+'">'+value.difficultyLevel.description+'</td>'+
-            '<td style="text-align: center; display: none;"><label id="labelDiffLevel'+value.id+'">'+value.difficultyLevel.level+'</td>'+
             '<td style="text-align: center;"><label id="labelScore'+value.id+'">'+value.score+'</td>'+
 
             '<td style="text-align: center; display: none;"><label id="labelQuestionCreateBy'+value.id+'">'+value.createBy.thFname+" "+value.createBy.thLname+'</td>'+
@@ -270,52 +223,6 @@ var printRecordsSelectQuestion = function (result){
         );
     });
 };
-
-//var printManageUsers = function (result){
-//    $('#resultSearch').empty();
-//
-//    result.forEach(function(val){
-//        var status;
-//        var email;
-//        var position;
-//        var block;
-//
-//        if((val.enabled == 0) && (val.loginFailedTimeTo == null) && (val.loginFailedTimeFrom == null) ){
-//            block = '<button class="btn btn-danger btn-sm reset-block-user" empId="'+val.empId+'" name="'+val.thFname + '&nbsp;&nbsp;' + val.thLname+'">ยกเลิกบล็อก</button>';
-//        }
-//
-//        else{
-//            block = '<button class="btn btn-link btn-sm block-user" empId="'+val.empId+'" name="'+val.thFname + '&nbsp;&nbsp;' + val.thLname+'">บล็อก</button>';
-//        }
-//
-//        if(val.position == null? position = "": position = val.position.posiName);
-//
-//        if(Number(val.status) == 1){
-//            status = "ผู้ดูแลระบบ";
-//            email = val.eMail1+"@softsquaregroup.com";
-//        }
-//        else if(Number(val.status) == 2){
-//            status = "พนักงาน";
-//            email = val.eMail1+"@softsquaregroup.com";
-//        }
-//        else{
-//            status = "นักศึกษา";
-//            email = val.eMail1+"@internal.ssg";
-//        }
-//
-//        $('#resultSearch').append(
-//            '<tr>'+
-//            '<td>' + val.empId + '</td>' +
-//            '<td>' + val.thFname + '&nbsp;&nbsp;' + val.thLname +'</td>' +
-//            '<td>' + status + '</td>' +
-//            '<td>' + position + '</td>' +
-//            '<td>' + email + '</td>' +
-//            '<td>' + block + '</td>' +
-//            '<td><button class="btn btn-primary btn-sm delete-user" empId="'+val.empId+'" name="'+val.thFname + '&nbsp;&nbsp;' + val.thLname+'">ลบ</button></td>' +
-//            '</tr> '
-//        )
-//    });
-//}
 
 var totalPage = function(lenght, where){
 
@@ -337,7 +244,7 @@ var totalPage = function(lenght, where){
         );
     }
 
-    else if(where === "questions"){
+    if(where === "questions"){
         for(var i = 1; i <= allPages; i ++){
             str = str + '<li><a>'+i+'</a></li>';
         }
@@ -349,20 +256,6 @@ var totalPage = function(lenght, where){
             str +
             '<li id="next-page" where="questions"><a>&#x276f;</a></li>' +
             '<li id="last-page" where="questions"><a>&#x276f;&#x276f;</a></li>'
-        );
-    }
-    else{
-        for(var i = 1; i <= allPages; i ++){
-            str = str + '<li><a>'+i+'</a></li>';
-        }
-
-        $('.pagination').empty();
-        $('.pagination').append(
-            '<li id="first-page" where=""><a>&#x276e;&#x276e;</a></li>' +
-            '<li id="prev-page" where=""><a>&#x276e;</a></li>' +
-            str +
-            '<li id="next-page" where=""><a>&#x276f;</a></li>' +
-            '<li id="last-page" where=""><a>&#x276f;&#x276f;</a></li>'
         );
     }
 };
@@ -390,11 +283,3 @@ var notShowPagingSelectQuestions = function(){
     $('#page-component').hide();
     printRecordsSelectQuestion(records);
 };
-
-var getCurrentPageNumber = function(){
-    return parseInt($('.currentPage').text());
-}
-
-
-
-
