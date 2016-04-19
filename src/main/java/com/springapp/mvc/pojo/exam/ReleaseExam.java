@@ -2,6 +2,7 @@ package com.springapp.mvc.pojo.exam;
 
 
 import com.springapp.mvc.pojo.User;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,6 +21,12 @@ import java.util.Date;
 public class ReleaseExam implements Serializable{
     @EmbeddedId
     private ReleaseExamPk pk = new ReleaseExamPk();
+
+    @Id
+    @GenericGenerator(name = "id", strategy = "increment")
+    @GeneratedValue(generator = "id")
+    @Column(name = "ID")
+    private Integer id;
 
     @Column(name = "RELEASE_DATE_FROM")
     private Date releaseDateFrom;
@@ -107,5 +114,13 @@ public class ReleaseExam implements Serializable{
 
     public void setCheckInTime(Integer checkInTime) {
         this.checkInTime = checkInTime;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

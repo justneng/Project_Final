@@ -2,6 +2,7 @@ package com.springapp.mvc.domain;
 
 import com.springapp.mvc.pojo.UniversityFacultyMajor;
 import com.springapp.mvc.pojo.User;
+import com.springapp.mvc.pojo.exam.ReleaseExam;
 import com.springapp.mvc.util.BeanUtils;
 import com.springapp.mvc.util.DateUtil;
 import com.springapp.mvc.util.HibernateUtil;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -584,11 +586,24 @@ public class QueryUserDomain extends HibernateUtil {
     //Add by wanchana
     public List<User> getAllStudentInPosition(int positionId){
 
+//        List userIds = new ArrayList();
+//        Criteria c = getSession().createCriteria(ReleaseExam.class);
+//        List<ReleaseExam> releaseExamList = c.list();
+//        if(releaseExamList.size() > 0){
+//            for(ReleaseExam rel: releaseExamList){
+//                userIds.add(rel.getUser().getUserId());
+//            }
+//        }
+
         getSession().flush();
         Criteria criteria = getSession().createCriteria(User.class);
         Criterion cri1 = Restrictions.eq("aptId", 1);
         Criterion cri2 = Restrictions.eq("aptId", 2);
         criteria.add(Restrictions.or(cri1, cri2));
+
+//        if(userIds != null){
+//            criteria.add(Restrictions.in("id", userIds));
+//        }
 
         if(positionId != 0){
             criteria.add(Restrictions.eq("position.posiId", positionId));

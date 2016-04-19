@@ -1,7 +1,9 @@
 var releaseDateField = $('#release-exam-date-field');
+var releaseDateToField = $('#release-exam-dateto-field');
 var releaseDateBtn = $('#release-exam-date-btn');
 var currentDate = new Date();
-currentDate.setDate(currentDate.getDate() - 1);
+//currentDate.setDate(currentDate.getDate() - 1);
+currentDate.setDate(currentDate.getDate());
 var currentPaperCode = "";
 
 $(document).ajaxStart(function(){
@@ -27,6 +29,7 @@ $(document).on('click', '.release-exam', function(){
         success: function(data){
             $('#release-exam-modal').modal('show');
             $('form[where="add-student"]').empty();
+            $('form[where="student-out-in-time"]').empty();
             $('#student-in-rule').empty();
             $('#label-modal-header').empty().append(
                 paperCode + ' : ' + paperName
@@ -50,7 +53,14 @@ $(document).on('click', '.release-exam', function(){
                 else{
                     $('.modal-footer').show();
                     $('#setting-1').show();
-                    fillDataToReleaseExamModal(value.userId, value.fname, value.lname, value.permiss);
+
+                    if(value.intime == 0){
+                        $('#setting-3').show();
+                        fillDataToReleaseExamModal2(value.userId, value.fname, value.lname);
+                    }
+                    else{
+                        fillDataToReleaseExamModal(value.userId, value.fname, value.lname, value.permiss);
+                    }
                 }
             });
         },
@@ -63,6 +73,7 @@ $(document).on('click', '.release-exam', function(){
 
 $('#release-exam-modal').on('hidden.bs.modal', function(){
     $('#setting-2').hide();
+    $('#setting-3').hide();
     $('#setting-1').hide();
     $('.modal-footer').hide();
     $('#add-student-collapse').removeClass('in');
@@ -70,8 +81,13 @@ $('#release-exam-modal').on('hidden.bs.modal', function(){
 
 $("#save-rule-btn").on('click', function(){
     var userIds = [];
+    var userIdsRedoExam = [];
     var currentDate = getCurrentDateSQLFormat();
     var paperCode = currentPaperCode;
+
+    //var s = $("#release-exam-date-field").val().split("/");
+    //var e = $("#release-exam-dateto-field").val().split("/");
+    //timediff(s[1] + "/" + s[0] + "/" + s[2] + " 00:00", e[1] + "/" + e[0] + "/" + e[2] + " 00:00", 2);
 
     $('.add-permiss').each(function(){
         if(this.checked){
@@ -79,9 +95,23 @@ $("#save-rule-btn").on('click', function(){
         }
     });
 
+    $('.out-of-time').each(function(){
+        if(this.checked){
+            userIdsRedoExam.push($(this).attr('userid'));
+        }
+    });
+
+    //if(checkTime2 == true){
+    //    return false;
+    //}
+
+    if((userIds.length > 0) || (userIdsRedoExam.length > 0)){
+        $('#release-exam-modal').modal('hide');
+    }
+
     $.ajax({
         type: "POST",
-        url: context+"/TDCS/exam/addReleaseExamPaperRule?userIds=" + userIds + "&currentDate=" + currentDate + "&paperCode=" + paperCode,
+        url: context+"/TDCS/exam/addReleaseExamPaperRule?userIds=" + userIds + "&currentDate=" + currentDate + "&paperCode=" + paperCode + "&userIdsRedoExam=" + userIdsRedoExam,
         async: false,
         success: function(data){
             alert("บันทึกการตั้งค่าเรียบร้อยแล้ว");
@@ -96,8 +126,16 @@ releaseDateField.datepicker({
     startDate: currentDate
 });
 
+releaseDateToField.datepicker({
+    startDate: currentDate
+});
+
 releaseDateField.datepicker().on('changeDate', function () {
     releaseDateField.datepicker('hide');
+});
+
+releaseDateToField.datepicker().on('changeDate', function () {
+    releaseDateToField.datepicker('hide');
 });
 
 releaseDateBtn.on('click', function () {
@@ -116,6 +154,21 @@ function fillDataToReleaseExamModal(userId, fname, lname, permiss){
         '<div class="form-group">'+
             '<div class="col-sm-3 text-right">'+
                 '<input class="add-permiss" userId="'+userId+'" type="checkbox"/>'+
+            '</div>'+
+
+            '<div class="col-sm-7">'+
+                '<label class="label-on-release-exam-modal">'+ fname + ' ' + lname + '</label>'+
+            '</div>'+
+        '</div>'
+    );
+}
+
+function fillDataToReleaseExamModal2(userId, fname, lname){
+    $('form[where="student-out-in-time"]').append(
+        '<div class="form-group">'+
+            '<div class="col-sm-3 text-right">'+
+                '<span class="label label-warning">สอบซ่อมวันนี้</span>&nbsp;'+
+                '<input class="out-of-time" userId="'+userId+'" type="checkbox"/>'+
             '</div>'+
 
             '<div class="col-sm-7">'+

@@ -70,7 +70,6 @@ public class QueryReleaseExamDomain extends HibernateUtil{
     public void checkExpireRule(Date date){
 
         try{
-            HibernateUtil.beginTransaction();
             Criteria criteria = getSession().createCriteria(ReleaseExam.class, "release");
             criteria.add(Restrictions.lt("releaseDateTo", date));
             criteria.add(Restrictions.eq("checkRelease", 'Y'));
@@ -81,13 +80,17 @@ public class QueryReleaseExamDomain extends HibernateUtil{
                     pap.setCheckRelease('N');
                     pap.setCheckInTime(0);
                     ExamPaper examPaper = pap.getExamPaper();
-                    examPaper.setPaperStatus(queryStatusDomain.getDeletedStatus());
+//                    examPaper.setPaperStatus(queryStatusDomain.getDeletedStatus());
+                    examPaper.setPaperStatus(queryStatusDomain.getClosedStatus());
+                    HibernateUtil.beginTransaction();
                     getSession().merge(examPaper);
+                    HibernateUtil.commitTransaction();
+
+                    HibernateUtil.beginTransaction();
                     getSession().merge(pap);
+                    HibernateUtil.commitTransaction();
                 }
             }
-            HibernateUtil.commitTransaction();
-
         }catch (Exception e){
             e.printStackTrace();
         } finally {
@@ -121,5 +124,26 @@ public class QueryReleaseExamDomain extends HibernateUtil{
         }
 
         HibernateUtil.commitTransaction();
+    }
+
+    public ReleaseExam getUserPermissToDoExam(User user, ExamPaper paper){
+
+        Criteria criteria = getSession().createCriteria(ReleaseExam.class);
+        criteria.add(Restrictions.eq("pk.user", user));
+        criteria.add(Restrictions.eq("pk.examPaper", paper));
+
+        List<ReleaseExam> releaseExamList = criteria.list();
+        ReleaseExam releaseExams = null;
+
+        if(releaseExamList.size() > 0){
+            releaseExams = (ReleaseExam) criteria.list().get(0);
+        }
+
+        if(releaseExams != null){
+            return releaseExams;
+        }
+        else{
+            return null;
+        }
     }
 }

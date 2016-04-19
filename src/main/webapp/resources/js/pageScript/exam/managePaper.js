@@ -681,7 +681,8 @@ function validateScoreRandom(){
     if(countHard == ""? countHard = 0: countHard = countHard);
 
     if((countEasy + countNormal + countHard) != Number($("#maxScore").val())){
-        alert('คะแนนรวมข้อสอบไม่เพียงพอ' + (countEasy + countNormal + countHard) + ' vs ' + Number($("#maxScore").val()));
+        alert('คะแนนรวมข้อสอบไม่เพียงพอ');
+        //alert('คะแนนรวมข้อสอบไม่เพียงพอ' + (countEasy + countNormal + countHard) + ' vs ' + Number($("#maxScore").val()));
         $("#questionEasyCount").focus();
         $("#questionEasyCount, #questionNormalCount, #questionHardCount").css('border-color', 'red');
         return false;
@@ -960,8 +961,8 @@ function generalSearchQuestion(btnSearchStatus) {
                     "questionDescriptionSearch" : questionDescriptionSearch,
                     "questionCreateDateFromSearch" : questionCreateDateFromSearch,
                     "questionCreateDateToSearch" : questionCreateDateToSearch,
-                    "questionScoreToSearch" : questionScoreToSearch,
-                    "questionScoreFromSearch" : questionScoreFromSearch,
+                    //"questionScoreToSearch" : questionScoreToSearch,
+                    //"questionScoreFromSearch" : questionScoreFromSearch,
                     "searchQEasy": searchQEasy,
                     "searchQNormal": searchQNormal,
                     "searchQHard": searchQHard
@@ -991,8 +992,8 @@ function generalSearchQuestion(btnSearchStatus) {
                     "questionDescriptionSearch" : questionDescriptionSearch,
                     "questionCreateDateFromSearch" : questionCreateDateFromSearch,
                     "questionCreateDateToSearch" : questionCreateDateToSearch,
-                    "questionScoreToSearch" : questionScoreToSearch,
-                    "questionScoreFromSearch" : questionScoreFromSearch,
+                    //"questionScoreToSearch" : questionScoreToSearch,
+                    //"questionScoreFromSearch" : questionScoreFromSearch,
                     "searchQEasy": searchQEasy,
                     "searchQNormal": searchQNormal,
                     "searchQHard": searchQHard

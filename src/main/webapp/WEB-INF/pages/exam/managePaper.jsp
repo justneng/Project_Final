@@ -217,47 +217,72 @@
                     <div class="well">
                         <form class="form-horizontal">
                             <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label text-right label-on-release-exam-modal">วันที่เปิดสอบ</label>--%>
-                            <%--<div class="col-sm-7">--%>
-                            <%--<div class="input-group">--%>
-                            <%--<input id="release-exam-date-field" type="text" data-date-format="dd/mm/yyyy" placeholder="&nbsp;&nbsp;วันที่เปิดสอบ" date-format="dd/mm/yyyy"--%>
-                            <%--maxlength="10" class="form-control input-sm datepicker">--%>
-                            <%--<span id="release-exam-date-btn" class="input-group-addon"><span href="#"--%>
-                            <%--class="glyphicon glyphicon-calendar"></span></span>--%>
-                            <%--</div>--%>
-                            <%--</div>--%>
+                                <%--<div class="col-sm-3 text-right">--%>
+                                    <%--<input id="open-exam-other-day" type="out-of-time" data-toggle="collapse" data-target="#add-student-collapse"/>--%>
+                                <%--</div>--%>
                             <%--</div>--%>
 
                             <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label text-right label-on-release-exam-modal">เวลาตั้งแต่</label>--%>
+                                <%--<label class="col-sm-3 control-label text-right label-on-release-exam-modal">วันที่เปิดสอบ</label>--%>
 
-                            <%--<div id="release-exam-time-from" class="col-sm-6">--%>
-                            <%--<div class="col-sm-6">--%>
-                            <%--<input id="hour-from" class="form-control input-sm" type="number" min="0" max="24" placeholder="ชม." oninput="validity.valid||(value='');" required/>--%>
-                            <%--</div>--%>
-
-                            <%--<div class="col-sm-6">--%>
-                            <%--<input id="minute-from" class="col-sm-5 form-control input-sm" type="number" min="0" max="24" placeholder="น." oninput="validity.valid||(value='');" required/>--%>
-                            <%--</div>--%>
-                            <%--</div>--%>
-
-                            <%--<label class="control-label label-on-release-exam-modal">นาฬิกา</label>--%>
+                                <%--<div class="col-sm-7">--%>
+                                    <%--<div class="input-group">--%>
+                                        <%--<input id="release-exam-date-field" type="text" data-date-format="dd/mm/yyyy"--%>
+                                               <%--placeholder="&nbsp;&nbsp;วันที่เปิดสอบ" date-format="dd/mm/yyyy"--%>
+                                               <%--maxlength="10" class="form-control input-sm datepicker">--%>
+                                        <%--<span id="release-exam-date-btn" class="input-group-addon"><span href="#"--%>
+                                                                                             <%--class="glyphicon glyphicon-calendar"></span></span>--%>
+                                    <%--</div>--%>
+                                <%--</div>--%>
                             <%--</div>--%>
 
                             <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label text-right label-on-release-exam-modal">ถึง</label>--%>
+                                <%--<label class="col-sm-3 control-label text-right label-on-release-exam-modal">เวลาตั้งแต่</label>--%>
 
-                            <%--<div id="release-exam-time-to" class="col-sm-6">--%>
-                            <%--<div class="col-sm-6">--%>
-                            <%--<input id="hour-to" class="form-control input-sm" type="number" min="0" max="24" placeholder="ชม." oninput="validity.valid||(value='');" required/>--%>
+                                <%--<div id="release-exam-time-from" class="col-sm-6">--%>
+                                    <%--<div class="col-sm-6">--%>
+                                        <%--<input id="hour-from" class="form-control input-sm" type="number" min="0"--%>
+                                               <%--max="24" placeholder="ชม." oninput="validity.valid||(value='');"--%>
+                                               <%--required/>--%>
+                                    <%--</div>--%>
+
+                                    <%--<div class="col-sm-6">--%>
+                                        <%--<input id="minute-from" class="col-sm-5 form-control input-sm" type="number"--%>
+                                               <%--min="0" max="24" placeholder="น." oninput="validity.valid||(value='');"--%>
+                                               <%--required/>--%>
+                                    <%--</div>--%>
+                                <%--</div>--%>
+
+                                <%--<label class="control-label label-on-release-exam-modal">นาฬิกา</label>--%>
                             <%--</div>--%>
 
-                            <%--<div class="col-sm-6">--%>
-                            <%--<input id="minute-to" class="col-sm-5 form-control input-sm" min="0" max="24" type="number" placeholder="น." oninput="validity.valid||(value='');" required/>--%>
-                            <%--</div>--%>
-                            <%--</div>--%>
+                            <%--<div class="form-group">--%>
+                                <%--<label class="col-sm-3 control-label text-right label-on-release-exam-modal">ถึง</label>--%>
 
-                            <%--<label class="control-label label-on-release-exam-modal">นาฬิกา</label>--%>
+                                <%--<div id="release-exam-time-to" class="col-sm-6">--%>
+                                    <%--<div class="col-sm-6">--%>
+                                        <%--<input id="hour-to" class="form-control input-sm" type="number" min="0" max="24"--%>
+                                               <%--placeholder="ชม." oninput="validity.valid||(value='');" required/>--%>
+                                    <%--</div>--%>
+
+                                    <%--<div class="col-sm-6">--%>
+                                        <%--<input id="minute-to" class="col-sm-5 form-control input-sm" min="0" max="24"--%>
+                                               <%--type="number" placeholder="น." oninput="validity.valid||(value='');"--%>
+                                               <%--required/>--%>
+                                    <%--</div>--%>
+                                <%--</div>--%>
+
+                                <%--<label class="control-label label-on-release-exam-modal">นาฬิกา</label>--%>
+
+                                <%--<div class="col-sm-7">--%>
+                                    <%--<div class="input-group">--%>
+                                        <%--<input id="release-exam-dateto-field" type="text" data-date-format="dd/mm/yyyy"--%>
+                                               <%--placeholder="&nbsp;&nbsp;วันที่เปิดสอบ" date-format="dd/mm/yyyy"--%>
+                                               <%--maxlength="10" class="form-control input-sm datepicker">--%>
+                                        <%--<span id="release-exam-dateto-btn" class="input-group-addon"><span href="#"--%>
+                                                                                                         <%--class="glyphicon glyphicon-calendar"></span></span>--%>
+                                    <%--</div>--%>
+                                <%--</div>--%>
                             <%--</div>--%>
 
                             <div class="form-group">
@@ -280,6 +305,15 @@
                         <label><span class="glyphicon glyphicon-user"></span>&nbsp;เพิ่มนักศึกษา</label>
                         <div class="well">
                             <form class="form-horizontal" where="add-student">
+
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="setting-3" style="display: none;">
+                        <label><span class="glyphicon glyphicon-exclamation-sign" style="color: red;"></span>&nbsp;นักศึกษาที่ทำชุดข้อสอบนี้ไม่ทัน</label>
+                        <div class="well">
+                            <form class="form-horizontal" where="student-out-in-time">
 
                             </form>
                         </div>

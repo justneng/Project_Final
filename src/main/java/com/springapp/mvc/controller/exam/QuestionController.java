@@ -273,8 +273,8 @@ public class QuestionController {
         String qDesc = "";
         String qCreateDateFrom = "";
         String qCreateDateTo = "";
-        String qScoreFrom = "";
-        String qScoreTo = "";
+//        String qScoreFrom = "";
+//        String qScoreTo = "";
         Integer searchQEasy = 0;
         Integer searchQNormal = 0;
         Integer searchQHard = 0;
@@ -305,8 +305,8 @@ public class QuestionController {
             qDesc = jsonObject.getString("questionDescriptionSearch");
             qCreateDateFrom = jsonObject.getString("questionCreateDateFromSearch");
             qCreateDateTo = jsonObject.getString("questionCreateDateToSearch");
-            qScoreFrom = jsonObject.getString("questionScoreFromSearch");
-            qScoreTo = jsonObject.getString("questionScoreToSearch");
+//            qScoreFrom = jsonObject.getString("questionScoreFromSearch");
+//            qScoreTo = jsonObject.getString("questionScoreToSearch");
 
             searchQEasy = jsonObject.getInt("searchQEasy");
             searchQNormal = jsonObject.getInt("searchQNormal");
@@ -323,8 +323,8 @@ public class QuestionController {
                     qDesc = jsonObject.getString("questionDescriptionSearch");
                     qCreateDateFrom = jsonObject.getString("questionCreateDateFromSearch");
                     qCreateDateTo = jsonObject.getString("questionCreateDateToSearch");
-                    qScoreFrom = jsonObject.getString("questionScoreFromSearch");
-                    qScoreTo = jsonObject.getString("questionScoreToSearch");
+//                    qScoreFrom = jsonObject.getString("questionScoreFromSearch");
+//                    qScoreTo = jsonObject.getString("questionScoreToSearch");
                 }
                 btnStatus = jsonObject.getInt("btnSearchStatus");
             }
@@ -347,11 +347,13 @@ public class QuestionController {
             List<Question> questionsAdvanceResult = new ArrayList<Question>();
             if((searchQEasy == 0) && (searchQNormal == 0) && (searchQHard == 0)){
                 questionsAdvanceResult = queryQuestionDomain.advanceSearchQuestion(empNameSearch, categorySearch, subCategoryId, qIdsNotSearch, qDesc,
-                        qCreateDateFrom, qCreateDateTo, qScoreFrom, qScoreTo, searchQEasy, searchQNormal, searchQHard);
+                        qCreateDateFrom, qCreateDateTo, "", "", searchQEasy, searchQNormal, searchQHard);
+//                        qCreateDateFrom, qCreateDateTo, qScoreFrom, qScoreTo, searchQEasy, searchQNormal, searchQHard);
             }
             if(searchQEasy != 0){
                 List<Question> tmp1 = queryQuestionDomain.advanceSearchQuestion(empNameSearch, categorySearch, subCategoryId, qIdsNotSearch, qDesc,
-                        qCreateDateFrom, qCreateDateTo, qScoreFrom, qScoreTo, searchQEasy, 0, 0);
+                        qCreateDateFrom, qCreateDateTo, "", "", searchQEasy, 0, 0);
+//                        qCreateDateFrom, qCreateDateTo, qScoreFrom, qScoreTo, searchQEasy, 0, 0);
                 if(searchQEasy <= tmp1.size()){
                     for(idx = 0; idx < searchQEasy; idx ++){
                         questionsAdvanceResult.add(tmp1.get(idx));
@@ -363,7 +365,8 @@ public class QuestionController {
             }
             if(searchQNormal != 0){
                 List<Question> tmp2 = queryQuestionDomain.advanceSearchQuestion(empNameSearch, categorySearch, subCategoryId, qIdsNotSearch, qDesc,
-                        qCreateDateFrom, qCreateDateTo, qScoreFrom, qScoreTo, 0, searchQNormal, 0);
+                        qCreateDateFrom, qCreateDateTo, "", "", 0, searchQNormal, 0);
+//                        qCreateDateFrom, qCreateDateTo, qScoreFrom, qScoreTo, 0, searchQNormal, 0);
                 if(searchQNormal <= tmp2.size()){
                     for(idx = 0; idx < searchQNormal; idx ++){
                         questionsAdvanceResult.add(tmp2.get(idx));
@@ -375,7 +378,8 @@ public class QuestionController {
             }
             if(searchQHard != 0){
                 List<Question> tmp3 = queryQuestionDomain.advanceSearchQuestion(empNameSearch, categorySearch, subCategoryId, qIdsNotSearch, qDesc,
-                        qCreateDateFrom, qCreateDateTo, qScoreFrom, qScoreTo, 0, 0, searchQHard);
+                        qCreateDateFrom, qCreateDateTo, "", "", 0, 0, searchQHard);
+//                        qCreateDateFrom, qCreateDateTo, qScoreFrom, qScoreTo, 0, 0, searchQHard);
                 if(searchQHard <= tmp3.size()){
                     for(idx = 0; idx < searchQHard; idx ++){
                         questionsAdvanceResult.add(tmp3.get(idx));

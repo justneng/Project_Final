@@ -25,7 +25,10 @@
                 </div>
                 <div class="row text-center">
                     <c:if test="${ch == 'fail'}">
-                        <div class="col-md-offset-4 col-md-4" style="color: red;">คุณป้อนชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</div>
+                        <div class="text-center" style="color: red;">
+                            คุณป้อนชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง<br/>
+                            สามารถ Login พลาดได้ไม่เกิน "<c:out value="${loginRemaining}" /> ครั้ง"
+                        </div>
                     </c:if>
 
                     <c:if test="${ch == 'block'}">

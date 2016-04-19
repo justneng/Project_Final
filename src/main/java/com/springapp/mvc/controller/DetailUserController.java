@@ -142,8 +142,23 @@ public class DetailUserController {
         }
         else{
             for(User user : users){
-                usersInPositionList.add(new ListenUsersInPosition(user.getUserId(), user.getThFname(), user.getThLname(),
-                        user.getPosition().getPosiId(), user.getPosition().getPosiName(), 'N', null));
+                ReleaseExam releaseExam = queryReleaseExamDomain.getUserPermissToDoExam(user, paper);
+                if(releaseExam != null){
+                    int inTime = 0;
+                    if(releaseExam.getCheckInTime() == null){
+                        inTime = 0;
+                    }
+                    else{
+                        inTime = releaseExam.getCheckInTime();
+                    }
+
+                    usersInPositionList.add(new ListenUsersInPosition(user.getUserId(), user.getThFname(), user.getThLname(),
+                            user.getPosition().getPosiId(), user.getPosition().getPosiName(), 'N', inTime));
+                }
+                else{
+                    usersInPositionList.add(new ListenUsersInPosition(user.getUserId(), user.getThFname(), user.getThLname(),
+                            user.getPosition().getPosiId(), user.getPosition().getPosiName(), 'N', null));
+                }
             }
 
             String toJson = new JSONSerializer().exclude("*.class").serialize(usersInPositionList);

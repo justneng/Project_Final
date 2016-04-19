@@ -16,7 +16,13 @@ var checkScore;
 var checkAll;
 var checkCurrent;
 
+var checkTime2
+
 $(document).ready(function(){
+
+    if($('#paper-not-found-message').is(':visible')){
+        $('#paging').hide();
+    }
 
     $("#advPaperResetBtn").unbind('click').click(function(){
         resetAdvInput();
@@ -302,7 +308,7 @@ function generalSearchPaper(btnSearchStatus) {
 
     var s = $("#searchCreateDateFromInput").val().split("/");
     var e = $("#searchCreateDateToInput").val().split("/");
-    timediff(s[1] + "/" + s[0] + "/" + s[2] + " 00:00", e[1] + "/" + e[0] + "/" + e[2] + " 00:00");
+    timediff(s[1] + "/" + s[0] + "/" + s[2] + " 00:00", e[1] + "/" + e[0] + "/" + e[2] + " 00:00", 1);
 
     if(!checkTime && !checkScore){
         if (itemLenght > 0) {
@@ -483,7 +489,7 @@ function scoreDiff(sFrom, sTo){
     return checkScore;
 }
 
-function timediff(start_actual_time, end_actual_time) {
+function timediff(start_actual_time, end_actual_time, chk) {
     start_actual_time = new Date(start_actual_time);
     end_actual_time = new Date(end_actual_time);
 
@@ -494,15 +500,33 @@ function timediff(start_actual_time, end_actual_time) {
     var MM = Math.floor(diffSeconds % 3600) / 60;
 
     var formatted = ((HH < 10) ? ("0" + HH) : HH) + ":" + ((MM < 10) ? ("0" + MM) : MM);
-    if (formatted.charAt(1) == '-' || formatted == '00:00') {
-        $("#searchCreateDateFromInput").css('border-color', 'red');
-        $("#searchCreateDateToInput").css('border-color', 'red');
-        checkTime = true;
-    } else {
-        $("#searchCreateDateFromInput").css('border-color', '');
-        $("#searchCreateDateToInput").css('border-color', '');
-        checkTime = false;
+
+    if(chk == 1){
+        if (formatted.charAt(1) == '-' || formatted == '00:00') {
+            $("#searchCreateDateFromInput").css('border-color', 'red');
+            $("#searchCreateDateToInput").css('border-color', 'red');
+            checkTime = true;
+        }
+        else {
+            $("#searchCreateDateFromInput").css('border-color', '');
+            $("#searchCreateDateToInput").css('border-color', '');
+            checkTime = false;
+        }
     }
+
+    if(chk == 2){
+        if (formatted.charAt(1) == '-' || formatted == '00:00') {
+            $("#release-exam-date-field").css('border-color', 'red');
+            $("#release-exam-dateto-field").css('border-color', 'red');
+            checkTime2 = true;
+        }
+        else {
+            $("#release-exam-date-field").css('border-color', '');
+            $("#release-exam-dateto-field").css('border-color', '');
+            checkTime2 = false;
+        }
+    }
+
 };
 
 function counter(){

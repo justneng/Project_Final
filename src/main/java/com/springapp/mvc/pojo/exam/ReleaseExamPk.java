@@ -1,6 +1,7 @@
 package com.springapp.mvc.pojo.exam;
 
 import com.springapp.mvc.pojo.User;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -43,4 +44,5 @@ public class ReleaseExamPk implements Serializable{
     public void setUpdateBy(User updateBy) {
         this.updateBy = updateBy;
     }
+
 }

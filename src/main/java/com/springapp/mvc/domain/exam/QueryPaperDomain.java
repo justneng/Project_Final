@@ -530,6 +530,32 @@ public class QueryPaperDomain extends HibernateUtil {
         return papers;
     }
 
+    public void redoExam(int userId, String paperCode, User updateBy, String date){
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+        QueryPaperDomain queryPaperDomain = new QueryPaperDomain();
+        ExamPaper examPaper = queryPaperDomain.getPaperByCode(paperCode);
+        Date currentDate = new Date();
+        try{
+            currentDate = simpleDateFormat.parse(date);
+            User user = queryUserDomain.getUserById(userId);
+            HibernateUtil.beginTransaction();
+            Criteria criteria = getSession().createCriteria(ReleaseExam.class);
+            criteria.add(Restrictions.eq("pk.user", user));
+            criteria.add(Restrictions.eq("pk.examPaper", examPaper));
+            ReleaseExam userRedoExam = (ReleaseExam) criteria.list().get(0);
+            userRedoExam.setReleaseDateTo(currentDate);
+            userRedoExam.setCheckInTime(null);
+            userRedoExam.setCheckRelease('Y');
+
+            getSession().merge(userRedoExam);
+            HibernateUtil.commitTransaction();
+
+        } catch (ParseException e){
+            e.printStackTrace();
+        }
+    }
+
     public void addRule(int userId, String paperCode, User updateBy, String date){
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);

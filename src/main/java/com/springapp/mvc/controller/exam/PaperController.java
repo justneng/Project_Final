@@ -579,12 +579,23 @@ public class PaperController {
     public ResponseEntity<String> getUsersInPosition(HttpServletRequest request, HttpServletResponse response,
                                                      @RequestParam(value = "userIds") int[] userIds,
                                                      @RequestParam(value = "currentDate") String currentDate,
-                                                     @RequestParam(value = "paperCode") String paperCode){
+                                                     @RequestParam(value = "paperCode") String paperCode,
+                                                     @RequestParam(value = "userIdsRedoExam") int[] userIdsRedoExam){
 
         User updateBy = queryUserDomain.getCurrentUser(request);
-        for(int i: userIds){
-            queryPaperDomain.addRule(i, paperCode, updateBy, currentDate);
+
+        if(userIds.length > 0){
+            for(int i: userIds){
+                queryPaperDomain.addRule(i, paperCode, updateBy, currentDate);
+            }
         }
+
+        if(userIdsRedoExam.length > 0){
+            for(int i: userIdsRedoExam){
+                queryPaperDomain.redoExam(i, paperCode, updateBy, currentDate);
+            }
+        }
+
 
         return new ResponseEntity<String>(HttpStatus.OK);
     }
