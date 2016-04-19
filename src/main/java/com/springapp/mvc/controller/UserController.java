@@ -3,6 +3,7 @@ package com.springapp.mvc.controller;
 import com.springapp.mvc.domain.QueryPositionDomain;
 import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.pojo.User;
+import com.springapp.mvc.util.BeanUtils;
 import com.springapp.mvc.util.DateUtil;
 import com.springapp.mvc.util.HibernateUtil;
 import flexjson.JSONSerializer;
@@ -13,10 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -103,6 +101,7 @@ public class UserController {
         return new ResponseEntity<String>(null, headers, HttpStatus.OK);
     }
 
+
     @RequestMapping(method = RequestMethod.POST, value = "/editUser")
     @ResponseBody
     public ResponseEntity<String> editUser(ModelMap model,
@@ -126,14 +125,101 @@ public class UserController {
         queryUserDomain.updateUser(user);
 
 
-        String json= "";
+        String json = "";
 //        if (newQuestion == null) {
 //            json = new JSONSerializer().exclude("*.class").serialize(question);
 //        }else{
 //            json = new JSONSerializer().exclude("*.class").serialize(newQuestion);
 //        }
+        return null;
+    }
+//Add By Wanchana
+    @RequestMapping(value = "/searchUserData", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> positionSearch(@ModelAttribute("tFname") String thFn,
+                                                 @ModelAttribute("tLname") String thLn,
+                                                 @ModelAttribute("nickName") String nick,
+                                                 @ModelAttribute("empId") String empId,
+                                                 @ModelAttribute("company") String company,
+                                                 @ModelAttribute("section") String section,
+                                                 @ModelAttribute("position") String position,
+                                                 @ModelAttribute("startTime") String startTime,
+                                                 @ModelAttribute("endTime") String endTime,
+                                                 @ModelAttribute("userType") Integer userType,
+                                                 HttpServletRequest request) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;charset=UTF-8");
+        List<User> list = queryUserDomain.getAllUser(thFn, thLn, nick, company, empId, userType);
+
+        for (int i = 0; i < list.size(); i++) {
+            if (BeanUtils.isNotEmpty(position)) {
+                if(list.get(i).getSectionPosition() != null){
+                    if (list.get(i).getSectionPosition().getPosiId() != Integer.parseInt(position)) {
+                        list.remove(i);
+                        i = -1;
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < list.size(); i++) {
+            if (BeanUtils.isNotEmpty(section)) {
+                if (list.get(i).getSectionPosition().getSectionId() != Integer.parseInt(section)) {
+                    list.remove(i);
+                    i = -1;
+                }
+            }
+        }
+
+        for (int i = 0; i < list.size(); i++) {
+            if (BeanUtils.isNotEmpty(endTime)) {
+                String[] endWork = endTime.split("/");
+                String[] startWorkUser = list.get(i).getStartWork().toString().split("/");
+                if (Integer.parseInt(startWorkUser[2]) > Integer.parseInt(endWork[2])) {
+                    list.remove(i);
+                    i = -1;
+                } else if (Integer.parseInt(startWorkUser[2]) == Integer.parseInt(endWork[2])) {
+                    if (Integer.parseInt(startWorkUser[1]) > Integer.parseInt(endWork[1])) {
+                        list.remove(i);
+                        i = -1;
+                    } else if (Integer.parseInt(startWorkUser[1]) == Integer.parseInt(endWork[1])) {
+                        if (Integer.parseInt(startWorkUser[0]) > Integer.parseInt(endWork[0])) {
+                            list.remove(i);
+                            i = -1;
+                        }
+                    }
+                }
+            }
+        }
+
+        String json = new JSONSerializer().exclude("*.class").serialize(list);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/exam/blockUser", method = RequestMethod.POST)
+    public ResponseEntity<String> blockUser(HttpServletRequest request, HttpServletResponse response,
+                                                     @RequestParam(value = "empid") String empid){
+
+        queryUserDomain.blockUser(empid);
+
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/exam/deleteUser", method = RequestMethod.POST)
+    public ResponseEntity<String> deleteUser(HttpServletRequest request, HttpServletResponse response,
+                                                     @RequestParam(value = "empid") String empid){
+
+        queryUserDomain.deleteUser(empid);
+
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/exam/resetBlock", method = RequestMethod.POST)
+    public ResponseEntity<String> resetBlock(HttpServletRequest request, HttpServletResponse response,
+                                                     @RequestParam(value = "empid") String empid){
+
+        queryUserDomain.resetBlock(empid);
+
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
 }

@@ -271,6 +271,52 @@ var printRecordsSelectQuestion = function (result){
     });
 };
 
+//var printManageUsers = function (result){
+//    $('#resultSearch').empty();
+//
+//    result.forEach(function(val){
+//        var status;
+//        var email;
+//        var position;
+//        var block;
+//
+//        if((val.enabled == 0) && (val.loginFailedTimeTo == null) && (val.loginFailedTimeFrom == null) ){
+//            block = '<button class="btn btn-danger btn-sm reset-block-user" empId="'+val.empId+'" name="'+val.thFname + '&nbsp;&nbsp;' + val.thLname+'">ยกเลิกบล็อก</button>';
+//        }
+//
+//        else{
+//            block = '<button class="btn btn-link btn-sm block-user" empId="'+val.empId+'" name="'+val.thFname + '&nbsp;&nbsp;' + val.thLname+'">บล็อก</button>';
+//        }
+//
+//        if(val.position == null? position = "": position = val.position.posiName);
+//
+//        if(Number(val.status) == 1){
+//            status = "ผู้ดูแลระบบ";
+//            email = val.eMail1+"@softsquaregroup.com";
+//        }
+//        else if(Number(val.status) == 2){
+//            status = "พนักงาน";
+//            email = val.eMail1+"@softsquaregroup.com";
+//        }
+//        else{
+//            status = "นักศึกษา";
+//            email = val.eMail1+"@internal.ssg";
+//        }
+//
+//        $('#resultSearch').append(
+//            '<tr>'+
+//            '<td>' + val.empId + '</td>' +
+//            '<td>' + val.thFname + '&nbsp;&nbsp;' + val.thLname +'</td>' +
+//            '<td>' + status + '</td>' +
+//            '<td>' + position + '</td>' +
+//            '<td>' + email + '</td>' +
+//            '<td>' + block + '</td>' +
+//            '<td><button class="btn btn-primary btn-sm delete-user" empId="'+val.empId+'" name="'+val.thFname + '&nbsp;&nbsp;' + val.thLname+'">ลบ</button></td>' +
+//            '</tr> '
+//        )
+//    });
+//}
+
 var totalPage = function(lenght, where){
 
     var allPages = Math.ceil(lenght / 10);

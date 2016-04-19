@@ -37,6 +37,13 @@
                             กรุณาเข้าสู่ระบบใหม่หลังจาก "<c:out value="${time}" /> " นาที
                         </div>
                     </c:if>
+
+                    <c:if test="${ch == 'block-by-admin'}">
+                        <div class="text-center" style="color: red;">
+                            ชื่อผู้ใช้งาน "<c:out value="${username}"/>" ถูกระงับ<br/>
+                            กรุณาติดต่อผู้ดูแลระบบ
+                        </div>
+                    </c:if>
                 </div>
                 <br/>
 

@@ -8,12 +8,18 @@
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 <script>
     var context = '${context}';
-</script>
-<script>
+
     if('${status}' == 'user' || '${status}' == 'staff' || '${status}' == ''){
         window.location.href = context+"/TDCS/index.html";
     }
 </script>
+
+<style>
+    .search-staff-input{
+        padding: 0;
+    }
+</style>
+
 <div class="container">
     <div class="row">
         <h3 class="h3">ค้นหาข้อมูลพนักงาน</h3>
@@ -26,13 +32,13 @@
             <div class="row form-group">
                 <div class="col-md-6" style="padding: 0;">
                     <label for="sName" class="col-md-4 control-label"><small>ชื่อ หรือ นามสกุล</small></label>
-                    <div class="col-md-8">
+                    <div class="col-md-8 search-staff-input">
                         <input id="sName" type="text" class="form-control" placeholder="ชื่อ หรือ นามสกุล"/>
                     </div>
                 </div>
                 <div class="col-md-6" style="padding: 0;">
                     <label for="sNickName" class="col-md-4 control-label"><small>ชื่อเล่น</small></label>
-                    <div class="col-md-8">
+                    <div class="col-md-8 search-staff-input">
                         <input id="sNickName" type="text" class="form-control" placeholder="ชื่อเล่น"/>
                     </div>
                 </div>
@@ -41,13 +47,13 @@
             <div class="row form-group">
                 <div class="col-md-6" style="padding: 0;">
                     <label for="sEmpId" class="col-md-4 control-label"><small>รหัสพนักงาน</small></label>
-                    <div class="col-md-8">
+                    <div class="col-md-8 search-staff-input">
                         <input id="sEmpId" class="form-control" placeholder="รหัสพนักงาน"/>
                     </div>
                 </div>
                 <div class="col-md-6" style="padding: 0;">
                     <label for="sCompany" class="col-md-4 control-label"><small>บริษัท</small></label>
-                    <div class="col-md-8">
+                    <div class="col-md-8 search-staff-input">
                         <select id="sCompany" class="form-control">
                             <option value="">โปรเลือกบริษัท</option>
                             <c:forEach var="company" items="${listCompany}">
@@ -61,7 +67,7 @@
             <div class="row form-group">
                 <div class="col-md-6" style="padding: 0;">
                     <label for="sSection" class="col-md-4 control-label"><small>แผนก</small></label>
-                    <div class="col-md-8">
+                    <div class="col-md-8 search-staff-input">
                         <select id="sSection" class="form-control">
                             <option value="">โปรดเลือกแผนก</option>
                             <c:forEach var="section" items="${listSection}">
@@ -72,7 +78,7 @@
                 </div>
                 <div class="col-md-6" style="padding: 0;">
                     <label for="sPosition" class="col-md-4 control-label"><small>ตำแหน่งงาน</small></label>
-                    <div class="col-md-8">
+                    <div class="col-md-8 search-staff-input">
                         <select id="sPosition" class="form-control">
                             <option value="">โปรดเลือกตำแหน่งงาน</option>
                             <c:forEach var="position" items="${listPosition}">
@@ -85,8 +91,22 @@
 
             <div class="row form-group">
                 <div class="col-md-6" style="padding: 0;">
+                    <label class="col-md-4 control-label"><small>ประเภทผู้ใช้งาน</small></label>
+                    <div class="col-md-8 search-staff-input">
+                        <select id="userType" required="true" class="form-control">
+                            <option value="0">เลือกประเภทผู้ใช้</option>
+                            <option value="1">พนักงาน</option>
+                            <option value="2">นักศึกษา</option>
+                            <option value="3">ผู้ดูแลระบบ</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-6" style="padding: 0;">
                     <label for="sStartTime" class="col-md-4 control-label"><small>เริ่มทำงาน</small></label>
-                    <div class="col-md-8">
+                    <div class="col-md-8 search-staff-input">
                         <div class='input-group date' id='sStartTime'>
                             <input id="startTime" type='text' class="form-control" placeholder="เริ่มทำงาน" />
                             <span class="input-group-addon">
@@ -97,7 +117,7 @@
                 </div>
                 <div class="col-md-6" style="padding: 0;">
                     <label for="sEndTime" class="col-md-4 control-label"><small>ถึง</small></label>
-                    <div class="col-md-8">
+                    <div class="col-md-8 search-staff-input">
                         <div class='input-group date' id='sEndTime'>
                             <input id="endTime" type='text' class="form-control" placeholder="ถึง" />
                         <span class="input-group-addon">
@@ -133,14 +153,15 @@
     <table class="table" id="table">
         <thead class="bg-primary">
         <tr>
-            <th style="text-align: center ; border: 1px solid white">ดูข้อมูล</th>
+            <%--<th style="text-align: center ; border: 1px solid white">ดูข้อมูล</th>--%>
             <th style="text-align: center ; border-left: 1px solid white">รหัสพนักงาน</th>
             <th style="text-align: center ; border-left: 1px solid white">ชื่อ-นามสกุล</th>
+            <th style="text-align: center ; border-left: 1px solid white">สิทธิ</th>
             <th style="text-align: center ; border-left: 1px solid white">สังกัด</th>
             <th style="text-align: center ; border-left: 1px solid white">ทีม</th>
             <th style="text-align: center ; border-left: 1px solid white">ตำแหน่ง</th>
             <th style="text-align: center ; border: 1px solid white">แผนก</th>
-            <th style="text-align: center ; border: 1px solid white">ระยะเวลาการทำงาน</th>
+            <%--<th style="text-align: center ; border: 1px solid white">ระยะเวลาการทำงาน</th>--%>
         </tr>
         </thead>
         <tbody id="resultSearch">

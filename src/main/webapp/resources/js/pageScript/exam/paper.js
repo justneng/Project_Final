@@ -527,6 +527,19 @@ function timediff(start_actual_time, end_actual_time, chk) {
         }
     }
 
+    if(chk == 3){
+        if (formatted.charAt(1) == '-' || formatted == '00:00') {
+            $("#startTime").css('border-color', 'red');
+            $("#endTime").css('border-color', 'red');
+            checkie = false;
+        }
+        else {
+            $("#startTime").css('border-color', '');
+            $("#endTime").css('border-color', '');
+            checkie = true;
+        }
+    }
+
 };
 
 function counter(){

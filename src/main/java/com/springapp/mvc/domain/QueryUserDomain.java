@@ -633,7 +633,7 @@ public class QueryUserDomain extends HibernateUtil {
         return (User)criteria.list().get(0);
     }
 
-    public User getUserByEmpId(String empId){
+    public static User getUserByEmpId(String empId){
         Criteria criteria = getSession().createCriteria(User.class);
         Criterion cri = Restrictions.eq("empId", empId);
         criteria.add(cri);
@@ -645,12 +645,73 @@ public class QueryUserDomain extends HibernateUtil {
         return (User)criteria.list().get(0);
     }
 
-    public void updateUser(User user){
+    public void updateUser(User user) {
         HibernateUtil.beginTransaction();
         getSession().merge(user);
         getSession().flush();
         HibernateUtil.commitTransaction();
         closeSession();
+    }
+
+    public List<User> getAllUser(String fName, String lName, String nickName, String company, String employeeId, Integer userType) {
+
+        Criteria criteria = getSession().createCriteria(User.class);
+        if (BeanUtils.isNotEmpty(fName) && BeanUtils.isNotEmpty(lName)) {
+            if (BeanUtils.isNotEmpty(fName)) {
+                criteria.add(Restrictions.like("thFname", "%" + fName + "%"));
+            }
+            if (BeanUtils.isNotEmpty(lName)) {
+                criteria.add(Restrictions.like("thLname", "%" + lName + "%"));
+            }
+        } else if (BeanUtils.isEmpty(lName) && BeanUtils.isNotEmpty(fName)) {
+            criteria.add(Restrictions.or(Restrictions.like("thFname", "%" + fName + "%"), Restrictions.like("thLname", "%" + fName + "%")));
+        }
+        if (BeanUtils.isNotEmpty(nickName)) {
+            criteria.add(Restrictions.like("nickName", "%" + nickName + "%"));
+        }
+        if (BeanUtils.isNotEmpty(employeeId)) {
+            criteria.add(Restrictions.like("empId", "%" + employeeId + "%"));
+        }
+        if (BeanUtils.isNotEmpty(company)) {
+            criteria.add(Restrictions.eq("compId", Integer.parseInt(company)));
+        }
+
+        if(userType != 0){
+            criteria.add(Restrictions.eq("status", userType));
+        }
+
+        List<User> users = criteria.list();
+
+        return users;
+    }
+
+    public void blockUser(String empId){
+
+        User user = getUserByEmpId(empId);
+        user.setEnabled(0);
+        HibernateUtil.beginTransaction();
+        getSession().merge(user);
+        HibernateUtil.commitTransaction();
+    }
+
+    public void deleteUser(String empId){
+
+        User user = getUserByEmpId(empId);
+        HibernateUtil.beginTransaction();
+        getSession().delete(user);
+        HibernateUtil.commitTransaction();
+    }
+
+    public void resetBlock(String empId){
+
+        User user = getUserByEmpId(empId);
+        user.setEnabled(1);
+        user.setLoginFailedTimeFrom(null);
+        user.setLoginFailedTimeTo(null);
+        user.setLoginFailed(null);
+        HibernateUtil.beginTransaction();
+        getSession().merge(user);
+        HibernateUtil.commitTransaction();
     }
 }
 

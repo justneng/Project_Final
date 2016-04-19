@@ -5,6 +5,7 @@ import com.springapp.mvc.domain.FindAllDataTableDomain;
 import com.springapp.mvc.domain.QueryUserDomain;
 import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.util.BeanUtils;
+import flexjson.JSONSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class SearchStaffController {
     @Autowired
     private FindAllDataTableDomain findAllDataTableDomain;
 
-    @RequestMapping(value = "/searchStaffData", method = RequestMethod.POST, produces = "text/html", headers = "Accept=application/json")
+    @RequestMapping(value = "/searchStaffData", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> positionSearch(@ModelAttribute("tFname") String thFn,
                                                  @ModelAttribute("tLname") String thLn,
@@ -80,9 +81,10 @@ public class SearchStaffController {
             }
         }
 
-        String json = new Gson().toJson(list);
-        if (list.size() == 0)
-            json = "";
+//        String json = new Gson().toJson(list);
+//        if (list.size() == 0)
+//            json = "";
+        String json = new JSONSerializer().exclude("*.class").serialize(list);
 
         return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
