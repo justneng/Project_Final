@@ -108,12 +108,12 @@
                 <div class="modal-footer" id="question">
 
                     <div class="row form-group" id="questionContainer">
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <h5><label style="font-weight: 100"><span class="mandatory">*</span>คำถาม :</label></h5>
                         </div>
-                        <div class="col-md-5" style="padding: 0px">
+                        <div class="col-md-8" style="padding: 0px">
                             <textarea id="questionDescription" class="form-control" style="resize: vertical"
-                                      maxlength="1200"></textarea>
+                                      maxlength="2040"></textarea>
                         </div>
                     </div>
                     <div class="row form-group form-inline text-left" id="difficultyContainer" style="padding: 0;">
@@ -156,8 +156,8 @@
 
                             <div class="col-md-8 col-md-offset-2" style="padding: 0px" align="left">
                                 <div class="input-group">
-                                    <input class="form-control choiceDesc" maxlength="300" type="text"
-                                           id="choice1"/>
+                                    <textarea class="form-control choiceDesc" maxlength="1020" type="text"
+                                           id="choice1" style="resize: vertical" rows="1"></textarea>
                                         <span class="input-group-addon choiceRadioAddon">
                                             <input class="correctRadio" type="radio" name="choiceRadio"
                                                    value="1"/>
@@ -168,7 +168,8 @@
                                 <br>
 
                                 <div class="input-group">
-                                    <input class="form-control choiceDesc" maxlength="300" type="text" id="choice2"/>
+                                    <textarea class="form-control choiceDesc" maxlength="1020" type="text" id="choice2"
+                                              style="resize:vertical;" rows="1"></textarea>
                                     <span class="input-group-addon choiceRadioAddon">
                                             <input class="correctRadio" type="radio" name="choiceRadio" value="2"/>
                                         <div class=" glyphicon glyphicon-ok"></div>
@@ -177,7 +178,8 @@
                                 <br>
 
                                 <div class="input-group">
-                                    <input class="form-control choiceDesc" maxlength="300" type="text" id="choice3"/>
+                                    <textarea class="form-control choiceDesc" maxlength="1020" type="text" id="choice3"
+                                              style="resize:vertical;" rows="1"></textarea>
                                         <span class="input-group-addon choiceRadioAddon">
                                             <input class="correctRadio" type="radio" name="choiceRadio" value="3"/>
                                             <div class=" glyphicon glyphicon-ok"></div>
@@ -187,7 +189,8 @@
                                 <br>
 
                                 <div class="input-group">
-                                    <input class="form-control choiceDesc" maxlength="300" type="text" id="choice4"/>
+                                    <textarea class="form-control choiceDesc" maxlength="1020" type="text" id="choice4"
+                                              style="resize:vertical" rows="1"></textarea>
                                         <span class="input-group-addon choiceRadioAddon">
                                             <input class="correctRadio" type="radio" name="choiceRadio" value="4"/>
                                             <div class=" glyphicon glyphicon-ok "></div>

@@ -19,7 +19,7 @@ public class Choice  implements Serializable {
     @Column(name="CHOICE_ID")
     private Integer id;
 
-    @Column(name="CHOICE_DESCRIPTION")
+    @Column(name="CHOICE_DESCRIPTION",length = 1020)
     private String description;
 
     @Column(name="CHOICE_CORRECTION")

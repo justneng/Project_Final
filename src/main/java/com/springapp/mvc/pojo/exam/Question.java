@@ -24,7 +24,7 @@ public class Question implements Serializable, Cloneable {
     @Column(name = "QUESTION_ID")
     private Integer id;
 
-    @Column(name = "QUESTION_DESCRIPTION")
+    @Column(name = "QUESTION_DESCRIPTION",length = 2040)
     private String description;
 
     @Column(name = "QUESTION_SCORE")

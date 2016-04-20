@@ -59,38 +59,41 @@
 
                 <div class="row">
                     <div class="col-md-2 text-right">คำถาม :</div>
-                    <span class="col-md-8" id="questionDescDetail"></span>
+                    <textarea class="col-md-9" disabled style="background: none; border:none; resize: none;" id="questionDescDetail"></textarea>
                 </div>
 
             </div>
             <div class="modal-footer">
                 <div id="choiceDetailContainer">
                     <div class="row">
-                        <div class="col-md-1 col-md-offset-1"><span class="glyphicon glyphicon-ok text-success hidden correction"></span></div>
+                        <div class="col-md-1 col-md-offset-1"><span class="glyphicon glyphicon-ok text-success hidden correction"></span>&nbsp;1)</div>
                         <div class="col-md-8 text-left" id="choiceDetail1"></div>
                         <div class="col-md-1 " id="correctDetail1"><span class="glyphicon glyphicon-ok "
                                                                          style="color:rgb(92, 184, 92)"></span></div>
                     </div>
-                    <br>
+                    <%--<br>--%>
+                    <hr>
 
                     <div class="row">
-                        <div class="col-md-1 col-md-offset-1"><span class="glyphicon glyphicon-ok text-success hidden correction"></span></div>
+                        <div class="col-md-1 col-md-offset-1"><span class="glyphicon glyphicon-ok text-success hidden correction"></span>&nbsp;2)</div>
                         <div class="col-md-8 text-left" id="choiceDetail2"></div>
                         <div class="col-md-1 " id="correctDetail2"><span class="glyphicon glyphicon-ok "
                                                                          style="color:rgb(92, 184, 92)"></span></div>
                     </div>
-                    <br>
+                    <%--<br>--%>
+                    <hr>
 
                     <div class="row">
-                        <div class="col-md-1 col-md-offset-1"><span class="glyphicon glyphicon-ok text-success hidden correction"></span></div>
+                        <div class="col-md-1 col-md-offset-1"><span class="glyphicon glyphicon-ok text-success hidden correction"></span>&nbsp;3)</div>
                         <div class="col-md-8 text-left" id="choiceDetail3"></div>
                         <div class="col-md-1 " id="correctDetail3"><span class="glyphicon glyphicon-ok "
                                                                          style="color:rgb(92, 184, 92)"></span></div>
                     </div>
-                    <br>
+                    <%--<br>--%>
+                    <hr>
 
                     <div class="row">
-                        <div class="col-md-1 col-md-offset-1"><span class="glyphicon glyphicon-ok text-success hidden correction"></span></div>
+                        <div class="col-md-1 col-md-offset-1"><span class="glyphicon glyphicon-ok text-success hidden correction"></span>&nbsp;4)</div>
                         <div class="col-md-8 text-left" id="choiceDetail4"></div>
                         <div class="col-md-1 " id="correctDetail4"><span class="glyphicon glyphicon-ok "
                                                                          style="color:rgb(92, 184, 92)"></span></div>
@@ -114,4 +117,3 @@
 </div>
 
 <script src="${context}/resources/js/pageScript/exam/questionDetailModal.js" charset="UTF-8"></script>
-

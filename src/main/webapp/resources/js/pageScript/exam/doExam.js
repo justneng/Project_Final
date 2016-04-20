@@ -110,6 +110,7 @@ var checkExamCompletion = function () {
 }
 
 var examTimeOut = function () {
+    disableOnUnloadEvent()
     alert('หมดเวลาทำข้อสอบ');
     submitExam;
     location.href = context + "/TDCS/home.html";
@@ -222,8 +223,8 @@ var getExamPaperBody = function () {
                             case 4:
                                 choiceLabel = 'ง'
                                 break;
-                            default :
-                                choiceLabel = 'ฮ'
+                            //default :
+                            //    choiceLabel = 'ฮ'
                         }
                         if (c.status.id == 3) {
                             appendString +=
@@ -232,7 +233,7 @@ var getExamPaperBody = function () {
                                 '<form role="form">' +
                                 '<div class="radio">' +
                                 '<label><input class="answer" type="radio" name="' + question.id + '" value="' + c.id + '">' +
-                                choiceLabel + '.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + c.description + '</label>' +
+                                choiceLabel + '.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p>' + unboxingComma(c.description) + '</p></label>' +
                                 '</div>' +
                                 '</form>' +
                                 '</div>' +

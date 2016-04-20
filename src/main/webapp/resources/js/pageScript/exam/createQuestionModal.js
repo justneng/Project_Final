@@ -98,7 +98,7 @@ function saveQuestion() {
     var questionTypeString = $("#select-QuestionType").val();
     var score = $("#questionScoreForCreateQuestion").val();
     var choiceDesc = null;
-    var questionDesc = $("#questionDescription").val();
+    var questionDesc = textareaToDatabase($("#questionDescription").val());
     var difficulty = $("input[name='level']:checked").val();
     var correctChoice = parseInt($(".correctRadio:checked").val());
 
@@ -111,7 +111,8 @@ function saveQuestion() {
 
     //if (questionType == 1) {
     if(questionType == 1) {
-        choiceDesc = new Array($('#choice1').val(), $('#choice2').val(), $('#choice3').val(), $('#choice4').val()).toString();
+        choiceDesc = new Array(boxingComma($('#choice1').val()), boxingComma($('#choice2').val())
+            , boxingComma($('#choice3').val()), boxingComma($('#choice4').val())).toString();
     }else{
         choiceDesc = null;
         correctChoice = null;
@@ -155,6 +156,7 @@ function saveQuestion() {
                 $('.questionSelectBox').css('cursor', 'pointer');
                 //pagination.pagination('redraw');
                 //pagination.pagination("updateItems",itemCount);
+                $("#init-message-show").hide()
             }else{
                 viewQuestions();
             }
@@ -315,6 +317,7 @@ var setCreateModalCorrectQuestion = function (correctQuestion) {
 }
 var setCreateModalIthChoice = function (cDesc, position) {
     $("#choice" + position).val(cDesc);
+    $("#choice" + position).attr("oldDesc",cDesc);
 }
 var setCreateModalQuestionDesc = function (questionDesc) {
     $("#questionDescription").val(questionDesc);

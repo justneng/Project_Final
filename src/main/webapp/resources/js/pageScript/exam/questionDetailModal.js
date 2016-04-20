@@ -8,6 +8,19 @@ $(document).ready(function () {
     $("#correctDetail3").hide();
     $("#correctDetail4").hide();
 })
+String.prototype.lines = function() { return this.split(/\r*\n/); }
+String.prototype.lineCount = function() { return this.lines().length; }
+
+$('#questionDescDetail').on("change",function(){
+    //setTimeout(function(){
+    var sch = $(this)[0].scrollHeight+"px"
+    //alert(sch)
+    $(this).css("height",sch);
+    //alert(sch)
+    //$(this).css("height",$(this)[0].scrollHeight+"px")
+    //},500)
+    //alert("hello")
+})
 
 var updateDetailModal = function (tr) {
 
@@ -52,17 +65,32 @@ var updateDetailModal = function (tr) {
             $('#createByDetail').text(question.createBy.thFname + " " + question.createBy.thLname);
             $('#createDateDetail').text(formattedCreateDate);
             //$('#questionTypeDetail').text(question.questionType.description);
-            $('#questionDescDetail').text(question.description);
+
+            //$('#questionDescDetail').empty();
+            //$('#questionDescDetail').append("<p>"+question.description+"</p>");
+            $('#questionDescDetail').val(question.description);
+            var linesCount = $('#questionDescDetail').val().lineCount();
+            $('#questionDescDetail').prop("rows",linesCount)
+
+
+            //$('#questionDescDetail')
+            //$('#questionDescDetail').css("height",$('#questionDescDetail')[0].scrollHeight+"px")
+            //$('#questionDescDetail').css("height",$('#questionDescDetail')[0].scrollHeight+"px")
+            //$('#questionDescDetail').css("height",$('#questionDescDetail')[0].scrollHeight+"px")
+
+            $("p").css("font-size","14px")
             //$('#updateDetail').text(formattedUpdateDate);
 
             var i = 1;
             question.choices.forEach(function (choice) {
                 var currentChoice = $('#choiceDetail' + i)
-                currentChoice.text(choice.description);
+                currentChoice.empty();
+                currentChoice.append(unboxingComma(choice.description));
                 if (choice.correction) {
                     //$('#correctDetail' + i).show();
                     //currentChoice.parent().addClass("bg-success")
                     currentChoice.parent().find(".correction").removeClass("hidden");
+                    //currentChoice.parent().addClass("label-success")
                 }else{
                     //currentChoice.parent().removeClass("bg-success")
                     currentChoice.parent().find(".correction").addClass("hidden");
@@ -75,9 +103,11 @@ var updateDetailModal = function (tr) {
             }else{
                 $('#choiceDetailContainer').hide()
             }
+
         }, error: function () {
             alert("error occur");
             $('#questionDetailModal').modal('hide');
         }
     })
+
 }
