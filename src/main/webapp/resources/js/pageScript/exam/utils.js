@@ -47,10 +47,10 @@ function DatabaseToTextarea(txt){
     return txt
 }
 
-function boxingComma(txt){
+var boxingComma = function(txt){
     return txt.replace(/,/g,"%coMMa%")
 }
 
-function unboxingComma(txt){
+var unboxingComma = function(txt){
     return txt.replace(/%coMMa%/g,",")
 }

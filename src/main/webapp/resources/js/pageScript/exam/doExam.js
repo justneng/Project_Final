@@ -13,7 +13,12 @@ $(document).ready(function () {
     countdownContainerElement = $('#countdownContainer');
     $.timer(countdownTimer);
 })
-
+String.prototype.lines = function () {
+    return this.split(/\r*\n/);
+}
+String.prototype.lineCount = function () {
+    return this.lines().length;
+}
 
 var goToUnfinishBtn = $('#goToUnfinish');
 var goToUnfinishBtnInitialText = goToUnfinishBtn.text();
@@ -49,12 +54,12 @@ $('#examBody').on('change', 'input[type="radio"]', function () {
     $(this).prop('checked', true)
 })
 
-$(function(){
+$(function () {
     var rx = /INPUT|SELECT|TEXTAREA/i;
 
-    $(document).bind("keydown keypress", function(e){
-        if( e.which == 8 ){ // 8 == backspace
-            if(!rx.test(e.target.tagName) || e.target.disabled || e.target.readOnly ){
+    $(document).bind("keydown keypress", function (e) {
+        if (e.which == 8) { // 8 == backspace
+            if (!rx.test(e.target.tagName) || e.target.disabled || e.target.readOnly) {
                 e.preventDefault();
             }
         }
@@ -176,7 +181,7 @@ function formatTime(time) {
     var sec = parseInt(time / 100) - (parseInt(time / 6000) * 60 );
     //var hundredths = pad(time - (sec * 100) - (min * 6000), 2);
     //return (min > 0 ? pad(min, 2) : "00") + ":" + pad(sec, 2) + ":" + hundredths;
-    return (hour > 0 ? pad(hour, 2) : "00")+ ":" +(min > 0 ? pad(min, 2) : "00") + ":" + pad(sec, 2);
+    return (hour > 0 ? pad(hour, 2) : "00") + ":" + (min > 0 ? pad(min, 2) : "00") + ":" + pad(sec, 2);
 }
 
 var getExamPaperBody = function () {
@@ -200,7 +205,9 @@ var getExamPaperBody = function () {
                     '<div class="panel-body">' +
                     '<div class="row">' +
                     '<div class="col-md-10 col-md-offset-1">' +
-                    'ข้อที่ ' + questionNo + '.&nbsp;<h5>' + question.description + '</h5>' +
+                    //'ข้อที่ ' + questionNo + '.&nbsp;<h5>' + question.description + '</h5>' +
+                    'ข้อที่ ' + questionNo + '.&nbsp;<textarea id="taQid'+question.id+'" disabled ' +
+                    'style="background: none; border:none; resize: none;"></textarea>' +
                     '</div>' +
                     '</div>'
 
@@ -233,7 +240,7 @@ var getExamPaperBody = function () {
                                 '<form role="form">' +
                                 '<div class="radio">' +
                                 '<label><input class="answer" type="radio" name="' + question.id + '" value="' + c.id + '">' +
-                                choiceLabel + '.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p>' + unboxingComma(c.description) + '</p></label>' +
+                                choiceLabel + '.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p>' + transformString(unboxingComma(c.description)) + '</p></label>' +
                                 '</div>' +
                                 '</form>' +
                                 '</div>' +
@@ -254,10 +261,14 @@ var getExamPaperBody = function () {
                 }
 
                 $('#examBody').append(appendString);
+                $('#taQid'+question.id).val(question.description)
+                $('#taQid'+question.id).prop("rows",$('#taQid'+question.id).val().lineCount())
                 questionNo++;
 
-                enableOnUnloadEvent()
             })
+            $('p').css('font-size', "14")
+            enableOnUnloadEvent()
+
         }, error: function () {
             console.log('doExam.js : getExamPaperBody Failed');
         }
@@ -269,12 +280,12 @@ function enableOnUnloadEvent() {
         return 'เมื่อคุณออกจากหน้าทำข้อสอบระบบจะทำการบันทึกผลสอบทันที \n ยังคงต้องการออกจากหน้านี้หรือไม่';
     }
     if (typeof window.addEventListener === 'undefined') {
-        window.addEventListener = function(e, callback) {
+        window.addEventListener = function (e, callback) {
             return window.attachEvent('on' + e, callback);
         }
     }
 
-    window.addEventListener('beforeunload', function() {
+    window.addEventListener('beforeunload', function () {
         return 'เมื่อคุณออกจากหน้าทำข้อสอบระบบจะทำการบันทึกผลสอบทันที \n ยังคงต้องการออกจากหน้านี้หรือไม่';
     });
 
@@ -336,12 +347,12 @@ var submitExam = function () {
             //}else     if(returnValue.status == 500){
             //    alert('บันทึกข้อสอบล้มเหลว : CODE 500')
             //}
-            if(returnValue.status == 200){
+            if (returnValue.status == 200) {
                 alert('บันทึกข้อมูลสำเร็จ');
                 location.href = context + "/TDCS/home.html";
-            }else{
+            } else {
                 enableOnUnloadEvent()
-                alert('บันทึกข้อมูลล้มเหลว : ERROR CODE '+ parseInt(returnValue.status))
+                alert('บันทึกข้อมูลล้มเหลว : ERROR CODE ' + parseInt(returnValue.status))
             }
 
         }

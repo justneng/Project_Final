@@ -315,9 +315,9 @@ var setCreateModalCorrectQuestion = function (correctQuestion) {
     $(".correctRadio").prop('checked', false);
     $(".correctRadio:eq(" + (correctQuestion - 1) + ")").click();
 }
-var setCreateModalIthChoice = function (cDesc, position) {
-    $("#choice" + position).val(cDesc);
-    $("#choice" + position).attr("oldDesc",cDesc);
+var setCreateModalIthChoice = function (cDesc,ith) {
+    $("#choice" + ith).val(cDesc);
+    $("#choice" + ith).attr("oldDesc",cDesc);
 }
 var setCreateModalQuestionDesc = function (questionDesc) {
     $("#questionDescription").val(questionDesc);

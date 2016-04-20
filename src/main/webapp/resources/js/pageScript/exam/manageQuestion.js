@@ -151,8 +151,9 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
         questionType = 2;
     }
     var choiceHasChange = false;
-    choiceDesc = new Array($('#choice1').val(), $('#choice2').val(), $('#choice3').val(), $('#choice4').val());
-    var oldChoiceDesc = new Array($('#choice1').attr("oldDesc"), $('#choice2').attr("oldDesc"), $('#choice3').attr("oldDesc"), $('#choice4').attr("oldDesc"));
+    choiceDesc = new Array(boxingComma($('#choice1').val()), boxingComma($('#choice2').val()), boxingComma($('#choice3').val()), boxingComma($('#choice4').val()));
+    var oldChoiceDesc = new Array(boxingComma($('#choice1').attr("oldDesc")), boxingComma($('#choice2').attr("oldDesc"))
+        , boxingComma($('#choice3').attr("oldDesc")), boxingComma($('#choice4').attr("oldDesc")));
     if(choiceDesc != oldChoiceDesc){
         choiceHasChange = true;
     }
@@ -242,11 +243,12 @@ var setEditModalParameter = function (questionId) {
             updateCreateModalLayout();
             var ith = 1;
             question.choices.forEach(function (choice) {
-                setCreateModalIthChoice(unboxingComma((choice.description), ith));
+                console.log(ith)
+                setCreateModalIthChoice(unboxingComma((choice.description)), ith);
                 if (choice.correction) {
                     setCreateModalCorrectQuestion(ith);
                 }
-                ith = ith + 1;
+                ith++;
             })
 
         },
