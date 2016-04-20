@@ -33,19 +33,19 @@ public class IndexController {
     @Autowired
     private FindAllDataTableDomain findAllDataTableDomain;
 
-	@RequestMapping(method = RequestMethod.GET,value = "index")
-	public String printWelcome(ModelMap model,HttpServletRequest request,HttpServletResponse response) {
+    @RequestMapping(method = RequestMethod.GET, value = "index")
+    public String printWelcome(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
         request.getSession().removeAttribute("status");
         request.getSession().removeAttribute("username");
         request.getSession().removeAttribute("password");
         request.getSession().removeAttribute("userid");
-		return "login";
-	}
+        return "login";
+    }
 
     @RequestMapping(value = "login")
-    public String checkLogin(ModelMap model,@RequestParam(value = "id",required = false)String username,
-                             @RequestParam(value = "pass",required = false)String pass,
-                             HttpServletRequest request,HttpServletResponse response) throws ParseException {
+    public String checkLogin(ModelMap model, @RequestParam(value = "id", required = false) String username,
+                             @RequestParam(value = "pass", required = false) String pass,
+                             HttpServletRequest request, HttpServletResponse response) throws ParseException {
 
         queryUserDomain.resetBlockingUser();
 
@@ -54,25 +54,24 @@ public class IndexController {
 //            System.out.println(userList.get(0).getId());
 
             if (userList.size() > 0) {
-                if((userList.get(0).getEnabled() == 0) && (userList.get(0).getLoginFailedTimeFrom() == null) && (userList.get(0).getLoginFailedTimeTo() == null)){
+                if ((userList.get(0).getEnabled() == 0) && (userList.get(0).getLoginFailedTimeFrom() == null) && (userList.get(0).getLoginFailedTimeTo() == null)) {
                     model.addAttribute("ch", "block-by-admin");
                     model.addAttribute("username", userList.get(0).getUserName());
 
                     return "login";
-                }
-                else{
+                } else {
                     queryUserDomain.resetBlockingAfterLoginSuccess(userList.get(0));
 
-                    if(userList.get(0).getValidateStu()==0){
-                        model.addAttribute("RegisSuc",1);
-                        return "login";
-                    }
+//                    if(userList.get(0).getValidateStu()==0){
+//                        model.addAttribute("RegisSuc",1);
+//                        return "login";
+//                    }
                     if (userList.get(0).getStatus() == 1) {
                         request.getSession().setAttribute("status", "admin");
-                        request.getSession().setAttribute("username",username);
-                        request.getSession().setAttribute("session_piority","");
-                        request.getSession().setAttribute("password",pass);
-                        request.getSession().setAttribute("userid",userList.get(0).getUserId());
+                        request.getSession().setAttribute("username", username);
+                        request.getSession().setAttribute("session_piority", "");
+                        request.getSession().setAttribute("password", pass);
+                        request.getSession().setAttribute("userid", userList.get(0).getUserId());
 //                    model.addAttribute("user",queryUserDomain.getUserDatas(userList.get(0).getUserId()));
 //                    request.getSession().setAttribute("username",username);
 
@@ -80,28 +79,28 @@ public class IndexController {
                         return "loginComplete";
                     } else if (userList.get(0).getStatus() == 2) {
                         request.getSession().setAttribute("status", "staff");
-                        request.getSession().setAttribute("username",username);
-                        request.getSession().setAttribute("session_id",userList.get(0).getUserId());
-                        request.getSession().setAttribute("session_piority",userList.get(0).getPiority());
-                        request.getSession().setAttribute("countUserValidate",queryUserDomain.getCountUserValidate(request.getSession().getAttribute("session_piority").toString()));
-                        request.getSession().setAttribute("password",pass);
-                        request.getSession().setAttribute("userid",userList.get(0).getUserId());
-                        model.addAttribute("countUserValidate",request.getSession().getAttribute("countUserValidate"));
+                        request.getSession().setAttribute("username", username);
+                        request.getSession().setAttribute("session_id", userList.get(0).getUserId());
+                        request.getSession().setAttribute("session_piority", userList.get(0).getPiority());
+//                        request.getSession().setAttribute("countUserValidate",queryUserDomain.getCountUserValidate(request.getSession().getAttribute("session_piority").toString()));
+                        request.getSession().setAttribute("password", pass);
+                        request.getSession().setAttribute("userid", userList.get(0).getUserId());
+                        model.addAttribute("countUserValidate", request.getSession().getAttribute("countUserValidate"));
 
 //                    model.addAttribute("user",queryUserDomain.getUserDatas(userList.get(0).getUserId()));
 
                         return "loginComplete";
                     } else if (userList.get(0).getStatus() == 3) {
                         request.getSession().setAttribute("status", "user");
-                        request.getSession().setAttribute("username",username);
-                        request.getSession().setAttribute("password",pass);
-                        request.getSession().setAttribute("userid",userList.get(0).getUserId());
-                        List<User> users = findAllDataTableDomain.searchId(User.class,"userName",request.getSession().getAttribute("username").toString());
-                        model.addAttribute("user",users);
+                        request.getSession().setAttribute("username", username);
+                        request.getSession().setAttribute("password", pass);
+                        request.getSession().setAttribute("userid", userList.get(0).getUserId());
+//                        List<User> users = findAllDataTableDomain.searchId(User.class,"userName",request.getSession().getAttribute("username").toString());
+//                        model.addAttribute("user",users);
 
-                        model.addAttribute("listApp",queryApprentieDomain.getApprentice());
-                        model.addAttribute("listPosition",queryJobDomain.getJop("s"));
-                        model.addAttribute("listUser",queryUserDomain.getStaff());
+//                        model.addAttribute("listApp",queryApprentieDomain.getApprentice());
+//                        model.addAttribute("listPosition",queryJobDomain.getJop("s"));
+//                        model.addAttribute("listUser",queryUserDomain.getStaff());
 
                         return "loginComplete";
                     }
@@ -110,24 +109,26 @@ public class IndexController {
             } else {
 //              Check login failed
                 List<User> user = queryUserDomain.whoIsLoginFailed(username);
-                if(user != null || user.size() > 0){
-                    queryUserDomain.loginFailedRemaining(user.get(0));
+                if (user != null) {
+                    if (user.size() > 0) {
+                        queryUserDomain.loginFailedRemaining(user.get(0));
 
-                    if(user.get(0).getEnabled() == 0){
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-                        Date date = user.get(0).getLoginFailedTimeTo();
-                        String time = dateFormat.format(date);
+                        if (user.get(0).getEnabled() == 0) {
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+                            Date date = user.get(0).getLoginFailedTimeTo();
+                            String time = dateFormat.format(date);
 
-                        model.addAttribute("ch", "block");
-                        model.addAttribute("time", time);
-                        model.addAttribute("username", user.get(0).getUserName());
+                            model.addAttribute("ch", "block");
+                            model.addAttribute("time", time);
+                            model.addAttribute("username", user.get(0).getUserName());
 
-                        return "login";
+                            return "login";
+                        }
                     }
                 }
 //
                 model.addAttribute("ch", "fail");
-                model.addAttribute("loginRemaining", 3 - user.get(0).getLoginFailed());
+//                model.addAttribute("loginRemaining", 3 - user.get(0).getLoginFailed());
                 return "login";
             }
         }
@@ -154,15 +155,15 @@ public class IndexController {
 //            return "login";
 //        }
 
-    @RequestMapping(method = RequestMethod.GET,value = "signup")
-    public String register(ModelMap model,@ModelAttribute("studentData")User user) {
+    @RequestMapping(method = RequestMethod.GET, value = "signup")
+    public String register(ModelMap model, @ModelAttribute("studentData") User user) {
         List<University> lisUniver = queryUniversityDomain.getAllUniversity();
         List<User> listUser = queryUserDomain.getStaff();
-        List<Position> positions  = queryJobDomain.getJop("s");
-        model.addAttribute("listUser",listUser);
-        model.addAttribute("listUni",lisUniver);
-        model.addAttribute("listApp",queryApprentieDomain.getApprentice());
-        model.addAttribute("listPosition",positions);
+        List<Position> positions = queryJobDomain.getJop("s");
+        model.addAttribute("listUser", listUser);
+        model.addAttribute("listUni", lisUniver);
+        model.addAttribute("listApp", queryApprentieDomain.getApprentice());
+        model.addAttribute("listPosition", positions);
         return "signup";
     }
 }

@@ -240,7 +240,8 @@ var getExamPaperBody = function () {
                                 '<form role="form">' +
                                 '<div class="radio">' +
                                 '<label><input class="answer" type="radio" name="' + question.id + '" value="' + c.id + '">' +
-                                choiceLabel + '.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p>' + transformString(unboxingComma(c.description)) + '</p></label>' +
+                                choiceLabel + '.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea style="background: none; border:none; resize: none;">'
+                                + (unboxingComma(c.description)) + '</textarea></label>' +
                                 '</div>' +
                                 '</form>' +
                                 '</div>' +
@@ -268,6 +269,9 @@ var getExamPaperBody = function () {
             })
             $('p').css('font-size', "14")
             enableOnUnloadEvent()
+            $("textarea").forEach(function(ta){
+                ta.prop("rows",ta.val().lineCount())
+            })
 
         }, error: function () {
             console.log('doExam.js : getExamPaperBody Failed');
