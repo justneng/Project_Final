@@ -49,8 +49,8 @@ public class QueryQuestionDomain extends HibernateUtil {
         if (question.getQuestionType().getId() == 1) {
             queryChoiceDomain.insertAllChoice(question, cDesc, correctChoice);
         }
+        getSession().flush();
         commitTransaction();
-
         closeSession();
     }
 
@@ -725,4 +725,18 @@ public class QueryQuestionDomain extends HibernateUtil {
             return 0;
         }
     }
+
+//    public void deleteDuplicateChoice(Question q){
+//        Choice correctChoice = null;
+//        for(Choice c:q.getChoices()){
+//            if(c.getCorrection()){
+//                correctChoice = c;
+//            }
+//        }
+//        for(Choice c:q.getChoices()){
+//            if(correctChoice.getId() != c.getId() && correctChoice.getDescription() == c.getDescription()){
+//                queryChoiceDomain.deleteSpecificChoice(c);
+//            }
+//        }
+//    }
 }

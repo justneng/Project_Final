@@ -21,7 +21,7 @@ $(document).ready(function () {
     clearAllSearchQuestionField()
     $('#selectAllItem').prop('checked', false)
     //listSearchQuestion();
-    $("#searchCatNotFound").hide();
+    //$("#searchCatNotFound").hide();
 
 //    ---------------------------------------------------------------------
 
@@ -150,8 +150,12 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
     } else {
         questionType = 2;
     }
-
+    var choiceHasChange = false;
     choiceDesc = new Array($('#choice1').val(), $('#choice2').val(), $('#choice3').val(), $('#choice4').val());
+    var oldChoiceDesc = new Array($('#choice1').attr("oldDesc"), $('#choice2').attr("oldDesc"), $('#choice3').attr("oldDesc"), $('#choice4').attr("oldDesc"));
+    if(choiceDesc != oldChoiceDesc){
+        choiceHasChange = true;
+    }
 
     var dat = $.ajax({
             type: 'POST',
@@ -162,6 +166,7 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
                 subCategoryName: subCategoryName,
                 questionDesc: questionDesc,
                 choiceDescArray: choiceDesc.toString(),
+                choiceHasChange : choiceHasChange,
                 correctChoice: parseInt(correctChoice),
                 questionType: questionType,
                 difficulty: parseInt(difficulty),
@@ -191,7 +196,7 @@ editQuestion = function () { // THIS FUNCTION IS CALLED FROM webapp/WEB-INF/page
                     '<td style="vertical-align: middle;" class="questionSubCategory">' + q.subCategory.name + '</td>' +
                     '<td style="vertical-align: middle;" class="questionDescription" align="left">' + transformString(q.description.substring(0, 100)) + '</td>' +
                         //'<td class="questionDifficulty">' + q.difficultyLevel.description + '</td>' +
-                    '<td style="vertical-align: middle;" class="questionScore">' + q.score + '</td>' +
+                    //'<td style="vertical-align: middle;" class="questionScore">' + q.score + '</td>' +
                     '<td style="vertical-align: middle;" class="questionCreateBy">' + q.createBy.thFname + ' ' + q.createBy.thLname + '</td>' +
                     '<td style="vertical-align: middle;" class="questionCreateDate">' + formattedDate + '</td>' +
                     '<td style="vertical-align: middle;" class="questionEditColumn"><button class="detailEditBtn btn btn-primary" value="' + q.id + '"><span class="glyphicon glyphicon-pencil"></span></button></td>' +
@@ -233,11 +238,11 @@ var setEditModalParameter = function (questionId) {
             setCreateModalQuestionType(question.questionType.description);
             setCreateModalDufficulty(question.difficultyLevel.level);
             setCreateModalScore(question.score);
-            setCreateModalQuestionDesc(transformString(question.description));
+            setCreateModalQuestionDesc((question.description));
             updateCreateModalLayout();
             var ith = 1;
             question.choices.forEach(function (choice) {
-                setCreateModalIthChoice(transformString(choice.description), ith);
+                setCreateModalIthChoice(unboxingComma((choice.description), ith));
                 if (choice.correction) {
                     setCreateModalCorrectQuestion(ith);
                 }

@@ -30,7 +30,7 @@
 
 <div class="container-fluid noselect">
     <h3 class="h3">จัดการข้อสอบ</h3>
-<hr/>
+    <hr/>
 
     <%--<%@include file="template/searchQuestionTemplateNew.jsp" %>--%>
     <tiles:insertTemplate template="/WEB-INF/pages/exam/template/searchQuestionTemplateNew.jsp"/>
@@ -94,10 +94,12 @@
         </table>
     </div>
 
-    <div class="bg-info row" id="searchCatNotFound">
-        <%--<p class="bg-info">--%>
-        <h3 id="searchCatDescNotFound" style="text-align: center;">ไม่พบข้อมูลที่ค้นหา</h3>
-        <%--</p>--%>
+    <div class="row">
+        <div class="bg-info" id="searchCatNotFound" hidden>
+            <%--<p class="bg-info">--%>
+            <h3 id="searchCatDescNotFound" style="text-align: center;">ไม่พบข้อมูลที่ค้นหา</h3>
+            <%--</p>--%>
+        </div>
     </div>
 
     <%--<div class="row">--%>

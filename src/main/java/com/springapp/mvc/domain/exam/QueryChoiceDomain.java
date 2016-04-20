@@ -75,5 +75,14 @@ public class QueryChoiceDomain extends HibernateUtil {
         for(Choice c : q.getChoices()){
             getSession().delete(c);
         }
+        getSession().flush();
+    }
+
+    public void deleteSpecificChoice(Choice c){
+        beginTransaction();
+        getSession().delete(c);
+        getSession().flush();
+        commitTransaction();
+        closeSession();
     }
 }

@@ -114,7 +114,8 @@ public class QuestionController {
                                                @RequestParam(value = "correctChoice", required = false) Integer correctChoice,
                                                @RequestParam(value = "questionType", required = true) Integer questionTypeId,
                                                @RequestParam(value = "difficulty", required = true) Integer difficultyLevel,
-                                               @RequestParam(value = "score", required = true) Float score
+                                               @RequestParam(value = "score", required = true) Float score,
+                                               @RequestParam(value = "choiceHasChange",required = true) Boolean choiceHasChange
             , HttpServletRequest request, HttpServletResponse response) {
 
         HttpHeaders headers = new HttpHeaders();
@@ -131,9 +132,9 @@ public class QuestionController {
         List<Choice> choices = queryChoiceDomain.getChoiceListByQuestionId(question.getId());
         Question newQuestion = null;
 
-        if (!(question.getDescription().equals(qDesc) && question.getScore().equals(score) &&
+        if ((!(question.getDescription().equals(qDesc) && question.getScore().equals(score) &&
                 question.getQuestionType().equals(questionType) && question.getDifficultyLevel().equals(difficulty) &&
-                question.getSubCategory().equals(subCategory))) { //if question is edited
+                question.getSubCategory().equals(subCategory))) || choiceHasChange) { //if question is edited
 
             if (question.getPapers().isEmpty()) { //if not used
 
@@ -148,8 +149,8 @@ public class QuestionController {
                 HibernateUtil.beginTransaction();
 
                 queryChoiceDomain.deleteChoiceFromQuestion(question);
-                queryChoiceDomain.insertAllChoice(question, cDescList, correctChoice);
                 queryQuestionDomain.mergeQuestion(question);
+                queryChoiceDomain.insertAllChoice(question, cDescList, correctChoice);
 
                 HibernateUtil.commitTransaction();
                 HibernateUtil.closeSession();
@@ -159,7 +160,7 @@ public class QuestionController {
                 question.setStatus(queryStatusDomain.getDeletedStatus());
                 HibernateUtil.beginTransaction();
                 queryQuestionDomain.mergeQuestion(question);
-
+                HibernateUtil.getSession().flush();
                 HibernateUtil.commitTransaction();
 
                 newQuestion = cloneQuestion(question, request);
