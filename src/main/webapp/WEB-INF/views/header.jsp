@@ -38,6 +38,9 @@
         /*color: #555555;*/
     /*}*/
 
+    .admin-menu{
+        color: black;
+    }
 
 </style>
 
@@ -73,10 +76,10 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false">จัดการบัญชีผู้ใช้ <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="${context}/TDCS/addStudent.html">เพิ่มข้อมูลนักศึกษา</a></li>
-                                <li><a href="${context}/TDCS/addStaff.html">เพิ่มข้อมูลพนักงาน</a></li>
-                                <li><a href="${context}/TDCS/addUser.html">เพิ่มบัญชีผู้ใช้</a></li>
-                                <li><a href="${context}/TDCS/manageUser.html">จัดการบัญชีผู้ใช้</a></li>
+                                <li><a href="${context}/TDCS/addStudent.html"><label class="admin-menu" style="font-weight: normal;">เพิ่มข้อมูลนักศึกษา</label></a></li>
+                                <li><a href="${context}/TDCS/addStaff.html"><label class="admin-menu" style="font-weight: normal;">เพิ่มข้อมูลพนักงาน</label></a></li>
+                                <li><a href="${context}/TDCS/addUser.html"><label class="admin-menu" style="font-weight: normal;">เพิ่มบัญชีผู้ใช</label>้</a></li>
+                                <li><a href="${context}/TDCS/manageUser.html"><label class="admin-menu" style="font-weight: normal;">จัดการบัญชีผู้ใช</label>้</a></li>
                             </ul>
                         </li>
                     </c:if>
