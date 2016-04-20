@@ -162,13 +162,22 @@ var printRecords = function (records){
             str3 = "";
         }
 
+        var displayPaperStatus = "";
+        if(value.examPaper.paperType.id == 1){
+            displayPaperStatus = '<span class="label label-default">กำหนดเอง</span>&nbsp;';
+        }
+
+        if(value.examPaper.paperType.id == 2){
+            displayPaperStatus = '<span class="label label-primary">สุ่ม</span>&nbsp;';
+        }
+
         $("#tbodyManagePaper").append(
             '<tr>'+
             '<td style="display: none;"><label id="'+value.examPaper.id+'">'+value.examPaper.id+'</label></td>'+
             '<td class="pCheck"><input class="checkPaper" '+str1+' type="checkbox" check="'+check+'"/></td>'+
             '<td><label id="lpaperCode'+value.examPaper.code+'" class="paper-code">'+value.examPaper.code+'</label>&nbsp;' + str3 +'</td>'+
                 //'<td><label id="lpaperCode'+value.examPaper.code+'">'+value.examPaper.code+'&nbsp;<span class="glyphicon glyphicon-calendar release-exam" data-toggle="modal" papercode="'+value.examPaper.code+'" positionid="'+posiId+'" data-target="#release-exam-modal" style="color: #00b5e5;"></span></label></td>'+
-            '<td style="text-align: left;"><label id="lpaperName'+paperName+'">'+paperName+'</label></td>'+
+            '<td style="text-align: left;"><label id="lpaperName'+paperName+'">'+displayPaperStatus+paperName+'</label></td>'+
             '<td><label id="lpaperCreateBy'+value.examPaper.createBy.empId+'">'+value.examPaper.createBy.thFname+' '+value.examPaper.createBy.thLname+'</label></td>'+
             '<td><label id="lpaperScore'+value.examPaper.maxScore+'" class="label-control">'+value.examPaper.maxScore+'</label></td>'+
             '<td><label id="lpaperForPosition'+posiId+'" class="label-control">'+posiName+'</label></td>'+

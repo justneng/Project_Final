@@ -81,6 +81,10 @@
         bottom: 3px;
     }
 
+    .control-label{
+        font-weight: normal;
+    }
+
 </style>
 
 <div id="searchPanel" class="panel panel-default ">

@@ -33,7 +33,6 @@ $(document).ready(function(){
                     for(var i = 0; i < value.length; i ++){
                         var str = "";
                         if($('#select-paper-type').val() == 'random'){
-                            alert(value.length)
                             $("#score").val(value.length);
                             str = '<input id="newScore'+value[i].question.id+'" type="number" name="newScore" class="form-control input-sm" value="1" readonly/>';
                         }

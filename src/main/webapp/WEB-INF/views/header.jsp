@@ -224,7 +224,8 @@
                 <c:if test="${ status == 'user'}">
                     <li id="dropdownExamStudent">
                         <a href="${context}/TDCS/exam/mainPageStudent" class="dropdown-toggle" role="button" aria-expanded="false">
-                            ทำข้อสอบ
+                            <%--ทำข้อสอบ--%>
+                            เข้าสอบ
                         </a>
                         <%--<ul class="dropdown-menu" role="menu">--%>
                             <%--<li>--%>
@@ -238,7 +239,8 @@
 
                     <li>
                         <a href="${context}/TDCS/exam/checkScore" class="dropdown-toggle" role="button" aria-expanded="false">
-                            ผลคะแนนการสอบ
+                            <%--ผลคะแนนการสอบ--%>
+                            ดูผลสอบ
                         </a>
                     </li>
                 </c:if>
