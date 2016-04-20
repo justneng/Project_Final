@@ -1,13 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 <script>
     var context = '${context}';
 
-    if('${status}' == ''||'${status}' == 'staff'){
-        window.location.href = context+"/TDCS/index.html";
+    if ('${status}' == '' || '${status}' == 'staff') {
+        window.location.href = context + "/TDCS/index.html";
     }
 </script>
 
@@ -16,7 +17,11 @@
 </div>
 <hr/>
 
-<a href="printReport"><button class="btn btn-gray btn-sm" type="button"><strong style="color: whitesmoke;">ดาวน์โหลดผลสอบ</strong>&nbsp;<span class="glyphicon glyphicon-save"></span></button></a>
+<a href="printReport">
+    <button class="btn btn-gray btn-sm" type="button"><strong
+            style="color: whitesmoke;">ดาวน์โหลดผลสอบ</strong>&nbsp;<span class="glyphicon glyphicon-save"></span>
+    </button>
+</a>
 
 <div class="container">
     <div class="row">
@@ -26,6 +31,7 @@
             <tr>
                 <th style="text-align: center">รหัสชุดข้อสอบ</th>
                 <th style="text-align: center">ชื่อชุดข้อสอบ</th>
+                <th style="text-align: center">วันที่สอบ</th>
                 <th style="text-align: center" width="20%">คะแนนเต็ม</th>
                 <th style="text-align: center" width="20%">คะแนนที่ได้</th>
             </tr>
@@ -33,36 +39,45 @@
             <tbody>
 
             <c:forEach items="${examResults}" var="result">
-                    <c:if test="${fn:indexOf(result.objectiveScore + result.subjectiveScore,',') != 0}">
-                        <c:set var="score"
-                               value="${fn:substring(result.objectiveScore + result.subjectiveScore , 0 , (fn:indexOf(result.objectiveScore + result.subjectiveScore, '.')+3))}"/>
-                    </c:if>
+                <c:if test="${fn:indexOf(result.objectiveScore + result.subjectiveScore,',') != 0}">
+                    <c:set var="score"
+                           value="${fn:substring(result.objectiveScore + result.subjectiveScore , 0 , (fn:indexOf(result.objectiveScore + result.subjectiveScore, '.')+3))}"/>
+                </c:if>
 
-                    <tr resultId="${result.id}">
-                        <td align="center">${result.examRecord.paper.code}</td>
-                        <td>${result.examRecord.paper.name}</td>
-                        <td align="center" class="col-max-score">
-                                ${result.examRecord.paper.maxScore}
-                        </td>
-                        <c:choose>
-                            <c:when test="${result.status.id == 7}">
+                <tr resultId="${result.id}">
+                    <td align="center">${result.examRecord.paper.code}</td>
+                    <td>${result.examRecord.paper.name}</td>
+                    <td align="center">
+                            <%--${result.examRecord.examDate}--%>
+                                <fmt:formatDate value="${result.examRecord.examDate}" pattern="dd-MMM-yy"/>
+                        <%--<script>--%>
+                            <%--var createDate = new Date(${result.examRecord.examDate});--%>
+                            <%--var formattedDate = createDate.getDate() + "/" + (parseInt(createDate.getMonth()) + 1) + "/" + createDate.getFullYear();--%>
+                            <%--$("td:last").text(formattedDate)--%>
+                        <%--</script>--%>
+                    </td>
+                    <td align="center" class="col-max-score">
+                            ${result.examRecord.paper.maxScore}
+                    </td>
+                    <c:choose>
+                        <c:when test="${result.status.id == 7}">
 
-                                <td align="center" class="col-score">
-                                        ${score}
-                                    <button class="btn btn-link btn-info btn-sm resultDetail" type="button" data-toggle="modal"
-                                            data-target="#showScore" resultId="${result.id}">
-                                        <span class="glyphicon glyphicon-info-sign" href="#"></span>
-                                    </button>
-                                </td>
+                            <td align="center" class="col-score">
+                                    ${score}
+                                    <%--<button class="btn btn-link btn-info btn-sm resultDetail" type="button" data-toggle="modal"--%>
+                                    <%--data-target="#showScore" resultId="${result.id}">--%>
+                                    <%--<span class="glyphicon glyphicon-info-sign" href="#"></span>--%>
+                                    <%--</button>--%>
+                            </td>
 
-                            </c:when>
-                            <c:otherwise>
-                                <td align="center" class="col-score">
-                                    ยังไม่ตรวจ
-                                </td>
-                            </c:otherwise>
-                        </c:choose>
-                    </tr>
+                        </c:when>
+                        <c:otherwise>
+                            <td align="center" class="col-score">
+                                ยังไม่ตรวจ
+                            </td>
+                        </c:otherwise>
+                    </c:choose>
+                </tr>
             </c:forEach>
             </tbody>
         </table>

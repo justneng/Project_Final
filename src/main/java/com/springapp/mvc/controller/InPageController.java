@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.print.Paper;
@@ -44,9 +45,9 @@ public class InPageController {
     @Autowired
     private QueryCompanyDomain queryCompanyDomain;
     @Autowired
-    private QueryPositionDomain queryPositionDomain ;
+    private QueryPositionDomain queryPositionDomain;
     @Autowired
-    private QuerySectionDomain querySectionDomain  ;
+    private QuerySectionDomain querySectionDomain;
     @Autowired
     private FindAllDataTableDomain findAllDataTableDomain;
     @Autowired
@@ -56,7 +57,7 @@ public class InPageController {
     @Autowired
     private QueryTopicDomain queryTopicDomain;
 
-//    Add by Wanchana
+    //    Add by Wanchana
     @Autowired
     private QueryCategoryDomain queryCategoryDomain;
     @Autowired
@@ -72,10 +73,10 @@ public class InPageController {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/picture")
-    public String picture(ModelMap model,  HttpServletRequest request) {
+    public String picture(ModelMap model, HttpServletRequest request) {
 
-        List<User> list = findAllDataTableDomain.searchId(User.class,"userName", (String) request.getSession().getAttribute("username"));
-        model.addAttribute("picName",list.get(0).getImange());
+        List<User> list = findAllDataTableDomain.searchId(User.class, "userName", (String) request.getSession().getAttribute("username"));
+        model.addAttribute("picName", list.get(0).getImange());
         return "pacturePage";
     }
 
@@ -85,7 +86,7 @@ public class InPageController {
         try {
             request.getSession().setAttribute("countUserValidate", queryUserDomain.getCountUserValidate(request.getSession().getAttribute("session_piority").toString()));
             model.addAttribute("countUserValidate", request.getSession().getAttribute("status"));
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
         List<University> lisUniver = queryUniversityDomain.getAllUniversity();
@@ -111,7 +112,7 @@ public class InPageController {
                 request.getSession().setAttribute("countUserValidate", queryUserDomain.getCountUserValidate(request.getSession().getAttribute("session_piority").toString()));
                 model.addAttribute("countUserValidate", request.getSession().getAttribute("countUserValidate"));
             }
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
         model.addAttribute("listUni", queryUniversityDomain.getAllUniversity());
@@ -135,61 +136,62 @@ public class InPageController {
     @RequestMapping(method = RequestMethod.GET, value = "/home")
     public String userData(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
 //            List<User> users = findAllDataTableDomain.searchId(User.class,"userName",request.getSession().getAttribute("username").toString());
-            List<User> users = queryUserDomain.
-                    getStudentUserDataList(
-                            Integer.parseInt(request.getSession().getAttribute("userid").toString()),
-                            request.getSession().getAttribute("status").toString());
-            model.addAttribute("user",users);
-            if(request.getSession().getAttribute("status").toString().equals("user")) {
-                model.addAttribute("listApp", queryApprentieDomain.getApprentice());
-                model.addAttribute("listPosition", queryJobDomain.getJop("s"));
-                model.addAttribute("listUser", queryUserDomain.getStaff());
-                model.addAttribute("countUserValidate", request.getSession().getAttribute("countUserValidate"));
-                model.addAttribute("viewEva", queryUserDomain.getViewEva(Integer.parseInt(request.getSession().getAttribute("userid").toString())));
 
-                try {
-                    request.getSession().setAttribute("countUserValidate", queryUserDomain.getCountUserValidate(request.getSession().getAttribute("session_piority").toString()));
-                }catch (NullPointerException e){
-                    e.printStackTrace();
-                }
-                return "homeUser";
-            }else if(request.getSession().getAttribute("status").toString().equals("staff")){
-//                List<SectionPosition> spBuffer = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class,"spId",users.get(0).getSpId());
-                users.get(0).setSectionPosition(querySectionPositionDomain.getSectionPositionClass(users.get(0).getSpId()));
-                users.get(0).setTeam(queryTeamDomain.getTeamDatas(users.get(0).getTeamId()));
-                List<Company> companyList = queryCompanyDomain.getCompanyList();
-                List<Section> sectionList = findAllDataTableDomain.searchByIntegerColumn(Section.class,"conpId",users.get(0).getCompId());
-//                Integer integer = spBuffer.get(0).getSectionId();
-//                List<SectionPosition> sectionPositionList = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class,"sectionId",spBuffer.get(0).getSectionId());
-                List<SectionPosition> sectionPositionList = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class,"sectionId",users.get(0).getSectionPosition().getSectionId());
-                model.addAttribute("listComp", companyList);
-                model.addAttribute("listSection",sectionList);
-                model.addAttribute("listSectionPosition",sectionPositionList);
-                try{
-                    request.getSession().setAttribute("countUserValidate", queryUserDomain.getCountUserValidate(request.getSession().getAttribute("session_piority").toString()));
-                }catch (NullPointerException e){
-                    e.printStackTrace();
-                }
-                return "homeStaff";
-            }else {
-                //                List<SectionPosition> spBuffer = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class,"spId",users.get(0).getSpId());
-                users.get(0).setSectionPosition(querySectionPositionDomain.getSectionPositionClass(users.get(0).getSpId()));
-                users.get(0).setTeam(queryTeamDomain.getTeamDatas(users.get(0).getTeamId()));
-                List<Company> companyList = queryCompanyDomain.getCompanyList();
-                List<Section> sectionList = findAllDataTableDomain.searchByIntegerColumn(Section.class,"conpId",users.get(0).getCompId());
-//                Integer integer = spBuffer.get(0).getSectionId();
-//                List<SectionPosition> sectionPositionList = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class,"sectionId",spBuffer.get(0).getSectionId());
-                List<SectionPosition> sectionPositionList = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class,"sectionId",users.get(0).getSectionPosition().getSectionId());
-                model.addAttribute("listComp", companyList);
-                model.addAttribute("listSection",sectionList);
-                model.addAttribute("listSectionPosition",sectionPositionList);
-                try{
-                    request.getSession().setAttribute("countUserValidate", queryUserDomain.getCountUserValidate(request.getSession().getAttribute("session_piority").toString()));
-                }catch (NullPointerException e){
-                    e.printStackTrace();
-                }
-                return "homeStaff";
+        List<User> users = queryUserDomain.
+                getStudentUserDataList(
+                        Integer.parseInt(request.getSession().getAttribute("userid").toString()),
+                        request.getSession().getAttribute("status").toString());
+        model.addAttribute("user", users);
+        if (request.getSession().getAttribute("status").toString().equals("user")) {
+            model.addAttribute("listApp", queryApprentieDomain.getApprentice());
+            model.addAttribute("listPosition", queryJobDomain.getJop("s"));
+            model.addAttribute("listUser", queryUserDomain.getStaff());
+            model.addAttribute("countUserValidate", request.getSession().getAttribute("countUserValidate"));
+            model.addAttribute("viewEva", queryUserDomain.getViewEva(Integer.parseInt(request.getSession().getAttribute("userid").toString())));
+
+            try {
+                request.getSession().setAttribute("countUserValidate", queryUserDomain.getCountUserValidate(request.getSession().getAttribute("session_piority").toString()));
+            } catch (NullPointerException e) {
+                e.printStackTrace();
             }
+            return "homeUser";
+        } else if (request.getSession().getAttribute("status").toString().equals("staff")) {
+//                List<SectionPosition> spBuffer = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class,"spId",users.get(0).getSpId());
+            users.get(0).setSectionPosition(querySectionPositionDomain.getSectionPositionClass(users.get(0).getSpId()));
+            users.get(0).setTeam(queryTeamDomain.getTeamDatas(users.get(0).getTeamId()));
+            List<Company> companyList = queryCompanyDomain.getCompanyList();
+            List<Section> sectionList = findAllDataTableDomain.searchByIntegerColumn(Section.class, "conpId", users.get(0).getCompId());
+//                Integer integer = spBuffer.get(0).getSectionId();
+//                List<SectionPosition> sectionPositionList = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class,"sectionId",spBuffer.get(0).getSectionId());
+            List<SectionPosition> sectionPositionList = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class, "sectionId", users.get(0).getSectionPosition().getSectionId());
+            model.addAttribute("listComp", companyList);
+            model.addAttribute("listSection", sectionList);
+            model.addAttribute("listSectionPosition", sectionPositionList);
+            try {
+                request.getSession().setAttribute("countUserValidate", queryUserDomain.getCountUserValidate(request.getSession().getAttribute("session_piority").toString()));
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+            return "homeStaff";
+        } else {
+            //                List<SectionPosition> spBuffer = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class,"spId",users.get(0).getSpId());
+            users.get(0).setSectionPosition(querySectionPositionDomain.getSectionPositionClass(users.get(0).getSpId()));
+            users.get(0).setTeam(queryTeamDomain.getTeamDatas(users.get(0).getTeamId()));
+            List<Company> companyList = queryCompanyDomain.getCompanyList();
+            List<Section> sectionList = findAllDataTableDomain.searchByIntegerColumn(Section.class, "conpId", users.get(0).getCompId());
+//                Integer integer = spBuffer.get(0).getSectionId();
+//                List<SectionPosition> sectionPositionList = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class,"sectionId",spBuffer.get(0).getSectionId());
+            List<SectionPosition> sectionPositionList = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class, "sectionId", users.get(0).getSectionPosition().getSectionId());
+            model.addAttribute("listComp", companyList);
+            model.addAttribute("listSection", sectionList);
+            model.addAttribute("listSectionPosition", sectionPositionList);
+            try {
+                request.getSession().setAttribute("countUserValidate", queryUserDomain.getCountUserValidate(request.getSession().getAttribute("session_piority").toString()));
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+            return "homeStaff";
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/evaluation")
@@ -215,15 +217,15 @@ public class InPageController {
             pageNumber++;
         }
         if (page > pageNumber) {
-            model.addAttribute("notPage",1);
-        }else model.addAttribute("notPage",0);
+            model.addAttribute("notPage", 1);
+        } else model.addAttribute("notPage", 0);
         model.addAttribute("pageCount", pageNumber);
         model.addAttribute("currentPage", page);
         return "validate";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/logout")
-     public String logout(HttpServletRequest request) {
+    public String logout(HttpServletRequest request) {
         request.getSession().removeAttribute("status");
         return "login";
     }
@@ -264,12 +266,12 @@ public class InPageController {
 
     // Create by Wanchana K
     @RequestMapping(method = RequestMethod.GET, value = "/exam/manageCategory")
-    public String editCategories(HttpServletRequest request , Model model){
+    public String editCategories(HttpServletRequest request, Model model) {
         List<Category> categories = queryCategoryDomain.getAllCategory();
         List tmp = null;
-        if(categories.size() > 0){
+        if (categories.size() > 0) {
             tmp = new ArrayList();
-            for(int i = 0 ; i < categories.size(); i ++){
+            for (int i = 0; i < categories.size(); i++) {
                 Boolean check = queryCategoryDomain.checkCategoryInUse(categories.get(i));
                 CheckCategoryInUse checkCategoryInUse = new CheckCategoryInUse();
                 checkCategoryInUse.setId(categories.get(i).getId());
@@ -295,12 +297,13 @@ public class InPageController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/exam/editPaper")
-    public String editPaper(HttpServletRequest request, Model model){
+    public String editPaper(HttpServletRequest request, Model model) {
         return "editPaper";
     }
+
     //Create Jokizz
     @RequestMapping(method = RequestMethod.GET, value = "/exam/manageSubCategory")
-    public String editSubCategories(HttpServletRequest request, Model model){
+    public String editSubCategories(HttpServletRequest request, Model model) {
 
 //        model.addAttribute("LIST_OF_SUBCATEOGRIES", querySubCategoryDomain.getListSubCategories());
 
@@ -404,17 +407,19 @@ public class InPageController {
 //    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/exam/manageQuestion")
-    public String editQuestions(HttpServletRequest request){
+    public String editQuestions(HttpServletRequest request) {
         return "manageQuestion";
     }
+
     @RequestMapping(method = RequestMethod.GET, value = "/exam/managePapers")
-    public String editPapers(HttpServletRequest request){
+    public String editPapers(HttpServletRequest request) {
         Date today = DateUtil.getCurrentDateWithRemovedTime();
         queryReleaseExamDomain.checkExpireRule(today);
         return "managePapers";
     }
+
     @RequestMapping(method = RequestMethod.GET, value = "/exam/editButtonOnPageManagePapers")
-    public String editButtonOnPageEditPapers(HttpServletRequest request){
+    public String editButtonOnPageEditPapers(HttpServletRequest request) {
         return "editButtonOnPageManagePapers";
     }
 //    @RequestMapping(method = RequestMethod.GET, value = "/exam/doExam")
@@ -427,7 +432,7 @@ public class InPageController {
     // Create by Mr.Wanchana
 
     @RequestMapping(method = RequestMethod.GET, value = "viewevaluate")
-    public String afterEvaluation(ModelMap model,HttpServletRequest request) {
+    public String afterEvaluation(ModelMap model, HttpServletRequest request) {
         queryUserDomain.setViewEva(Integer.parseInt(request.getSession().getAttribute("userid").toString()));
         model.addAttribute("viewEva", queryUserDomain.getViewEva(Integer.parseInt(request.getSession().getAttribute("userid").toString())));
         return "viewEvaluate";
@@ -435,27 +440,39 @@ public class InPageController {
 
     //CREATE BY NICK
     @RequestMapping(method = RequestMethod.GET, value = "/exam/examRecordSearch")
-    public String examRecordSearch(HttpServletRequest request){ return "examRecordSearch";}
+    public String examRecordSearch(HttpServletRequest request) {
+        return "examRecordSearch";
+    }
 
     //CREATE BY NICK
-    @RequestMapping(method = RequestMethod.GET,value = "/exam/paperPreview")
-    public String paperPreview(HttpServletRequest request) {return "paperPreview";}
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/paperPreview")
+    public String paperPreview(HttpServletRequest request) {
+        return "paperPreview";
+    }
 
     //CREATE BY NICK
-    @RequestMapping(method = RequestMethod.GET,value = "/exam/paperExamRecord")
-    public String paperExamRecord(HttpServletRequest request) {return "paperExamRecord";}
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/paperExamRecord")
+    public String paperExamRecord(HttpServletRequest request) {
+        return "paperExamRecord";
+    }
 
     //CREATE BY NICK
 //    @RequestMapping(method = RequestMethod.GET,value = "/exam/marking")
 //    public String marking(HttpServletRequest request){return "marking";}
 
     //CREATE BY JOB
-    @RequestMapping(method = RequestMethod.GET,value = "/exam/examReportResultForEmployee")
-    public String examReportResultForEmployee(HttpServletRequest request) {return "examReportResultForEmployee";}
+    @RequestMapping(method = RequestMethod.GET, value = "/exam/examReportResultForEmployee")
+    public String examReportResultForEmployee(HttpServletRequest request) {
+        return "examReportResultForEmployee";
+    }
 
-    @RequestMapping(method = RequestMethod.GET,value = "/addUser")
-    public String addUser(HttpServletRequest request) {return "addUser";}
+    @RequestMapping(method = RequestMethod.GET, value = "/addUser")
+    public String addUser(HttpServletRequest request) {
+        return "addUser";
+    }
 
-    @RequestMapping(method = RequestMethod.GET,value = "/manageUser")
-    public String manageUser(HttpServletRequest request) {return "manageUser";}
+    @RequestMapping(method = RequestMethod.GET, value = "/manageUser")
+    public String manageUser(HttpServletRequest request) {
+        return "manageUser";
+    }
 }
