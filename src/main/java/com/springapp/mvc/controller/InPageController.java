@@ -157,7 +157,7 @@ public class InPageController {
 //            e.printStackTrace();
 //        }
 //        if(currentUser.getPosition()!=null){
-            if(currentUser.getPosition().getPosiId() == 2 || currentUser.getPosition().getPosiId() == 1){
+            if(currentUser.getStatus() == 3){
                 return "homeUser";
             }else{
                 return "homeStaff";
