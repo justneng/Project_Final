@@ -76,7 +76,7 @@ public class QueryPaperDomain extends HibernateUtil {
         }
 
         HibernateUtil.commitTransaction();
-        HibernateUtil.closeSession();
+//        HibernateUtil.closeSession();
     }
 
     public void updatePaper(List<Integer> qIds, List<Float> newScores, Integer paperId, User updateBy, String paperCode, String paperName, Float paperMaxScore, Date updateDate, Integer paperTime, Status paperStatus, Position paperForPosition, PaperType paperType, Integer easy, Integer normal, Integer hard){
@@ -158,9 +158,10 @@ public class QueryPaperDomain extends HibernateUtil {
         } catch (Exception e) {
             System.out.println("==========Error while delete papers==========");
             e.printStackTrace();
-        } finally {
-            HibernateUtil.closeSession();
         }
+//        } finally {
+//            HibernateUtil.closeSession();
+//        }
     }
 
     public void updatePaperStatus(ExamPaper examPaper){
@@ -438,12 +439,13 @@ public class QueryPaperDomain extends HibernateUtil {
                 getSession().save(paperQuestionCopy);
             }
             HibernateUtil.commitTransaction();
-        } catch(Exception e){
+        } catch(Exception e) {
             System.out.println("=========ERROR While create copy paper========");
             e.printStackTrace();
-        } finally {
-            HibernateUtil.closeSession();
         }
+//        } finally {
+//            HibernateUtil.closeSession();
+//        }
     }
 
     public List<ExamPaper> orderPaper(List paperCodes, String orderBy, String orderType){

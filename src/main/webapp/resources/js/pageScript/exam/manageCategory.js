@@ -117,6 +117,11 @@ $(document).ready(function () {
 
     $('.remove-category').on('click', function(){
         var categoryid = $(this).attr('cateoryid');
+
+        if (!confirm("ยืนยันการลบหมวดหมู่")) {
+            return false;
+        }
+
         $.ajax({
             type: "POST",
             url: context + "/TDCS/exam/removeCategory",
@@ -327,6 +332,7 @@ function checkCategoryNameInUse(categoryId){
 
 function onLoadPageAfterCreateOrDeleteCategorySuccessful(){
     viewCategory();
+    //location.reload();
 }
 
 function searchResultNotFound(){
@@ -453,11 +459,11 @@ function saveCategory() {
         return false;
     }
 
-    if(checkCategoryCode($("#categoryIdText").val()) == 'false'){
-        alert('รหัสหมวดหมู่ซ้ำ');
-        $("#categoryIdText").attr('style', 'border:solid 1px red');
-        return false;
-    }
+    //if(checkCategoryCode($("#categoryIdText").val()) == 'false'){
+    //    alert('รหัสหมวดหมู่ซ้ำ');
+    //    $("#categoryIdText").attr('style', 'border:solid 1px red');
+    //    return false;
+    //}
 
     var categoryName = $("#categoryNameText").val();
     var categoryId = $("#categoryIdText").val();
@@ -470,6 +476,7 @@ function saveCategory() {
             //alert('เพิ่มวิชา ' + categoryName + ' สำเร็จ ');
             alert("บันทึกข้อมูลสำเร็จ");
             $("#createCat").modal('hide');
+            window.location.reload();
             onLoadPageAfterCreateOrDeleteCategorySuccessful();
         },
         error: function (xhr) {
