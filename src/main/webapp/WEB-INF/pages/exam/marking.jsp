@@ -83,9 +83,9 @@
         <div class="col-md-1 ObjectiveScore">
                 ${examResult.objectiveScore}
         </div>
-        <div class="col-md-1">
-            <button class="btn btn-primary" id="showObjective">แสดงข้อปรนัย</button>
-        </div>
+        <%--<div class="col-md-1">--%>
+            <%--<button class="btn btn-primary" id="showObjective">แสดงข้อปรนัย</button>--%>
+        <%--</div>--%>
     </div>
     <div class="row">
         <div class="col-md-2 col-md-offset-6 text-right">คะแนนอัตนัยที่ได้ :</div>
@@ -165,11 +165,11 @@
             <%--Objective--%>
             <c:if test="${answerRecord.question.questionType.id == 1}">
 
-                <div class="questionContainer containerObjective hidden" questionNo="${questionNumber}"
+                <div class="questionContainer containerObjective" questionNo="${questionNumber}"
                      questionId="${answerRecord.question.id}"
                      answerRecordId="${answerRecord.id}">
                     <div class="row question-row">
-                        <div class="col-md-1 text-right">ป-${questionNumberObjective} :</div>
+                        <div class="col-md-1 text-right">${questionNumberObjective} :</div>
                         <div class="col-md-10"><span style="font-weight:bold ">คำถาม :</span>
             <span>
                     ${answerRecord.question.description}

@@ -6,6 +6,7 @@ import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.*;
 import com.springapp.mvc.util.DateUtil;
 import com.springapp.mvc.util.HibernateUtil;
+import com.springapp.mvc.util.QuestionUtil;
 import flexjson.JSONSerializer;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.MathContext;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -101,7 +103,7 @@ public class DoExamController {
         modelMap.addAttribute("paper", examPaper);
         modelMap.addAttribute("user", user);
 
-        ExamRecord examRecord = queryExamRecordDomain.getExamRecordByPaperAndUser(examPaper,user);
+        ExamRecord examRecord = queryExamRecordDomain.getExamRecordByPaperAndUser(examPaper, user);
         if(examRecord == null && examPaper != null){
             examRecord = new ExamRecord();
             examRecord.setUser(user);
@@ -226,7 +228,16 @@ public class DoExamController {
     @ResponseBody
     public ResponseEntity<String> getExamBody(@RequestParam(value = "paperId", required = true) Integer paperId) {
 
-        List<Question> questionList = queryQuestionDomain.getQuestionListByPaper(queryPaperDomain.getPaperById(paperId));
+        ExamPaper paper = queryPaperDomain.getPaperById(paperId);
+        List<Question> questionList;
+        questionList = queryQuestionDomain.getQuestionListByPaper(paper);
+        List<Question> depletedQuestions = new ArrayList<Question>();
+
+        if(paper.getPaperType().getId() == 2){
+            DoExamController doExamController = new DoExamController();
+            questionList = QuestionUtil.getRandomlyPickQuestionFromPaper(paper,questionList,depletedQuestions);
+        }
+
         for (Question q : questionList) {
             Collections.shuffle(q.getChoices());
         }

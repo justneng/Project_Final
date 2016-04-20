@@ -14,17 +14,17 @@
 
 <h3 class="h3">เลือกทำข้อสอบ</h3>
 
-<ul class="nav nav-tabs">
-    <li class="active">
-        <a href="#select-paper" data-toggle="tab">ชุดข้อสอบออกโดยพนักงาน</a>
-    </li>
-
-    <%--<li id="generate-paper-tab" class="">--%>
-        <%--<a href="#select-paper-by-system-generate" data-toggle="tab">ชุดข้อสอบออกโดยระบบ</a>--%>
+<%--<ul class="nav nav-tabs">--%>
+    <%--<li class="active">--%>
+        <%--<a href="#select-paper" data-toggle="tab">ชุดข้อสอบออกโดยพนักงาน</a>--%>
     <%--</li>--%>
-</ul>
-<br/>
 
+    <%--&lt;%&ndash;<li id="generate-paper-tab" class="">&ndash;%&gt;--%>
+    <%--&lt;%&ndash;<a href="#select-paper-by-system-generate" data-toggle="tab">ชุดข้อสอบออกโดยระบบ</a>&ndash;%&gt;--%>
+    <%--&lt;%&ndash;</li>&ndash;%&gt;--%>
+<%--</ul>--%>
+<%--<br/>--%>
+<hr>
 <div class="tab-content">
     <div id="select-paper" class="container-fluid tab-pane fade in active">
         <div class="row">
@@ -34,8 +34,8 @@
                     <tr>
                         <th style="text-align: center">รหัสชุดข้อสอบ</th>
                         <th style="text-align: center">ชื่อชุดข้อสอบ</th>
-                        <th style="text-align: center">ชื่อผู้สร้าง</th>
-                        <th style="text-align: center">ประเภทผู้สอบ</th>
+                        <th style="text-align: center">ผู้สร้างชุดข้อสอบ</th>
+                        <%--<th style="text-align: center">ประเภทผู้สอบ</th>--%>
                         <th style="text-align: center">คะแนนเต็ม</th>
                         <th style="text-align: center">เวลาในการทำข้อสอบ</th>
                         <th style="text-align: center">Action</th>
@@ -48,21 +48,21 @@
                         <tr>
                             <td align="center">${paper.code}</td>
                             <td>
-                                    <c:if test="${paper.paperType.id} == 1">
-                                        <span class="label label-default">กำหนดเอง</span>&nbsp;
-                                    </c:if>
-                                    <c:if test="${paper.paperType.id} == 2">
-                                        <span class="label label-primary">สุ่ม</span>&nbsp;
-                                    </c:if>
+                                <c:if test="${paper.paperType.id} == 1">
+                                    <span class="label label-default">กำหนดเอง</span>&nbsp;
+                                </c:if>
+                                <c:if test="${paper.paperType.id} == 2">
+                                    <span class="label label-primary">สุ่ม</span>&nbsp;
+                                </c:if>
                                     ${paper.name}
                             </td>
                             <td>${paper.createBy.thFname}&nbsp;${paper.createBy.thLname}</td>
-                            <c:if test="${paper.position.posiName != null}">
-                                <td>${paper.position.posiName}</td>
-                            </c:if>
-                            <c:if test="${paper.position.posiName == null}">
-                                <td>ทั้งหมด</td>
-                            </c:if>
+                            <%--<c:if test="${paper.position.posiName != null}">--%>
+                                <%--<td>${paper.position.posiName}</td>--%>
+                            <%--</c:if>--%>
+                            <%--<c:if test="${paper.position.posiName == null}">--%>
+                                <%--<td>ทั้งหมด</td>--%>
+                            <%--</c:if>--%>
                             <td align="center">${paper.maxScore}</td>
                             <c:set var="hour" value="${f:parseInt(paper.timeLimit / 60)}"/>
                             <td align="center">${hour}.${paper.timeLimit % 60} ชั่วโมง</td>
@@ -80,14 +80,22 @@
                     <c:forEach var="paper" items="${donePaperList}">
                         <tr>
                             <td align="center">${paper.code}</td>
-                            <td>${paper.name}</td>
+                            <td>
+                                <c:if test="${paper.paperType.id} == 1">
+                                <span class="label label-default">กำหนดเอง</span>&nbsp;
+                                </c:if>
+                                <c:if test="${paper.paperType.id} == 2">
+                                    <span class="label label-primary">สุ่ม</span>&nbsp;
+                                </c:if>
+                                ${paper.name}
+                            </td>
                             <td>${paper.createBy.thFname}&nbsp;${paper.createBy.thLname}</td>
-                            <c:if test="${paper.position.posiName != null}">
-                                <td>${paper.position.posiName}</td>
-                            </c:if>
-                            <c:if test="${paper.position.posiName == null}">
-                                <td>ทั้งหมด</td>
-                            </c:if>
+                            <%--<c:if test="${paper.position.posiName != null}">--%>
+                                <%--<td>${paper.position.posiName}</td>--%>
+                            <%--</c:if>--%>
+                            <%--<c:if test="${paper.position.posiName == null}">--%>
+                                <%--<td>ทั้งหมด</td>--%>
+                            <%--</c:if>--%>
                             <td align="center">${paper.maxScore}</td>
                             <c:set var="hour" value="${f:parseInt(paper.timeLimit / 60)}"/>
                             <td align="center">${hour}.${paper.timeLimit % 60} ชั่วโมง</td>

@@ -46,6 +46,7 @@ public class QueryExamResultDomain extends HibernateUtil {
 
 //        criteria.add(criterion2);
         criteria.add(Restrictions.eq("record.user", user));
+        criteria.addOrder(Order.asc("record.examDate"));
         criteria.addOrder(Order.desc("status.id"));
 
         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);

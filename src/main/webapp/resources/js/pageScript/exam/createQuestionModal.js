@@ -389,7 +389,7 @@ $("#categoryInputForCreateQuestion").on('change', function () {
         if (categoryId != "") {
             if (categoryId.indexOf(':') != -1) {
                 categoryId.indexOf(':');
-                var categoryId2 = categoryId.substr(0, categoryId.indexOf(' '));
+                var categoryId2 = categoryId.substr(0, categoryId.indexOf(':')).trim();
                 categoryId = categoryId2;
                 var data = $.ajax({
                     type: "POST",
