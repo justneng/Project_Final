@@ -135,64 +135,74 @@ public class InPageController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/home")
     public String userData(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+        User currentUser = queryUserDomain.getCurrentUser(request);
+        model.addAttribute("currentUser",currentUser);
 //            List<User> users = findAllDataTableDomain.searchId(User.class,"userName",request.getSession().getAttribute("username").toString());
 
-        List<User> users = queryUserDomain.
-                getStudentUserDataList(
-                        Integer.parseInt(request.getSession().getAttribute("userid").toString()),
-                        request.getSession().getAttribute("status").toString());
-        model.addAttribute("user", users);
-        if (request.getSession().getAttribute("status").toString().equals("user")) {
-            model.addAttribute("listApp", queryApprentieDomain.getApprentice());
-            model.addAttribute("listPosition", queryJobDomain.getJop("s"));
-            model.addAttribute("listUser", queryUserDomain.getStaff());
-            model.addAttribute("countUserValidate", request.getSession().getAttribute("countUserValidate"));
-            model.addAttribute("viewEva", queryUserDomain.getViewEva(Integer.parseInt(request.getSession().getAttribute("userid").toString())));
+//        List<User> users = queryUserDomain.
+//                getStudentUserDataList(
+//                        Integer.parseInt(request.getSession().getAttribute("userid").toString()),
+//                        request.getSession().getAttribute("status").toString());
+//        model.addAttribute("user", users);
+//        if (request.getSession().getAttribute("status").toString().equals("user")) {
+//            model.addAttribute("listApp", queryApprentieDomain.getApprentice());
+//            model.addAttribute("listPosition", queryJobDomain.getJop("s"));
+//            model.addAttribute("listUser", queryUserDomain.getStaff());
+//            model.addAttribute("countUserValidate", request.getSession().getAttribute("countUserValidate"));
+//            model.addAttribute("viewEva", queryUserDomain.getViewEva(Integer.parseInt(request.getSession().getAttribute("userid").toString())));
 
-            try {
-                request.getSession().setAttribute("countUserValidate", queryUserDomain.getCountUserValidate(request.getSession().getAttribute("session_piority").toString()));
-            } catch (NullPointerException e) {
-                e.printStackTrace();
+//        try {
+//                request.getSession().setAttribute("countUserValidate", queryUserDomain.getCountUserValidate(request.getSession().getAttribute("session_piority").toString()));
+//        } catch (NullPointerException e) {
+//            e.printStackTrace();
+//        }
+//        if(currentUser.getPosition()!=null){
+            if(currentUser.getPosition().getPosiId() == 2 || currentUser.getPosition().getPosiId() == 1){
+                return "homeUser";
+            }else{
+                return "homeStaff";
             }
-            return "homeUser";
-        } else if (request.getSession().getAttribute("status").toString().equals("staff")) {
+//        }else
+
+
+//        } else if (request.getSession().getAttribute("status").toString().equals("staff")) {
 //                List<SectionPosition> spBuffer = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class,"spId",users.get(0).getSpId());
-            users.get(0).setSectionPosition(querySectionPositionDomain.getSectionPositionClass(users.get(0).getSpId()));
-            users.get(0).setTeam(queryTeamDomain.getTeamDatas(users.get(0).getTeamId()));
-            List<Company> companyList = queryCompanyDomain.getCompanyList();
-            List<Section> sectionList = findAllDataTableDomain.searchByIntegerColumn(Section.class, "conpId", users.get(0).getCompId());
+//            users.get(0).setSectionPosition(querySectionPositionDomain.getSectionPositionClass(users.get(0).getSpId()));
+//            users.get(0).setTeam(queryTeamDomain.getTeamDatas(users.get(0).getTeamId()));
+//            List<Company> companyList = queryCompanyDomain.getCompanyList();
+//            List<Section> sectionList = findAllDataTableDomain.searchByIntegerColumn(Section.class, "conpId", users.get(0).getCompId());
 //                Integer integer = spBuffer.get(0).getSectionId();
 //                List<SectionPosition> sectionPositionList = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class,"sectionId",spBuffer.get(0).getSectionId());
-            List<SectionPosition> sectionPositionList = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class, "sectionId", users.get(0).getSectionPosition().getSectionId());
-            model.addAttribute("listComp", companyList);
-            model.addAttribute("listSection", sectionList);
-            model.addAttribute("listSectionPosition", sectionPositionList);
-            try {
-                request.getSession().setAttribute("countUserValidate", queryUserDomain.getCountUserValidate(request.getSession().getAttribute("session_piority").toString()));
-            } catch (NullPointerException e) {
-                e.printStackTrace();
-            }
-            return "homeStaff";
-        } else {
-            //                List<SectionPosition> spBuffer = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class,"spId",users.get(0).getSpId());
-            users.get(0).setSectionPosition(querySectionPositionDomain.getSectionPositionClass(users.get(0).getSpId()));
-            users.get(0).setTeam(queryTeamDomain.getTeamDatas(users.get(0).getTeamId()));
-            List<Company> companyList = queryCompanyDomain.getCompanyList();
-            List<Section> sectionList = findAllDataTableDomain.searchByIntegerColumn(Section.class, "conpId", users.get(0).getCompId());
+//            List<SectionPosition> sectionPositionList = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class, "sectionId", users.get(0).getSectionPosition().getSectionId());
+//            model.addAttribute("listComp", companyList);
+//            model.addAttribute("listSection", sectionList);
+//            model.addAttribute("listSectionPosition", sectionPositionList);
+//            try {
+//                request.getSession().setAttribute("countUserValidate", queryUserDomain.getCountUserValidate(request.getSession().getAttribute("session_piority").toString()));
+//            } catch (NullPointerException e) {
+//                e.printStackTrace();
+//            }
+//            return "homeStaff";
+//        } else {
+        //                List<SectionPosition> spBuffer = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class,"spId",users.get(0).getSpId());
+//            users.get(0).setSectionPosition(querySectionPositionDomain.getSectionPositionClass(users.get(0).getSpId()));
+//            users.get(0).setTeam(queryTeamDomain.getTeamDatas(users.get(0).getTeamId()));
+//            List<Company> companyList = queryCompanyDomain.getCompanyList();
+//            List<Section> sectionList = findAllDataTableDomain.searchByIntegerColumn(Section.class, "conpId", users.get(0).getCompId());
 //                Integer integer = spBuffer.get(0).getSectionId();
 //                List<SectionPosition> sectionPositionList = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class,"sectionId",spBuffer.get(0).getSectionId());
-            List<SectionPosition> sectionPositionList = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class, "sectionId", users.get(0).getSectionPosition().getSectionId());
-            model.addAttribute("listComp", companyList);
-            model.addAttribute("listSection", sectionList);
-            model.addAttribute("listSectionPosition", sectionPositionList);
-            try {
-                request.getSession().setAttribute("countUserValidate", queryUserDomain.getCountUserValidate(request.getSession().getAttribute("session_piority").toString()));
-            } catch (NullPointerException e) {
-                e.printStackTrace();
-            }
-            return "homeStaff";
-        }
+//            List<SectionPosition> sectionPositionList = findAllDataTableDomain.searchByIntegerColumn(SectionPosition.class, "sectionId", users.get(0).getSectionPosition().getSectionId());
+//            model.addAttribute("listComp", companyList);
+//            model.addAttribute("listSection", sectionList);
+//            model.addAttribute("listSectionPosition", sectionPositionList);
+//            try {
+//                request.getSession().setAttribute("countUserValidate", queryUserDomain.getCountUserValidate(request.getSession().getAttribute("session_piority").toString()));
+//            } catch (NullPointerException e) {
+//                e.printStackTrace();
+//            }
+//            return "homeStaff";
     }
+//    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/evaluation")
     public String evaluation(ModelMap model, HttpServletRequest request) {

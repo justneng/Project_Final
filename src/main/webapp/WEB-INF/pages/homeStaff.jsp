@@ -55,15 +55,15 @@
         <label for="stuid" class="col-md-2 control-label" style="padding-right: 0px">
             <small>รหัสพนักงาน</small><small style="color: red">*</small></label>
         <div class="col-md-4">
-            <input id="stuid" name="stuid" class="form-control" value="${user[0].empId}"
-                   onkeypress="return numberAndEnglist(event)" maxlength="5" disabled/>
+            <input id="stuid" name="stuid" class="form-control" value="${currentUser.empId}"
+                   onkeypress="return numberAndEnglist(event)" maxlength="5" disabled />
         </div>
         <label for="username" class="col-md-1 control-label" style="padding-left: 0px;padding-right: 0px;padding-top: 0px">
             <small>ชื่อผู้ใช้</small>
         </label>
         <input path="status" type="hidden" value="2" />
         <div class="col-md-4">
-            <input id="username" name="username" class="form-control" value="${user[0].userName}" disabled/>
+            <input id="username" name="username" class="form-control" value="${currentUser.userName}" disabled/>
         </div>
     </div>
 </div>
@@ -72,12 +72,12 @@
     <div class="row col-md-12">
         <label for="fname" class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px"><small>ชื่อ(ไทย)</small><small style="color: red">*</small></label>
         <div class="col-md-4">
-            <input id="fname" name="fname" class="form-control " value="${user[0].thFname}" onkeypress="return isThai(event)" />
+            <input id="fname" name="fname" class="form-control " value="${currentUser.thFname}" onkeypress="return isThai(event)" />
         </div>
 
         <label for="lname" class="col-md-1 control-label" style="padding: 7px 0px 7px 0px;"><small>นามสกุล</small><small style="color: red">*</small></label>
         <div class="col-md-4">
-            <input  id="lname" name="lname" class="form-control" value="${user[0].thLname}" onkeypress="return isThai(event)" />
+            <input  id="lname" name="lname" class="form-control" value="${currentUser.thLname}" onkeypress="return isThai(event)" />
         </div>
     </div>
 </div>
@@ -86,12 +86,12 @@
     <div class="row col-md-12">
         <label for="engfname" class="col-md-2 control-label" style="padding-left: 0px;padding-right: 0px"><small>ชื่อ(อังกฤษ)</small><small style="color: red">*</small></label>
         <div class="col-md-4">
-            <input id="engfname" name="engfname" class="form-control " value="${user[0].enFname}"  onkeypress="return isEnglish(event)" />
+            <input id="engfname" name="engfname" class="form-control " value="${currentUser.enFname}"  onkeypress="return isEnglish(event)" />
         </div>
 
         <label for="englname" class="col-md-1 control-label" style="padding: 7px 0px 7px 0px;"><small>นามสกุล</small><small style="color: red">*</small></label>
         <div class="col-md-4">
-            <input id="englname" name="englname" class="form-control" value="${user[0].enLname}"  onkeypress="return isEnglish(event)" />
+            <input id="englname" name="englname" class="form-control" value="${currentUser.enLname}"  onkeypress="return isEnglish(event)" />
         </div>
     </div>
 </div>
@@ -277,7 +277,7 @@
             <small>อีเมล</small><small style="color: red">*</small></label>
         <div class="col-md-4">
             <input id="othEmail" name="stuid" class="form-control"  onkeypress="return checkEmail(event)"
-                   value="${user[0].eMail2}" />
+                   value="${currentUser.eMail2}" />
         </div>
     </div>
 </div>

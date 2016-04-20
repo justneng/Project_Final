@@ -22,8 +22,8 @@
 </div>
 <div class="row">
     <%--<div class="col-md-offset-1 col-md-2">--%>
-    <%--<input type="hidden" id="userId" value="${user[0].userId}" />--%>
-    <%--<input type="hidden" id="piority" value="${user[0].piority}" />--%>
+    <%--<input type="hidden" id="userId" value="${currentUser.userId}" />--%>
+    <%--<input type="hidden" id="piority" value="${currentUser.piority}" />--%>
     <%--<div class="form-group">--%>
     <%--<div class="row">--%>
     <%--<div class="col-md-12 text-center">--%>
@@ -34,11 +34,11 @@
     <%--&lt;%&ndash;<div id="divImg" style="width: 100%;height: 200px;background-image: url(<c:url value="/resources/images/blank.jpg" />);">&ndash;%&gt;--%>
     <%--&lt;%&ndash;<object  />&ndash;%&gt;--%>
     <%--<c:choose>--%>
-    <%--<c:when test="${user[0].imange == null}">--%>
+    <%--<c:when test="${currentUser.imange == null}">--%>
     <%--<img id="myImg" src="<c:url value="/resources/images/blank.jpg" />" alt="your image" width="100%" height="190px"/>--%>
     <%--</c:when>--%>
     <%--<c:otherwise>--%>
-    <%--<img id="myImg" src="<c:url value="/resources/pictureUpload/${user[0].imange}" />" alt="your image" width="100%" height="190px"/>--%>
+    <%--<img id="myImg" src="<c:url value="/resources/pictureUpload/${currentUser.imange}" />" alt="your image" width="100%" height="190px"/>--%>
     <%--</c:otherwise>--%>
     <%--</c:choose>--%>
     <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
@@ -58,7 +58,7 @@
                     </label>
 
                     <div class="col-md-4">
-                        <input id="stuid" class="form-control" value="${user[0].empId}"
+                        <input id="stuid" class="form-control" value="${currentUser.empId}"
                                onkeypress="return numberAndEnglist(event)" maxlength="6" disabled/>
                     </div>
                     <label for="username" class="col-md-1 control-label" style="padding-left: 0px;padding-right: 0px;">
@@ -66,7 +66,7 @@
                     </label>
 
                     <div class="col-md-4">
-                        <input id="username" class="form-control" value="${user[0].userName}" readonly="true"/>
+                        <input id="username" class="form-control" value="${currentUser.userName}" readonly="true"/>
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                     </label>
 
                     <div class="col-md-4">
-                        <input id="fname" class="form-control" value="${user[0].thFname}"
+                        <input id="fname" class="form-control" value="${currentUser.thFname}"
                                onkeypress="return isThai(event)"/>
                     </div>
 
@@ -87,7 +87,7 @@
                     </label>
 
                     <div class="col-md-4">
-                        <input id="lname" class="form-control" value="${user[0].thLname}"
+                        <input id="lname" class="form-control" value="${currentUser.thLname}"
                                onkeypress="return isThai(event)"/>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                     </label>
 
                     <div class="col-md-4">
-                        <input id="engfname" class="form-control" value="${user[0].enFname}"
+                        <input id="engfname" class="form-control" value="${currentUser.enFname}"
                                onkeypress="return isEnglish(event)"/>
                     </div>
 
@@ -109,7 +109,7 @@
                     </label>
 
                     <div class="col-md-4">
-                        <input id="englname" class="form-control" value="${user[0].enLname}"
+                        <input id="englname" class="form-control" value="${currentUser.enLname}"
                                onkeypress="return isEnglish(event)"/>
                     </div>
                 </div>
@@ -121,7 +121,7 @@
             <%--<small>ชื่อเล่น</small>--%>
             <%--</label>--%>
             <%--<div class="col-md-4">--%>
-            <%--<input id="nickname" class="form-control" value="${user[0].nickName}" onkeypress="return isThai(event)" />--%>
+            <%--<input id="nickname" class="form-control" value="${currentUser.nickName}" onkeypress="return isThai(event)" />--%>
             <%--</div>--%>
             <%--</div>--%>
             <%--</div>--%>
@@ -139,7 +139,7 @@
             <%--&lt;%&ndash;<div class="col-md-5" style="padding: 0px;">&ndash;%&gt;--%>
             <%--<div class='input-group date' id='sBirthday'>--%>
             <%--<input id="birthday" type='text' class="form-control" readonly="true" style="cursor:pointer;background-color: white"--%>
-            <%--value="${user[0].birthDate}"/>--%>
+            <%--value="${currentUser.birthDate}"/>--%>
             <%--<span class="input-group-addon">--%>
             <%--<span class="glyphicon glyphicon-calendar"></span>--%>
             <%--</span>--%>
@@ -166,10 +166,10 @@
             <%--</label>--%>
             <%--<div class="col-md-9">--%>
             <%--&lt;%&ndash;<input id="university" class="form-control" value="${user.universityFacultyMajor.universityFaculty.university.university_name}"  />&ndash;%&gt;--%>
-            <%--<input type="hidden" id="universityId" name="universityId" value="${user[0].universityFacultyMajor.universityFaculty.uniId}"/>--%>
+            <%--<input type="hidden" id="universityId" name="universityId" value="${currentUser.universityFacultyMajor.universityFaculty.uniId}"/>--%>
             <%--<div class="input-group">--%>
             <%--<input id="univerName" name="universityName" type="text" class="form-control" onchange="listuni()"--%>
-            <%--value="${user[0].universityFacultyMajor.universityFaculty.university.university_name}"/>--%>
+            <%--value="${currentUser.universityFacultyMajor.universityFaculty.university.university_name}"/>--%>
             <%--<span class="input-group-addon">--%>
             <%--<i class="glyphicon glyphicon-search" onclick="listuni()" style="cursor: pointer"></i>--%>
             <%--</span>--%>
@@ -188,7 +188,7 @@
             <%--<div class="input-group">--%>
             <%--&lt;%&ndash;<form:input path="uniFacId" type="hidden" id="facid" name="facid" value="0" />&ndash;%&gt;--%>
             <%--<input id="comboFac" name="facName" type="text" class="form-control" onchange="showFacuty()"--%>
-            <%--value="${user[0].universityFacultyMajor.universityFaculty.faculty.facName}"  />--%>
+            <%--value="${currentUser.universityFacultyMajor.universityFaculty.faculty.facName}"  />--%>
             <%--<span class="input-group-addon">--%>
             <%--<i class="glyphicon glyphicon-search" onclick="showFacuty()" style="cursor: pointer"></i>--%>
             <%--</span>--%>
@@ -204,10 +204,10 @@
             <%--</label>--%>
             <%--<div class="col-md-9">--%>
             <%--&lt;%&ndash;<input id="major" class="form-control" value="${user.universityFacultyMajor.major.majName}"  />&ndash;%&gt;--%>
-            <%--<input type="hidden" id="depid" name="depid" value="${user[0].universityFacultyMajor.uniFacMajId}" />--%>
+            <%--<input type="hidden" id="depid" name="depid" value="${currentUser.universityFacultyMajor.uniFacMajId}" />--%>
             <%--<div class="input-group">--%>
             <%--<input id="comboDep" name="depaName" type="text" class="form-control" onchange="shoeDepartMent()"--%>
-            <%--value="${user[0].universityFacultyMajor.major.majName}" />--%>
+            <%--value="${currentUser.universityFacultyMajor.major.majName}" />--%>
             <%--<span class="input-group-addon">--%>
             <%--<i class="glyphicon glyphicon-search" onclick="shoeDepartMent()" style="cursor: pointer"></i>--%>
             <%--</span>--%>
@@ -223,7 +223,7 @@
             <%--<div class="col-md-2" style="padding-left: 0px;">--%>
             <%--<select id="level" class="form-control">--%>
             <%--<option value="">เลือกชั้นปี</option>--%>
-            <%--<c:set var="level" scope="session" value="${user[0].levelStu}"/>--%>
+            <%--<c:set var="level" scope="session" value="${currentUser.levelStu}"/>--%>
             <%--<c:forEach var="i" begin="1" end="8">--%>
             <%--<option value="${i}" <c:if test="${i == level}"> selected="selected" </c:if> ><c:out value="${i}"/></option>--%>
             <%--</c:forEach>--%>
@@ -234,7 +234,7 @@
             <%--<label class="col-md-5 control-label" style="padding: 7px 0px;"><small>เกรดเฉลี่ยสะสม</small><small style="color: red">*</small></label>--%>
             <%--<div class="col-md-7" style="padding-right: 0px;">--%>
             <%--<input id="inputGrade" class="form-control" maxlength="4" onkeypress="return isNumberPoint(event)"--%>
-            <%--onchange="fullfulegrade()" value="${user[0].grade}"/>--%>
+            <%--onchange="fullfulegrade()" value="${currentUser.grade}"/>--%>
             <%--</div>--%>
             <%--</div>--%>
             <%--</div>--%>
@@ -247,7 +247,7 @@
             <%--<small>ที่อยู่</small>--%>
             <%--</label>--%>
             <%--<div class="col-md-9">--%>
-            <%--<textarea class="form-control" id="address" >${user[0].address}</textarea>--%>
+            <%--<textarea class="form-control" id="address" >${currentUser.address}</textarea>--%>
             <%--</div>--%>
             <%--</div>--%>
             <%--</div>--%>
@@ -258,7 +258,7 @@
             <%--<small>มือถือ</small>--%>
             <%--</label>--%>
             <%--<div class="col-md-4">--%>
-            <%--<input id="tel2" class="form-control" value="${user[0].tell2}" maxlength="10" onkeypress="return isNumber(event)" />--%>
+            <%--<input id="tel2" class="form-control" value="${currentUser.tell2}" maxlength="10" onkeypress="return isNumber(event)" />--%>
 
             <%--</div>--%>
 
@@ -266,7 +266,7 @@
             <%--<small>โทร</small>--%>
             <%--</label>--%>
             <%--<div class="col-md-4">--%>
-            <%--<input id="tel1" class="form-control" value="${user[0].tell1}" maxlength="10" onkeypress="return isNumber(event)" />--%>
+            <%--<input id="tel1" class="form-control" value="${currentUser.tell1}" maxlength="10" onkeypress="return isNumber(event)" />--%>
             <%--</div>--%>
             <%--</div>--%>
             <%--</div>--%>
@@ -278,7 +278,7 @@
             <%--</label>--%>
             <%--<div class="col-md-9">--%>
             <%--<div class="col-md-5" style="padding-left: 0px;padding-right: 0px;">--%>
-            <%--<input id="ssgMail" class="form-control"  value="${user[0].eMail1}" readonly="true"/>--%>
+            <%--<input id="ssgMail" class="form-control"  value="${currentUser.eMail1}" readonly="true"/>--%>
             <%--</div>--%>
             <%--<label class="col-md-2 control-label" style="text-align: left;"><small>@internal.ssg</small></label>--%>
             <%--</div>--%>
@@ -293,7 +293,7 @@
 
                     <div class="col-md-4">
                         <%--<div class="col-md-5" style="padding-left: 0px;">--%>
-                        <input id="mail" class="form-control" value="${user[0].eMail2}"
+                        <input id="mail" class="form-control" value="${currentUser.eMail2}"
                                onkeypress="return checkEmail(event)"/>
                         <%--</div>--%>
                     </div>
@@ -305,7 +305,7 @@
                         <%--<div class="col-md-8" style="padding-left: 0px;">--%>
                         <%--<input id="position" class="form-control"  value="${user.position.posiName}"/>--%>
                         <%--</div>--%>
-                        <c:set var="posiId" scope="session" value="${user[0].posiId}"/>
+                        <c:set var="posiId" scope="session" value="${currentUser.posiId}"/>
                         <select id="position" name="position" class="form-control" required="true">
                             <option value="">เลือกตำแหน่ง</option>
                             <c:forEach var="positionList" items="${listPosition}">
@@ -325,7 +325,7 @@
             <%--</label>--%>
             <%--<div class="col-md-9">--%>
             <%--&lt;%&ndash;<div class="col-md-8" style="padding-left: 0px;">&ndash;%&gt;--%>
-            <%--<input id="skype" class="form-control"  value="${user[0].skype}" onkeypress="return numberEnglishEmegency(event)" />--%>
+            <%--<input id="skype" class="form-control"  value="${currentUser.skype}" onkeypress="return numberEnglishEmegency(event)" />--%>
             <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
             <%--</div>--%>
             <%--</div>--%>
@@ -339,7 +339,7 @@
             <%--<div class="col-md-4">--%>
             <%--&lt;%&ndash;<input id="stime" class="form-control" value="${user.startWork}"  />&ndash;%&gt;--%>
             <%--<div class='input-group date' id='sStartTime'>--%>
-            <%--<input id="startTime" type='text' value="${user[0].startWork}" style="background-color: white;cursor: pointer"--%>
+            <%--<input id="startTime" type='text' value="${currentUser.startWork}" style="background-color: white;cursor: pointer"--%>
             <%--class="form-control" onchange="getTimeWork()" readonly="true"--%>
             <%--style="margin-top:0px;cursor:pointer" />--%>
             <%--<span class="input-group-addon">--%>
@@ -355,7 +355,7 @@
             <%--<div class="col-md-4">--%>
             <%--&lt;%&ndash;<input id="etime" class="form-control" value="${user.endWork}"  />&ndash;%&gt;--%>
             <%--<div class='input-group date' id='sEndTime'>--%>
-            <%--<input id="endTime" type='text' value="${user[0].endWork}" style="background-color: white;cursor: pointer"--%>
+            <%--<input id="endTime" type='text' value="${currentUser.endWork}" style="background-color: white;cursor: pointer"--%>
             <%--class="form-control" onchange="getTimeWork()" readonly="true" required="true"--%>
             <%--style="margin-top:0px;cursor:pointer"/>--%>
             <%--<span class="input-group-addon">--%>
@@ -386,7 +386,7 @@
             <%--<div class="col-md-9">--%>
             <%--&lt;%&ndash;<input id="type" class="form-control" value="${user.apprentice.aptName}"/>&ndash;%&gt;--%>
             <%--<select id="type" class="form-control" required="true">--%>
-            <%--<c:set var="appId" scope="session" value="${user[0].aptId}"/>--%>
+            <%--<c:set var="appId" scope="session" value="${currentUser.aptId}"/>--%>
             <%--<option value="">เลือกประเภทการฝึก</option>--%>
             <%--<c:forEach var="getApp" items="${listApp}">--%>
             <%--<option value="${getApp.aptId}" <c:if test="${getApp.aptId == appId}"> selected="selected" </c:if> > ${getApp.aptName} </option>--%>
@@ -406,7 +406,7 @@
             <%--&lt;%&ndash;<div class="col-md-8" style="padding-left: 0px;">&ndash;%&gt;--%>
             <%--&lt;%&ndash;<input id="advisor" class="form-control"  value="${user.staffId}"/>&ndash;%&gt;--%>
             <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
-            <%--<c:set var="staffid" scope="session" value="${user[0].staffId}"/>--%>
+            <%--<c:set var="staffid" scope="session" value="${currentUser.staffId}"/>--%>
             <%--<select id="advisor" name="advisor" class="form-control" required="true">--%>
             <%--<option value="">เลือกพนักงานที่ปรึกษา</option>--%>
             <%--<c:forEach var="getStaff" items="${listUser}">--%>
@@ -578,23 +578,23 @@
 <!-- /.modal -->
 
 <script>
-    <%--alert('${user[0].address}');--%>
+    <%--alert('${currentUser.address}');--%>
     var gradeUser;
     var elementStart;
     var facutyforFixid, facutyforfixName, universityId;
     $(document).ready(function () {
-        facutyforFixid = '${user[0].universityFacultyMajor.uniFacId}';
-        facutyforfixName = '${user[0].universityFacultyMajor.universityFaculty.faculty.facName}';
-        universityId = '${user[0].universityFacultyMajor.universityFaculty.uniId}';
-        gradeUser = '${user[0].grade}';
-        for (var i = gradeUser.length; i < 4; i++) {
-            gradeUser += "0";
-        }
+        <%--facutyforFixid = '${currentUser.universityFacultyMajor.uniFacId}';--%>
+        <%--facutyforfixName = '${currentUser.universityFacultyMajor.universityFaculty.faculty.facName}';--%>
+        <%--universityId = '${currentUser.universityFacultyMajor.universityFaculty.uniId}';--%>
+        <%--gradeUser = '${currentUser.grade}';--%>
+//        for (var i = gradeUser.length; i < 4; i++) {
+//            gradeUser += "0";
+//        }
 
-        elementStart = ['${user[0].empId}', '${user[0].userName}', '${user[0].thFname}', '${user[0].thLname}', '${user[0].enFname}', '${user[0].enLname}',
-            '${user[0].nickName}', '${user[0].birthDate}', '${user[0].universityFacultyMajor.uniFacMajId}', '${user[0].levelStu}', gradeUser, '${user[0].address}',
-            '${user[0].tell1}', '${user[0].tell2}', '${user[0].eMail1}', '${user[0].eMail2}', '${user[0].skype}', '${user[0].startWork}', '${user[0].endWork}',
-            '${user[0].aptId}', '${user[0].posiId}', '${user[0].staffId}' + ""];
+        elementStart = ['${currentUser.empId}', '${currentUser.userName}', '${currentUser.thFname}', '${currentUser.thLname}', '${currentUser.enFname}', '${currentUser.enLname}',
+            '${currentUser.nickName}', '${currentUser.birthDate}', '${currentUser.universityFacultyMajor.uniFacMajId}', '${currentUser.levelStu}', gradeUser, '${currentUser.address}',
+            '${currentUser.tell1}', '${currentUser.tell2}', '${currentUser.eMail1}', '${currentUser.eMail2}', '${currentUser.skype}', '${currentUser.startWork}', '${currentUser.endWork}',
+            '${currentUser.aptId}', '${currentUser.posiId}', '${currentUser.staffId}' + ""];
 
     });
 
