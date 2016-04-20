@@ -119,10 +119,10 @@
 </div>
 </div>
 
-<script src="${context}/resources/js/pageScript/exam/manageQuestion.js" charset="UTF-8"></script>
 <%--<script type="text/javascript" src="${context}/resources/js/jquery.simplePagination.js"></script>--%>
 <script type="text/javascript" src="<c:url value="/resources/js/pageScript/exam/utils.js" />"></script>
 <%--<link type="text/css" rel="stylesheet" href="${context}/resources/css/simplePagination.css"/>--%>
+<script src="${context}/resources/js/pageScript/exam/manageQuestion.js" charset="UTF-8"></script>
 
 <style>
     th {
