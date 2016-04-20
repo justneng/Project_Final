@@ -62,12 +62,14 @@ public class QueryReportDomain {
         String currentPath = System.getProperty("user.dir");
         String filePath = "";
 
-        if(image.equals("")){
-            filePath = currentPath + "\\src\\main\\webapp\\resources\\pictureUpload\\no-image.png";
-        }
-        else{
-            filePath = currentPath + "\\src\\main\\webapp\\resources\\pictureUpload\\" + image;
-        }
+        filePath = currentPath + "\\src\\main\\webapp\\resources\\pictureUpload\\no-image.png";
+
+//        if(image.equals("")){
+//            filePath = currentPath + "\\src\\main\\webapp\\resources\\pictureUpload\\no-image.png";
+//        }
+//        else{
+//            filePath = currentPath + "\\src\\main\\webapp\\resources\\pictureUpload\\" + image;
+//        }
 
         BufferedImage bufferedImage = null;
         try{

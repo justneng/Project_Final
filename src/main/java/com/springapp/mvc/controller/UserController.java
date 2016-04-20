@@ -149,7 +149,8 @@ public class UserController {
                                                  HttpServletRequest request) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;charset=UTF-8");
-        List<User> list = queryUserDomain.getAllUser(thFn, thLn, nick, company, empId, userType);
+        User currentUser = queryUserDomain.getCurrentUser(request);
+        List<User> list = queryUserDomain.getAllUser(thFn, thLn, nick, company, empId, userType, currentUser);
 
         for (int i = 0; i < list.size(); i++) {
             if (BeanUtils.isNotEmpty(position)) {

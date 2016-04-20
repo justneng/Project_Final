@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="hopez" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ed77365a-e309-472a-8a67-35e2fa73d616">
 	<property name="ireport.zoom" value="1.2100000000000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="79"/>
+	<property name="ireport.y" value="269"/>
 	<parameter name="studentId" class="java.lang.String"/>
 	<parameter name="studentName" class="java.lang.String"/>
 	<parameter name="faculty" class="java.lang.String"/>
@@ -70,14 +70,14 @@
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="243" y="0" width="112" height="30" uuid="4c4429ac-a4c6-4503-8e41-70398354fc01"/>
+				<reportElement x="228" y="0" width="112" height="30" uuid="4c4429ac-a4c6-4503-8e41-70398354fc01"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="18" isBold="true" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ใบตรวจผลการสอบ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="237" y="18" width="122" height="22" uuid="ab9f4970-2ba5-4561-b25a-b3894215723b"/>
+				<reportElement x="222" y="18" width="122" height="22" uuid="ab9f4970-2ba5-4561-b25a-b3894215723b"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="16" isBold="true" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -92,153 +92,153 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="176" splitType="Stretch">
+		<band height="333" splitType="Stretch">
 			<staticText>
-				<reportElement x="92" y="0" width="17" height="22" uuid="16d30adf-8f2b-4a45-9a2c-dc8b26ac42c6"/>
+				<reportElement x="90" y="147" width="17" height="22" uuid="16d30adf-8f2b-4a45-9a2c-dc8b26ac42c6"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" isBold="true" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ทีม]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="340" y="102" width="82" height="20" uuid="82babcdc-920e-4389-9f1b-27b9012ac94f"/>
+				<reportElement x="338" y="249" width="82" height="20" uuid="82babcdc-920e-4389-9f1b-27b9012ac94f"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" isBold="true" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ระยะเวลาฝึกงาน]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="92" y="122" width="80" height="20" uuid="e54de672-2ad1-484d-8b9a-5c6432d84eb3"/>
+				<reportElement x="90" y="269" width="80" height="20" uuid="e54de672-2ad1-484d-8b9a-5c6432d84eb3"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" isBold="true" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ประเภทการฝึกงาน]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="92" y="102" width="78" height="20" uuid="e620b465-952b-4e5a-afe9-b5ff2241ade4"/>
+				<reportElement x="90" y="249" width="78" height="20" uuid="e620b465-952b-4e5a-afe9-b5ff2241ade4"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" isBold="true" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[เข้าฝึกงานตำแหน่ง]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="92" y="62" width="55" height="20" uuid="0c5c2722-d92b-4e0d-b930-29df2feedb07"/>
+				<reportElement x="90" y="209" width="55" height="20" uuid="0c5c2722-d92b-4e0d-b930-29df2feedb07"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" isBold="true" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[คณะ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="92" y="142" width="75" height="20" uuid="50fec6c4-2400-42be-8cd2-59367efdd311"/>
+				<reportElement x="90" y="289" width="75" height="20" uuid="50fec6c4-2400-42be-8cd2-59367efdd311"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" isBold="true" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[พนักงานที่ปรึกษา]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="92" y="22" width="55" height="20" uuid="4b542661-9e68-411c-835e-17d1a6055aee"/>
+				<reportElement x="90" y="169" width="55" height="20" uuid="4b542661-9e68-411c-835e-17d1a6055aee"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" isBold="true" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[รหัสนักศึกษา]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="92" y="42" width="58" height="20" uuid="ae8fce14-c721-4e88-a740-24ae2e67a6b5"/>
+				<reportElement x="90" y="189" width="58" height="20" uuid="ae8fce14-c721-4e88-a740-24ae2e67a6b5"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" isBold="true" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[ชื่อ - นามสกุล]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="179" y="0" width="306" height="22" uuid="4010cea5-6be0-4276-b1c0-b4c8e5da0ffd"/>
+				<reportElement x="177" y="147" width="306" height="22" uuid="4010cea5-6be0-4276-b1c0-b4c8e5da0ffd"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" isBold="false" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{team}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="179" y="22" width="306" height="20" uuid="fc7860c8-39ca-4beb-9ec2-abd700638cc5"/>
+				<reportElement x="177" y="169" width="306" height="20" uuid="fc7860c8-39ca-4beb-9ec2-abd700638cc5"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{studentId}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="179" y="42" width="304" height="20" uuid="c56fcaf6-9da5-4c2e-bd1a-76a8530e4db2"/>
+				<reportElement x="177" y="189" width="304" height="20" uuid="c56fcaf6-9da5-4c2e-bd1a-76a8530e4db2"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{studentName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="179" y="62" width="161" height="20" uuid="d57e26ac-0f46-4e7b-8067-7af4af70c045"/>
+				<reportElement x="177" y="209" width="161" height="20" uuid="d57e26ac-0f46-4e7b-8067-7af4af70c045"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{faculty}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="422" y="102" width="122" height="20" uuid="bd28976c-0746-40bc-85ee-c30d942d7eb6"/>
+				<reportElement x="420" y="249" width="122" height="20" uuid="bd28976c-0746-40bc-85ee-c30d942d7eb6"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{startWorking}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="179" y="102" width="124" height="20" uuid="2372418d-6b3b-47b0-8863-b09d0641ec71"/>
+				<reportElement x="177" y="249" width="124" height="20" uuid="2372418d-6b3b-47b0-8863-b09d0641ec71"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{section}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="179" y="122" width="306" height="20" uuid="51044f8a-b1f7-42e9-aca2-065465148844"/>
+				<reportElement x="177" y="269" width="306" height="20" uuid="51044f8a-b1f7-42e9-aca2-065465148844"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{apprentice}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="179" y="142" width="304" height="20" uuid="89c5d749-25d6-4b8f-b5d0-c3edc6f87d2b"/>
+				<reportElement x="177" y="289" width="304" height="20" uuid="89c5d749-25d6-4b8f-b5d0-c3edc6f87d2b"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{staff}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="92" y="84" width="39" height="20" uuid="726ea07f-ba79-4871-ba65-ea9470758ab6"/>
+				<reportElement x="90" y="231" width="39" height="20" uuid="726ea07f-ba79-4871-ba65-ea9470758ab6"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" isBold="true" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[สถาบัน]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="179" y="84" width="306" height="20" uuid="c13fc7bd-e7d5-436e-be44-13243139fbcf"/>
+				<reportElement x="177" y="231" width="306" height="20" uuid="c13fc7bd-e7d5-436e-be44-13243139fbcf"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{university}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="340" y="62" width="82" height="20" uuid="06c153e8-1f56-478e-aa3d-822e375bb2f2"/>
+				<reportElement x="338" y="209" width="82" height="20" uuid="06c153e8-1f56-478e-aa3d-822e375bb2f2"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" isBold="true" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[สาขา]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="422" y="62" width="122" height="20" uuid="849351a1-8f5e-4175-a1cd-24228efb6367"/>
+				<reportElement x="420" y="209" width="122" height="20" uuid="849351a1-8f5e-4175-a1cd-24228efb6367"/>
 				<textElement>
 					<font fontName="TH Sarabun New" size="12" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{major}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="1" y="0" width="84" height="102" uuid="d5f6881e-2138-49f8-870f-7c40c7400d71"/>
+				<reportElement x="243" y="17" width="84" height="102" uuid="d5f6881e-2138-49f8-870f-7c40c7400d71"/>
 				<imageExpression><![CDATA[$P{image}]]></imageExpression>
 			</image>
 			<line>
-				<reportElement x="1" y="174" width="552" height="1" uuid="a465c8dc-ea30-4a77-9a6b-508f682ccff2"/>
+				<reportElement x="-1" y="321" width="552" height="1" uuid="a465c8dc-ea30-4a77-9a6b-508f682ccff2"/>
 			</line>
 		</band>
 	</pageHeader>

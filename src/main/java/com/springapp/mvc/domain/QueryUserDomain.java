@@ -653,7 +653,7 @@ public class QueryUserDomain extends HibernateUtil {
         closeSession();
     }
 
-    public List<User> getAllUser(String fName, String lName, String nickName, String company, String employeeId, Integer userType) {
+    public List<User> getAllUser(String fName, String lName, String nickName, String company, String employeeId, Integer userType, User currentUser) {
 
         Criteria criteria = getSession().createCriteria(User.class);
         if (BeanUtils.isNotEmpty(fName) && BeanUtils.isNotEmpty(lName)) {
@@ -679,6 +679,8 @@ public class QueryUserDomain extends HibernateUtil {
         if(userType != 0){
             criteria.add(Restrictions.eq("status", userType));
         }
+
+        criteria.add(Restrictions.ne("userId", currentUser.getUserId()));
 
         List<User> users = criteria.list();
 

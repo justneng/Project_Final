@@ -232,7 +232,8 @@ function updatePaperStatus(paperId) {
         },
         success: function () {
             alert('อัพเดทสถานะเรียบร้อยแล้ว');
-            window.location.reload();
+            //window.location.reload();
+            getAllPapers();
         },
         error: function () {
             alert('error');
