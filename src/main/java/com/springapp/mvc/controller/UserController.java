@@ -62,23 +62,29 @@ public class UserController {
                 user.setEnFname(enFname);
                 user.setEnLname(enLname);
                 user.seteMail2(email);
+                user.setEnabled(1);
 
                 Integer pos = Integer.parseInt(position);
                 Integer ut = Integer.parseInt(userType);
                 if(pos == 1 && ut == 1){
                     user.setPosition(queryPositionDomain.getPositionById(4));
+                    user.setPosiId(4);
                     user.setStatus(2);
                 }else if(pos == 1 && ut == 2){
                     user.setPosition(queryPositionDomain.getPositionById(5));
+                    user.setPosiId(5);
                     user.setStatus(2);
                 }else if(pos == 2 && ut == 1){
                     user.setPosition(queryPositionDomain.getPositionById(1));
+                    user.setPosiId(1);
                     user.setStatus(3);
                 }else if(pos ==2 && ut == 2){
                     user.setPosition(queryPositionDomain.getPositionById(2));
+                    user.setPosiId(2);
                     user.setStatus(3);
                 }else if (pos ==3){
                     user.setPosition(queryPositionDomain.getPositionById(3));
+                    user.setPosiId(3);
                     user.setStatus(1);
                 }else{
                     System.out.println("case1");

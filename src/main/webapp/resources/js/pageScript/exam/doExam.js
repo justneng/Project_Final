@@ -204,10 +204,11 @@ var getExamPaperBody = function () {
                     '<div class="panel panel-default">' +
                     '<div class="panel-body">' +
                     '<div class="row">' +
-                    '<div class="col-md-10 col-md-offset-1">' +
+                        '<div class="col-md-1" align="right">ข้อที่ '+questionNo+'</div>'+
+                    '<div class="col-md-10">' +
                     //'ข้อที่ ' + questionNo + '.&nbsp;<h5>' + question.description + '</h5>' +
-                    'ข้อที่ ' + questionNo + '.&nbsp;<textarea id="taQid'+question.id+'" disabled ' +
-                    'style="background: none; border:none; resize: none;"></textarea>' +
+                    '<textarea id="taQid'+question.id+'" disabled ' +
+                    'style="background: none; border:none; resize: none;width:100%;">'+question.description+'</textarea>' +
                     '</div>' +
                     '</div>'
 
@@ -240,8 +241,7 @@ var getExamPaperBody = function () {
                                 '<form role="form">' +
                                 '<div class="radio">' +
                                 '<label><input class="answer" type="radio" name="' + question.id + '" value="' + c.id + '">' +
-                                choiceLabel + '.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea style="background: none; border:none; resize: none;">'
-                                + (unboxingComma(c.description)) + '</textarea></label>' +
+                                choiceLabel + '.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<pre>' + transformString(unboxingComma(c.description)) + '</pre></label>' +
                                 '</div>' +
                                 '</form>' +
                                 '</div>' +
@@ -262,16 +262,13 @@ var getExamPaperBody = function () {
                 }
 
                 $('#examBody').append(appendString);
-                $('#taQid'+question.id).val(question.description)
+                //$('#taQid'+question.id).val(question.description)
                 $('#taQid'+question.id).prop("rows",$('#taQid'+question.id).val().lineCount())
                 questionNo++;
 
             })
             $('p').css('font-size', "14")
             enableOnUnloadEvent()
-            $("textarea").forEach(function(ta){
-                ta.prop("rows",ta.val().lineCount())
-            })
 
         }, error: function () {
             console.log('doExam.js : getExamPaperBody Failed');
