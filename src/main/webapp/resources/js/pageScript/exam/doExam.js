@@ -101,7 +101,7 @@ var checkExamCompletion = function () {
         var questionNo = $(this).attr('questionNo');
         if (
             ($(this).find('input:checked').val() == undefined) &&
-            ($(this).find('textarea').val() == '' || $(this).find('textarea').val() == undefined)) {
+            ($(this).find('textarea[class="answer"]').val() == '' || $(this).find('textarea[class="answer"]').val() == undefined)) {
 
             unfinishedArray.push(questionNo)
         }
