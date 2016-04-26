@@ -153,6 +153,12 @@
     </div>
 </div>
 
+<a href="printStaticReport">
+    <button class="btn btn-gray btn-sm" type="button"><strong
+            style="color: whitesmoke;">สถิติการสอบ</strong>&nbsp;<span class="glyphicon glyphicon-save"></span>
+    </button>
+</a>
+
 <div class="row">
     <div class="col-md-12">
         <table id="tbExamRecordSearch" class="table table-bordered table-responsive table-hover">

@@ -128,7 +128,7 @@ public class IndexController {
                 }
 //
                 model.addAttribute("ch", "fail");
-                model.addAttribute("loginRemaining", 3 - user.get(0).getLoginFailed());
+//                model.addAttribute("loginRemaining", 3 - user.get(0).getLoginFailed());
                 return "login";
             }
         }

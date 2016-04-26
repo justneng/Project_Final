@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="static" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="54fd0cab-fb96-4e59-8a16-054dc9a48ade">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="44"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select paper.paper_code, paper.paper_name, usr.TH_FNAME || '  ' || usr.TH_LNAME as name, (rs.OBJECTIVE_SCORE + rs.SUBJECTIVE_SCORE) as realScore,
+paper.paper_max_score
+from tdcs_exam_records rc
+join TDCS_EXAM_RESULTS rs
+on(rc.RECORD_ID = rs.EXAM_RECORD_ID)
+join TDCS_EXAM_PAPERS paper
+on(rc.PAPER_ID = paper.PAPER_ID)
+join TDCS_USER usr
+on(rc.USER_ID = usr.user_id)
+where paper.paper_status != 4
+and rs.result_status = 7
+and paper.paper_code != 'SYSTM']]>
+	</queryString>
+	<field name="PAPER_CODE" class="java.lang.String"/>
+	<field name="PAPER_NAME" class="java.lang.String"/>
+	<field name="NAME" class="java.lang.String"/>
+	<field name="REALSCORE" class="java.math.BigDecimal"/>
+	<field name="PAPER_MAX_SCORE" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="58" splitType="Stretch">
+			<staticText>
+				<reportElement x="261" y="14" width="299" height="33" uuid="99bb03e6-223f-4bb4-91bb-052324bca718"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH Sarabun New" size="24" isBold="true" pdfFontName="G:\TDCS-master\src\main\webapp\WEB-INF\report\THSarabunNew Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[สถิติการทำชุดข้อสอบของนักศึกษาฝึกงาน]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="331">
+			<barChart>
+				<chart>
+					<reportElement x="71" y="16" width="664" height="303" uuid="e34de457-bdc8-4243-aa61-363f120ca6fe"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{PAPER_CODE} + " : " + $F{PAPER_NAME} + " คะแนนเต็ม [" + $F{PAPER_MAX_SCORE} + "]"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{NAME}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{REALSCORE}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot orientation="Horizontal"/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

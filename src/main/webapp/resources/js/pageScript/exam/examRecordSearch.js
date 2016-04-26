@@ -110,9 +110,29 @@ function ajax(){
                         paperName = "";
                     }
 
+                    //
+                    var str = "";
+                    if(data[i].status.id == 7){
+                        str = '<a href="static-report">'+
+                                '<button class="btn btn-info btn-sm" type="button">' +
+                                    '<strong style="color: whitesmoke;">' +
+                                        'สถิติการสอบ' +
+                                    '</strong>&nbsp;<span class="glyphicon glyphicon-stats"></span>'+
+                                '</button>'+
+                              '</a>';
+                    }
+
+                    if(data[i+1].examRecord.paper.code === data[i].examRecord.paper.code){
+                        str = "";
+                    }
+                    else{
+                        str = str;
+                    }
+                    //
+
                     $("#tbodyExamRecord").append(
                         '<tr>' +
-                        '<td class="text-center"><label ><a>' + data[i].examRecord.paper.code + '</a></label></td>' +
+                        '<td class="text-center"><label ><a>' + data[i].examRecord.paper.code + '</a></label>&nbsp;'+str+'</td>' +
                         '<td><label >' + paperName + '</label></td>' +
                         '<td><label >' + data[i].examRecord.user.thFname + "    " + data[i].examRecord.user.thLname + '</label></td>' +
                         '<td class="text-center"><label >' + data[i].examRecord.user.position.posiName + '</label></td>' +

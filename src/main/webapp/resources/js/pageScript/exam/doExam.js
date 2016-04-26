@@ -217,23 +217,24 @@ var getExamPaperBody = function () {
 
                     question.choices.forEach(function (c) {
 
-                        var choiceLabel
-                        switch (choiceNo) {
-                            case 1:
-                                choiceLabel = 'ก'
-                                break;
-                            case 2:
-                                choiceLabel = 'ข'
-                                break;
-                            case 3:
-                                choiceLabel = 'ค'
-                                break;
-                            case 4:
-                                choiceLabel = 'ง'
-                                break;
-                            //default :
-                            //    choiceLabel = 'ฮ'
-                        }
+                        //var choiceLabel
+                        //switch (choiceNo) {
+                        //    case 1:
+                        //        choiceLabel = 'ก'
+                        //        break;
+                        //    case 2:
+                        //        choiceLabel = 'ข'
+                        //        break;
+                        //    case 3:
+                        //        choiceLabel = 'ค'
+                        //        break;
+                        //    case 4:
+                        //        choiceLabel = 'ง'
+                        //        break;
+                        //    case 5:
+                        //    //default :
+                        //    //    choiceLabel = 'ฮ'
+                        //}
                         if (c.status.id == 3) {
                             appendString +=
                                 '<div class="row">' +
@@ -241,7 +242,7 @@ var getExamPaperBody = function () {
                                 '<form role="form">' +
                                 '<div class="radio">' +
                                 '<label><input class="answer" type="radio" name="' + question.id + '" value="' + c.id + '">' +
-                                choiceLabel + '.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<pre>' + transformString(unboxingComma(c.description)) + '</pre></label>' +
+                                choiceNo + '.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<pre>' + transformString(unboxingComma(c.description)) + '</pre></label>' +
                                 '</div>' +
                                 '</form>' +
                                 '</div>' +

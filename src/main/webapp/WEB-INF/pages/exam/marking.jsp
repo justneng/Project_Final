@@ -242,9 +242,9 @@
         <!----------------------------------------------->
 
     </div>
-    <div class="comment-body">
+    <div class="comment-body hidden">
         <h4>แสดงความคิดเห็น</h4>
-    <textarea class="form-control" rows="5" id="comment" style="resize: none"
+    <textarea class="form-control hidden" rows="5" id="comment" style="resize: none"
               placeholder="แสดงความคิดเห็น...">${examResult.comment}</textarea>
     </div>
     <br>

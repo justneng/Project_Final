@@ -2,14 +2,17 @@ package com.springapp.mvc.controller.exam;
 
 import com.springapp.mvc.controller.exam.reportutils.ReportUtils;
 import com.springapp.mvc.domain.QueryUserDomain;
+import com.springapp.mvc.domain.exam.QueryExamRecordDomain;
 import com.springapp.mvc.domain.exam.QueryExamResultDomain;
 import com.springapp.mvc.domain.exam.QueryPaperDomain;
 import com.springapp.mvc.domain.exam.QueryReportDomain;
 import com.springapp.mvc.pojo.User;
 import com.springapp.mvc.pojo.exam.ExamResult;
+import com.springapp.mvc.pojo.exam.StaticReport;
 import com.springapp.mvc.pojo.exam.StudentReport;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +29,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -49,6 +54,9 @@ public class ReportController {
 
     @Autowired
     QueryExamResultDomain queryExamResultDomain;
+
+    @Autowired
+    QueryExamRecordDomain queryExamRecordDomain;
 
     @RequestMapping(value = "/exam/printReport", method = RequestMethod.GET)
     public void printReport(HttpServletRequest request,
@@ -85,7 +93,7 @@ public class ReportController {
             }
 
             Map param = queryReportDomain.getParameterStudentReport(user, Math.round((tmp/count)*100)/100, count);
-            File file = ReportUtils.viewReport(studentReports, inputStream, param, filePdf, fileXMLToCompile);
+            File file = ReportUtils.viewStudentReport(studentReports, inputStream, param, filePdf, fileXMLToCompile);
 
 //            For download pdf
             InputStream is = new FileInputStream(file);
@@ -111,5 +119,39 @@ public class ReportController {
             e.printStackTrace();
         }
 
+    }
+
+    @RequestMapping(value = "/exam/printStaticReport", method = RequestMethod.GET)
+    public void printStaticReport(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException, IOException, JRException {
+
+        File report = null;
+        InputStream inputStream = null;
+        List<StaticReport> staticReportList = queryExamRecordDomain.getStaticReportDatasource();
+
+        String currentPath = System.getProperty("user.dir");
+        String filePath = currentPath + "\\src\\main\\webapp\\WEB-INF\\report\\static.jasper";
+        String fileXMLToCompile = currentPath + "\\src\\main\\webapp\\WEB-INF\\report\\static.jrxml";
+        String filePdf = currentPath + "\\src\\main\\webapp\\WEB-INF\\report\\static.pdf";
+
+        report = new File(filePath);
+        inputStream = new FileInputStream(report);
+
+        File file = ReportUtils.viewStatictReport(staticReportList, inputStream, null, filePdf, fileXMLToCompile);
+
+//            For download pdf
+        InputStream is = new FileInputStream(file);
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment; filename=\""
+                + file.getName() + "\"");
+        OutputStream os = response.getOutputStream();
+        byte[] buffer = new byte[1024];
+        int len;
+        while ((len = is.read(buffer)) != -1) {
+            os.write(buffer, 0, len);
+        }
+        os.flush();
+        os.close();
+        is.close();
+        System.out.println(file.getName() + " was downloaded...");
     }
 }

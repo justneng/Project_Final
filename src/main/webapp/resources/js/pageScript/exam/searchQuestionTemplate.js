@@ -102,7 +102,7 @@ var submitSearchQuestion = function (mode, page) {
             searchQuestionResultList = dat
         },
         error: function () {
-            alert("เกิดข้อผิดพลาด")
+            //alert("เกิดข้อผิดพลาด")
         }
     })
 }
@@ -128,7 +128,7 @@ $(".searchInputClearBtn").on('click', function () {
 })
 
 $("#advBtnReset").unbind('click').click(function () {
-    alert('hi');
+    //alert('hi');
 });
 
 

@@ -1,5 +1,6 @@
 package com.springapp.mvc.controller.exam.reportutils;
 
+import com.springapp.mvc.pojo.exam.StaticReport;
 import com.springapp.mvc.pojo.exam.StudentReport;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -16,7 +17,7 @@ import java.util.Map;
  */
 public class ReportUtils {
 
-    public static File viewReport(List<StudentReport> models, InputStream inputStream, Map params, String filePdf, String toCompile) throws JRException {
+    public static File viewStudentReport(List<StudentReport> models, InputStream inputStream, Map params, String filePdf, String toCompile) throws JRException {
 
         JRBeanCollectionDataSource beans = null;
         if(models != null){
@@ -36,6 +37,24 @@ public class ReportUtils {
 //        JasperViewer viewer = new JasperViewer(jasperPrint, false);
 //        viewer.setVisible(true);
 //        viewer.setFitPageZoomRatio();
+    }
+
+    public static File viewStatictReport(List<StaticReport> models, InputStream inputStream, Map params, String filePdf, String toCompile) throws JRException {
+
+        JRBeanCollectionDataSource beans = null;
+        if(models != null){
+            beans = new JRBeanCollectionDataSource(models);
+        }
+        File file = new File(filePdf);
+        if(file.exists()){
+            file.delete();
+        }
+
+        JasperReport jasperReport = JasperCompileManager.compileReport(toCompile);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, beans);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, filePdf);
+
+        return new File(filePdf);
     }
 
 }

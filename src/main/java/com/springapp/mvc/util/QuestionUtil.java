@@ -42,16 +42,19 @@ public class QuestionUtil {
         for(int picked = 0 ; picked < paper.getQuestionEasy() ; picked++ ){
             int numberPicked = random.nextInt(easyList.size());
             pickedQuestions.add(easyList.get(numberPicked));
+            easyList.remove(numberPicked);
         }
 
         for(int picked = 0 ; picked < paper.getQuestionNormal() ; picked++ ){
             int numberPicked = random.nextInt(mediocreList.size());
             pickedQuestions.add(mediocreList.get(numberPicked));
+            mediocreList.remove(numberPicked);
         }
 
         for(int picked = 0 ; picked < paper.getQuestionHard() ; picked++ ){
             int numberPicked = random.nextInt(hardList.size());
             pickedQuestions.add(hardList.get(numberPicked));
+            mediocreList.remove(numberPicked);
         }
 
         //Prevent duplicate Function

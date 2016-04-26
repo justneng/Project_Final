@@ -5,6 +5,7 @@ import com.springapp.mvc.pojo.Position;
 import com.springapp.mvc.pojo.exam.ExamPaper;
 import com.springapp.mvc.pojo.exam.ExamRecord;
 import com.springapp.mvc.pojo.exam.ExamResult;
+import com.springapp.mvc.pojo.exam.StaticReport;
 import com.springapp.mvc.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.hibernate.criterion.*;
 import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,6 +65,10 @@ public class QueryExamResultDomain extends HibernateUtil {
         criteria.createAlias("examRecord.user", "user");
         criteria.createAlias("paper.createBy", "createBy");
         criteria.createAlias("er.status","status");
+
+        criteria.createAlias("paper.paperStatus", "paperStatus");
+        criteria.add(Restrictions.ne("paperStatus.id", 4));
+
         if (userId.size()!=0){
 
             criteria.add(Restrictions.in("createBy.userId", userId));

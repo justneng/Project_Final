@@ -27,7 +27,7 @@
                     <c:if test="${ch == 'fail'}">
                         <div class="text-center" style="color: red;">
                             คุณป้อนชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง<br/>
-                            สามารถ Login พลาดได้ไม่เกิน "<c:out value="${loginRemaining}" /> ครั้ง"
+                            <%--สามารถ Login พลาดได้ไม่เกิน "<c:out value="${loginRemaining}" /> ครั้ง"--%>
                         </div>
                     </c:if>
 

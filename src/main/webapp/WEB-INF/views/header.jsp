@@ -76,10 +76,10 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false">จัดการบัญชีผู้ใช้ <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="${context}/TDCS/addStudent.html"><label class="admin-menu" style="font-weight: normal;">เพิ่มข้อมูลนักศึกษา</label></a></li>
-                                <li><a href="${context}/TDCS/addStaff.html"><label class="admin-menu" style="font-weight: normal;">เพิ่มข้อมูลพนักงาน</label></a></li>
+                                <%--<li><a href="${context}/TDCS/addStudent.html"><label class="admin-menu" style="font-weight: normal;">เพิ่มข้อมูลนักศึกษา</label></a></li>--%>
+                                <%--<li><a href="${context}/TDCS/addStaff.html"><label class="admin-menu" style="font-weight: normal;">เพิ่มข้อมูลพนักงาน</label></a></li>--%>
                                 <li><a href="${context}/TDCS/addUser.html"><label class="admin-menu" style="font-weight: normal;">เพิ่มบัญชีผู้ใช</label>้</a></li>
-                                <li><a href="${context}/TDCS/manageUser.html"><label class="admin-menu" style="font-weight: normal;">จัดการบัญชีผู้ใช</label>้</a></li>
+                                <li><a href="${context}/TDCS/manageUser.html"><label class="admin-menu" style="font-weight: normal;">จัดการบัญชีผู้ใช้</label>้</a></li>
                             </ul>
                         </li>
                     </c:if>
@@ -95,14 +95,14 @@
                         <%--</li>--%>
                     <%--</c:if>--%>
                     <c:if test="${status == 'admin'}">
-                        <li id="addSearch" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false">ค้นหาข้อมูล <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <%--<li><a href="${context}/TDCS/searchStudent.html">ค้นหาข้อมูลนักศึกษา</a></li>--%>
-                                <li><a href="${context}/TDCS/searchStaff.html">ค้นหาข้อมูลพนักงาน</a></li>
-                            </ul>
-                        </li>
+                        <%--<li id="addSearch" class="dropdown">--%>
+                            <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"--%>
+                               <%--aria-expanded="false">ค้นหาข้อมูล <span class="caret"></span></a>--%>
+                            <%--<ul class="dropdown-menu" role="menu">--%>
+                                <%--&lt;%&ndash;<li><a href="${context}/TDCS/searchStudent.html">ค้นหาข้อมูลนักศึกษา</a></li>&ndash;%&gt;--%>
+                                <%--<li><a href="${context}/TDCS/searchStaff.html">ค้นหาข้อมูลพนักงาน</a></li>--%>
+                            <%--</ul>--%>
+                        <%--</li>--%>
                     </c:if>
                     <%--<c:if test="${status == 'staff'}">--%>
                         <%--<li id="addSearch"><a href="${context}/TDCS/searchStudent.html">ค้นหาข้อมูลนักศึกษา</a></li>--%>
